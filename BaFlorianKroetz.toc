@@ -1,0 +1,23 @@
+\select@language {ngerman}
+\contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Intel MKL}{2}{chapter.2}
+\contentsline {chapter}{\numberline {3}QR factorisation}{3}{chapter.3}
+\contentsline {section}{\numberline {3.1}QR-Zerlegung}{3}{section.3.1}
+\contentsline {subsubsection}{\nonumberline Definition}{3}{section*.2}
+\contentsline {subsubsection}{\nonumberline QR Anwendung oder so was}{3}{section*.3}
+\contentsline {section}{\numberline {3.2}Householder Spiegelung}{3}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Householder Vector}{3}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Apply vector}{3}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}LAPACK QR}{4}{section.3.3}
+\contentsline {section}{\numberline {3.4}NUM1 Urban QR}{4}{section.3.4}
+\contentsline {section}{\numberline {3.5}Unterschiede der Algorithmen}{6}{section.3.5}
+\contentsline {section}{\numberline {3.6}QR Blocked}{6}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Calc Factor T larft}{6}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Apply H larfb}{7}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.3}Iterativer Algorithmus}{7}{subsection.3.6.3}
+\contentsline {subsection}{\numberline {3.6.4}Rekursiver Algorithmus}{7}{subsection.3.6.4}
+\contentsline {chapter}{\numberline {4}Implementierung und Benchmarks}{8}{chapter.4}
+\contentsline {section}{\numberline {4.1}MKL Wraper}{8}{section.4.1}
+\contentsline {section}{\numberline {4.2}Benchmarks}{8}{section.4.2}
+\contentsline {chapter}{\numberline {A}Quelltexte}{9}{appendix.A}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{10}{chapter*.4}
