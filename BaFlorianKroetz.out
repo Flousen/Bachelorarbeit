@@ -1,22 +1,22 @@
 \BOOKMARK [0][-]{chapter.1}{Einleitung}{}% 1
-\BOOKMARK [0][-]{chapter.2}{Intel MKL}{}% 2
-\BOOKMARK [0][-]{chapter.3}{QR factorisation}{}% 3
-\BOOKMARK [1][-]{section.3.1}{QR-Zerlegung}{chapter.3}% 4
-\BOOKMARK [2][-]{section*.2}{Definition}{section.3.1}% 5
+\BOOKMARK [1][-]{section.1.1}{Intel MKL}{chapter.1}% 2
+\BOOKMARK [0][-]{chapter.2}{QR factorisation}{}% 3
+\BOOKMARK [1][-]{section.2.1}{QR-Zerlegung}{chapter.2}% 4
+\BOOKMARK [2][-]{section*.2}{Definition}{section.2.1}% 5
 \BOOKMARK [3][-]{section*.3}{QR Anwendung oder so was}{section*.2}% 6
-\BOOKMARK [1][-]{section.3.2}{Householder Spiegelung}{chapter.3}% 7
-\BOOKMARK [2][-]{subsection.3.2.1}{Householder Vector}{section.3.2}% 8
-\BOOKMARK [2][-]{subsection.3.2.2}{Apply vector}{section.3.2}% 9
-\BOOKMARK [1][-]{section.3.3}{LAPACK QR}{chapter.3}% 10
-\BOOKMARK [1][-]{section.3.4}{NUM1 Urban QR}{chapter.3}% 11
-\BOOKMARK [1][-]{section.3.5}{Unterschiede der Algorithmen}{chapter.3}% 12
-\BOOKMARK [1][-]{section.3.6}{QR Blocked}{chapter.3}% 13
-\BOOKMARK [2][-]{subsection.3.6.1}{Calc Factor T larft}{section.3.6}% 14
-\BOOKMARK [2][-]{subsection.3.6.2}{Apply H larfb}{section.3.6}% 15
-\BOOKMARK [2][-]{subsection.3.6.3}{Iterativer Algorithmus}{section.3.6}% 16
-\BOOKMARK [2][-]{subsection.3.6.4}{Rekursiver Algorithmus}{section.3.6}% 17
-\BOOKMARK [0][-]{chapter.4}{Implementierung und Benchmarks}{}% 18
-\BOOKMARK [1][-]{section.4.1}{MKL Wraper}{chapter.4}% 19
-\BOOKMARK [1][-]{section.4.2}{Benchmarks}{chapter.4}% 20
+\BOOKMARK [1][-]{section.2.2}{Householdertransformation}{chapter.2}% 7
+\BOOKMARK [2][-]{subsection.2.2.1}{Householder Vector}{section.2.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.2}{Apply vector}{section.2.2}% 9
+\BOOKMARK [1][-]{section.2.3}{LAPACK QR}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.4}{NUM1 Urban QR}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.5}{Unterschiede der Algorithmen}{chapter.2}% 12
+\BOOKMARK [1][-]{section.2.6}{QR Blocked}{chapter.2}% 13
+\BOOKMARK [2][-]{subsection.2.6.1}{Calc Factor T larft}{section.2.6}% 14
+\BOOKMARK [2][-]{subsection.2.6.2}{Apply H larfb}{section.2.6}% 15
+\BOOKMARK [2][-]{subsection.2.6.3}{Iterativer Algorithmus}{section.2.6}% 16
+\BOOKMARK [2][-]{subsection.2.6.4}{Rekursiver Algorithmus}{section.2.6}% 17
+\BOOKMARK [0][-]{chapter.3}{Implementierung und Benchmarks}{}% 18
+\BOOKMARK [1][-]{section.3.1}{MKL Wraper}{chapter.3}% 19
+\BOOKMARK [1][-]{section.3.2}{Benchmarks}{chapter.3}% 20
 \BOOKMARK [0][-]{appendix.A}{Quelltexte}{}% 21
 \BOOKMARK [0][-]{chapter*.4}{Literaturverzeichnis}{}% 22

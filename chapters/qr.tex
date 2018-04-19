@@ -15,7 +15,12 @@ mit einer orthogonalen Matrix $ Q \in \mathbb{R}^{m \times n} $ und einer oberen
 -Ausgleichsprobleme 
 -QR-Verfahren 
 
-\section{Householder Spiegelung}
+\section{Householdertransformation}
+\begin{figure} 
+	\input{images/hh.tex}
+	\caption{Householder Trans}
+	\label{fig:patrA}
+\end{figure}
 \subsection{Householder Vector}
 \subsection{Apply vector}
 \begin{align}
@@ -106,6 +111,12 @@ H' &= I - VT'V'\\
 H'A_2 &= A_2 - VT'V'A_2
 \end{align}
 
+\begin{figure} 
+	\input{images/partitionOFA1.tex}
+	\caption{Partitionierung vom A}
+	\label{fig:patrA}
+\end{figure}
+
 
 
 
@@ -152,7 +163,50 @@ Fahre mit $A_{0, \text{bs}}$ fort.
 \subsection{Calc Factor T larft}
 \cite{Joffrain:2006:AHT:1141885.1141886}
 
+\begin{align*}
+	H_2 H_1 x &= (I-\tau_2 v_2 v_2^T)(I-\tau_1 v_1 v_1^T)x\\
+	&= (I - \tau_1 v_1 v_1^T - \tau_2 v_2 v_2^T - \tau_2 v_2 v_2^T \tau_1 v_1 v_2^T) x\\
+  &= x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 v_2 (v_2^T v_1 )v_2^T x\\
+  &= x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 (v_2^T v_1 ) v_2 v_2^T x\\
+\end{align*}
+
+\begin{align*}
+  H_{1,2} x &= (I - V T V^T) x = x - V T V^T x\\
+  &= x - (v_1, v_2)
+  \begin{pmatrix}
+    a & b \\ 0 & c
+  \end{pmatrix}
+  \begin{pmatrix}
+    v_1^T \\ v_2^T 
+  \end{pmatrix}
+  x\\
+  &= x - (v_1, v_2)
+  \begin{pmatrix}
+    a & b \\ 0 & c
+  \end{pmatrix}
+  \begin{pmatrix}
+    v_1^T x \\ v_2^T x
+  \end{pmatrix}\\
+  &= x - (v_1, v_2)
+  \begin{pmatrix}
+    a v_1^T x + b v_2^T x\\  c v_2^T x
+  \end{pmatrix}\\
+  &= x - v_1(a v_1^T x + b v_2^T x) - v_2 (c v_2^T x)\\
+  &= x - a v_1 v_1^T x - b v_1 v_2^T x - c v_2 v_2^T x
+\end{align*}
+
 \subsection{Apply H larfb}
+Die Funktion larfb berechnet.
+
+\begin{align}
+	H^T A &= A - V T^T V^T A
+\end{align}
+
+\begin{figure} 
+	\input{images/partitionOFA.tex}
+	\caption{Partitionierung vom A}
+	\label{fig:patrA}
+\end{figure}
 
 
 \subsection{Iterativer Algorithmus}
