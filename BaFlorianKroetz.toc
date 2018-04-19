@@ -1,13 +1,13 @@
 \select@language {ngerman}
 \contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Intel MKL}{1}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}QR Anwendung oder so was}{1}{subsection.1.1.1}
 \contentsline {chapter}{\numberline {2}QR factorisation}{2}{chapter.2}
 \contentsline {section}{\numberline {2.1}QR-Zerlegung}{2}{section.2.1}
 \contentsline {subsubsection}{\nonumberline Definition}{2}{section*.2}
-\contentsline {subsubsection}{\nonumberline QR Anwendung oder so was}{2}{section*.3}
-\contentsline {section}{\numberline {2.2}Householdertransformation}{2}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Householder Vector}{2}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Apply vector}{2}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.2}Householder-Transformation}{2}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Householder Vector}{3}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Apply vector}{3}{subsection.2.2.2}
 \contentsline {section}{\numberline {2.3}LAPACK QR}{3}{section.2.3}
 \contentsline {section}{\numberline {2.4}NUM1 Urban QR}{4}{section.2.4}
 \contentsline {section}{\numberline {2.5}Unterschiede der Algorithmen}{5}{section.2.5}
@@ -20,4 +20,4 @@
 \contentsline {section}{\numberline {3.1}MKL Wraper}{9}{section.3.1}
 \contentsline {section}{\numberline {3.2}Benchmarks}{9}{section.3.2}
 \contentsline {chapter}{\numberline {A}Quelltexte}{10}{appendix.A}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{11}{chapter*.4}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{11}{chapter*.3}

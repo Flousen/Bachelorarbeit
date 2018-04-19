@@ -10,16 +10,18 @@ mit einer orthogonalen Matrix $ Q \in \mathbb{R}^{m \times n} $ und einer oberen
 
 % TODO Quelle suchen das ist von Wikipedia -.-
 
-\subsubsection{QR Anwendung oder so was}
--LGS 
--Ausgleichsprobleme 
--QR-Verfahren 
+Eine QR Zerlegung kann mit einer Householder-Transformation bestimmt werden.
 
-\section{Householdertransformation}
+\section{Householder-Transformation}
+Sei $v \in \mathbb{R}^n$ und $\tau \in \mathbb{R}$ dann wir die $n \times n$ Matrix 
+\begin{align}
+	H = I - \tau v v^T
+\end{align}
+als Householder-Transformation und der Vektor $v$ als Householder-Vektor bezeichnet.
 \begin{figure} 
 	\input{images/hh.tex}
-	\caption{Householder Trans}
-	\label{fig:patrA}
+	\caption{Spiegelung an der zu v orthogonalen Ebene }
+	\label{fig:HHolder}
 \end{figure}
 \subsection{Householder Vector}
 \subsection{Apply vector}
@@ -197,10 +199,24 @@ Fahre mit $A_{0, \text{bs}}$ fort.
 
 \subsection{Apply H larfb}
 Die Funktion larfb berechnet.
-
 \begin{align}
 	H^T A &= A - V T^T V^T A
 \end{align}
+
+\begin{align*}
+	W := C' * V  =  (C1'*V1 + C2'*V2)  (stored in WORK)
+	W := C1'
+	W := W * V1
+	IF( M.GT.K ) THEN
+	W := W + C2'*V2
+	W := W * T'  or  W * T
+	C := C - V * W'
+	IF( M.GT.K ) THEN
+	C2 := C2 - V2 * W'
+	W := W * V1'
+	C1 := C1 - W'
+\end{align*}
+
 
 \begin{figure} 
 	\input{images/partitionOFA.tex}
