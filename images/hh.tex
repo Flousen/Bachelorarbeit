@@ -1,6 +1,4 @@
 \begin{tikzpicture}
-\filldraw[red, opacity=0.1] (0,0)--(-0.45, 0.22) arc (150:244:.5cm) -- (0,0) ;
-\filldraw(-0.25,-0.1) circle (.03cm) ;
 
 \draw[->] (-2,0) -- (3,0);
 \draw[->] (0,-1) -- (0,3);
@@ -12,11 +10,16 @@
 \draw[->,line width=0.5mm] (0,0) -- (-0.9, 0.44);
 
 
+
+
+%Rechter Winkel
+\filldraw[red, opacity=0.5] (0,0)--(-0.3375, 0.16) arc (150:244:.375cm) -- (0,0) ;
+\draw[black, opacity=1] (0,0)--(-0.3375, 0.16) arc (150:244:.375cm) -- (0,0) ;
+\filldraw(-0.2,-0.07) circle (.02cm) ;
+
+%Beschriftung
 \draw (3.4,-0.1) node {$x_1$};
 \draw (-0.1,3.3) node {$x_2$};
-
-\filldraw[red, opacity=0.5] (0,0)--(-0.45, 0.22) arc (150:244:.5cm) -- (0,0) ;
-\filldraw(-0.25,-0.1) circle (.03cm) ;
 
 \draw (-1.1, 0.3) node {$v$};
 \draw (-1, 2.3) node {$x$};
