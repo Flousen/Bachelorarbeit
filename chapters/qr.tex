@@ -6,9 +6,46 @@ Eine Matrix $A \in \mathbb{R}^{m \times n}$ , $m \ge n$ besitzt eine eindeutige 
 \begin{align}
 	A = QR
 \end{align}
-mit einer orthogonalen Matrix $ Q \in \mathbb{R}^{m \times n} $ und einer oberen Dreiecksmatrix $ R \in \mathbb{R}^{n \times n}$ \cite{num1}
+mit einer orthogonalen Matrix $ Q \in \mathbb{R}^{m \times m} $ und einer oberen Dreiecksmatrix $ R \in \mathbb{R}^{n \times n}$ \cite{num1}
 
 Eine QR Zerlegung kann mit einer Householder-Transformation berechnet werden.
+
+\subsubsection{Motivation}
+Lösung eines Minimierungsproblem
+\begin{align}
+	\min_{x \in \mathbb{R}^n} \|Ax-b\|^2 \label{eq1}
+\end{align}
+mit Matrix $A \in \mathbb{R}^{m\times n}$ mit $rang(A) = n < m$ für die eine QR Zerlegung existiert.
+$R$ besitzt die Gestalt 
+\begin{align*}
+	R=	
+	\left(\begin{array}{ccc}
+		*&*&* \\ 
+		&*&* \\ 
+		& &* \\ \hline
+		& 0 &
+	\end{array} \right)
+	=
+	\left(\begin{array}{c}
+	 \\ 
+	\hat{R} \\ 
+	 \\ \hline
+	0
+	\end{array} \right) 
+\end{align*}
+
+$\hat{R}$ stellt eine obere Dreiecksmatrix dar.
+Damit kann man das Minimierungs Problem wie folgt modifizieren mit $A=QR$
+\begin{align}
+		\min_{x \in \mathbb{R}^n} \|Ax-b\|^2 =
+		\min_{x \in \mathbb{R}^n} \|Q^T(Ax-b)\|^2 =
+		\min_{x \in \mathbb{R}^n} \|Rx-Q^Tb\|^2
+\end{align}
+Also löst
+\begin{align}
+Rx=Q^Tb \label{solvminqr}
+\end{align}
+das Minimierungsproblem (\ref{eq1}). Da $R$ eine Dreiecksmatrix ist lässt sich (\ref{solvminqr}) leicht mit Rückwärtseinsetzen  lösen.
 
 \section{Householder-Transformation}
 Sei $v \in \mathbb{R}^n$ und $\tau \in \mathbb{R}$ dann wir die $n \times n$ Matrix 
@@ -17,19 +54,65 @@ Sei $v \in \mathbb{R}^n$ und $\tau \in \mathbb{R}$ dann wir die $n \times n$ Mat
 	H = I - 2 \dfrac{vv^T}{v^Tv}
 \end{align}
 als Householder-Transformation und der Vektor $v$ als Householder-Vektor bezeichnet.
-\begin{figure} 
+Eine Householder-Transformation $H = I - 2 \dfrac{vv^T}{v^Tv}$ ist orthogonal und symmetrisch. \cite{num1}\\
+Die Householder-Transformation spiegelt den Vektor $x$ auf die Achse $x_1$.
+Dazu multipliziert man $H$ von links auf $x$.
+\begin{align}
+	Hx=\alpha e_1 \label{spiegelung}
+\end{align}
+mit $\alpha \in \mathbb{R}$ und $e_1$ erster kanonischer Einheitsvektor. Der Householder-Vektor steht senkrecht auf der Achse an der $x$ gespiegelt wird.\\
+Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung der Vektors $x$ and der gestrichelt eingezeichneten Ebene auf die $x_1$ Achse.
+\begin{figure}[h]
 	\centering
 	\input{images/hh.tex}
-	\caption{Spiegelung an der zu $v$ orthogonalen Ebene }
+	\caption{Beispiel Householder-Transformation mit $x=(-1,2)^T$}
 	\label{fig:HHolder}
 \end{figure}
+
+
 \subsection{Householder Vector}
+Wie muss der Vekor $v$ aussehen damit (\ref{spiegelung}) gilt.
+%TODO fragen
+\begin{algorithm}
+	\caption{Housholder-Vector}
+	\begin{algorithmic}
+		\State $A \in \mathbb{R}^{m \times n}$
+		\For {i = 0 : n}
+		\State [$v$, $\tau$] = housevector($A(i:m,i)$)
+		\State $w \leftarrow v^T*A$ (dgemv)
+		\State $ A \leftarrow \tau * v * w + A $ (dger)
+		\If {i > m}
+		\State $A(i + 1 : m, j) \leftarrow v(2 : m - i + 1)$
+		\EndIf
+		\EndFor	
+	\end{algorithmic} 
+	\label{alg:unblockedqr}
+\end{algorithm}
 \subsection{Apply vector}
-\begin{align}
+
+\begin{align*}
 H =& I - \tau vv'\\ 
-H A_2 =& A_2 - \tau vv' A_2\\
-=& A_2 - \tau v*(v'*A_2)
-\end{align}
+H A =& A - \tau vv' A\\
+=& A - \tau v*(v'*A)
+\end{align*}
+
+
+Das führt auf den Algorithmus \ref{alg:unblockedqr}. 
+\begin{algorithm}
+	\caption{Ungeblockte Housholder-Transformation}
+	\begin{algorithmic}
+	\State $A \in \mathbb{R}^{m \times n}$
+	\For {i = 0 : n}
+		\State [$v$, $\tau$] = housevector($A(i:m,i)$)
+		\State $w \leftarrow v^T*A$ (dgemv)
+		\State $ A \leftarrow \tau * v * w + A $ (dger)
+		\If {i > m}
+			\State $A(i + 1 : m, j) \leftarrow v(2 : m - i + 1)$
+		\EndIf
+	\EndFor	
+\end{algorithmic} 
+\label{alg:unblockedqr}
+\end{algorithm}
 
 \section{LAPACK QR}
 Der von LAPACK benutzte Algorithmus \cite{DGEQR2}
@@ -41,12 +124,10 @@ Der von LAPACK benutzte Algorithmus \cite{DGEQR2}
 	x &= A(i+1:m,i)\\
 	\omega &= A(i+1:m,i) * \frac{1}{\alpha - \beta}
 \end{align}
-Algorithmus
 
 \section{NUM1 Urban QR}
 Algorithmus aus Numerik 1
 
-Mathe
 \begin{align}
 	H &= I - 2 \frac{\omega \omega^T}{\omega^T \omega}\\
 	\omega_1 &= \frac{x - \alpha e_1}{x_1 - \alpha}\\
@@ -54,31 +135,31 @@ Mathe
 \end{align}
 
 
-\section{Unterschiede der Algorithmen}
-Die beiden Algorithmen unterscheiden sich lediglich durch ein eine Kleinigkeite im der Transformations Matrix.
-\begin{align*}
-	H_{\text{Urban}} = I -  \dfrac{2}{v^T v}v v^T \qquad \qquad H_{\text{LAPACK}} = I - 2 \tau v v^T
-\end{align*}
-mit $\tau = \dfrac{2}{v^T v}$. Das $\tau_i$ für jeden Householder-Vektor wird in einem Vektor $\tau \in \mathbb{R}^n$ gespeichert.
-\begin{align*}
-	H_i = I - \tau_i v_i v_i^T \quad , \quad i \in 1,...,n
-\end{align*}
-
-Durch die Verwendung des $\tau$ muss das Skalarprodukts $v^T v$  nur einmalig Berechnet werde.
-
-Hypothese:\\
-Das Einsprungpotential ist nicht sehr groß.
-Das Skalar Produkt hat einen Aufwand von $O(n)$. Außerdem muss man den $v$ nicht extra in den Cache laden, da er zur Berechnung des dyadischen Produkts $vv^T$ schon im Cache liegt.
+%\section{Unterschiede der Algorithmen}
+%Die beiden Algorithmen unterscheiden sich lediglich durch ein eine Kleinigkeite im der Transformations Matrix.
+%\begin{align*}
+%	H_{\text{Urban}} = I -  \dfrac{2}{v^T v}v v^T \qquad \qquad H_{\text{LAPACK}} = I - 2 \tau v v^T
+%\end{align*}
+%mit $\tau = \dfrac{2}{v^T v}$. Das $\tau_i$ für jeden Householder-Vektor wird in einem Vektor $\tau \in \mathbb{R}^n$ gespeichert.
+%\begin{align*}
+%	H_i = I - \tau_i v_i v_i^T \quad , \quad i \in 1,...,n
+%\end{align*}
+%
+%Durch die Verwendung des $\tau$ muss das Skalarprodukts $v^T v$  nur einmalig Berechnet werde.
+%
+%Hypothese:\\
+%Das Einsprungpotential ist nicht sehr groß.
+%Das Skalar Produkt hat einen Aufwand von $O(n)$. Außerdem muss man den $v$ nicht extra in den Cache laden, da er zur Berechnung des dyadischen Produkts $vv^T$ schon im Cache liegt.
 
 
 
 \section{QR Blocked}
 Geblockte Alorighmus
-\begin{align}
-H &= I - VTV'\\
-H' &= I - VT'V'\\ 
-H'A_2 &= A_2 - VT'V'A_2
-\end{align}
+\begin{align*}
+H &= I - VTV^T\\
+H^T &= I - VT^TV^T\\ 
+H^TA_{bs,bs} &= A_{bs,bs} - VT^TV^TA_{bs,bs}
+\end{align*}
 
 
 
@@ -205,21 +286,24 @@ Im Fall $ m = k $ ist die Aufteilung nicht Notwendig da $ V $ quadratisch ist.
 
 
 
-Dies führt zu dem Algorithmus:
-
-\begin{algorithmic}
-	\State 	$W \leftarrow C_1^T$ (copy)
-	\State	$W \leftarrow W * V_1 $ (trmm)
-	\If {m > k}
-		\State $W \leftarrow W + C_2^T*V_2$ (gemm)
-	\EndIf
-	\State 	$ W \leftarrow W * T^T \quad \text{or}\quad  W * T$ (trmm)
-	\If {m > k}
-		\State $C_2 \leftarrow C_2 - V_2 * W^T$ (gemm)
-	\EndIf
-	\State 	$ W \leftarrow W * V_1^T $ (trmm)
-	\State 	$ C_1 \leftarrow C_1 - W^T $
-\end{algorithmic}
+Dies führt zu dem Algorithmus \ref{alg:applyblockref}
+\begin{algorithm}
+	\caption{Block reflector anwenden}
+	\label{alg:applyblockref}
+	\begin{algorithmic}
+		\State 	$W \leftarrow C_1^T$ (copy)
+		\State	$W \leftarrow W * V_1 $ (trmm)
+		\If {m > k}
+			\State $W \leftarrow W + C_2^T*V_2$ (gemm)
+		\EndIf
+		\State 	$ W \leftarrow W * T^T \quad \text{or}\quad  W * T$ (trmm)
+		\If {m > k}
+			\State $C_2 \leftarrow C_2 - V_2 * W^T$ (gemm)
+		\EndIf
+		\State 	$ W \leftarrow W * V_1^T $ (trmm)
+		\State 	$ C_1 \leftarrow C_1 - W^T $
+	\end{algorithmic}
+\end{algorithm}
 
 
 
@@ -232,17 +316,18 @@ Dies führt zu dem Algorithmus:
 
 
 \subsection{Iterativer Algorithmus}
-
-\begin{algorithmic}
-\For {i = 0 : n}
-	\State QR = A;
-	\If {i + ib > n}
-		\State Calc T: H=I-VTV'
-		\State Apply H: A=H'A
-	\EndIf
-\EndFor
-
-\end{algorithmic}
+\begin{algorithm}
+	\caption{Iterativer Algorithmus}
+	\begin{algorithmic}
+		\For {i = 0 : n}
+			\State QR = A;
+			\If {i + ib > n}
+				\State Calc T: H=I-VTV'
+				\State Apply H: A=H'A
+			\EndIf
+		\EndFor
+	\end{algorithmic}
+\end{algorithm}
 
 
 \subsection{Rekursiver Algorithmus}

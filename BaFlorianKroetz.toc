@@ -5,19 +5,19 @@
 \contentsline {chapter}{\numberline {2}QR factorisation}{2}{chapter.2}
 \contentsline {section}{\numberline {2.1}QR-Zerlegung}{2}{section.2.1}
 \contentsline {subsubsection}{\nonumberline Definition}{2}{section*.2}
-\contentsline {section}{\numberline {2.2}Householder-Transformation}{2}{section.2.2}
+\contentsline {subsubsection}{\nonumberline Motivation}{2}{section*.3}
+\contentsline {section}{\numberline {2.2}Householder-Transformation}{3}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Householder Vector}{3}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Apply vector}{3}{subsection.2.2.2}
-\contentsline {section}{\numberline {2.3}LAPACK QR}{3}{section.2.3}
-\contentsline {section}{\numberline {2.4}NUM1 Urban QR}{4}{section.2.4}
-\contentsline {section}{\numberline {2.5}Unterschiede der Algorithmen}{4}{section.2.5}
-\contentsline {section}{\numberline {2.6}QR Blocked}{5}{section.2.6}
-\contentsline {subsection}{\numberline {2.6.1}Calc Factor T larft}{6}{subsection.2.6.1}
-\contentsline {subsection}{\numberline {2.6.2}Apply H larfb}{7}{subsection.2.6.2}
-\contentsline {subsection}{\numberline {2.6.3}Iterativer Algorithmus}{8}{subsection.2.6.3}
-\contentsline {subsection}{\numberline {2.6.4}Rekursiver Algorithmus}{8}{subsection.2.6.4}
-\contentsline {chapter}{\numberline {3}Implementierung und Benchmarks}{9}{chapter.3}
-\contentsline {section}{\numberline {3.1}MKL Wraper}{9}{section.3.1}
-\contentsline {section}{\numberline {3.2}Benchmarks}{9}{section.3.2}
-\contentsline {chapter}{\numberline {A}Quelltexte}{10}{appendix.A}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{11}{chapter*.3}
+\contentsline {subsection}{\numberline {2.2.2}Apply vector}{4}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.3}LAPACK QR}{5}{section.2.3}
+\contentsline {section}{\numberline {2.4}NUM1 Urban QR}{5}{section.2.4}
+\contentsline {section}{\numberline {2.5}QR Blocked}{6}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Calc Factor T larft}{7}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Apply H larfb}{8}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}Iterativer Algorithmus}{8}{subsection.2.5.3}
+\contentsline {subsection}{\numberline {2.5.4}Rekursiver Algorithmus}{8}{subsection.2.5.4}
+\contentsline {chapter}{\numberline {3}Implementierung und Benchmarks}{10}{chapter.3}
+\contentsline {section}{\numberline {3.1}MKL Wraper}{10}{section.3.1}
+\contentsline {section}{\numberline {3.2}Benchmarks}{10}{section.3.2}
+\contentsline {chapter}{\numberline {A}Quelltexte}{11}{appendix.A}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{12}{chapter*.4}
