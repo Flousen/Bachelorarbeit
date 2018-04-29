@@ -6,16 +6,15 @@ Eine Matrix $A \in \mathbb{R}^{m \times n}$ , $m \ge n$ besitzt eine eindeutige 
 \begin{align}
 	A = QR
 \end{align}
-mit einer orthogonalen Matrix $ Q \in \mathbb{R}^{m \times n} $ und einer oberen Dreiecksmatrix $ R \in \mathbb{R}^{n \times n}$ 
+mit einer orthogonalen Matrix $ Q \in \mathbb{R}^{m \times n} $ und einer oberen Dreiecksmatrix $ R \in \mathbb{R}^{n \times n}$ \cite{num1}
 
-% TODO Quelle suchen das ist von Wikipedia -.-
-
-Eine QR Zerlegung kann mit einer Householder-Transformation bestimmt werden.
+Eine QR Zerlegung kann mit einer Householder-Transformation berechnet werden.
 
 \section{Householder-Transformation}
 Sei $v \in \mathbb{R}^n$ und $\tau \in \mathbb{R}$ dann wir die $n \times n$ Matrix 
 \begin{align}
-	H = I - \tau v v^T
+	%H = I - \tau v v^T
+	H = I - 2 \dfrac{vv^T}{v^Tv}
 \end{align}
 als Householder-Transformation und der Vektor $v$ als Householder-Vektor bezeichnet.
 \begin{figure} 
@@ -56,8 +55,22 @@ Mathe
 
 
 \section{Unterschiede der Algorithmen}
-LAPCK hat das Tau \\
-Vor und Nachteile oder so was
+Die beiden Algorithmen unterscheiden sich lediglich durch ein eine Kleinigkeite im der Transformations Matrix.
+\begin{align*}
+	H_{\text{Urban}} = I -  \dfrac{2}{v^T v}v v^T \qquad \qquad H_{\text{LAPACK}} = I - 2 \tau v v^T
+\end{align*}
+mit $\tau = \dfrac{2}{v^T v}$. Das $\tau_i$ für jeden Householder-Vektor wird in einem Vektor $\tau \in \mathbb{R}^n$ gespeichert.
+\begin{align*}
+	H_i = I - \tau_i v_i v_i^T \quad , \quad i \in 1,...,n
+\end{align*}
+
+Durch die Verwendung des $\tau$ muss das Skalarprodukts $v^T v$  nur einmalig Berechnet werde.
+
+Hypothese:\\
+Das Einsprungpotential ist nicht sehr groß.
+Das Skalar Produkt hat einen Aufwand von $O(n)$. Außerdem muss man den $v$ nicht extra in den Cache laden, da er zur Berechnung des dyadischen Produkts $vv^T$ schon im Cache liegt.
+
+
 
 \section{QR Blocked}
 Geblockte Alorighmus
@@ -67,18 +80,20 @@ H' &= I - VT'V'\\
 H'A_2 &= A_2 - VT'V'A_2
 \end{align}
 
-\begin{figure} 
+
+
+\begin{figure}
 	\centering
 	\input{images/partitionOFA1.tex}
 	\caption{Partitionierung vom A}
-	\label{fig:patrA}
+	\label{fig:blockA}
 \end{figure}
 
 
 
 
 
-Betrachte A geblockt
+Betrachte A geblockt, mit einer geeigneten Blockgröße $bs$.
 \begin{align}
 	A = \left(\begin{array}{l|l}
 	A_{0, 0} & A_{0, \text{bs}} \\ \hline
@@ -86,7 +101,13 @@ Betrachte A geblockt
 	\end{array} \right) 
 \end{align}
 
-Berechne QR Zerlegung für Blöcke $A_{0, 0}$ und $ A_{\text{bs},0}$
+Die Abbildung \ref{fig:blockA} zeigt schematisch die Partitionierung von A.
+
+Berechne nun QR Zerlegung für den Block $
+\left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right)$
+
+
+%% $A_{0, 0}$ und $ A_{\text{bs},0}$
 \begin{align}
 	\left(\begin{array}{l} 
 	A_{0, 0} \\ \hline
@@ -98,6 +119,8 @@ Berechne QR Zerlegung für Blöcke $A_{0, 0}$ und $ A_{\text{bs},0}$
 	Q_{\text{bs}, 0} 
 	\end{array}\right)
 \end{align}
+
+
 
 Berechne $H(0)$...$H(bs)$ aus $Q_{0, 0}$ und $Q_{bs, 0}$ mit $H = I - V*T*V^T$.\\
 Wende $H^T$ auf $A_{0, \text{bs}}$ und $ A_{0,\text{bs}}$ an.
@@ -118,13 +141,21 @@ Wende $H^T$ auf $A_{0, \text{bs}}$ und $ A_{0,\text{bs}}$ an.
 Fahre mit $A_{0, \text{bs}}$ fort.
 
 \subsection{Calc Factor T larft}
-\cite{Joffrain:2006:AHT:1141885.1141886}
 
+Die Funkton bekommt eine Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$ einen Vektor $\tau \in \mathbb{R}^k$ und eine Matrix $T\in \mathbb{R}^{k\times k}$ übergeben. 
+Die Funktion berechnet eine Dreiecksmatrix $T$ so dass
 \begin{align*}
-	H_2 H_1 x &= (I-\tau_2 v_2 v_2^T)(I-\tau_1 v_1 v_1^T)x\\
-	&= (I - \tau_1 v_1 v_1^T - \tau_2 v_2 v_2^T - \tau_2 v_2 v_2^T \tau_1 v_1 v_2^T) x\\
-  &= x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 v_2 (v_2^T v_1 )v_2^T x\\
-  &= x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 (v_2^T v_1 ) v_2 v_2^T x\\
+	H_1H_2...H_k = I - VTV^T \qquad \text{mit}\qquad H_i = I - \tau_i v_iv_i^T
+\end{align*}
+
+Warum und wie das Funktoniert wird hier beschreiben \cite{Joffrain:2006:AHT:1141885.1141886}.
+
+Versuch einer Herleitung
+\begin{align*}
+	H_1 H_2 x &= (I-\tau_1 v_1 v_1^T)(I-\tau_2 v_2 v_2^T)x\\
+	&= (I - \tau_1 v_1 v_1^T - \tau_2 v_2 v_2^T -  \tau_1 v_1 v_2^T \tau_2 v_2 v_2^T )x\\
+  &= x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 v_1 (v_1^T v_2 )v_2^T x\\
+  &= x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 (v_1^T v_2 ) v_1 v_2^T x\\
 \end{align*}
 
 \begin{align*}
@@ -153,30 +184,49 @@ Fahre mit $A_{0, \text{bs}}$ fort.
 \end{align*}
 
 \subsection{Apply H larfb}
-Die Funktion larfb berechnet.
-\begin{align}
-	H^T A &= A - V T^T V^T A
-\end{align}
+
+Die Funktion larfb bekommt eine Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$, eine Dreiecksmatrix $T \in \mathbb{R}^{k \times k}$ und eine Matrix $C \in \mathbb{R}^{m \times n }$ übergeben.
+Die Funktion wendet eine  Block Reflector Matrix $ 	H = C - V T V^T $ von rechts auf die Matrix $ C $ an. 
+Mit einem weiteren Übergabeparameter kann angeben werden ob die Block Reflector Matrix noch transponiert werden soll.
+Die Funktion berechnet also
+\begin{align*}
+	C \leftarrow H C = C - V T V^T C \quad \text{oder} \quad 	C \leftarrow H^T C = C - V T^T V^T C
+\end{align*}
+Die Abbildung \ref{fig:patrA} zeigt die Partitionierung der Matrix A für die Funktion larfb.\\
+Falls $m > k $ werden die Matrizen $V$ und $C$ aufgeteilt in $V=\left(\dfrac{V_1}{V_2}\right)$ und $C=\left(\dfrac{C_1}{C_2}\right)$. Dabei wird $V$ genau so gewählt, dass $V_1 \in \mathbb{R}^{k\times k}$ der Dreiecksteil der Matrix und quadratisch ist und $V_2 \in \mathbb{R}^{m-k\times k}$ der Rest der Matrix. Die Matrix $C$ wird in $C_1 \in \mathbb{R}^{k \times n}$ und $C_2 \in \mathbb{R}^{m-k \times n}$  aufgeteilt.\\
+Die Aufteilung ist Notwendig da die BLAS-Funktion trmm (matrix-matrix product where one input matrix is triangular) nur für Quadratische Dreiecksmatrizen implementiert ist.
+
+Im Fall $ m = k $ ist die Aufteilung nicht Notwendig da $ V $ quadratisch ist.
 
 \begin{align*}
-	W &= C' * V  =  (C1'*V1 + C2'*V2)  (stored in WORK)\\
-	W &= C1'\\
-	W &= W * V1\\
-	IF( M.GT.K ) THEN\\
-	W &= W + C2'*V2\\
-	W &= W * T'  or  W * T\\
-	C &= C - V * W'\\
-	IF( M.GT.K ) THEN\\
-	C2 &= C2 - V2 * W'\\
-	W &= W * V1'\\
-	C1 &= C1 - W'\\
+	(C_1^T * V_1 * T *V_1^T)^T\\
+	V_1 * T^T * V_1^T * C_1
 \end{align*}
+
+
+
+Dies führt zu dem Algorithmus:
+
+\begin{algorithmic}
+	\State 	$W \leftarrow C_1^T$ (copy)
+	\State	$W \leftarrow W * V_1 $ (trmm)
+	\If {m > k}
+		\State $W \leftarrow W + C_2^T*V_2$ (gemm)
+	\EndIf
+	\State 	$ W \leftarrow W * T^T \quad \text{or}\quad  W * T$ (trmm)
+	\If {m > k}
+		\State $C_2 \leftarrow C_2 - V_2 * W^T$ (gemm)
+	\EndIf
+	\State 	$ W \leftarrow W * V_1^T $ (trmm)
+	\State 	$ C_1 \leftarrow C_1 - W^T $
+\end{algorithmic}
+
 
 
 \begin{figure} 
 	\centering
 	\input{images/partitionOFA.tex}
-	\caption{Partitionierung vom A}
+	\caption{Partitionierung vom A für larfb}
 	\label{fig:patrA}
 \end{figure}
 

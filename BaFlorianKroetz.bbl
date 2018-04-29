@@ -18,7 +18,12 @@
 \newblock DOI 10.1145/1141885.1141886. --
 \newblock ISSN 0098--3500
 
-\bibitem[2]{DGEQR2}
+\bibitem[2]{num1}
+\textsc{Stefan A.~Funken}, Karsten~U.:
+\newblock \emph{Einführung in die Numerische Lineare Algebra}.
+\newblock Ulm, Germany, 2016
+
+\bibitem[3]{DGEQR2}
 \textsc{Tennessee}, Univ. of California~B.~o. ; \textsc{Ltd..}, NAG:
 \newblock \emph{{LAPACK unblocked QR}}.
 \newblock \url{http://www.netlib.org/lapack/explore-3.1.1-html/dgeqr2.f.html},
