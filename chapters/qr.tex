@@ -89,12 +89,14 @@ Wie muss der Vekor $v$ aussehen damit (\ref{spiegelung}) gilt.
 	\label{alg:unblockedqr}
 \end{algorithm}
 \subsection{Apply vector}
-
-\begin{align*}
-H =& I - \tau vv'\\ 
-H A =& A - \tau vv' A\\
-=& A - \tau v*(v'*A)
+Ein aufwändiges Matrix-Matrix Produkt kann bei der Anwendung der Housholder-Matrix $H = I - \tau vv'$ auf die Matrix A umgangen werden, indem man geschickt Klammert.
+\begin{align*} 
+H A =(I - \tau vv') A= A - \tau vv' A = A - \tau v*(v'*A)
 \end{align*}
+Statt eines Matrix-Matrix Produkts, muss man nun nur ein Matrix-Vektor Produkt und ein dyadisches Produkt berechnen.
+Das Matrix-Vektor Produkt und das dyadisches Produkt haben nur einen Aufwand von $O(n^2)$.
+
+
 
 
 Das führt auf den Algorithmus \ref{alg:unblockedqr}. 
@@ -114,23 +116,32 @@ Das führt auf den Algorithmus \ref{alg:unblockedqr}.
 \label{alg:unblockedqr}
 \end{algorithm}
 
-\section{LAPACK QR}
+Der Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$. Da $R$ eine obere Dreiecksmatrix ist, werden unter der Diagonalen die Housholder-Vektoren gespeichert. A hat also die Form
+\begin{align*}
+	A = 
+	\left(\begin{array}{ccc}
+	R   &  R  & R \\ 
+	v_1 &  R  & R \\ 
+	v_1 & v_2 & R \\ 
+	v_1 & v_2 & v_3
+	\end{array} \right)
+\end{align*}
+
+\subsection{LAPACK QR}
 Der von LAPACK benutzte Algorithmus \cite{DGEQR2}
 \begin{align}
-	H &= I - \tau \omega \omega^T \\
 	\tau &= \frac{\alpha - \beta}{\beta} \\
 	\alpha &= A(i,i)\\
 	\beta &= \text{sign}(\alpha) \left|\sqrt{\alpha^2 + \|x\|^2}\right|\\
 	x &= A(i+1:m,i)\\
-	\omega &= A(i+1:m,i) * \frac{1}{\alpha - \beta}
+	v &= A(i+1:m,i) * \frac{1}{\alpha - \beta}
 \end{align}
 
-\section{NUM1 Urban QR}
+\subsection{NUM1 Urban QR}
 Algorithmus aus Numerik 1
 
 \begin{align}
-	H &= I - 2 \frac{\omega \omega^T}{\omega^T \omega}\\
-	\omega_1 &= \frac{x - \alpha e_1}{x_1 - \alpha}\\
+	v_1 &= \frac{x - \alpha e_1}{x_1 - \alpha}\\
 	\alpha ^2 &= \|x\|^2 
 \end{align}
 
@@ -154,6 +165,7 @@ Algorithmus aus Numerik 1
 
 
 \section{QR Blocked}
+Ein geblockter Algorithmus ist sinnvoll um bei großen Matrizen den Cache optimal auszunutzen. 
 Geblockte Alorighmus
 \begin{align*}
 H &= I - VTV^T\\
