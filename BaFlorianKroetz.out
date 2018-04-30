@@ -4,12 +4,12 @@
 \BOOKMARK [2][-]{subsection.1.2.1}{QR Anwendung oder so was}{section.1.2}% 4
 \BOOKMARK [0][-]{chapter.2}{BLAS}{}% 5
 \BOOKMARK [1][-]{section.2.1}{Datenstruktur f\374r Matrizen}{chapter.2}% 6
-\BOOKMARK [1][-]{section.2.2}{Einige Blasroutinen}{chapter.2}% 7
-\BOOKMARK [2][-]{subsection.2.2.1}{Matrix-Matrix Produkt gemm}{section.2.2}% 8
-\BOOKMARK [2][-]{subsection.2.2.2}{Matrix-Vector Produkt gemv}{section.2.2}% 9
-\BOOKMARK [2][-]{subsection.2.2.3}{Rank1 update ger}{section.2.2}% 10
-\BOOKMARK [2][-]{subsection.2.2.4}{Matrix-Matrix Produkt trmm}{section.2.2}% 11
-\BOOKMARK [2][-]{subsection.2.2.5}{Matrix-Vector Produkt trmv}{section.2.2}% 12
+\BOOKMARK [1][-]{section.2.2}{Einige BLAS-Blasroutinen}{chapter.2}% 7
+\BOOKMARK [2][-]{subsection.2.2.1}{Matrix-Matrix Produkt \(gemm\)}{section.2.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.2}{Matrix-Vector Produkt \(gemv\)}{section.2.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.3}{Rank1 update \(ger\)}{section.2.2}% 10
+\BOOKMARK [2][-]{subsection.2.2.4}{Matrix-Matrix Produkt \(trmm\)}{section.2.2}% 11
+\BOOKMARK [2][-]{subsection.2.2.5}{Matrix-Vector Produkt \(trmv\)}{section.2.2}% 12
 \BOOKMARK [0][-]{chapter.3}{QR factorisation}{}% 13
 \BOOKMARK [1][-]{section.3.1}{QR-Zerlegung}{chapter.3}% 14
 \BOOKMARK [2][-]{section*.2}{Definition}{section.3.1}% 15

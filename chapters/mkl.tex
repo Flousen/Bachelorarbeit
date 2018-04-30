@@ -88,29 +88,50 @@ struct Matrix {
 }
 \end{lstlisting}
 
-
 Für Intel MKL und LAPACK Routinen müssen die Matrizen zeilenweise gespeichert.
-\section{Einige Blasroutinen}
 
 
-\subsection{Matrix-Matrix Produkt gemm}
+\section{Einige BLAS-Blasroutinen}
+Im Folgenden werden einige BLAS-Routinen beschrieben, die bei der QR-Zerlegung benutzt werden.
+BLAS-Blasroutinen werden bei MKL und LAPACK nach folgendem Schema benannt.
+Der erste Buchstabe im Namen gibt an für welchen Datentype die Funktion implementiert wurde. Der rest zeigt an was die Funktion tut.
+Zum Beispiel "dgemm", das d zeigt an die Funktion ist für Doubles und "gemm" steht für das Matrix-Matrix Produkt.
+
+\subsection{Matrix-Matrix Produkt (gemm)}
+Die gemm Funktion berechnet das Matrix-Matrix Produkt.
+Der Funktion werden die Matrizen $A$, $B$ und $C$ und die Skalare $\alpha$ und $\beta$ übergeben.\\
+Die Funktion berechnet
 \begin{align}
-	C \leftarrow \beta * C + \alpha * A * B
+	C \leftarrow \beta  C + \alpha  A  B
 \end{align}
-\subsection{Matrix-Vector Produkt gemv}
+Falls $\beta = 0$ wird die Matrix $C$ zuerst mit Nullen initialisiert. Falls $C$ Einträge hat die NaN (Not a Number) sind, werden diese somit mit 0 überschrieben.
+
+\subsection{Matrix-Vector Produkt (gemv)}
+Die Funktion gemv berechnet das Matrix-Vector Produkt.
+Der Funktion wird die Matrix $A$ die Vektoren $x$ und $y$ und die Skalare $\alpha$ und $\beta$ übergeben.\\
+Die Funktion berechnet
 \begin{align}
-	y \leftarrow \alpha * A*x + \beta * y
+	y \leftarrow \beta  y + \alpha A x 
 \end{align}
-\subsection{Rank1 update ger}
+Falls $\beta = 0$ wird der Vektor $y$ zuerst mit Nullen initialisiert. Falls $y$ Einträge hat die NaN (Not a Number) sind, werden diese somit mit 0 überschrieben.
+\subsection{Rank1 update (ger)}
+Die Funktion ger berechnet ein dyadische Produkt aus den Vektoren $x$ und $y$, skaliert die daraus resultierende Matrix mit $\alpha$ und addiert das Ergebnis auf $A$.//
+Der Funktion wird die Matrix $A$ die Vektoren $x$ und $y$ und das Skalar $\alpha$ übergeben.\\
+Die Funktion berechnet
 \begin{align}
-	A \leftarrow A + \alpha * x * y^T
+	A \leftarrow A + \alpha  x y^T
 \end{align}
 
-\subsection{Matrix-Matrix Produkt trmm}
+\subsection{Matrix-Matrix Produkt (trmm)}
+Die Funktion trmm berechnet das Matrix-Matrix Produkt einer Dreiecksmatrix mit einer voll besetzten Matrix.
+Der Funktion wird die Dreiecksmatrix $A$, die Matrix $B$ und das Skalar $\alpha$ übergeben. Außerdem werden Flags mit übergeben die anzeigen ob $A$ eine obere oder unter Dreiecksmatrix ist, ob $A$ eine strikte oder unipotente Dreiecksmatrix ist, ob $A$ von links oder rechts auf $B$ multipliziert werden soll und ob $A$ transponiert werden soll.
+\\
+Die Funktion berechnet
 \begin{align}
 B \leftarrow  \alpha * op(A) * B \qquad \text{or} \qquad B \leftarrow  \alpha *  B * op(A)
 \end{align}
-\subsection{Matrix-Vector Produkt trmv}
+\subsection{Matrix-Vector Produkt (trmv)}
+Die Funktion berechnet
 \begin{align}
 x \leftarrow \alpha * A*x \qquad \text{or} \qquad x \leftarrow \alpha * A^T*x
 \end{align}
