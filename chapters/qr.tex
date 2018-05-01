@@ -1,7 +1,7 @@
 \chapter{QR factorisation}
 
 \section{QR-Zerlegung}
-\subsubsection{Definition}
+\subsection{Definition}
 Eine Matrix $A \in \mathbb{R}^{m \times n}$ , $m \ge n$ besitzt eine eindeutige QR-Zerlegung.
 \begin{align}
 	A = QR
@@ -45,7 +45,7 @@ Also löst
 \begin{align}
 Rx=Q^Tb \label{solvminqr}
 \end{align}
-das Minimierungsproblem (\ref{eq1}). Da $R$ eine Dreiecksmatrix ist lässt sich (\ref{solvminqr}) leicht mit Rückwärtseinsetzen  lösen.
+das Minimierungsproblem (\ref{eq1}). Da $R$ eine Dreiecksmatrix ist, lässt sich (\ref{solvminqr}) leicht mit Rückwärtseinsetzen  lösen.
 
 \section{Householder-Transformation}
 Sei $v \in \mathbb{R}^n$ und $\tau \in \mathbb{R}$ dann wir die $n \times n$ Matrix 
@@ -62,6 +62,7 @@ Dazu multipliziert man $H$ von links auf $x$.
 \end{align}
 mit $\alpha \in \mathbb{R}$ und $e_1$ erster kanonischer Einheitsvektor. Der Householder-Vektor steht senkrecht auf der Achse an der $x$ gespiegelt wird.\\
 Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung der Vektors $x$ and der gestrichelt eingezeichneten Ebene auf die $x_1$ Achse.
+[Abbildung \ref{fig:HHolder}]
 \begin{figure}[h]
 	\centering
 	\input{images/hh.tex}
@@ -69,26 +70,66 @@ Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung der Vektors $x$ a
 	\label{fig:HHolder}
 \end{figure}
 
+Eine Householder-Transformation kann die eine Matrix $A$ wie folgt transformieren.
+\begin{align*}
+	H_1 A= \left( 
+	\begin{array}{cccc}
+	* & * & * & * \\ 
+	0 & * & * & * \\ 
+	0 & * & * & * \\ 
+	0 & * & * & *
+	\end{array}
+	\right)
+	\quad , \quad
+	H_2x1 H_1 A= \left( 
+	\begin{array}{cccc}
+	* & * & * & * \\ 
+	0 & * & * & * \\ 
+	0 & 0 & * & * \\ 
+	0 & 0 & * & *
+	\end{array}
+	\right)
+\end{align*} 
+So erhält man folgende Faktorisierung
+\begin{align*}
+	R = H_{n-1} H_{n-2}\cdot ...\cdot H_1 A \Leftrightarrow A = (H_1\cdot ...\cdot H_n)R \Rightarrow Q = H_1\cdot ... \cdot H_n
+\end{align*}
+$Q$ ist also das Produkt aller Householder-Transformationen.
+
 
 \subsection{Householder Vector}
 Wie muss der Vekor $v$ aussehen damit (\ref{spiegelung}) gilt.
+\begin{align*}
+	Hx = \alpha e_1
+\end{align*}
 %TODO fragen
 \begin{algorithm}
 	\caption{Housholder-Vector}
 	\begin{algorithmic}
-		\State $A \in \mathbb{R}^{m \times n}$
-		\For {i = 0 : n}
-		\State [$v$, $\tau$] = housevector($A(i:m,i)$)
-		\State $w \leftarrow v^T*A$ (dgemv)
-		\State $ A \leftarrow \tau * v * w + A $ (dger)
-		\If {i > m}
-		\State $A(i + 1 : m, j) \leftarrow v(2 : m - i + 1)$
-		\EndIf
-		\EndFor	
+		\State $x \in \mathbb{R}^n$
 	\end{algorithmic} 
 	\label{alg:unblockedqr}
 \end{algorithm}
-\subsection{Apply vector}
+
+\subsubsection{LAPACK QR}
+Der von LAPACK benutzte Algorithmus \cite{DGEQR2}
+\begin{align*}
+x &= A(i+1:m,i)\\
+\alpha &= A(i,i)\\
+\beta &= \text{sign}(\alpha) \left|\sqrt{\alpha^2 + \|x\|^2}\right|\\
+\tau &= \frac{\alpha - \beta}{\beta} \\
+v &= A(i+1:m,i) * \frac{1}{\alpha - \beta}
+\end{align*}
+
+\subsubsection{NUM1 Urban QR}
+Algorithmus aus Numerik 1
+
+\begin{align*}
+v_1 &= \frac{x - \alpha e_1}{x_1 - \alpha}\\
+\alpha ^2 &= \|x\|^2 
+\end{align*}
+
+\subsection{Householder-Transformation anwenden}
 Ein aufwändiges Matrix-Matrix Produkt kann bei der Anwendung der Housholder-Matrix $H = I - \tau vv'$ auf die Matrix A umgangen werden, indem man geschickt Klammert.
 \begin{align*} 
 H A =(I - \tau vv') A= A - \tau vv' A = A - \tau v*(v'*A)
@@ -116,6 +157,8 @@ Das führt auf den Algorithmus \ref{alg:unblockedqr}.
 \label{alg:unblockedqr}
 \end{algorithm}
 
+
+
 Der Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$. Da $R$ eine obere Dreiecksmatrix ist, werden unter der Diagonalen die Housholder-Vektoren gespeichert. A hat also die Form
 \begin{align*}
 	A = 
@@ -127,23 +170,7 @@ Der Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$. Da $
 	\end{array} \right)
 \end{align*}
 
-\subsection{LAPACK QR}
-Der von LAPACK benutzte Algorithmus \cite{DGEQR2}
-\begin{align}
-	\tau &= \frac{\alpha - \beta}{\beta} \\
-	\alpha &= A(i,i)\\
-	\beta &= \text{sign}(\alpha) \left|\sqrt{\alpha^2 + \|x\|^2}\right|\\
-	x &= A(i+1:m,i)\\
-	v &= A(i+1:m,i) * \frac{1}{\alpha - \beta}
-\end{align}
 
-\subsection{NUM1 Urban QR}
-Algorithmus aus Numerik 1
-
-\begin{align}
-	v_1 &= \frac{x - \alpha e_1}{x_1 - \alpha}\\
-	\alpha ^2 &= \|x\|^2 
-\end{align}
 
 
 %\section{Unterschiede der Algorithmen}
@@ -165,42 +192,26 @@ Algorithmus aus Numerik 1
 
 
 \section{QR Blocked}
-Ein geblockter Algorithmus ist sinnvoll um bei großen Matrizen den Cache optimal auszunutzen. 
-Geblockte Alorighmus
-\begin{align*}
-H &= I - VTV^T\\
-H^T &= I - VT^TV^T\\ 
-H^TA_{bs,bs} &= A_{bs,bs} - VT^TV^TA_{bs,bs}
-\end{align*}
+Ein geblockter Algorithmus ist sinnvoll damit der Cache bei großen Matrizen optimal ausgenutzt wird. \\
+%Geblockte Alorighmus
+%\begin{align*}
+%H &= I - VTV^T\\
+%H^T &= I - VT^TV^T\\ 
+%H^TA_{bs,bs} &= A_{bs,bs} - VT^TV^TA_{bs,bs}
+%\end{align*}
 
 
-
-\begin{figure}
-	\centering
-	\input{images/partitionOFA1.tex}
-	\caption{Partitionierung vom A}
-	\label{fig:blockA}
-\end{figure}
-
-
-
-
-
-Betrachte A geblockt, mit einer geeigneten Blockgröße $bs$.
+Betrachte die Matrix $A \in \mathbb{R}^{m \times n}$ geblockt, mit einer geeigneten Blockgröße $bs$.
 \begin{align}
 	A = \left(\begin{array}{l|l}
 	A_{0, 0} & A_{0, \text{bs}} \\ \hline
 	A_{\text{bs}, 0}   & A_{\text{bs}, \text{bs}} 	
-	\end{array} \right) 
+	\end{array} \right) \label{equ:blockA}
 \end{align}
-
 Die Abbildung \ref{fig:blockA} zeigt schematisch die Partitionierung von A.
 
-Berechne nun QR Zerlegung für den Block $
-\left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right)$
-
-
-%% $A_{0, 0}$ und $ A_{\text{bs},0}$
+Nun wird QR Zerlegung für den Block $ \left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right)$
+mit Algorithmus \ref{alg:unblockedqr} berechnet.
 \begin{align}
 	\left(\begin{array}{l} 
 	A_{0, 0} \\ \hline
@@ -213,25 +224,35 @@ Berechne nun QR Zerlegung für den Block $
 	\end{array}\right)
 \end{align}
 
+Das Bedeutet im block $A_{0, 0}$ steht nun auf und über der Diagonalen $R_{0,0}$, unterhalb der Diagonalen und im block $A_{\text{bs}, 0}$ stehen die Householder-Vektoren.
+
+Damit 
 
 
-Berechne $H(0)$...$H(bs)$ aus $Q_{0, 0}$ und $Q_{bs, 0}$ mit $H = I - V*T*V^T$.\\
+
+Berechne $H_{0}$...$H_{bs}$ aus $Q_{0, 0}$ und $Q_{bs, 0}$ mit $H = I - V*T*V^T$.\\
 Wende $H^T$ auf $A_{0, \text{bs}}$ und $ A_{0,\text{bs}}$ an.
 \begin{align}
 	\left(\begin{array}{l} 
 	A_{0, \text{bs}} \\ \hline
-	A_{0, \text{bs}}
+	A_{bs, \text{bs}}
 	\end{array}\right)
 	\leftarrow
 	H^T \left(\begin{array}{l} 
 	A_{0, \text{bs}} \\ \hline
-	A_{0, \text{bs}}
+	A_{bs, \text{bs}}
 	\end{array}\right)
 \end{align}
 
+Betrachte nun den Block $A_{bs, \text{bs}}$ wie in (\ref{equ:blockA}), in der Abbildung \ref{fig:blockA} gestrichelt Dargestellt.
 
-
-Fahre mit $A_{0, \text{bs}}$ fort.
+[Abbildung \ref{fig:blockA}]
+\begin{figure}
+	\centering
+	\input{images/partitionOFA1.tex}
+	\caption{Partitionierung vom A}
+	\label{fig:blockA}
+\end{figure}
 
 \subsection{Calc Factor T larft}
 
@@ -276,6 +297,14 @@ Versuch einer Herleitung
   &= x - a v_1 v_1^T x - b v_1 v_2^T x - c v_2 v_2^T x
 \end{align*}
 
+Produkt orthogonaler Matrizen ist orthogonal 
+\begin{align*}
+	A^{-1} = A^T, B^{-1} = B^T\\
+	(AB)^{-1} = B^{-1}A^{-1} = B^TA^T = (AB)^T
+\end{align*}
+$\Rightarrow H=I-VTV^T$ ist orthogonal\\
+ich bin doof Q ist ja auch orthogonal
+
 \subsection{Apply H larfb}
 
 Die Funktion larfb bekommt eine Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$, eine Dreiecksmatrix $T \in \mathbb{R}^{k \times k}$ und eine Matrix $C \in \mathbb{R}^{m \times n }$ übergeben.
@@ -298,7 +327,7 @@ Im Fall $ m = k $ ist die Aufteilung nicht Notwendig da $ V $ quadratisch ist.
 
 
 
-Dies führt zu dem Algorithmus \ref{alg:applyblockref}
+Dies führt zu dem[ Algorithmus \ref{alg:applyblockref} ]\\
 \begin{algorithm}
 	\caption{Block reflector anwenden}
 	\label{alg:applyblockref}
@@ -318,7 +347,7 @@ Dies führt zu dem Algorithmus \ref{alg:applyblockref}
 \end{algorithm}
 
 
-
+[Abbildung \ref{fig:patrA}]
 \begin{figure} 
 	\centering
 	\input{images/partitionOFA.tex}
@@ -328,8 +357,10 @@ Dies führt zu dem Algorithmus \ref{alg:applyblockref}
 
 
 \subsection{Iterativer Algorithmus}
+[Algorithmus \ref{alg::italg}]
 \begin{algorithm}
 	\caption{Iterativer Algorithmus}
+	\label{alg::italg}
 	\begin{algorithmic}
 		\For {i = 0 : n}
 			\State QR = A;

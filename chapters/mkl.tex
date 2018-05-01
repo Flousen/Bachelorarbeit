@@ -99,7 +99,7 @@ Zum Beispiel "dgemm", das d zeigt an die Funktion ist für Doubles und "gemm" st
 
 \subsection{Matrix-Matrix Produkt (gemm)}
 Die gemm Funktion berechnet das Matrix-Matrix Produkt.
-Der Funktion werden die Matrizen $A$, $B$ und $C$ und die Skalare $\alpha$ und $\beta$ übergeben.\\
+Der Funktion werden die Matrizen $A$, $B$ und $C$ und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem werden 2 Flags übergeben ob die Matrizen $A$ und $B$ transponiert werden sollen.\\
 Die Funktion berechnet
 \begin{align}
 	C \leftarrow \beta  C + \alpha  A  B
@@ -108,7 +108,7 @@ Falls $\beta = 0$ wird die Matrix $C$ zuerst mit Nullen initialisiert. Falls $C$
 
 \subsection{Matrix-Vector Produkt (gemv)}
 Die Funktion gemv berechnet das Matrix-Vector Produkt.
-Der Funktion wird die Matrix $A$ die Vektoren $x$ und $y$ und die Skalare $\alpha$ und $\beta$ übergeben.\\
+Der Funktion wird die Matrix $A$ die Vektoren $x$ und $y$ und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem wird ein Flag übergeben das anzeigt ob die Matrixa Transponiert werden soll.\\
 Die Funktion berechnet
 \begin{align}
 	y \leftarrow \beta  y + \alpha A x 
@@ -125,14 +125,16 @@ Die Funktion berechnet
 \subsection{Matrix-Matrix Produkt (trmm)}
 Die Funktion trmm berechnet das Matrix-Matrix Produkt einer Dreiecksmatrix mit einer voll besetzten Matrix.
 Der Funktion wird die Dreiecksmatrix $A$, die Matrix $B$ und das Skalar $\alpha$ übergeben. Außerdem werden Flags mit übergeben die anzeigen ob $A$ eine obere oder unter Dreiecksmatrix ist, ob $A$ eine strikte oder unipotente Dreiecksmatrix ist, ob $A$ von links oder rechts auf $B$ multipliziert werden soll und ob $A$ transponiert werden soll.
+%% TODO stimmt unipotente Dreiecksmatrix?
 \\
 Die Funktion berechnet
 \begin{align}
-B \leftarrow  \alpha * op(A) * B \qquad \text{or} \qquad B \leftarrow  \alpha *  B * op(A)
+B \leftarrow  \alpha \cdot op(A) \cdot B \qquad \text{or} \qquad B \leftarrow  \alpha \cdot B \cdot op(A)
 \end{align}
 \subsection{Matrix-Vector Produkt (trmv)}
+Die Funktion berechnet das Matrix-Vector Produkt für Dreiecksmatrizen.
 Die Funktion berechnet
 \begin{align}
-x \leftarrow \alpha * A*x \qquad \text{or} \qquad x \leftarrow \alpha * A^T*x
+x \leftarrow \alpha  Ax %\qquad \text{or} \qquad x \leftarrow \alpha * A^T*x
 \end{align}
 

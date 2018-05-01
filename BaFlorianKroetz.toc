@@ -13,20 +13,21 @@
 \contentsline {subsection}{\numberline {2.2.5}Matrix-Vector Produkt (trmv)}{4}{subsection.2.2.5}
 \contentsline {chapter}{\numberline {3}QR factorisation}{5}{chapter.3}
 \contentsline {section}{\numberline {3.1}QR-Zerlegung}{5}{section.3.1}
-\contentsline {subsubsection}{\nonumberline Definition}{5}{section*.2}
-\contentsline {subsubsection}{\nonumberline Motivation}{5}{section*.3}
+\contentsline {subsection}{\numberline {3.1.1}Definition}{5}{subsection.3.1.1}
+\contentsline {subsubsection}{\nonumberline Motivation}{5}{section*.2}
 \contentsline {section}{\numberline {3.2}Householder-Transformation}{6}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Householder Vector}{6}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Apply vector}{7}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}LAPACK QR}{8}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}NUM1 Urban QR}{8}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.1}Householder Vector}{7}{subsection.3.2.1}
+\contentsline {subsubsection}{\nonumberline LAPACK QR}{8}{section*.3}
+\contentsline {subsubsection}{\nonumberline NUM1 Urban QR}{8}{section*.4}
+\contentsline {subsection}{\numberline {3.2.2}Householder-Transformation anwenden}{8}{subsection.3.2.2}
 \contentsline {section}{\numberline {3.3}QR Blocked}{9}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Calc Factor T larft}{10}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Apply H larfb}{11}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Iterativer Algorithmus}{12}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Rekursiver Algorithmus}{12}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.3}Iterativer Algorithmus}{13}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Rekursiver Algorithmus}{13}{subsection.3.3.4}
 \contentsline {chapter}{\numberline {4}Implementierung und Benchmarks}{14}{chapter.4}
-\contentsline {section}{\numberline {4.1}MKL Wraper}{14}{section.4.1}
-\contentsline {section}{\numberline {4.2}Benchmarks}{14}{section.4.2}
+\contentsline {section}{\numberline {4.1}Fehler Sch\IeC {\"a}tzer}{14}{section.4.1}
+\contentsline {section}{\numberline {4.2}MKL Wraper}{14}{section.4.2}
+\contentsline {section}{\numberline {4.3}Benchmarks}{14}{section.4.3}
 \contentsline {chapter}{\numberline {A}Quelltexte}{15}{appendix.A}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{16}{chapter*.4}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{16}{chapter*.5}

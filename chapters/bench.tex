@@ -1,5 +1,13 @@
 \chapter{Implementierung und Benchmarks}
 Irgend was über die HPC Bibliothek
+
+\section{Fehler Schätzer}
+\begin{align}
+	err = \dfrac{\|A - QR\|_i}{\|A\|_i \cdot \min(m,n) \cdot \varepsilon}
+\end{align}
+mit $\|\cdot\|_i$ passender Norm und $\varepsilon$ die kleinste darstellbare Zahl.
+
+Die QR-Zerlegung ist gut genug falls $ err < 1 $
 \section{MKL Wraper}
 
 \section{Benchmarks}
