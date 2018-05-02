@@ -109,11 +109,22 @@ Damit der Faktor vor dem $x$ verschwindet muss gelten
 	1 = \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2} \Leftrightarrow (x - \alpha e_1)^T(x - \alpha e_1) = 2 x^T x - 2\alpha x_1 \Leftrightarrow \alpha = \pm \sqrt{x^Tx}
 \end{align*}
 
-Wie ist das Vorzeichen von $\alpha = \pm \sqrt{x^Tx}$ zu wählen?
+Wie ist das Vorzeichen von $\alpha = \pm \sqrt{x^Tx}$ zu wählen um $ v = x - \alpha e_1$ zu berechnen?
+
+Wählt man das Vorzeichen positive kann Auslöschung auftreten falls $x$ annähernd ein positives Vielfaches von $e_1$ ist.
+
+LAPACK \cite{DGEQR2} vermeidet die Auslöschung indem das Vorzeichen entgegengesetzt gewählt wird. Das bedeutet $x$ wird immer auf die gegenüberliegende Seite gespiegelt.
+
+Im Numerik 1 Skript \cite{num1} wird das Vorzeichen immer positiv gewählt d.h. $\alpha = |\sqrt{x^Tx}| = \|x\|_2$. Eine mögliche Auslöschung im Fall $ x_1 > 0$ wird hier durch die Umformung 
+\begin{align}
+	v_1 = x_1 - \|x\|_2 = \dfrac{x_1^2 - \|x\|_2^2}{x_1 + \|x\|_2}
+	=\dfrac{-(x_2^2+...+x_n^2)}{x_1 - \|x\|_2}
+\end{align}
+vermieden.
 
 
 \begin{algorithm}
-	\caption{Housholder-Vector}
+	\caption{Housholder-Vector(LAPACK DLARFG)}
 	\begin{algorithmic}
 		\State $x \in \mathbb{R}^n$
 	\end{algorithmic} 
@@ -174,34 +185,8 @@ Der Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$. Da $
 \end{align*}
 
 
-
-
-%\section{Unterschiede der Algorithmen}
-%Die beiden Algorithmen unterscheiden sich lediglich durch ein eine Kleinigkeite im der Transformations Matrix.
-%\begin{align*}
-%	H_{\text{Urban}} = I -  \dfrac{2}{v^T v}v v^T \qquad \qquad H_{\text{LAPACK}} = I - 2 \tau v v^T
-%\end{align*}
-%mit $\tau = \dfrac{2}{v^T v}$. Das $\tau_i$ für jeden Householder-Vektor wird in einem Vektor $\tau \in \mathbb{R}^n$ gespeichert.
-%\begin{align*}
-%	H_i = I - \tau_i v_i v_i^T \quad , \quad i \in 1,...,n
-%\end{align*}
-%
-%Durch die Verwendung des $\tau$ muss das Skalarprodukts $v^T v$  nur einmalig Berechnet werde.
-%
-%Hypothese:\\
-%Das Einsprungpotential ist nicht sehr groß.
-%Das Skalar Produkt hat einen Aufwand von $O(n)$. Außerdem muss man den $v$ nicht extra in den Cache laden, da er zur Berechnung des dyadischen Produkts $vv^T$ schon im Cache liegt.
-
-
-
 \section{QR Blocked}
 Ein geblockter Algorithmus ist sinnvoll damit der Cache bei großen Matrizen optimal ausgenutzt wird. \\
-%Geblockte Alorighmus
-%\begin{align*}
-%H &= I - VTV^T\\
-%H^T &= I - VT^TV^T\\ 
-%H^TA_{bs,bs} &= A_{bs,bs} - VT^TV^TA_{bs,bs}
-%\end{align*}
 
 
 Betrachte die Matrix $A \in \mathbb{R}^{m \times n}$ geblockt, mit einer geeigneten Blockgröße $bs$.

@@ -94,11 +94,11 @@ Für Intel MKL Routinen müssen die Matrizen zeilenweise gespeichert sein.
 \section{Einige BLAS-Routinen}
 Im Folgenden werden einige BLAS-Routinen beschrieben, die bei der QR-Zerlegung benutzt werden.
 BLAS-Routinen werden bei MKL und LAPACK nach folgendem Schema benannt.
-Der erste Buchstabe im Namen gibt an für welchen Datentype die Funktion implementiert wurde. Der rest zeigt an was die Funktion tut.\\
-Beispiel: \glqq dgemm \flqq, das d zeigt an die Funktion ist für Doubles und 	\glqq gemm \flqq steht für das Matrix-Matrix Produkt.
+Der erste Buchstabe im Namen gibt an für welchen Datentype die Funktion implementiert wurde. Der Rest zeigt an was die Funktion tut.\\
+Beispiel: \glqq dgemm\grqq{}, das d zeigt an die Funktion ist für Doubles und \glqq gemm\grqq{} steht für das Matrix-Matrix Produkt.
 
 \subsection{Matrix-Matrix Produkt (gemm)}
-Die \glqq gemm \flqq Funktion berechnet das Matrix-Matrix Produkt.
+Die \glqq gemm\grqq{} Funktion berechnet das Matrix-Matrix Produkt.
 Der Funktion werden die Matrizen $A$, $B$ und $C$ und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem werden 2 Flags übergeben ob die Matrizen $A$ und $B$ transponiert werden sollen.\\
 Die Funktion berechnet
 \begin{align}
@@ -107,7 +107,7 @@ Die Funktion berechnet
 Falls $\beta = 0$ wird die Matrix $C$ zuerst mit Nullen initialisiert. Falls $C$ Einträge hat die NaN (Not a Number) sind, werden diese somit mit 0 überschrieben.
 
 \subsection{Matrix-Vector Produkt (gemv)}
-Die Funktion \glqq gemv \flqq berechnet das Matrix-Vector Produkt.
+Die Funktion \glqq gemv\grqq{} berechnet das Matrix-Vector Produkt.
 Der Funktion wird die Matrix $A$ die Vektoren $x$ und $y$ und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem wird ein Flag übergeben das anzeigt ob die Matrixa Transponiert werden soll.\\
 Die Funktion berechnet
 \begin{align}
@@ -115,7 +115,7 @@ Die Funktion berechnet
 \end{align}
 Falls $\beta = 0$ wird der Vektor $y$ zuerst mit Nullen initialisiert. Falls $y$ Einträge hat die NaN (Not a Number) sind, werden diese somit mit 0 überschrieben.
 \subsection{Rank1 update (ger)}
-Die Funktion \glqq ger \flqq berechnet ein dyadische Produkt aus den Vektoren $x$ und $y$, skaliert die daraus resultierende Matrix mit $\alpha$ und addiert das Ergebnis auf $A$.//
+Die Funktion \glqq ger\grqq{}  berechnet ein dyadische Produkt aus den Vektoren $x$ und $y$, skaliert die daraus resultierende Matrix mit $\alpha$ und addiert das Ergebnis auf $A$.//
 Der Funktion wird die Matrix $A$ die Vektoren $x$ und $y$ und das Skalar $\alpha$ übergeben.\\
 Die Funktion berechnet
 \begin{align}
@@ -123,7 +123,7 @@ Die Funktion berechnet
 \end{align}
 
 \subsection{Matrix-Matrix Produkt (trmm)}
-Die Funktion \glqq trmm \flqq berechnet das Matrix-Matrix Produkt einer Dreiecksmatrix mit einer voll besetzten Matrix.
+Die Funktion \glqq trmm\grqq{} berechnet das Matrix-Matrix Produkt einer Dreiecksmatrix mit einer voll besetzten Matrix.
 Der Funktion wird die Dreiecksmatrix $A$, die Matrix $B$ und das Skalar $\alpha$ übergeben. Außerdem werden Flags mit übergeben die anzeigen ob $A$ eine obere oder unter Dreiecksmatrix ist, ob $A$ eine strikte oder unipotente Dreiecksmatrix ist, ob $A$ von links oder rechts auf $B$ multipliziert werden soll und ob $A$ transponiert werden soll.
 %% TODO stimmt unipotente Dreiecksmatrix?
 \\
