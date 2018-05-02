@@ -1,11 +1,11 @@
 \chapter{BLAS}
+Die Abkürzung BLAS steht für Basic Linear Algebra Subprograms.
 
 \section{Datenstruktur für Matrizen}
-
 Um vollbesetzte Matrizen zu speichern benötigt man eine Speicherfläche für alle Einträge der Matrix, Informationen wie die Einräge im Speicher organisiert sind und Informationen über die Größe der Matrix.
 
-Es ist sinnvoll vollbesetzte Matrizen entweder Zeilen-der Matrix liegen hintereinander im Speicher oder Spaltenweise abzuspeichern.
-Das bedeutet die Zeilen oder Spalten der Matrix liegen hintereinander im Speicher.
+Es ist sinnvoll vollbesetzte Matrizen entweder Zeilen- oder Spaltenweise abzuspeichern.
+Das bedeutet entweder die Zeilen oder die Spalten der Matrix liegen hintereinander im Speicher.
 \begin{align*}
 	A=
 	\left(\begin{array}{ccc}
@@ -41,7 +41,7 @@ Matrix $A$ Zeilenweise gespeichert\\
 	
 	\draw[->,line width=0.4mm] (0,-.5) -- (0,0);
 	\draw (0,-0.8) node {*data};
-	\draw[->,line width=0.4mm] (3,-.5) -- (3,0);
+	\draw[->,line width=0.4mm] (0,-.25) -- (3,-.25);
 	\draw (3,-0.8) node {incRow};
 \end{tikzpicture}\\
 Matrix $A$ Spaltenweise gespeichert\\
@@ -71,7 +71,7 @@ Matrix $A$ Spaltenweise gespeichert\\
 	
 \draw[->,line width=0.4mm] (0,-.5) -- (0,0);
 \draw (0,-0.8) node {*data};
-\draw[->,line width=0.4mm] (3,-.5) -- (3,0);
+\draw[->,line width=0.4mm] (0,-.25) -- (3,-.25);
 \draw (3,-0.8) node {incCol};
 \end{tikzpicture}\\
 
@@ -88,17 +88,17 @@ struct Matrix {
 }
 \end{lstlisting}
 
-Für Intel MKL und LAPACK Routinen müssen die Matrizen zeilenweise gespeichert.
+Für Intel MKL Routinen müssen die Matrizen zeilenweise gespeichert sein.
 
 
-\section{Einige BLAS-Blasroutinen}
+\section{Einige BLAS-Routinen}
 Im Folgenden werden einige BLAS-Routinen beschrieben, die bei der QR-Zerlegung benutzt werden.
-BLAS-Blasroutinen werden bei MKL und LAPACK nach folgendem Schema benannt.
-Der erste Buchstabe im Namen gibt an für welchen Datentype die Funktion implementiert wurde. Der rest zeigt an was die Funktion tut.
-Zum Beispiel "dgemm", das d zeigt an die Funktion ist für Doubles und "gemm" steht für das Matrix-Matrix Produkt.
+BLAS-Routinen werden bei MKL und LAPACK nach folgendem Schema benannt.
+Der erste Buchstabe im Namen gibt an für welchen Datentype die Funktion implementiert wurde. Der rest zeigt an was die Funktion tut.\\
+Beispiel: \glqq dgemm \flqq, das d zeigt an die Funktion ist für Doubles und 	\glqq gemm \flqq steht für das Matrix-Matrix Produkt.
 
 \subsection{Matrix-Matrix Produkt (gemm)}
-Die gemm Funktion berechnet das Matrix-Matrix Produkt.
+Die \glqq gemm \flqq Funktion berechnet das Matrix-Matrix Produkt.
 Der Funktion werden die Matrizen $A$, $B$ und $C$ und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem werden 2 Flags übergeben ob die Matrizen $A$ und $B$ transponiert werden sollen.\\
 Die Funktion berechnet
 \begin{align}
@@ -107,7 +107,7 @@ Die Funktion berechnet
 Falls $\beta = 0$ wird die Matrix $C$ zuerst mit Nullen initialisiert. Falls $C$ Einträge hat die NaN (Not a Number) sind, werden diese somit mit 0 überschrieben.
 
 \subsection{Matrix-Vector Produkt (gemv)}
-Die Funktion gemv berechnet das Matrix-Vector Produkt.
+Die Funktion \glqq gemv \flqq berechnet das Matrix-Vector Produkt.
 Der Funktion wird die Matrix $A$ die Vektoren $x$ und $y$ und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem wird ein Flag übergeben das anzeigt ob die Matrixa Transponiert werden soll.\\
 Die Funktion berechnet
 \begin{align}
@@ -115,7 +115,7 @@ Die Funktion berechnet
 \end{align}
 Falls $\beta = 0$ wird der Vektor $y$ zuerst mit Nullen initialisiert. Falls $y$ Einträge hat die NaN (Not a Number) sind, werden diese somit mit 0 überschrieben.
 \subsection{Rank1 update (ger)}
-Die Funktion ger berechnet ein dyadische Produkt aus den Vektoren $x$ und $y$, skaliert die daraus resultierende Matrix mit $\alpha$ und addiert das Ergebnis auf $A$.//
+Die Funktion \glqq ger \flqq berechnet ein dyadische Produkt aus den Vektoren $x$ und $y$, skaliert die daraus resultierende Matrix mit $\alpha$ und addiert das Ergebnis auf $A$.//
 Der Funktion wird die Matrix $A$ die Vektoren $x$ und $y$ und das Skalar $\alpha$ übergeben.\\
 Die Funktion berechnet
 \begin{align}
@@ -123,7 +123,7 @@ Die Funktion berechnet
 \end{align}
 
 \subsection{Matrix-Matrix Produkt (trmm)}
-Die Funktion trmm berechnet das Matrix-Matrix Produkt einer Dreiecksmatrix mit einer voll besetzten Matrix.
+Die Funktion \glqq trmm \flqq berechnet das Matrix-Matrix Produkt einer Dreiecksmatrix mit einer voll besetzten Matrix.
 Der Funktion wird die Dreiecksmatrix $A$, die Matrix $B$ und das Skalar $\alpha$ übergeben. Außerdem werden Flags mit übergeben die anzeigen ob $A$ eine obere oder unter Dreiecksmatrix ist, ob $A$ eine strikte oder unipotente Dreiecksmatrix ist, ob $A$ von links oder rechts auf $B$ multipliziert werden soll und ob $A$ transponiert werden soll.
 %% TODO stimmt unipotente Dreiecksmatrix?
 \\

@@ -10,7 +10,7 @@ mit einer orthogonalen Matrix $ Q \in \mathbb{R}^{m \times m} $ und einer oberen
 
 Eine QR Zerlegung kann mit einer Householder-Transformation berechnet werden.
 
-\subsubsection{Motivation}
+\subsubsection{Beispiel}
 Lösung eines Minimierungsproblem
 \begin{align}
 	\min_{x \in \mathbb{R}^n} \|Ax-b\|^2 \label{eq1}
@@ -81,7 +81,7 @@ Eine Householder-Transformation kann die eine Matrix $A$ wie folgt transformiere
 	\end{array}
 	\right)
 	\quad , \quad
-	H_2x1 H_1 A= \left( 
+	H_2 H_1 A= \left( 
 	\begin{array}{cccc}
 	* & * & * & * \\ 
 	0 & * & * & * \\ 
@@ -98,11 +98,20 @@ $Q$ ist also das Produkt aller Householder-Transformationen.
 
 
 \subsection{Householder Vector}
-Wie muss der Vekor $v$ aussehen damit (\ref{spiegelung}) gilt.
+Wie muss der Vekor $v$ aussehen damit (\ref{spiegelung}) gilt. $v \in \text{span}\{x - \alpha e_1\}$. Setze nun $v = x - \alpha e_1$ in $Hx = \alpha e_1 $ ein
 \begin{align*}
-	Hx = \alpha e_1
+	Hx =& x - \dfrac{2}{v^Tv}v(v^Tx) = x - 2\dfrac{v^Tx}{v^Tv}v\\
+	=& x - \dfrac{(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2} (x - \alpha e_1)
+	=\underbrace{\left(1 - \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2}\right)}_{ \overset{!}{=} 0 } x + \alpha e_1 \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2}  \overset{!}{=} \alpha e_1
 \end{align*}
-%TODO fragen
+Damit der Faktor vor dem $x$ verschwindet muss gelten
+\begin{align*}
+	1 = \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2} \Leftrightarrow (x - \alpha e_1)^T(x - \alpha e_1) = 2 x^T x - 2\alpha x_1 \Leftrightarrow \alpha = \pm \sqrt{x^Tx}
+\end{align*}
+
+Wie ist das Vorzeichen von $\alpha = \pm \sqrt{x^Tx}$ zu wählen?
+
+
 \begin{algorithm}
 	\caption{Housholder-Vector}
 	\begin{algorithmic}
@@ -115,19 +124,13 @@ Wie muss der Vekor $v$ aussehen damit (\ref{spiegelung}) gilt.
 Der von LAPACK benutzte Algorithmus \cite{DGEQR2}
 \begin{align*}
 x &= A(i+1:m,i)\\
-\alpha &= A(i,i)\\
-\beta &= \text{sign}(\alpha) \left|\sqrt{\alpha^2 + \|x\|^2}\right|\\
-\tau &= \frac{\alpha - \beta}{\beta} \\
-v &= A(i+1:m,i) * \frac{1}{\alpha - \beta}
+x_1 &= A(i,i)\\
+\alpha &= -1 * \text{sign}(x_1) \left|\sqrt{x_1^2 + \|x\|^2}\right|\\
+\tau &= \frac{x_1 - \alpha}{\alpha} \\
+v &= A(i+1:m,i) * \frac{1}{x_1 - \alpha}
 \end{align*}
 
-\subsubsection{NUM1 Urban QR}
-Algorithmus aus Numerik 1
 
-\begin{align*}
-v_1 &= \frac{x - \alpha e_1}{x_1 - \alpha}\\
-\alpha ^2 &= \|x\|^2 
-\end{align*}
 
 \subsection{Householder-Transformation anwenden}
 Ein aufwändiges Matrix-Matrix Produkt kann bei der Anwendung der Housholder-Matrix $H = I - \tau vv'$ auf die Matrix A umgangen werden, indem man geschickt Klammert.
@@ -265,13 +268,27 @@ Die Funktion berechnet eine Dreiecksmatrix $T$ so dass
 Warum und wie das Funktoniert wird hier beschreiben \cite{Joffrain:2006:AHT:1141885.1141886}.
 
 Versuch einer Herleitung
+
+Vorwärts \\
+n=2;
 \begin{align*}
 	H_1 H_2 x &= (I-\tau_1 v_1 v_1^T)(I-\tau_2 v_2 v_2^T)x\\
-	&= (I - \tau_1 v_1 v_1^T - \tau_2 v_2 v_2^T -  \tau_1 v_1 v_2^T \tau_2 v_2 v_2^T )x\\
-  &= x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 v_1 (v_1^T v_2 )v_2^T x\\
-  &= x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 (v_1^T v_2 ) v_1 v_2^T x\\
+	= &(I - \tau_1 v_1 v_1^T - \tau_2 v_2 v_2^T -  \tau_1 v_1 v_1^T \tau_2 v_2 v_2^T )x\\
+  = &x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 v_1 (v_1^T v_2 )v_2^T x\\
+  = &x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 (v_1^T v_2 ) v_1 v_2^T x\\
 \end{align*}
-
+n=3;
+\begin{align*}
+	H_1 H_2 H_3 x &= (I-\tau_1 v_1 v_1^T)(I-\tau_2 v_2 v_2^T)(I-\tau_3 v_3 v_3^T)x\\
+	= &(I - \tau_1 v_1 v_1^T - \tau_2 v_2 v_2^T - \tau_3 v_3 v_3^T\\
+    &- \tau_1 v_1 v_1^T \tau_2 v_2 v_2^T - \tau_1 v_1 v_1^T \tau_2 v_2 v_2^T \tau_3 v_3 v_3^T )x \\
+  = &x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_3 v_3 v_3^T x\\
+    &- \tau_1 \tau_2 v_1 (v_1^T v_2 )v_2^T x- \tau_1 \tau_2 \tau_3 v_1 ( v_1^T v_2)( v_2^T v_3) v_3^T x \\
+  = &x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_3 v_3 v_3^T x \\
+    &- \tau_1 \tau_2 (v_1^T v_2 ) v_1 v_2^T x- \tau_1 \tau_2 \tau_3 ( v_1^T v_2)( v_2^T v_3) v_1 v_3^T x \\
+\end{align*}
+Rückwärts\\
+n=2
 \begin{align*}
   H_{1,2} x &= (I - V T V^T) x = x - V T V^T x\\
   &= x - (v_1, v_2)
@@ -295,6 +312,52 @@ Versuch einer Herleitung
   \end{pmatrix}\\
   &= x - v_1(a v_1^T x + b v_2^T x) - v_2 (c v_2^T x)\\
   &= x - a v_1 v_1^T x - b v_1 v_2^T x - c v_2 v_2^T x
+\end{align*}
+n=3
+\begin{align*}
+  H_{1,2,3} x &= (I - V T V^T) x = x - V T V^T x\\
+  &= x - (v_1, v_2, v_3)
+  \begin{pmatrix}
+    a & b & c\\ 
+    0 & d & e\\
+    0 & 0 & f
+  \end{pmatrix}
+  \begin{pmatrix}
+    v_1^T \\ v_2^T \\ v_3^T
+  \end{pmatrix}
+  x\\
+  &= x - (v_1, v_2, v_3)
+  \begin{pmatrix}
+    a & b & c\\ 
+    0 & d & e\\
+    0 & 0 & f
+  \end{pmatrix}
+  \begin{pmatrix}
+    v_1^T x \\ v_2^T x \\ v_3^T
+  \end{pmatrix}\\
+  &= x - (v_1, v_2, v_3)
+  \begin{pmatrix}
+    a v_1^t x + b v_2^t x + c v_3^t\\ 
+    d v_2^T x + e v_3^T \\
+    f v_3^T
+  \end{pmatrix}\\
+  =& x - v_1(a v_1^T x + b v_2^T x + c v_3^T x) \\ 
+   & - v_2 ( d v_2^T x + e v_3^T x) \\ 
+   & - v_3 ( f v_3^T ) \\
+  =& x - a v_1 v_1^T x - b v_1 v_2^T x - c v_1 v_3^T x \\
+   & - d v_2 v_2^T x - e v_2 v_3^T \\
+   & - f v_3 v_3^T
+\end{align*}
+Koeffizienten Vergleich
+
+\begin{align*}
+  a &= \tau_1 \\
+	b &= \tau_1 \tau_2 (v_1^T v_2) \\
+	c &= \tau_2 \\
+  T &=
+  \begin{pmatrix}
+    \tau_1 & \tau_1 \tau_2 (v_1^T v_2)\\ 0 & \tau_2
+  \end{pmatrix}
 \end{align*}
 
 Produkt orthogonaler Matrizen ist orthogonal 
