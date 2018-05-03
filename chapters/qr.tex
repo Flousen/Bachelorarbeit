@@ -98,7 +98,9 @@ $Q$ ist also das Produkt aller Householder-Transformationen.
 
 
 \subsection{Householder Vector}
-Wie muss der Vekor $v$ aussehen damit (\ref{spiegelung}) gilt. $v \in \text{span}\{x - \alpha e_1\}$. Setze nun $v = x - \alpha e_1$ in $Hx = \alpha e_1 $ ein
+Wie muss der Vekor $v$ aussehen damit (\ref{spiegelung}) gilt.\\
+\glqq Mit $Hx = x - 2\dfrac{vv^T}{v^Tv} x = x - \lambda v \overset{!}{=} \alpha e_1$ folgt $v \in \text{span}\{x - \alpha e_1\}$. \grqq{} \cite{num1}Warum?\\
+  Setze nun $v = x - \alpha e_1$ in $Hx = \alpha e_1 $ ein
 \begin{align*}
 	Hx =& x - \dfrac{2}{v^Tv}v(v^Tx) = x - 2\dfrac{v^Tx}{v^Tv}v\\
 	=& x - \dfrac{(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2} (x - \alpha e_1)
@@ -115,7 +117,7 @@ Wählt man das Vorzeichen positive kann Auslöschung auftreten falls $x$ annähe
 
 LAPACK \cite{DGEQR2} vermeidet die Auslöschung indem das Vorzeichen entgegengesetzt gewählt wird. Das bedeutet $x$ wird immer auf die gegenüberliegende Seite gespiegelt.
 
-Im Numerik 1 Skript \cite{num1} wird das Vorzeichen immer positiv gewählt d.h. $\alpha = |\sqrt{x^Tx}| = \|x\|_2$. Eine mögliche Auslöschung im Fall $ x_1 > 0$ wird hier durch die Umformung 
+Im Numerik 1 Skript \cite{num1} wird das Vorzeichen immer positiv gewählt\\ $\alpha = |\sqrt{x^Tx}| = \|x\|_2$. Eine mögliche Auslöschung im Fall $ x_1 > 0$ wird hier durch die Umformung 
 \begin{align}
 	v_1 = x_1 - \|x\|_2 = \dfrac{x_1^2 - \|x\|_2^2}{x_1 + \|x\|_2}
 	=\dfrac{-(x_2^2+...+x_n^2)}{x_1 - \|x\|_2}
@@ -252,106 +254,8 @@ Die Funktion berechnet eine Dreiecksmatrix $T$ so dass
 
 Warum und wie das Funktoniert wird hier beschreiben \cite{Joffrain:2006:AHT:1141885.1141886}.
 
-Versuch einer Herleitung
 
-Vorwärts \\
-n=2;
-\begin{align*}
-	H_1 H_2 x &= (I-\tau_1 v_1 v_1^T)(I-\tau_2 v_2 v_2^T)x\\
-	= &(I - \tau_1 v_1 v_1^T - \tau_2 v_2 v_2^T -  \tau_1 v_1 v_1^T \tau_2 v_2 v_2^T )x\\
-  = &x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 v_1 (v_1^T v_2 )v_2^T x\\
-  = &x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 (v_1^T v_2 ) v_1 v_2^T x\\
-\end{align*}
-n=3;
-\begin{align*}
-	H_1 H_2 H_3 x &= (I-\tau_1 v_1 v_1^T)(I-\tau_2 v_2 v_2^T)(I-\tau_3 v_3 v_3^T)x\\
-	= &(I - \tau_1 v_1 v_1^T - \tau_2 v_2 v_2^T - \tau_3 v_3 v_3^T\\
-    &- \tau_1 v_1 v_1^T \tau_2 v_2 v_2^T - \tau_1 v_1 v_1^T \tau_2 v_2 v_2^T \tau_3 v_3 v_3^T )x \\
-  = &x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_3 v_3 v_3^T x\\
-    &- \tau_1 \tau_2 v_1 (v_1^T v_2 )v_2^T x- \tau_1 \tau_2 \tau_3 v_1 ( v_1^T v_2)( v_2^T v_3) v_3^T x \\
-  = &x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_3 v_3 v_3^T x \\
-    &- \tau_1 \tau_2 (v_1^T v_2 ) v_1 v_2^T x- \tau_1 \tau_2 \tau_3 ( v_1^T v_2)( v_2^T v_3) v_1 v_3^T x \\
-\end{align*}
-Rückwärts\\
-n=2
-\begin{align*}
-  H_{1,2} x &= (I - V T V^T) x = x - V T V^T x\\
-  &= x - (v_1, v_2)
-  \begin{pmatrix}
-    a & b \\ 0 & c
-  \end{pmatrix}
-  \begin{pmatrix}
-    v_1^T \\ v_2^T 
-  \end{pmatrix}
-  x\\
-  &= x - (v_1, v_2)
-  \begin{pmatrix}
-    a & b \\ 0 & c
-  \end{pmatrix}
-  \begin{pmatrix}
-    v_1^T x \\ v_2^T x
-  \end{pmatrix}\\
-  &= x - (v_1, v_2)
-  \begin{pmatrix}
-    a v_1^T x + b v_2^T x\\  c v_2^T x
-  \end{pmatrix}\\
-  &= x - v_1(a v_1^T x + b v_2^T x) - v_2 (c v_2^T x)\\
-  &= x - a v_1 v_1^T x - b v_1 v_2^T x - c v_2 v_2^T x
-\end{align*}
-n=3
-\begin{align*}
-  H_{1,2,3} x &= (I - V T V^T) x = x - V T V^T x\\
-  &= x - (v_1, v_2, v_3)
-  \begin{pmatrix}
-    a & b & c\\ 
-    0 & d & e\\
-    0 & 0 & f
-  \end{pmatrix}
-  \begin{pmatrix}
-    v_1^T \\ v_2^T \\ v_3^T
-  \end{pmatrix}
-  x\\
-  &= x - (v_1, v_2, v_3)
-  \begin{pmatrix}
-    a & b & c\\ 
-    0 & d & e\\
-    0 & 0 & f
-  \end{pmatrix}
-  \begin{pmatrix}
-    v_1^T x \\ v_2^T x \\ v_3^T
-  \end{pmatrix}\\
-  &= x - (v_1, v_2, v_3)
-  \begin{pmatrix}
-    a v_1^t x + b v_2^t x + c v_3^t\\ 
-    d v_2^T x + e v_3^T \\
-    f v_3^T
-  \end{pmatrix}\\
-  =& x - v_1(a v_1^T x + b v_2^T x + c v_3^T x) \\ 
-   & - v_2 ( d v_2^T x + e v_3^T x) \\ 
-   & - v_3 ( f v_3^T ) \\
-  =& x - a v_1 v_1^T x - b v_1 v_2^T x - c v_1 v_3^T x \\
-   & - d v_2 v_2^T x - e v_2 v_3^T \\
-   & - f v_3 v_3^T
-\end{align*}
-Koeffizienten Vergleich
 
-\begin{align*}
-  a &= \tau_1 \\
-	b &= \tau_1 \tau_2 (v_1^T v_2) \\
-	c &= \tau_2 \\
-  T &=
-  \begin{pmatrix}
-    \tau_1 & \tau_1 \tau_2 (v_1^T v_2)\\ 0 & \tau_2
-  \end{pmatrix}
-\end{align*}
-
-Produkt orthogonaler Matrizen ist orthogonal 
-\begin{align*}
-	A^{-1} = A^T, B^{-1} = B^T\\
-	(AB)^{-1} = B^{-1}A^{-1} = B^TA^T = (AB)^T
-\end{align*}
-$\Rightarrow H=I-VTV^T$ ist orthogonal\\
-ich bin doof Q ist ja auch orthogonal
 
 \subsection{Apply H larfb}
 
