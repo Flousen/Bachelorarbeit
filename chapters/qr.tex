@@ -1,7 +1,6 @@
-\chapter{QR factorisation}
+\chapter{QR-Zerlegung}
 
-\section{QR-Zerlegung}
-\subsection{Definition}
+\section{Definition}
 Eine Matrix $A \in \mathbb{R}^{m \times n}$ , $m \ge n$ besitzt eine eindeutige QR-Zerlegung.
 \begin{align}
 	A = QR
@@ -10,7 +9,7 @@ mit einer orthogonalen Matrix $ Q \in \mathbb{R}^{m \times m} $ und einer oberen
 
 Eine QR Zerlegung kann mit einer Householder-Transformation berechnet werden.
 
-\subsubsection{Beispiel}
+\subsection{Beispiel}
 Lösung eines Minimierungsproblem
 \begin{align}
 	\min_{x \in \mathbb{R}^n} \|Ax-b\|^2 \label{eq1}
@@ -103,12 +102,15 @@ Wie muss der Vekor $v$ aussehen damit (\ref{spiegelung}) gilt.\\
   Setze nun $v = x - \alpha e_1$ in $Hx = \alpha e_1 $ ein
 \begin{align*}
 	Hx =& x - \dfrac{2}{v^Tv}v(v^Tx) = x - 2\dfrac{v^Tx}{v^Tv}v\\
-	=& x - \dfrac{(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2} (x - \alpha e_1)
-	=\underbrace{\left(1 - \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2}\right)}_{ \overset{!}{=} 0 } x + \alpha e_1 \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2}  \overset{!}{=} \alpha e_1
+	=& x - \dfrac{(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2} (x - \alpha e_1)
+	=\underbrace{\left(1 - \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2}\right)}_{ \overset{!}{=} 0 } x + \alpha e_1 \underbrace{\dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2} }_{\overset{!}{=} 1} \overset{!}{=} \alpha e_1
 \end{align*}
-Damit der Faktor vor dem $x$ verschwindet muss gelten
+Damit das letzte $=$ gilt muss 
 \begin{align*}
-	1 = \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2} \Leftrightarrow (x - \alpha e_1)^T(x - \alpha e_1) = 2 x^T x - 2\alpha x_1 \Leftrightarrow \alpha = \pm \sqrt{x^Tx}
+	1 &= \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2}\\
+	\Leftrightarrow (x - \alpha e_1)^T(x - \alpha e_1) &= 2 x^T x - 2\alpha x_1 \\
+	\Leftrightarrow x^Tx -2\alpha x_1 + \alpha^2 &= 2 x^T x - 2\alpha x_1\\
+	\Leftrightarrow \alpha &= \pm \sqrt{x^Tx}
 \end{align*}
 
 Wie ist das Vorzeichen von $\alpha = \pm \sqrt{x^Tx}$ zu wählen um $ v = x - \alpha e_1$ zu berechnen?
@@ -118,39 +120,42 @@ Wählt man das Vorzeichen positive kann Auslöschung auftreten falls $x$ annähe
 LAPACK \cite{DGEQR2} vermeidet die Auslöschung indem das Vorzeichen entgegengesetzt gewählt wird. Das bedeutet $x$ wird immer auf die gegenüberliegende Seite gespiegelt.
 
 Im Numerik 1 Skript \cite{num1} wird das Vorzeichen immer positiv gewählt\\ $\alpha = |\sqrt{x^Tx}| = \|x\|_2$. Eine mögliche Auslöschung im Fall $ x_1 > 0$ wird hier durch die Umformung 
-\begin{align}
+\begin{align*}
 	v_1 = x_1 - \|x\|_2 = \dfrac{x_1^2 - \|x\|_2^2}{x_1 + \|x\|_2}
 	=\dfrac{-(x_2^2+...+x_n^2)}{x_1 - \|x\|_2}
-\end{align}
+\end{align*}
 vermieden.
 
 Der Vorteil bei der von LAPACK verwendeten Methode ist, das hier nur die Norm berechnet werden muss wohingegen bei dem anderen Algorithmus das Skalarprodukt $x^Tx$ berechnet werden muss was bei Vektoren mit vielen Einträgen und großen werten schneller zu einem Überlauf führen kann. Es muss jedoch ein Algorithmus algorithmus gewählt werden der die Norm berechnet $\|x\|=\sqrt{x^Tx}$ ohne das Skalarprodukt explizit auszurechnen.
 
+Der Vektor $v$ wird mit 
+\begin{align*}
+	v = \dfrac{x - \alpha e_1}{x_1 - \alpha}
+\end{align*}
+normiert, so dass $v_1 = 1$ gilt, um ihn später auf der frei werdenden Diagonalen von $A$ speichern zu können.
+
+Mit der Normierung kann man den Faktor $\tau = \dfrac{2}{v^Tv}$ berechnen.
+\begin{align*}
+	\tau = \dfrac{2}{v^Tv} = \dfrac{2 (x_1 - \alpha)^2}{(x - \alpha e_1)^T (x - \alpha e_1)} = \dfrac{2 (x_1 - \alpha)^2}{\|x\|^2_2 - 2\alpha x^Te_1 + \alpha^2} =  \dfrac{2 (x_1 - \alpha)^2}{ 2\alpha (\alpha - x_1)} = \dfrac{x_1 - \alpha}{\alpha}
+\end{align*}
 
 \begin{algorithm}
 	\caption{Housholder-Vector(LAPACK DLARFG)}
 	\begin{algorithmic}
-		\State $x \in \mathbb{R}^n$
+		\State Input: $x \in \mathbb{R}^n$ 
+		\State $\alpha = -1 * \text{sign}(x_1) \|x\|_2$
+		\State $\tau = \dfrac{x_1 - \alpha}{\alpha}$
+		\State $v=\dfrac{x}{x_1 - \alpha}$
+		\State Output: Householder-Vektor $v$ , $\tau$
 	\end{algorithmic} 
 	\label{alg:unblockedqr}
 \end{algorithm}
 
-\subsubsection{LAPACK QR}
-Der von LAPACK benutzte Algorithmus \cite{DGEQR2}
-\begin{align*}
-x &= A(i+1:m,i)\\
-x_1 &= A(i,i)\\
-\alpha &= -1 * \text{sign}(x_1) \left|\sqrt{x_1^2 + \|x\|^2}\right|\\
-\tau &= \frac{x_1 - \alpha}{\alpha} \\
-v &= A(i+1:m,i) * \frac{1}{x_1 - \alpha}
-\end{align*}
-
-
 
 \subsection{Householder-Transformation anwenden}
-Ein aufwändiges Matrix-Matrix Produkt kann bei der Anwendung der Housholder-Matrix $H = I - \tau vv^T$ auf die Matrix A umgangen werden, indem man geschickt Klammert.
+Ein aufwändiges Matrix-Matrix Produkt kann bei der Anwendung der Housholder-Matrix $H = I - \tau vv^T$ auf die Matrix $A$ umgangen werden, indem man geschickt Klammert.
 \begin{align*} 
-H A =(I - \tau vv^T) A= A - \tau vv^T A = A - \tau v*(v^T*A)
+H A =(I - \tau vv^T) A= A - \tau (vv^T )A = A - \tau v*(v^T*A)
 \end{align*}
 Statt eines Matrix-Matrix Produkts, muss man nun nur ein Matrix-Vektor Produkt und ein dyadisches Produkt berechnen.
 Das Matrix-Vektor Produkt und das dyadisches Produkt haben nur einen Aufwand von $O(n^2)$.
@@ -162,22 +167,24 @@ Das führt auf den Algorithmus \ref{alg:unblockedqr}.
 \begin{algorithm}
 	\caption{Ungeblockte Housholder-Transformation}
 	\begin{algorithmic}
-	\State $A \in \mathbb{R}^{m \times n}$
+	\State Input: $A \in \mathbb{R}^{m \times n}$
 	\For {i = 0 : n}
 		\State [$v$, $\tau$] = housevector($A(i:m,i)$)
-		\State $w \leftarrow v^T*A$ (dgemv)
-		\State $ A \leftarrow \tau * v * w + A $ (dger)
+		\State $w \leftarrow v^T*A(i:m,i:n)$ (dgemv)
+		\State $ A(i:m,i:n) \leftarrow \tau * v * w + A $ (dger)
 		\If {i > m}
-			\State $A(i + 1 : m, j) \leftarrow v(2 : m - i + 1)$
+			\State $A(i + 1 : m, i) \leftarrow v(2 : m - i + 1)$
 		\EndIf
 	\EndFor	
+	\State Output: $A$ QR zerlegt, Vektor $\tau \in \mathbb{R}^n$
 \end{algorithmic} 
 \label{alg:unblockedqr}
 \end{algorithm}
 
 
 
-Der Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$. Da $R$ eine obere Dreiecksmatrix ist, werden unter der Diagonalen die Housholder-Vektoren gespeichert. A hat also die Form
+Der Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$. Da $R$ eine obere Dreiecksmatrix ist, werden unter der Diagonalen die Housholder-Vektoren gespeichert. Da die Householder-Vektoren auf $v_1 = 1$ normiert wurden muss das Erste Element des Vektors nicht mit gespeichert werden und der Householder-Vektor hat unter $R$ platz.
+A hat also die Form
 \begin{align*}
 	A = 
 	\left(\begin{array}{ccc}
@@ -189,11 +196,10 @@ Der Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$. Da $
 \end{align*}
 
 
-\section{QR Blocked}
-Ein geblockter Algorithmus ist sinnvoll damit der Cache bei großen Matrizen optimal ausgenutzt wird. \\
+\section{Geblockte QR-Zerlegung}
+Ein geblockter Algorithmus ist sinnvoll um bei großen Matrizen den Cache optimal auszunutzen.
 
-
-Betrachte die Matrix $A \in \mathbb{R}^{m \times n}$ geblockt, mit einer geeigneten Blockgröße $bs$.
+Die Matrix $A \in \mathbb{R}^{m \times n}$ wird nun geblockt, mit einer geeigneten Blockgröße $bs$ betrachtet.
 \begin{align}
 	A = \left(\begin{array}{l|l}
 	A_{0, 0} & A_{0, \text{bs}} \\ \hline
@@ -203,7 +209,7 @@ Betrachte die Matrix $A \in \mathbb{R}^{m \times n}$ geblockt, mit einer geeigne
 Die Abbildung \ref{fig:blockA} zeigt schematisch die Partitionierung von A.
 
 Nun wird QR Zerlegung für den Block $ \left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right)$
-mit Algorithmus \ref{alg:unblockedqr} berechnet.
+mit dem ungeblockten Algorithmus \ref{alg:unblockedqr} berechnet.
 \begin{align}
 	\left(\begin{array}{l} 
 	A_{0, 0} \\ \hline
@@ -218,11 +224,7 @@ mit Algorithmus \ref{alg:unblockedqr} berechnet.
 
 Das Bedeutet im block $A_{0, 0}$ steht nun auf und über der Diagonalen $R_{0,0}$, unterhalb der Diagonalen und im block $A_{\text{bs}, 0}$ stehen die Householder-Vektoren.
 
-Damit 
-
-
-
-Berechne $H_{0}$...$H_{bs}$ aus $Q_{0, 0}$ und $Q_{bs, 0}$ mit $H = I - V*T*V^T$.\\
+Aus den Householder-Vektoren wird einer obere Dreiecksmatrix $T \in \mathbb{R}^{bs \times bs}$ für die gilt $H_{0}\cdot ... \cdot H_{bs} = H = I - V*T*V^T$ berechnet.\\
 Wende $H^T$ auf $A_{0, \text{bs}}$ und $ A_{0,\text{bs}}$ an.
 \begin{align}
 	\left(\begin{array}{l} 
@@ -325,9 +327,3 @@ Dies führt zu dem[ Algorithmus \ref{alg:applyblockref} ]\\
 		\EndFor
 	\end{algorithmic}
 \end{algorithm}
-
-
-\subsection{Rekursiver Algorithmus}
-
-
-e

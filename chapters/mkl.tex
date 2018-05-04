@@ -2,10 +2,8 @@
 Die Abkürzung BLAS steht für Basic Linear Algebra Subprograms.
 
 \section{Datenstruktur für Matrizen}
-Um vollbesetzte Matrizen zu speichern benötigt man eine Speicherfläche für alle Einträge der Matrix, Informationen wie die Einräge im Speicher organisiert sind und Informationen über die Größe der Matrix.
+Vollbesetzte Matrizen werden bei BLAS entweder Zeilen- oder Spaltenweise abgespeichert. Das bedeutet entweder Zeilen- oder Spalten der Matrxi liegen hintereinander im Speicher. 
 
-Es ist sinnvoll vollbesetzte Matrizen entweder Zeilen- oder Spaltenweise abzuspeichern.
-Das bedeutet entweder die Zeilen oder die Spalten der Matrix liegen hintereinander im Speicher.
 \begin{align*}
 	A=
 	\left(\begin{array}{ccc}
@@ -93,9 +91,9 @@ Für Intel MKL Routinen müssen die Matrizen zeilenweise gespeichert sein.
 
 \section{Einige BLAS-Routinen}
 Im Folgenden werden einige BLAS-Routinen beschrieben, die bei der QR-Zerlegung benutzt werden.
-BLAS-Routinen werden bei MKL und LAPACK nach folgendem Schema benannt.
-Der erste Buchstabe im Namen gibt an für welchen Datentype die Funktion implementiert wurde. Der Rest zeigt an was die Funktion tut.\\
-Beispiel: \glqq dgemm\grqq{}, das d zeigt an die Funktion ist für Doubles und \glqq gemm\grqq{} steht für das Matrix-Matrix Produkt.
+BLAS-Routinen werden meist nach folgendem Schema benannt.
+Der erste Buchstabe im Namen gibt an für welchen Datentype die Funktion implementiert wurde. Der Rest beschreibt die Funktion der Funktion.\\
+Beispiel: \glqq dgemm\grqq{}, das d zeigt an die Funktion ist für Doubles und \glqq gemm\grqq{} steht für \glqq generel Matrix Matrix\grqq{}, die Funktion berechnet also das Matrix-Matrix Produkt für Matrizen deren Einträge Doubles sind.
 
 \subsection{Matrix-Matrix Produkt (gemm)}
 Die \glqq gemm\grqq{} Funktion berechnet das Matrix-Matrix Produkt.

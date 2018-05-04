@@ -10,22 +10,21 @@
 \BOOKMARK [2][-]{subsection.2.2.3}{Rank1 update \(ger\)}{section.2.2}% 10
 \BOOKMARK [2][-]{subsection.2.2.4}{Matrix-Matrix Produkt \(trmm\)}{section.2.2}% 11
 \BOOKMARK [2][-]{subsection.2.2.5}{Matrix-Vector Produkt \(trmv\)}{section.2.2}% 12
-\BOOKMARK [0][-]{chapter.3}{QR factorisation}{}% 13
-\BOOKMARK [1][-]{section.3.1}{QR-Zerlegung}{chapter.3}% 14
-\BOOKMARK [2][-]{subsection.3.1.1}{Definition}{section.3.1}% 15
+\BOOKMARK [0][-]{chapter.3}{QR-Zerlegung}{}% 13
+\BOOKMARK [1][-]{section.3.1}{Definition}{chapter.3}% 14
+\BOOKMARK [2][-]{subsection.3.1.1}{Beispiel}{section.3.1}% 15
 \BOOKMARK [1][-]{section.3.2}{Householder-Transformation}{chapter.3}% 16
 \BOOKMARK [2][-]{subsection.3.2.1}{Householder Vector}{section.3.2}% 17
 \BOOKMARK [2][-]{subsection.3.2.2}{Householder-Transformation anwenden}{section.3.2}% 18
-\BOOKMARK [1][-]{section.3.3}{QR Blocked}{chapter.3}% 19
+\BOOKMARK [1][-]{section.3.3}{Geblockte QR-Zerlegung}{chapter.3}% 19
 \BOOKMARK [2][-]{subsection.3.3.1}{Calc Factor T larft}{section.3.3}% 20
 \BOOKMARK [2][-]{subsection.3.3.2}{Apply H larfb}{section.3.3}% 21
 \BOOKMARK [2][-]{subsection.3.3.3}{Iterativer Algorithmus}{section.3.3}% 22
-\BOOKMARK [2][-]{subsection.3.3.4}{Rekursiver Algorithmus}{section.3.3}% 23
-\BOOKMARK [0][-]{chapter.4}{Implementierung und Benchmarks}{}% 24
-\BOOKMARK [1][-]{section.4.1}{Fehler Sch\344tzer}{chapter.4}% 25
-\BOOKMARK [1][-]{section.4.2}{MKL Wraper}{chapter.4}% 26
-\BOOKMARK [1][-]{section.4.3}{Benchmarks}{chapter.4}% 27
-\BOOKMARK [0][-]{appendix.A}{Quelltexte}{}% 28
-\BOOKMARK [0][-]{appendix.B}{Block Reflector}{}% 29
-\BOOKMARK [1][-]{subsection.B.0.1}{Orthogonal}{appendix.B}% 30
-\BOOKMARK [0][-]{chapter*.4}{Literaturverzeichnis}{}% 31
+\BOOKMARK [0][-]{chapter.4}{Implementierung und Benchmarks}{}% 23
+\BOOKMARK [1][-]{section.4.1}{Fehler Sch\344tzer}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.2}{MKL Wraper}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.3}{Benchmarks}{chapter.4}% 26
+\BOOKMARK [0][-]{appendix.A}{Quelltexte}{}% 27
+\BOOKMARK [0][-]{appendix.B}{Block Reflector}{}% 28
+\BOOKMARK [1][-]{subsection.B.0.1}{Orthogonal}{appendix.B}% 29
+\BOOKMARK [0][-]{chapter*.2}{Literaturverzeichnis}{}% 30
