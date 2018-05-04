@@ -5,23 +5,23 @@ Vorwärts \\
 n=2;
 \begin{align*}
 	H_1 H_2 x &= (I-\tau_1 v_1 v_1^T)(I-\tau_2 v_2 v_2^T)x\\
-	= &(I - \tau_1 v_1 v_1^T - \tau_2 v_2 v_2^T -  \tau_1 v_1 v_1^T \tau_2 v_2 v_2^T )x\\
-  = &x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 v_1 (v_1^T v_2 )v_2^T x\\
-  = &x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x - \tau_1 \tau_2 (v_1^T v_2 ) v_1 v_2^T x\\
+	= &(I - \tau_1 v_1 v_1^T - \tau_2 v_2 v_2^T +  \tau_1 v_1 v_1^T \tau_2 v_2 v_2^T )x\\
+  = &x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x + \tau_1 \tau_2 v_1 (v_1^T v_2 )v_2^T x\\
+  = &x - \tau_1 v_1 v_1^T x - \tau_2 v_2 v_2^T x + \tau_1 \tau_2 (v_1^T v_2 ) v_1 v_2^T x\\
 \end{align*}
 n=3;
 \begin{align*}
 	H_1 H_2 H_3 x &= (I-\tau_1 v_1 v_1^T)(I-\tau_2 v_2 v_2^T)(I-\tau_3 v_3 v_3^T)x\\
-	= &(I - \tau_1 v_1 v_1^T - \tau_2 v_2 v_2^T -  \tau_1 v_1 v_1^T \tau_2 v_2 v_2^T )(I-\tau_3 v_3 v_3^T)x\\
+	= &(I - \tau_1 v_1 v_1^T - \tau_2 v_2 v_2^T +  \tau_1 v_1 v_1^T \tau_2 v_2 v_2^T )(I-\tau_3 v_3 v_3^T)x\\
 	= &(I - \tau_1 v_1 v_1^T - \tau_2 v_2 v_2^T - \tau_3 v_3 v_3^T \\
-	&- \tau_1 v_1 v_1^T \tau_2 v_2 v_2^T \\
-	&- \tau_1 v_1 v_1^T \tau_3 v_3 v_3^T\\
-	&- \tau_2 v_2 v_2^T \tau_3 v_3 v_3^T\\
+	&+ \tau_1 v_1 v_1^T \tau_2 v_2 v_2^T \\
+	&+ \tau_1 v_1 v_1^T \tau_3 v_3 v_3^T\\
+	&+ \tau_2 v_2 v_2^T \tau_3 v_3 v_3^T\\
 	&- \tau_1 v_1 v_1^T \tau_2 v_2 v_2^T \tau_3 v_3 v_3^T )x \\
 	= &x - \tau_1 v_1 v_1^Tx - \tau_2 v_2 v_2^Tx - \tau_3 v_3 v_3^Tx \\
-    &- \tau_1 \tau_2  (v_1^T v_2) v_1  v_2^T x\\
-	&- \tau_1 \tau_3  (v_1^T v_3) v_1  v_3^T x\\
-	&- \tau_2 \tau_3  (v_2^T v_3) v_2  v_3^T x\\
+    &+ \tau_1 \tau_2  (v_1^T v_2) v_1  v_2^T x\\
+	&+ \tau_1 \tau_3  (v_1^T v_3) v_1  v_3^T x\\
+	&+ \tau_2 \tau_3  (v_2^T v_3) v_2  v_3^T x\\
     &- \tau_1 \tau_2  \tau_3 (v_1^T v_2 v_2^T v_3) v_1  v_3^T x \\
 \end{align*}
 Rückwärts\\
@@ -89,11 +89,11 @@ Koeffizienten Vergleich\\
 n=2
 \begin{align*}
   a &= \tau_1 \\
-	b &= \tau_1 \tau_2 (v_1^T v_2) \\
+	b &=-  \tau_1 \tau_2 (v_1^T v_2) \\
 	c &= \tau_2 \\
   T &=
   \begin{pmatrix}
-    \tau_1 & \tau_1 \tau_2 (v_1^T v_2)\\ 0 & \tau_2
+    \tau_1 & - \tau_1 \tau_2 (v_1^T v_2)\\ 0 & \tau_2
   \end{pmatrix}
 \end{align*}
 \newpage
@@ -105,20 +105,20 @@ n=3
 \end{align*}
 vs
 \begin{align*}
-	= &x - \tau_1 v_1 v_1^Tx - \tau_2 v_2 v_2^Tx - \tau_3 v_3 v_3^Tx \\
-	&- \tau_1 \tau_2  (v_1^T v_2) v_1  v_2^T x\\
-	&- \tau_1 \tau_3  (v_1^T v_3) v_1  v_3^T x\\
-	&- \tau_2 \tau_3  (v_2^T v_3) v_2  v_3^T x\\
-	&- \tau_1 \tau_2  \tau_3 (v_1^T v_2 v_2^T v_3) v_1  v_3^T x \\
+= &x - \tau_1 v_1 v_1^Tx - \tau_2 v_2 v_2^Tx - \tau_3 v_3 v_3^Tx \\
+&+ \tau_1 \tau_2  (v_1^T v_2) v_1  v_2^T x\\
+&+ \tau_1 \tau_3  (v_1^T v_3) v_1  v_3^T x\\
+&+ \tau_2 \tau_3  (v_2^T v_3) v_2  v_3^T x\\
+&- \tau_1 \tau_2  \tau_3 (v_1^T v_2 v_2^T v_3) v_1  v_3^T x \\
 \end{align*}
 ist
 \begin{align*}
-	a =& \tau_1\\
-	b =& \tau_1 \tau_2 (v_1^T v_2 ) \\
-	c =& - \tau_1 \tau_2  \tau_3 (v_1^T v_2 v_2^T v_3) - \tau_1 \tau_3  (v_1^T v_3)\\
-	d =& \tau_2 \\
-	e =&  \tau_2 \tau_3  (v_2^T v_3)\\
-    f =& \tau_3\\
+	a =&  \tau_1\\
+	b =& -\tau_1 \tau_2 (v_1^T v_2 ) \\
+	c =& -\tau_1 \tau_2  \tau_3 (v_1^T v_2 v_2^T v_3) + \tau_1 \tau_3  (v_1^T v_3)\\
+	d =&  \tau_2 \\
+	e =& -\tau_2 \tau_3  (v_2^T v_3)\\
+    f =&  \tau_3\\
 	T =&
 	\begin{pmatrix}
 	a & b & c\\ 
@@ -126,8 +126,8 @@ ist
 	0 & 0 & f
 	\end{pmatrix} =
 	\begin{pmatrix}
-		\tau_1 & \tau_1 \tau_2 (v_1^T v_2 ) & - \tau_1 \tau_2  \tau_3 (v_1^T v_2 v_2^T v_3) - \tau_1 \tau_3  (v_1^T v_3)\\ 
-		0 & \tau_2 &  \tau_2 \tau_3  (v_2^T v_3)\\
+		\tau_1 & -\tau_1 \tau_2 (v_1^T v_2 ) & - \tau_1 \tau_2  \tau_3 (v_1^T v_2 v_2^T v_3) + \tau_1 \tau_3  (v_1^T v_3)\\ 
+		0 & \tau_2 &  -\tau_2 \tau_3  (v_2^T v_3)\\
 		0 & 0 & \tau_3
 	\end{pmatrix}
 \end{align*}

@@ -124,6 +124,8 @@ Im Numerik 1 Skript \cite{num1} wird das Vorzeichen immer positiv gewählt\\ $\a
 \end{align}
 vermieden.
 
+Der Vorteil bei der von LAPACK verwendeten Methode ist, das hier nur die Norm berechnet werden muss wohingegen bei dem anderen Algorithmus das Skalarprodukt $x^Tx$ berechnet werden muss was bei Vektoren mit vielen Einträgen und großen werten schneller zu einem Überlauf führen kann. Es muss jedoch ein Algorithmus algorithmus gewählt werden der die Norm berechnet $\|x\|=\sqrt{x^Tx}$ ohne das Skalarprodukt explizit auszurechnen.
+
 
 \begin{algorithm}
 	\caption{Housholder-Vector(LAPACK DLARFG)}
@@ -146,9 +148,9 @@ v &= A(i+1:m,i) * \frac{1}{x_1 - \alpha}
 
 
 \subsection{Householder-Transformation anwenden}
-Ein aufwändiges Matrix-Matrix Produkt kann bei der Anwendung der Housholder-Matrix $H = I - \tau vv'$ auf die Matrix A umgangen werden, indem man geschickt Klammert.
+Ein aufwändiges Matrix-Matrix Produkt kann bei der Anwendung der Housholder-Matrix $H = I - \tau vv^T$ auf die Matrix A umgangen werden, indem man geschickt Klammert.
 \begin{align*} 
-H A =(I - \tau vv') A= A - \tau vv' A = A - \tau v*(v'*A)
+H A =(I - \tau vv^T) A= A - \tau vv^T A = A - \tau v*(v^T*A)
 \end{align*}
 Statt eines Matrix-Matrix Produkts, muss man nun nur ein Matrix-Vektor Produkt und ein dyadisches Produkt berechnen.
 Das Matrix-Vektor Produkt und das dyadisches Produkt haben nur einen Aufwand von $O(n^2)$.
@@ -317,8 +319,8 @@ Dies führt zu dem[ Algorithmus \ref{alg:applyblockref} ]\\
 		\For {i = 0 : n}
 			\State QR = A;
 			\If {i + ib > n}
-				\State Calc T: H=I-VTV'
-				\State Apply H: A=H'A
+				\State Calc T: $H=I-VTV^T$
+				\State Apply H: $A=H^TA$
 			\EndIf
 		\EndFor
 	\end{algorithmic}
