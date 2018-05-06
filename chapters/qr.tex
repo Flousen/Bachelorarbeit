@@ -46,21 +46,20 @@ Rx=Q^Tb \label{solvminqr}
 \end{align}
 das Minimierungsproblem (\ref{eq1}). Da $R$ eine Dreiecksmatrix ist, lässt sich (\ref{solvminqr}) leicht mit Rückwärtseinsetzen  lösen.
 
-\section{Householder-Transformation}
-Sei $v \in \mathbb{R}^n$ und $\tau \in \mathbb{R}$ dann wir die $n \times n$ Matrix 
+1\section{Householder-Transformation}
+Sei  $v \in \mathbb{R}^n$ ein Vektor dann wird die $n \times n$ Matrix 
 \begin{align}
-	%H = I - \tau v v^T
 	H = I - 2 \dfrac{vv^T}{v^Tv}
 \end{align}
 als Householder-Transformation und der Vektor $v$ als Householder-Vektor bezeichnet.
 Eine Householder-Transformation $H = I - 2 \dfrac{vv^T}{v^Tv}$ ist orthogonal und symmetrisch. \cite{num1}\\
 Die Householder-Transformation spiegelt den Vektor $x$ auf die Achse $x_1$.
-Dazu multipliziert man $H$ von links auf $x$.
+Dazu multipliziert man $H$ von links auf $x$
 \begin{align}
 	Hx=\alpha e_1 \label{spiegelung}
 \end{align}
-mit $\alpha \in \mathbb{R}$ und $e_1$ erster kanonischer Einheitsvektor. Der Householder-Vektor steht senkrecht auf der Achse an der $x$ gespiegelt wird.\\
-Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung der Vektors $x$ and der gestrichelt eingezeichneten Ebene auf die $x_1$ Achse.
+mit dem Skalar $\alpha \in \mathbb{R}$ und $e_1$ als ersten kanonischen Einheitsvektor. Der Householder-Vektor steht senkrecht auf der Ebene an welcher $x$ gespiegelt wird.\\
+Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ an der gestrichelt eingezeichneten Ebene auf die Achse $x_1$.
 [Abbildung \ref{fig:HHolder}]
 \begin{figure}[h]
 	\centering
@@ -97,15 +96,18 @@ $Q$ ist also das Produkt aller Householder-Transformationen.
 
 
 \subsection{Householder Vector}
-Wie muss der Vekor $v$ aussehen damit (\ref{spiegelung}) gilt.\\
+%Wie muss der Vektor $v$ aussehen damit (\ref{spiegelung}) gilt?\\
+Damit (\ref{spiegelung}) gilt, muss der Vektor folgendermaßen berechnet werden. \\
 \glqq Mit $Hx = x - 2\dfrac{vv^T}{v^Tv} x = x - \lambda v \overset{!}{=} \alpha e_1$ folgt $v \in \text{span}\{x - \alpha e_1\}$. \grqq{} \cite{num1}Warum?\\
-  Setze nun $v = x - \alpha e_1$ in $Hx = \alpha e_1 $ ein
+Die Definition des Vektors $v = x - \alpha e_1$ wird in $Hx = \alpha e_1 $ eingesetzt
 \begin{align*}
 	Hx =& x - \dfrac{2}{v^Tv}v(v^Tx) = x - 2\dfrac{v^Tx}{v^Tv}v\\
 	=& x - \dfrac{(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2} (x - \alpha e_1)
 	=\underbrace{\left(1 - \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2}\right)}_{ \overset{!}{=} 0 } x + \alpha e_1 \underbrace{\dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2} }_{\overset{!}{=} 1} \overset{!}{=} \alpha e_1
 \end{align*}
-Damit das letzte $=$ gilt muss 
+
+Damit das Ergebnis $ = \alpha e_1$ erhalten wird, muss gelten
+%Damit das letzte $=$ gilt muss 
 \begin{align*}
 	1 &= \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2}\\
 	\Leftrightarrow (x - \alpha e_1)^T(x - \alpha e_1) &= 2 x^T x - 2\alpha x_1 \\
@@ -113,39 +115,49 @@ Damit das letzte $=$ gilt muss
 	\Leftrightarrow \alpha &= \pm \sqrt{x^Tx}
 \end{align*}
 
-Wie ist das Vorzeichen von $\alpha = \pm \sqrt{x^Tx}$ zu wählen um $ v = x - \alpha e_1$ zu berechnen?
+Das Vorzeichen von  $\alpha = \pm \sqrt{x^Tx}$ kann man frei wählen, um $ v = x - \alpha e_1$ zu berechnen.
 
-Wählt man das Vorzeichen positive kann Auslöschung auftreten falls $x$ annähernd ein positives Vielfaches von $e_1$ ist.
+
+%Wie ist das Vorzeichen von $\alpha = \pm \sqrt{x^Tx}$ zu wählen um $ v = x - \alpha e_1$ zu berechnen?
+
+Wählt man das Vorzeichen positiv kann Auslöschung auftreten, falls $x$ annähernd ein positives Vielfaches von $e_1$ ist.
 
 LAPACK \cite{DGEQR2} vermeidet die Auslöschung indem das Vorzeichen entgegengesetzt gewählt wird. Das bedeutet $x$ wird immer auf die gegenüberliegende Seite gespiegelt.
 
-Im Numerik 1 Skript \cite{num1} wird das Vorzeichen immer positiv gewählt\\ $\alpha = |\sqrt{x^Tx}| = \|x\|_2$. Eine mögliche Auslöschung im Fall $ x_1 > 0$ wird hier durch die Umformung 
+Im Skript von Numerik 1 \cite{num1} wird das Vorzeichen immer positiv gewählt\\ $\alpha = |\sqrt{x^Tx}| = \|x\|_2$. Eine mögliche Auslöschung im Fall $ x_1 > 0$ wird hier durch die folgende Umformung vermieden.
 \begin{align*}
 	v_1 = x_1 - \|x\|_2 = \dfrac{x_1^2 - \|x\|_2^2}{x_1 + \|x\|_2}
-	=\dfrac{-(x_2^2+...+x_n^2)}{x_1 - \|x\|_2}
+	=\dfrac{-(x_2^2+...+x_n^2)}{x_1 + \|x\|_2}
 \end{align*}
-vermieden.
 
-Der Vorteil bei der von LAPACK verwendeten Methode ist, das hier nur die Norm berechnet werden muss wohingegen bei dem anderen Algorithmus das Skalarprodukt $x^Tx$ berechnet werden muss was bei Vektoren mit vielen Einträgen und großen werten schneller zu einem Überlauf führen kann. Es muss jedoch ein Algorithmus algorithmus gewählt werden der die Norm berechnet $\|x\|=\sqrt{x^Tx}$ ohne das Skalarprodukt explizit auszurechnen.
 
-Der Vektor $v$ wird mit 
+Der Vorteil bei der von LAPACK verwendeten Methode ist, dass hier nur die Norm berechnet werden muss, wohingegen bei dem anderen Algorithmus das Skalarprodukt $x^Tx$ berechnet werden muss. Dies kann bei Vektoren mit vielen Einträgen und großen Werten zu einem Überlauf führen. Es muss jedoch ein Algorithmus gewählt werden, der die Norm berechnet $\|x\|=\sqrt{x^Tx}$ ohne das Skalarprodukt explizit auszurechnen.
+
+Um den Vektor $v$ später auf der frei werdenden Diagonalen von $A$ speichern zu können wird er auf $v_1 = 1$ normiert. Dies geschieht mit 
 \begin{align*}
 	v = \dfrac{x - \alpha e_1}{x_1 - \alpha}
 \end{align*}
-normiert, so dass $v_1 = 1$ gilt, um ihn später auf der frei werdenden Diagonalen von $A$ speichern zu können.
 
 Mit der Normierung kann man den Faktor $\tau = \dfrac{2}{v^Tv}$ berechnen.
 \begin{align*}
 	\tau = \dfrac{2}{v^Tv} = \dfrac{2 (x_1 - \alpha)^2}{(x - \alpha e_1)^T (x - \alpha e_1)} = \dfrac{2 (x_1 - \alpha)^2}{\|x\|^2_2 - 2\alpha x^Te_1 + \alpha^2} =  \dfrac{2 (x_1 - \alpha)^2}{ 2\alpha (\alpha - x_1)} = \dfrac{x_1 - \alpha}{\alpha}
 \end{align*}
 
+Mit dem Faktor $\tau = \dfrac{2}{v^Tv}$ kann man die Householder-Transformation schreiben als
+\begin{align*}
+	H = I - 2 \dfrac{vv^T}{v^Tv} = I - \tau v v^T
+\end{align*}
+
+Das macht man, weil die Berechnung des Skalarprodukts relativ aufwändig ist. Da man das Skalarprodukt zur Berechnung des Householder-Vektors benötigt, kann man damit direkt den Faktor $\tau$ berechnen.
+
+
 \begin{algorithm}
 	\caption{Housholder-Vector(LAPACK DLARFG)}
 	\begin{algorithmic}
 		\State Input: $x \in \mathbb{R}^n$ 
 		\State $\alpha = -1 * \text{sign}(x_1) \|x\|_2$
-		\State $\tau = \dfrac{x_1 - \alpha}{\alpha}$
-		\State $v=\dfrac{x}{x_1 - \alpha}$
+		\State $\tau = \frac{x_1 - \alpha}{\alpha}$
+		\State $v=\frac{x - \alpha e_1}{x_1 - \alpha}$
 		\State Output: Householder-Vektor $v$ , $\tau$
 	\end{algorithmic} 
 	\label{alg:unblockedqr}
@@ -153,17 +165,14 @@ Mit der Normierung kann man den Faktor $\tau = \dfrac{2}{v^Tv}$ berechnen.
 
 
 \subsection{Householder-Transformation anwenden}
-Ein aufwändiges Matrix-Matrix Produkt kann bei der Anwendung der Housholder-Matrix $H = I - \tau vv^T$ auf die Matrix $A$ umgangen werden, indem man geschickt Klammert.
+Ein aufwändiges Matrix-Matrix-Produkt kann bei der Anwendung der Housholder-Matrix $H = I - \tau vv^T$ auf die Matrix $A$ umgangen werden, indem man geschickt klammert.
 \begin{align*} 
 H A =(I - \tau vv^T) A= A - \tau (vv^T )A = A - \tau v*(v^T*A)
 \end{align*}
-Statt eines Matrix-Matrix Produkts, muss man nun nur ein Matrix-Vektor Produkt und ein dyadisches Produkt berechnen.
-Das Matrix-Vektor Produkt und das dyadisches Produkt haben nur einen Aufwand von $O(n^2)$.
+Statt eines Matrix-Matrix-Produkts muss man nur ein Matrix-Vektor-Produkt und ein dyadisches Produkt berechnen.
+Das Matrix-Vektor-Produkt und das dyadische Produkt haben nur einen Aufwand von $O(n^2)$.
 
-
-
-
-Das führt auf den Algorithmus \ref{alg:unblockedqr}. 
+Das führt zum Algorithmus \ref{alg:unblockedqr}. 
 \begin{algorithm}
 	\caption{Ungeblockte Housholder-Transformation}
 	\begin{algorithmic}
@@ -183,8 +192,8 @@ Das führt auf den Algorithmus \ref{alg:unblockedqr}.
 
 
 
-Der Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$. Da $R$ eine obere Dreiecksmatrix ist, werden unter der Diagonalen die Housholder-Vektoren gespeichert. Da die Householder-Vektoren auf $v_1 = 1$ normiert wurden muss das Erste Element des Vektors nicht mit gespeichert werden und der Householder-Vektor hat unter $R$ platz.
-A hat also die Form
+Der Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$. Da $R$ eine obere Dreiecksmatrix ist, werden unter der Diagonale die Housholder-Vektoren gespeichert. Da die Householder-Vektoren auf $v_1 = 1$ normiert wurden, muss das erste Element des Vektors nicht mit gespeichert werden. Die Householder-Vektoren können dadurch unterhalb der Diagonalen gespeichert werden.
+Die Matrix $A$ hat also die Form
 \begin{align*}
 	A = 
 	\left(\begin{array}{ccc}
@@ -197,9 +206,9 @@ A hat also die Form
 
 
 \section{Geblockte QR-Zerlegung}
-Ein geblockter Algorithmus ist sinnvoll um bei großen Matrizen den Cache optimal auszunutzen.
+Ein geblockter Algorithmus ist sinnvoll, um bei großen Matrizen den Cache optimal zu nutzen.
 
-Die Matrix $A \in \mathbb{R}^{m \times n}$ wird nun geblockt, mit einer geeigneten Blockgröße $bs$ betrachtet.
+Die Matrix $A \in \mathbb{R}^{m \times n}$ wird geblockt, mit einer geeigneten Blockgröße $bs$, betrachtet.
 \begin{align}
 	A = \left(\begin{array}{l|l}
 	A_{0, 0} & A_{0, \text{bs}} \\ \hline
@@ -208,7 +217,7 @@ Die Matrix $A \in \mathbb{R}^{m \times n}$ wird nun geblockt, mit einer geeignet
 \end{align}
 Die Abbildung \ref{fig:blockA} zeigt schematisch die Partitionierung von A.
 
-Nun wird QR Zerlegung für den Block $ \left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right)$
+Nun wird eine QR-Zerlegung für den Block $ \left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right)$
 mit dem ungeblockten Algorithmus \ref{alg:unblockedqr} berechnet.
 \begin{align}
 	\left(\begin{array}{l} 
@@ -222,10 +231,10 @@ mit dem ungeblockten Algorithmus \ref{alg:unblockedqr} berechnet.
 	\end{array}\right)
 \end{align}
 
-Das Bedeutet im block $A_{0, 0}$ steht nun auf und über der Diagonalen $R_{0,0}$, unterhalb der Diagonalen und im block $A_{\text{bs}, 0}$ stehen die Householder-Vektoren.
+Im Block $A_{0, 0}$ steht auf und über der Diagonalen $R_{0,0}$. Unterhalb der Diagonalen und im Block $A_{\text{bs}, 0}$ stehen die Householder-Vektoren.
 
-Aus den Householder-Vektoren wird einer obere Dreiecksmatrix $T \in \mathbb{R}^{bs \times bs}$ für die gilt $H_{0}\cdot ... \cdot H_{bs} = H = I - V*T*V^T$ berechnet.\\
-Wende $H^T$ auf $A_{0, \text{bs}}$ und $ A_{0,\text{bs}}$ an.
+Aus den Householder-Vektoren wird eine obere Dreiecksmatrix $T \in \mathbb{R}^{bs \times bs}$ für die gilt $H_{0}\cdot ... \cdot H_{bs} = H = I - V*T*V^T$ berechnet.\\
+$H^T$ wird auf $A_{0, \text{bs}}$ und $ A_{0,\text{bs}}$ angewendet.
 \begin{align}
 	\left(\begin{array}{l} 
 	A_{0, \text{bs}} \\ \hline
@@ -238,7 +247,9 @@ Wende $H^T$ auf $A_{0, \text{bs}}$ und $ A_{0,\text{bs}}$ an.
 	\end{array}\right)
 \end{align}
 
-Betrachte nun den Block $A_{bs, \text{bs}}$ wie in (\ref{equ:blockA}), in der Abbildung \ref{fig:blockA} gestrichelt Dargestellt.
+%Betrachte nun den Block $A_{bs, \text{bs}}$ wie in (\ref{equ:blockA}), in der Abbildung \ref{fig:blockA} gestrichelt Dargestellt.
+
+Der Block $A_{bs, \text{bs}}$ wird erneut aufgeteilt. Das ist in Abbildung \ref{fig:blockA} gestrichelt dargestellt.
 
 [Abbildung \ref{fig:blockA}]
 \begin{figure}

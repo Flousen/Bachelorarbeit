@@ -2,7 +2,7 @@
 Die Abkürzung BLAS steht für Basic Linear Algebra Subprograms.
 
 \section{Datenstruktur für Matrizen}
-Vollbesetzte Matrizen werden bei BLAS entweder Zeilen- oder Spaltenweise abgespeichert. Das bedeutet entweder Zeilen- oder Spalten der Matrxi liegen hintereinander im Speicher. 
+Vollbesetzte Matrizen werden bei BLAS entweder zeilen- oder spaltenweise abgespeichert. Das bedeutet, dass entweder die Zeilen- oder die Spalten der Matrix hintereinander im Speicher stehen. 
 
 \begin{align*}
 	A=
@@ -74,10 +74,15 @@ Matrix $A$ Spaltenweise gespeichert\\
 \end{tikzpicture}\\
 
 
+Eine Datenstruktur benötigt folgende Elemente:
+\begin{itemize}
+	\item einen Zeiger auf eine Speicherfläche
+	\item Informationen ob die Matrix zeilen- oder spaltenweise gespeichert ist 
+	\item die Dimension der Matrix.
+\end{itemize}
 
-Eine Datenstruktur benötigt ein Zeiger auf eine Speicherfläche, Informationen ob die Matrix Zeilen- oder Spaltenweise gespeichert ist und die Dimension der Matrix. 
 
-So eine Datenstruktur könnte in C so aussehen.
+Eine derartige Datenstruktur könnte in C so aussehen.
 \begin{lstlisting}
 struct Matrix {
   double * data;
