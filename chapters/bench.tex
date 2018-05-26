@@ -1,13 +1,34 @@
 \chapter{Implementierung und Benchmarks}
 Kurze Beschreibung der HPC-Bibliothek
 
+Die verwendete Bibliothek wurde in der Vorlesung HPC1 entwickelt.
+
+
+
+objektorientiert%\label{zur hpc vorlesung}
+
+eventuell Beispiel
+
 \section{Fehlerschätzer}
+
+Es wurde der Fehlerschätzer von ATLAS verwendet.
 \begin{align}
 	err = \dfrac{\|A - QR\|_i}{\|A\|_i \cdot \min(m,n) \cdot \varepsilon}
 \end{align}
 mit $\|\cdot\|_i$ passender Norm und $\varepsilon$ die kleinste darstellbare Zahl.
 
-Die QR-Zerlegung ist gut genug falls $ err < 1 $
+Die QR-Zerlegung ist gut genug falls $ err < 1 $.
+
+Als Norm wurde die Unendlichnorm $\|\cdot\|_\infty$ gewählt.
+Die Unendlich-Norm entspricht der Zeilensummennorm, die für eine Matrix $A \in \mathbb{R}^{m\times n}$ gegeben ist durch
+\begin{align*}
+	\|A\|_\infty = \max_{i=1,...,m} \sum_{j=1}^{n} |a_{ij}|
+\end{align*}
+
+$\epsilon$ ist auf dem Test-System $2.220446\cdot10^{-16}$
+
 \section{MKL-Wrapper}
 
 \section{Benchmarks}
+
+peak performance einzeichnen

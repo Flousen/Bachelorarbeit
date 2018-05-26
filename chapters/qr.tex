@@ -46,7 +46,7 @@ Rx=Q^Tb \label{solvminqr}
 \end{align}
 das Minimierungsproblem (\ref{eq1}). Da $R$ eine Dreiecksmatrix ist, lässt sich (\ref{solvminqr}) leicht mit Rückwärtseinsetzen  lösen.
 
-1\section{Householder-Transformation}
+\section{Householder-Transformation}
 Sei  $v \in \mathbb{R}^n$ ein Vektor dann wird die $n \times n$ Matrix 
 \begin{align}
 	H = I - 2 \dfrac{vv^T}{v^Tv}
@@ -98,16 +98,19 @@ $Q$ ist also das Produkt aller Householder-Transformationen.
 \subsection{Householder Vector}
 %Wie muss der Vektor $v$ aussehen damit (\ref{spiegelung}) gilt?\\
 Damit (\ref{spiegelung}) gilt, muss der Vektor folgendermaßen berechnet werden. \\
-\glqq Mit $Hx = x - 2\dfrac{vv^T}{v^Tv} x = x - \lambda v \overset{!}{=} \alpha e_1$ folgt $v \in \text{span}\{x - \alpha e_1\}$. \grqq{} \cite{num1}Warum?\\
-Die Definition des Vektors $v = x - \alpha e_1$ wird in $Hx = \alpha e_1 $ eingesetzt
+Mit $Hx = x - 2\dfrac{vv^T}{v^Tv} x = x - \lambda v \overset{!}{=} \alpha e_1$ folgt $v \in \text{span}\{x - \alpha e_1\}$. \cite{num1}\\
+Die Definition des Vektors $v = t(x - \alpha e_1)$ wird in $Hx = \alpha e_1 $ eingesetzt
 \begin{align*}
 	Hx =& x - \dfrac{2}{v^Tv}v(v^Tx) = x - 2\dfrac{v^Tx}{v^Tv}v\\
+	=& x - 2\dfrac{ t(x - \alpha e_1)^Tx}{ t(x - \alpha e_1)^T t(x - \alpha e_1)} t(x - \alpha e_1)
+	= x - 2\dfrac{ (x - \alpha e_1)^Tx}{ (x - \alpha e_1)^T (x - \alpha e_1)} (x - \alpha e_1)
+	\\
 	=& x - \dfrac{(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2} (x - \alpha e_1)
 	=\underbrace{\left(1 - \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2}\right)}_{ \overset{!}{=} 0 } x + \alpha e_1 \underbrace{\dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2} }_{\overset{!}{=} 1} \overset{!}{=} \alpha e_1
 \end{align*}
 
-Damit das Ergebnis $ = \alpha e_1$ erhalten wird, muss gelten
-%Damit das letzte $=$ gilt muss 
+%Damit das Ergebnis $ = \alpha e_1$ erhalten wird, muss gelten
+Damit das Letzte	 $=$ gilt muss 
 \begin{align*}
 	1 &= \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2}\\
 	\Leftrightarrow (x - \alpha e_1)^T(x - \alpha e_1) &= 2 x^T x - 2\alpha x_1 \\
@@ -131,7 +134,7 @@ Im Skript von Numerik 1 \cite{num1} wird das Vorzeichen immer positiv gewählt\\
 \end{align*}
 
 
-Der Vorteil bei der von LAPACK verwendeten Methode ist, dass hier nur die Norm berechnet werden muss, wohingegen bei dem anderen Algorithmus das Skalarprodukt $x^Tx$ berechnet werden muss. Dies kann bei Vektoren mit vielen Einträgen und großen Werten zu einem Überlauf führen. Es muss jedoch ein Algorithmus gewählt werden, der die Norm berechnet $\|x\|=\sqrt{x^Tx}$ ohne das Skalarprodukt explizit auszurechnen.
+%Der Vorteil bei der von LAPACK verwendeten Methode ist, dass hier nur die Norm berechnet werden muss, wohingegen bei dem anderen Algorithmus das Skalarprodukt $x^Tx$ berechnet werden muss. Dies kann bei Vektoren mit vielen Einträgen und großen Werten zu einem Überlauf führen. Es muss jedoch ein Algorithmus gewählt werden, der die Norm berechnet $\|x\|=\sqrt{x^Tx}$ ohne das Skalarprodukt explizit auszurechnen.
 
 Um den Vektor $v$ später auf der frei werdenden Diagonalen von $A$ speichern zu können wird er auf $v_1 = 1$ normiert. Dies geschieht mit 
 \begin{align*}
@@ -178,7 +181,7 @@ Das führt zum Algorithmus \ref{alg:unblockedqr}.
 	\begin{algorithmic}
 	\State Input: $A \in \mathbb{R}^{m \times n}$
 	\For {i = 0 : n}
-		\State [$v$, $\tau$] = housevector($A(i:m,i)$)
+		\State ($v_i$, $\tau_i$) $\leftarrow$ housevector($A(i:m,i)$)
 		\State $w \leftarrow v^T*A(i:m,i:n)$ (dgemv)
 		\State $ A(i:m,i:n) \leftarrow \tau * v * w + A $ (dger)
 		\If {i > m}
@@ -190,16 +193,16 @@ Das führt zum Algorithmus \ref{alg:unblockedqr}.
 \label{alg:unblockedqr}
 \end{algorithm}
 
-
+Matizen sind 0 indizeiert notiert
 
 Der Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$. Da $R$ eine obere Dreiecksmatrix ist, werden unter der Diagonale die Housholder-Vektoren gespeichert. Da die Householder-Vektoren auf $v_1 = 1$ normiert wurden, muss das erste Element des Vektors nicht mit gespeichert werden. Die Householder-Vektoren können dadurch unterhalb der Diagonalen gespeichert werden.
 Die Matrix $A$ hat also die Form
 \begin{align*}
 	A = 
 	\left(\begin{array}{ccc}
-	R   &  R  & R \\ 
-	v_1 &  R  & R \\ 
-	v_1 & v_2 & R \\ 
+	r_{1,1}   &  r_{1,2}  & r_{1,3} \\ 
+	v_1 &  r_{2,2}  & r_{2,3} \\ 
+	v_1 & v_2 & r_{3,3} \\ 
 	v_1 & v_2 & v_3
 	\end{array} \right)
 \end{align*}
@@ -208,7 +211,9 @@ Die Matrix $A$ hat also die Form
 \section{Geblockte QR-Zerlegung}
 Ein geblockter Algorithmus ist sinnvoll, um bei großen Matrizen den Cache optimal zu nutzen.
 
-Die Matrix $A \in \mathbb{R}^{m \times n}$ wird geblockt, mit einer geeigneten Blockgröße $bs$, betrachtet.
+Die Idee beim geblockten Algorithmus ist die Matrix in Blöcke aufzuteilen, die geblockte QR-Zerlegung für die Blöcke zu berechnen un die dabei entstandenen Householder-Transformationen auf den Rest der Matrix anzuwenden.
+
+Betrachte dazu die Matrix $A \in \mathbb{R}^{m \times n}$ geblockt, mit einer geeigneten Blockgröße $bs$, betrachtet.
 \begin{align}
 	A = \left(\begin{array}{l|l}
 	A_{0, 0} & A_{0, \text{bs}} \\ \hline
@@ -217,8 +222,9 @@ Die Matrix $A \in \mathbb{R}^{m \times n}$ wird geblockt, mit einer geeigneten B
 \end{align}
 Die Abbildung \ref{fig:blockA} zeigt schematisch die Partitionierung von A.
 
-Nun wird eine QR-Zerlegung für den Block $ \left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right)$
-mit dem ungeblockten Algorithmus \ref{alg:unblockedqr} berechnet.
+Die Blockgröße $bs$ wird so gewählt das die Geschwindigkeit der ungeblockten QR-Zerlegung für den Block $ \left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right)$ optimal ist.
+
+Für diesen Block wird nun die  QR-Zerlegung mit dem ungeblockten Algorithmus \ref{alg:unblockedqr} berechnet.
 \begin{align}
 	\left(\begin{array}{l} 
 	A_{0, 0} \\ \hline
@@ -233,8 +239,18 @@ mit dem ungeblockten Algorithmus \ref{alg:unblockedqr} berechnet.
 
 Im Block $A_{0, 0}$ steht auf und über der Diagonalen $R_{0,0}$. Unterhalb der Diagonalen und im Block $A_{\text{bs}, 0}$ stehen die Householder-Vektoren.
 
-Aus den Householder-Vektoren wird eine obere Dreiecksmatrix $T \in \mathbb{R}^{bs \times bs}$ für die gilt $H_{0}\cdot ... \cdot H_{bs} = H = I - V*T*V^T$ berechnet.\\
-$H^T$ wird auf $A_{0, \text{bs}}$ und $ A_{0,\text{bs}}$ angewendet.
+Nun muss man die bei der ungeblocketn QR-Zerlegung verwendeten Housholder-Transformationen auf die Restliche Matrix $ \left(\dfrac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ anwenden.
+
+Man kann das Produkt mehrerer Householder-Transformationen schreiben als
+
+\cite{Joffrain:2006:AHT:1141885.1141886}
+
+Die Anwendung der Matrix $I - V*T*V^T$ auf $\left(\dfrac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ erfolgt in 2 Schritten.
+
+Zuerst wird von der Funktion \glqq larft \grqq{}  die Matrix $T$ berechnet.
+Dann wird $I - V*T*V^T$ von der Funktion \glqq larfb\grqq{} auf $\left(\dfrac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ angewendet.
+
+
 \begin{align}
 	\left(\begin{array}{l} 
 	A_{0, \text{bs}} \\ \hline
@@ -251,6 +267,8 @@ $H^T$ wird auf $A_{0, \text{bs}}$ und $ A_{0,\text{bs}}$ angewendet.
 
 Der Block $A_{bs, \text{bs}}$ wird erneut aufgeteilt. Das ist in Abbildung \ref{fig:blockA} gestrichelt dargestellt.
 
+Fahre solange fort bis $A_{bs, \text{bs}}$ gleich der Blockgröße ist.
+
 [Abbildung \ref{fig:blockA}]
 \begin{figure}
 	\centering
@@ -259,9 +277,10 @@ Der Block $A_{bs, \text{bs}}$ wird erneut aufgeteilt. Das ist in Abbildung \ref{
 	\label{fig:blockA}
 \end{figure}
 
-\subsection{Calc Factor T larft}
+\subsection{Berechnung der Matrix $T$}
 
-Die Funkton bekommt eine Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$ einen Vektor $\tau \in \mathbb{R}^k$ und eine Matrix $T\in \mathbb{R}^{k\times k}$ übergeben. 
+\glqq larft \grqq{}
+Die Funkton  bekommt eine Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$ einen Vektor $\tau \in \mathbb{R}^k$ und eine Matrix $T\in \mathbb{R}^{k\times k}$ übergeben. 
 Die Funktion berechnet eine Dreiecksmatrix $T$ so dass
 \begin{align*}
 	H_1H_2...H_k = I - VTV^T \qquad \text{mit}\qquad H_i = I - \tau_i v_iv_i^T
@@ -272,7 +291,9 @@ Warum und wie das Funktoniert wird hier beschreiben \cite{Joffrain:2006:AHT:1141
 
 
 
-\subsection{Apply H larfb}
+\subsection{Anwenden von $I - VTV^T$ larfb}
+
+\glqq larft \grqq{}
 
 Die Funktion larfb bekommt eine Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$, eine Dreiecksmatrix $T \in \mathbb{R}^{k \times k}$ und eine Matrix $C \in \mathbb{R}^{m \times n }$ übergeben.
 Die Funktion wendet eine  Block Reflector Matrix $ 	H = C - V T V^T $ von rechts auf die Matrix $ C $ an. 
