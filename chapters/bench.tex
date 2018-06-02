@@ -1,26 +1,27 @@
 \chapter{Implementierung und Benchmarks}
-Kurze Beschreibung der HPC-Bibliothek
+Die verwendete Bibliothek wurde in der Vorlesung High Performance Computing 1 entwickelt \cite{HPC1}.
 
-Die verwendete Bibliothek wurde in der Vorlesung HPC1 entwickelt.
+Die Bibliothek ist in C++ geschrieben. Es sind Klassen für Matrizen und Vektoren implementiert, sowie einige BLAS-Routinen.
+
+Die Matrix-Klassen erlauben den zugriff auf Matrixblöcke. 
 
 
-
-objektorientiert%\label{zur hpc vorlesung}
 
 eventuell Beispiel
 
 \section{Fehlerschätzer}
 
-Es wurde der Fehlerschätzer von ATLAS verwendet.
+Es wurde der Fehlerschätzer von ATLAS verwendet. Nach Quelle Fragen!
 \begin{align}
 	err = \dfrac{\|A - QR\|_i}{\|A\|_i \cdot \min(m,n) \cdot \varepsilon}
 \end{align}
-mit $\|\cdot\|_i$ passender Norm und $\varepsilon$ die kleinste darstellbare Zahl.
+$\|\cdot\|_i$ ist eine passende Norm.
+Die Matrizen $Q$ und $R$ sind die QR-Zerlegung der Matrix $A \in \mathbb{R}^{m \times n}$.
+$\varepsilon$ ist die kleinste darstellbare Zahl.\\
+Die QR-Zerlegung ist gut genug falls der Fehler kleiner 1 ist $ err < 1 $.
 
-Die QR-Zerlegung ist gut genug falls $ err < 1 $.
-
-Als Norm wurde die Unendlichnorm $\|\cdot\|_\infty$ gewählt.
-Die Unendlich-Norm entspricht der Zeilensummennorm, die für eine Matrix $A \in \mathbb{R}^{m\times n}$ gegeben ist durch
+Als Norm wurde die Zeilensummennorm $\|\cdot\|_\infty$ gewählt.
+Diese ist für eine Matrix $A \in \mathbb{R}^{m\times n}$ gegeben durch
 \begin{align*}
 	\|A\|_\infty = \max_{i=1,...,m} \sum_{j=1}^{n} |a_{ij}|
 \end{align*}

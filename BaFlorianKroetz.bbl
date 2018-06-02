@@ -18,19 +18,25 @@
 \newblock DOI 10.1145/1141885.1141886. --
 \newblock ISSN 0098--3500
 
-\bibitem[2]{num1}
+\bibitem[2]{HPC1}
+\textsc{Lehn~Michael}, Borchert~A.:
+\newblock \emph{{Vorlesung High Performance Computing 1}}.
+\newblock \url{http://www.mathematik.uni-ulm.de/numerik/hpc/ws17/}, 2017. --
+\newblock [Online; zugegriffen 31-05-2018]
+
+\bibitem[3]{num1}
 \textsc{Stefan A.~Funken}, Karsten~U.:
 \newblock \emph{Einführung in die Numerische Lineare Algebra}.
 \newblock Ulm, Germany, 2016
 
-\bibitem[3]{DGEQRF}
+\bibitem[4]{DGEQRF}
 \textsc{Tennessee}, Univ. of California~B.~o. ; \textsc{Ltd..}, NAG:
 \newblock \emph{{LAPACK blocked QR}}.
 \newblock \url{http://www.netlib.org/lapack/explore-3.1.1-html/dgeqrf.f.html},
   2006. --
 \newblock [Online; zugegriffen 31-01-2018]
 
-\bibitem[4]{DGEQR2}
+\bibitem[5]{DGEQR2}
 \textsc{Tennessee}, Univ. of California~B.~o. ; \textsc{Ltd..}, NAG:
 \newblock \emph{{LAPACK unblocked QR}}.
 \newblock \url{http://www.netlib.org/lapack/explore-3.1.1-html/dgeqr2.f.html},
