@@ -68,7 +68,7 @@ Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ a
 	\label{fig:HHolder}
 \end{figure}
 
-Eine Householder-Transformation kann die eine Matrix $A$ wie folgt transformieren.
+Householder-Transformationen können die eine Matrix $A$ wie folgt transformieren.
 \begin{align*}
 	H_1 A= \left( 
 	\begin{array}{cccc}
@@ -90,9 +90,9 @@ Eine Householder-Transformation kann die eine Matrix $A$ wie folgt transformiere
 \end{align*} 
 So erhält man folgende Faktorisierung
 \begin{align*}
-	R = H_{n-1} H_{n-2}\cdot ...\cdot H_1 A \Leftrightarrow A = (H_1\cdot ...\cdot H_n)R \Rightarrow Q = H_1\cdot ... \cdot H_n
+	R = H_{n-1} H_{n-2}\cdot ...\cdot H_1 A \Leftrightarrow A = (H_1\cdot ...\cdot H_{n-1})R \Rightarrow Q = H_1\cdot ... \cdot H_{n-1}
 \end{align*}
-$Q$ ist also das Produkt aller Householder-Transformationen.
+$Q$ ist das Produkt aller Householder-Transformationen.
 
 
 \subsection{Householder Vector}
@@ -137,11 +137,12 @@ Im Skript von Numerik 1 \cite{num1} wird das Vorzeichen immer positiv gewählt\\
 %Der Vorteil bei der von LAPACK verwendeten Methode ist, dass hier nur die Norm berechnet werden muss, wohingegen bei dem anderen Algorithmus das Skalarprodukt $x^Tx$ berechnet werden muss. Dies kann bei Vektoren mit vielen Einträgen und großen Werten zu einem Überlauf führen. Es muss jedoch ein Algorithmus gewählt werden, der die Norm berechnet $\|x\|=\sqrt{x^Tx}$ ohne das Skalarprodukt explizit auszurechnen.
 
 Um den Vektor $v$ später auf der frei werdenden Diagonalen von $A$ speichern zu können wird er auf $v_1 = 1$ normiert. Dies geschieht mit 
-\begin{align*}
+\begin{align}
 	v = \dfrac{x - \alpha e_1}{x_1 - \alpha}
-\end{align*}
+	\label{eq:calcV}
+\end{align}
 
-Mit der Normierung kann man den Faktor $\tau = \dfrac{2}{v^Tv}$ berechnen.
+Mit der Normierung kann man den Faktor $\tau = \dfrac{2}{v^Tv}$ berechnen. Setze dazu (\ref{eq:calcV}) in die Definition von $\tau$ ein.
 \begin{align*}
 	\tau = \dfrac{2}{v^Tv} = \dfrac{2 (x_1 - \alpha)^2}{(x - \alpha e_1)^T (x - \alpha e_1)} = \dfrac{2 (x_1 - \alpha)^2}{\|x\|^2_2 - 2\alpha x^Te_1 + \alpha^2} =  \dfrac{2 (x_1 - \alpha)^2}{ 2\alpha (\alpha - x_1)} = \dfrac{x_1 - \alpha}{\alpha}
 \end{align*}
@@ -151,7 +152,7 @@ Mit dem Faktor $\tau = \dfrac{2}{v^Tv}$ kann man die Householder-Transformation 
 	H = I - 2 \dfrac{vv^T}{v^Tv} = I - \tau v v^T
 \end{align*}
 
-Das macht man, weil die Berechnung des Skalarprodukts relativ aufwändig ist. Da man das Skalarprodukt zur Berechnung des Householder-Vektors benötigt, kann man damit direkt den Faktor $\tau$ berechnen.
+%Das macht man, weil die Berechnung des Skalarprodukts relativ aufwändig ist. Da man das Skalarprodukt zur Berechnung des Householder-Vektors benötigt, kann man damit direkt den Faktor $\tau$ berechnen.
 
 
 \begin{algorithm}
@@ -159,21 +160,21 @@ Das macht man, weil die Berechnung des Skalarprodukts relativ aufwändig ist. Da
 	\begin{algorithmic}
 		\State Input: $x \in \mathbb{R}^n$ 
 		\State $\alpha = -1 * \text{sign}(x_1) \|x\|_2$
-		\State $\tau = \frac{x_1 - \alpha}{\alpha}$
-		\State $v=\frac{x - \alpha e_1}{x_1 - \alpha}$
-		\State Output: Householder-Vektor $v$ , $\tau$
+		\State $\tau = \dfrac{x_1 - \alpha}{\alpha}$
+		\State $v=\dfrac{x - \alpha e_1}{x_1 - \alpha}$
+		\State Output: Householder-Vektor $v$, $\tau$
 	\end{algorithmic} 
 	\label{alg:unblockedqr}
 \end{algorithm}
 
 
 \subsection{Householder-Transformation anwenden}
-Ein aufwändiges Matrix-Matrix-Produkt kann bei der Anwendung der Housholder-Matrix $H = I - \tau vv^T$ auf die Matrix $A$ umgangen werden, indem man geschickt klammert.
+Ein aufwändiges Matrix-Matrix-Produkt kann bei der Anwendung einer Housholder-Transformation $H = I - \tau vv^T$ auf die Matrix $A$ umgangen werden, indem man geschickt klammert.
 \begin{align*} 
-H A =(I - \tau vv^T) A= A - \tau (vv^T )A = A - \tau v*(v^T*A)
+H A =(I - \tau vv^T) A= A - \tau (vv^T )A = A - \tau v(v^TA)
 \end{align*}
 Statt eines Matrix-Matrix-Produkts muss man nur ein Matrix-Vektor-Produkt und ein dyadisches Produkt berechnen.
-Das Matrix-Vektor-Produkt und das dyadische Produkt haben nur einen Aufwand von $O(n^2)$.
+%Das Matrix-Vektor-Produkt und das dyadische Produkt haben nur einen Aufwand von $O(n^2)$.
 
 Das führt zum Algorithmus \ref{alg:unblockedqr}. 
 \begin{algorithm}
@@ -195,16 +196,24 @@ Das führt zum Algorithmus \ref{alg:unblockedqr}.
 
 Matizen sind 0 indizeiert notiert
 
-Der Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$. Da $R$ eine obere Dreiecksmatrix ist, werden unter der Diagonale die Housholder-Vektoren gespeichert. Da die Householder-Vektoren auf $v_1 = 1$ normiert wurden, muss das erste Element des Vektors nicht mit gespeichert werden. Die Householder-Vektoren können dadurch unterhalb der Diagonalen gespeichert werden.
-Die Matrix $A$ hat also die Form
+Dieser Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$.
+Aufgrund der Dreiecksstruktur von $R$,
+können unter der Diagonale die Housholder-Vektoren gespeichert werden. 
+Die Householder-Vektoren haben die Form 
+\begin{align*}
+v^{(j)} = ( \underbrace{0,...,0}_{j-1},1,	v_{j+1}^{(j)},...,v_{m}^{(j)}  )
+\end{align*}
+Da die ersten $j-1$ Einträge Null sind und der Vektor so normiert wurde das der $j$ Eintrag gleich 1 ist, müssen die ersten $j$ Einträge nicht gespeichert werden.
+Die Householder-Vektoren können somit unterhalb der Diagonalen gespeichert werden.
+Die Matrix $A$ hat die Form
 \begin{align*}
 	A = 
 	\left(\begin{array}{ccc}
 	r_{1,1}   &  r_{1,2}  & r_{1,3} \\ 
-	v_1 &  r_{2,2}  & r_{2,3} \\ 
-	v_1 & v_2 & r_{3,3} \\ 
-	v_1 & v_2 & v_3
-	\end{array} \right)
+	v_2^{(1)} &  r_{2,2}  & r_{2,3} \\ 
+	v_3^{(1)} & v_3^{(2)} & r_{3,3} \\ 
+	v_4^{(1)} & v_4^{(2)} & v_4^{(3)}
+	\end{array} \right) 
 \end{align*}
 
 
@@ -303,7 +312,7 @@ Warum und wie das Funktoniert wird hier beschreiben \cite{Joffrain:2006:AHT:1141
 
 Die Funktion \glqq larfb \grqq{} wendet die Matrix $I - VTV^T$ auf eine Matrix $C$ an.
 
-Sie bekommt eine Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$, eine Dreiecksmatrix $T \in \mathbb{R}^{k \times k}$ und eine Matrix $C \in \mathbb{R}^{m \times n }$ übergeben.
+Sie bekommt eine untere Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$, eine obere Dreiecksmatrix $T \in \mathbb{R}^{k \times k}$ und eine Matrix $C \in \mathbb{R}^{m \times n }$ übergeben.
 
 In der Dreiecksmatrix $V$ stehen die Householder-Vektoren,
 im Vektor $\tau$ die zu den Householder-Vektoren gehörende $\tau_i$.
@@ -314,15 +323,29 @@ Die Funktion berechnet also
 \begin{align*}
 	C \leftarrow H C = C - V T V^T C \quad \text{oder} \quad 	C \leftarrow H^T C = C - V T^T V^T C
 \end{align*}
-Die Abbildung \ref{fig:patrA} zeigt die Partitionierung der Matrix A für die Funktion larfb.\\
-Falls $m > k $ werden die Matrizen $V$ und $C$ aufgeteilt in $V=\left(\dfrac{V_1}{V_2}\right)$ und $C=\left(\dfrac{C_1}{C_2}\right)$. Dabei wird $V$ genau so gewählt, dass $V_1 \in \mathbb{R}^{k\times k}$ der Dreiecksteil der Matrix und quadratisch ist und $V_2 \in \mathbb{R}^{m-k\times k}$ der Rest der Matrix. Die Matrix $C$ wird in $C_1 \in \mathbb{R}^{k \times n}$ und $C_2 \in \mathbb{R}^{m-k \times n}$  aufgeteilt.\\
-Die Aufteilung ist notwendig da die BLAS-Funktion trmm (matrix-matrix product where one input matrix is triangular) nur für Quadratische Dreiecksmatrizen implementiert ist.
+
+Der Zweck der Funktion ist es die Householder-Transformationen, die bei der Bereicherung der QR-Zerlegung für einen Block entstanden sind, auf die restliche Matrix anzuwenden.
+Die Abbildung \ref{fig:patrA} zeigt wie die Matrix $A$ für die Funktion Partitioniert wird.
+\begin{figure} [H]
+	\centering
+	\input{images/partitionOFA.tex}
+	\caption{Partitionierung vom A für larfb}
+	\label{fig:patrA}
+\end{figure}
+Falls $m > k $ werden die Matrizen $V$ und $C$ aufgeteilt in $V=\left(\dfrac{V_1}{V_2}\right)$ und $C=\left(\dfrac{C_1}{C_2}\right)$.
+%Sodass $V_1 \in \mathbb{R}^{k \times k}$ und $C \in \mathbb{R}^{k \times n}$
+Dabei wird $V$ genau so geteilt, dass $V_1 \in \mathbb{R}^{k\times k}$ der quadratisch Dreiecksteil der Matrix ist und $V_2 \in \mathbb{R}^{m-k\times k}$ der Rest der Matrix. Die Matrix $C$ wird in $C_1 \in \mathbb{R}^{k \times n}$ und $C_2 \in \mathbb{R}^{m-k \times n}$  aufgeteilt. Die Aufteilung ist so gewählt das das Matrix-Matrix-Produkt $V_1 \cdot C_1$ und $V_2 \cdot C_2$ möglich ist.\\
+Diese Aufteilung ist notwendig da die BLAS-Funktion trmm (matrix-matrix product where one input matrix is triangular) nur für Quadratische Dreiecksmatrizen implementiert ist.
 
 Im Fall $ m = k $ ist die Aufteilung nicht notwendig da $ V $ quadratisch ist.
 
+
+
+
 \begin{align*}
-	(C_1^T * V_1 * T *V_1^T)^T\\
-	V_1 * T^T * V_1^T * C_1
+	C \leftarrow  C - \underbrace{V T V^T C}\\
+	V \cdot T \cdot V^T \cdot C\\ 
+	(C^T \cdot V \cdot T^T \cdot V^T)^T 
 \end{align*}
 
 
@@ -347,12 +370,7 @@ Dies führt zu den
 \end{algorithm}
 
 
-\begin{figure} [H]
-	\centering
-	\input{images/partitionOFA.tex}
-	\caption{Partitionierung vom A für larfb}
-	\label{fig:patrA}
-\end{figure}
+
 
 
 \subsection{Iterativer Algorithmus}
