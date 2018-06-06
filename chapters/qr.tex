@@ -60,7 +60,6 @@ Dazu multipliziert man $H$ von links auf $x$
 \end{align}
 mit dem Skalar $\alpha \in \mathbb{R}$ und $e_1$ als ersten kanonischen Einheitsvektor. Der Householder-Vektor steht senkrecht auf der Ebene an welcher $x$ gespiegelt wird.\\
 Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ an der gestrichelt eingezeichneten Ebene auf die Achse $x_1$.
-[Abbildung \ref{fig:HHolder}]
 \begin{figure}[H]
 	\centering
 	\input{images/hh.tex}
@@ -68,31 +67,7 @@ Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ a
 	\label{fig:HHolder}
 \end{figure}
 
-Householder-Transformationen können die eine Matrix $A$ wie folgt transformieren.
-\begin{align*}
-	H_1 A= \left( 
-	\begin{array}{cccc}
-	* & * & * & * \\ 
-	0 & * & * & * \\ 
-	0 & * & * & * \\ 
-	0 & * & * & *
-	\end{array}
-	\right)
-	\quad , \quad
-	H_2 H_1 A= \left( 
-	\begin{array}{cccc}
-	* & * & * & * \\ 
-	0 & * & * & * \\ 
-	0 & 0 & * & * \\ 
-	0 & 0 & * & *
-	\end{array}
-	\right)
-\end{align*} 
-So erhält man folgende Faktorisierung
-\begin{align*}
-	R = H_{n-1} H_{n-2}\cdot ...\cdot H_1 A \Leftrightarrow A = (H_1\cdot ...\cdot H_{n-1})R \Rightarrow Q = H_1\cdot ... \cdot H_{n-1}
-\end{align*}
-$Q$ ist das Produkt aller Householder-Transformationen.
+
 
 
 \subsection{Householder Vector}
@@ -176,7 +151,51 @@ H A =(I - \tau vv^T) A= A - \tau (vv^T )A = A - \tau v(v^TA)
 Statt eines Matrix-Matrix-Produkts muss man nur ein Matrix-Vektor-Produkt und ein dyadisches Produkt berechnen.
 %Das Matrix-Vektor-Produkt und das dyadische Produkt haben nur einen Aufwand von $O(n^2)$.
 
-Das führt zum Algorithmus \ref{alg:unblockedqr}. 
+\subsection{QR-Zerlegung mittels Housholder-Transformationen}
+Um $A$ in eine obere Dreiecksmatrix $R$ zu transformieren, muss man eine Folge von Housholder-Transformationen auf $A$ anwenden.
+
+Zuerst aus der ersten Spalte der Matrix $A$ ein Householder-Vektor berechnet, dann wird die  Householder-Transformationen auf die Matrix angewandt.
+Diese Housholder-Transformation erzeugt Nullen in der ersten Spalte unterhalb es ersten Eintrags.
+Damit eine obere Dreiecksmatrix entsteht, wird als nächstes die Matrix $A$ ohne die erste Zeile und Spalte betrachtet. Aus der ersten Spalte der nun betrachteten Matrix wird wieder ein Householder-Vektor berechnet und die Householder-Transformationen auf die Matrix angewandt.
+Fährt man nach diesem Schema immer weiter fort entsteht eine ober Dreiecksmatrix.
+%Mit Householder-Transformationen kann eine Matrix $A$ wie folgt transformieren.
+\begin{align*}
+	H_1 A= \left( 
+	\begin{array}{cccc}
+	* & * & * & * \\ 
+	0 & * & * & * \\ 
+	0 & * & * & * \\ 
+	0 & * & * & *
+	\end{array}
+	\right)
+	\quad , \quad
+	H_2 H_1 A= \left( 
+	\begin{array}{cccc}
+	* & * & * & * \\ 
+	0 & * & * & * \\ 
+	0 & 0 & * & * \\ 
+	0 & 0 & * & *
+	\end{array}
+	\right)
+\end{align*} 
+
+
+%\begin{align*}
+%	H_i = \begin{pmatrix}
+%	I_{i-1} & 0\\
+%	0 & \tilde{H_i}
+%	\end{pmatrix}
+%\end{align*}
+%$I_{i-1}$ bezeichnet die $i-1$ dimensionale Einheitsmatrix, $\tilde{H_i}$ ist eine Householder-Transformation.
+
+
+
+So erhält man die Faktorisierung
+\begin{align*}
+R = H_{n-1} H_{n-2}\cdot ...\cdot H_1 A \Leftrightarrow A = (H_1\cdot ...\cdot H_{n-1})R \Rightarrow Q = H_1\cdot ... \cdot H_{n-1}
+\end{align*}
+$Q$ ist das Produkt aller Householder-Transformationen.
+Diese Vorgehensweise führt zum Algorithmus \ref{alg:unblockedqr}. 
 \begin{algorithm}
 	\caption{Ungeblockte Housholder-Transformation}
 	\begin{algorithmic}
@@ -205,7 +224,7 @@ v^{(j)} = ( \underbrace{0,...,0}_{j-1},1,	v_{j+1}^{(j)},...,v_{m}^{(j)}  )
 \end{align*}
 Da die ersten $j-1$ Einträge Null sind und der Vektor so normiert wurde das der $j$ Eintrag gleich 1 ist, müssen die ersten $j$ Einträge nicht gespeichert werden.
 Die Householder-Vektoren können somit unterhalb der Diagonalen gespeichert werden.
-Die Matrix $A$ hat die Form
+Die Matrix $A$ hat somit die Form
 \begin{align*}
 	A = 
 	\left(\begin{array}{ccc}
