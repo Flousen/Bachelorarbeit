@@ -5,12 +5,12 @@
 \contentsline {subsection}{\numberline {1.2.1}Anwendung der QR-Zerlegung}{1}{subsection.1.2.1}
 \contentsline {chapter}{\numberline {2}BLAS}{2}{chapter.2}
 \contentsline {section}{\numberline {2.1}Datenstruktur f\IeC {\"u}r Matrizen}{2}{section.2.1}
-\contentsline {section}{\numberline {2.2}Einige BLAS-Routinen}{3}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Matrix-Matrix Produkt (gemm)}{3}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Matrix-Vector Produkt (gemv)}{4}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Rank1 update (ger)}{4}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Matrix-Matrix Produkt (trmm)}{4}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}Matrix-Vector Produkt (trmv)}{5}{subsection.2.2.5}
+\contentsline {section}{\numberline {2.2}Einige BLAS-Routinen}{4}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Matrix-Matrix Produkt (gemm)}{4}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Matrix-Vektor Produkt (gemv)}{4}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Rank1 update (ger)}{5}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Matrix-Matrix Produkt (trmm)}{5}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Matrix-Vektor Produkt (trmv)}{5}{subsection.2.2.5}
 \contentsline {chapter}{\numberline {3}QR-Zerlegung}{6}{chapter.3}
 \contentsline {section}{\numberline {3.1}Definition}{6}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Beispiel}{6}{subsection.3.1.1}

@@ -47,16 +47,17 @@ Rx=Q^Tb \label{solvminqr}
 das Minimierungsproblem (\ref{eq1}). Da $R$ eine Dreiecksmatrix ist, lässt sich (\ref{solvminqr}) leicht mit Rückwärtseinsetzen  lösen.
 
 \section{Householder-Transformation}
-Sei  $v \in \mathbb{R}^n$ ein Vektor dann wird die $n \times n$ Matrix 
+%Ein Vektor  $v \in \mathbb{R}^n$ dann wird die $n \times n$ Matrix 
+Eine Matrix $H \in \mathbb{R}^{n \times n}$ 
 \begin{align}
-	H = I - 2 \dfrac{vv^T}{v^Tv}
+	H = I - 2 \dfrac{vv^T}{v^Tv} \label{eq:HHM}
 \end{align}
-als Householder-Transformation und der Vektor $v$ als Householder-Vektor bezeichnet.
+wird als Householder-Transformation und der Vektor $v \in \mathbb{R}^n$ als Householder-Vektor bezeichnet.
 Eine Householder-Transformation $H = I - 2 \dfrac{vv^T}{v^Tv}$ ist orthogonal und symmetrisch. \cite{num1}\\
 Die Householder-Transformation spiegelt den Vektor $x$ auf die Achse $x_1$.
 Dazu multipliziert man $H$ von links auf $x$
 \begin{align}
-	Hx=\alpha e_1 \label{spiegelung}
+	Hx=\alpha e_1 \label{eq:spiegelung}
 \end{align}
 mit dem Skalar $\alpha \in \mathbb{R}$ und $e_1$ als ersten kanonischen Einheitsvektor. Der Householder-Vektor steht senkrecht auf der Ebene an welcher $x$ gespiegelt wird.\\
 Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ an der gestrichelt eingezeichneten Ebene auf die Achse $x_1$.
@@ -71,10 +72,16 @@ Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ a
 
 
 \subsection{Householder Vector}
-%Wie muss der Vektor $v$ aussehen damit (\ref{spiegelung}) gilt?\\
-Damit (\ref{spiegelung}) gilt, muss der Vektor folgendermaßen berechnet werden. \\
-Mit $Hx = x - 2\dfrac{vv^T}{v^Tv} x = x - \lambda v \overset{!}{=} \alpha e_1$ folgt $v \in \text{span}\{x - \alpha e_1\}$. \cite{num1}\\
-Die Definition des Vektors $v = t(x - \alpha e_1)$ wird in $Hx = \alpha e_1 $ eingesetzt
+Damit (\ref{eq:spiegelung}) gilt, wird der Vektor folgendermaßen berechnet. 
+In dem man (\ref{eq:HHM}) in (\ref{eq:spiegelung}) einsetzt
+\begin{align*}
+	Hx &= x - 2\dfrac{vv^T}{v^Tv} x = x - \underbrace{2\dfrac{v^Tx}{v^Tv}}_{\lambda} v = x - \lambda v \overset{!}{=} \alpha e_1 \\
+	&\Longrightarrow v \in \text{span}\{x - \alpha e_1\}
+\end{align*}
+erhält man dass $v$ in dem Span $x  - \alpha e_1$ liegt.\cite{num1}
+%Mit $Hx = x - 2\dfrac{vv^T}{v^Tv} x = x - \lambda v \overset{!}{=} \alpha e_1$ folgt $v \in \text{span}\{x - \alpha e_1\}$. \cite{num1}\\
+
+Setzt man $v = t(x - \alpha e_1)$ in $Hx = \alpha e_1 $(\ref{eq:spiegelung}) ein, erhält man 
 \begin{align*}
 	Hx =& x - \dfrac{2}{v^Tv}v(v^Tx) = x - 2\dfrac{v^Tx}{v^Tv}v\\
 	=& x - 2\dfrac{ t(x - \alpha e_1)^Tx}{ t(x - \alpha e_1)^T t(x - \alpha e_1)} t(x - \alpha e_1)
@@ -84,8 +91,7 @@ Die Definition des Vektors $v = t(x - \alpha e_1)$ wird in $Hx = \alpha e_1 $ ei
 	=\underbrace{\left(1 - \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2}\right)}_{ \overset{!}{=} 0 } x + \alpha e_1 \underbrace{\dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2} }_{\overset{!}{=} 1} \overset{!}{=} \alpha e_1
 \end{align*}
 
-%Damit das Ergebnis $ = \alpha e_1$ erhalten wird, muss gelten
-Damit das Letzte	 $=$ gilt muss 
+Damit das Letzte $=$ gilt muss gelten.
 \begin{align*}
 	1 &= \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2}\\
 	\Leftrightarrow (x - \alpha e_1)^T(x - \alpha e_1) &= 2 x^T x - 2\alpha x_1 \\
@@ -94,9 +100,6 @@ Damit das Letzte	 $=$ gilt muss
 \end{align*}
 
 Das Vorzeichen von  $\alpha = \pm \sqrt{x^Tx}$ kann man frei wählen, um $ v = x - \alpha e_1$ zu berechnen.
-
-
-%Wie ist das Vorzeichen von $\alpha = \pm \sqrt{x^Tx}$ zu wählen um $ v = x - \alpha e_1$ zu berechnen?
 
 Wählt man das Vorzeichen positiv kann Auslöschung auftreten, falls $x$ annähernd ein positives Vielfaches von $e_1$ ist.
 
@@ -107,7 +110,6 @@ Im Skript von Numerik 1 \cite{num1} wird das Vorzeichen immer positiv gewählt\\
 	v_1 = x_1 - \|x\|_2 = \dfrac{x_1^2 - \|x\|_2^2}{x_1 + \|x\|_2}
 	=\dfrac{-(x_2^2+...+x_n^2)}{x_1 + \|x\|_2}
 \end{align*}
-
 
 %Der Vorteil bei der von LAPACK verwendeten Methode ist, dass hier nur die Norm berechnet werden muss, wohingegen bei dem anderen Algorithmus das Skalarprodukt $x^Tx$ berechnet werden muss. Dies kann bei Vektoren mit vielen Einträgen und großen Werten zu einem Überlauf führen. Es muss jedoch ein Algorithmus gewählt werden, der die Norm berechnet $\|x\|=\sqrt{x^Tx}$ ohne das Skalarprodukt explizit auszurechnen.
 
@@ -127,7 +129,6 @@ Mit dem Faktor $\tau = \dfrac{2}{v^Tv}$ kann man die Householder-Transformation 
 	H = I - 2 \dfrac{vv^T}{v^Tv} = I - \tau v v^T
 \end{align*}
 
-%Das macht man, weil die Berechnung des Skalarprodukts relativ aufwändig ist. Da man das Skalarprodukt zur Berechnung des Householder-Vektors benötigt, kann man damit direkt den Faktor $\tau$ berechnen.
 
 
 \begin{algorithm}
@@ -152,11 +153,11 @@ Statt eines Matrix-Matrix-Produkts muss man nur ein Matrix-Vektor-Produkt und ei
 %Das Matrix-Vektor-Produkt und das dyadische Produkt haben nur einen Aufwand von $O(n^2)$.
 
 \subsection{QR-Zerlegung mittels Housholder-Transformationen}
-Um $A$ in eine obere Dreiecksmatrix $R$ zu transformieren, muss man eine Folge von Housholder-Transformationen auf $A$ anwenden.
+Um $A$ in eine obere Dreiecksmatrix $R$ zu transformieren, wird eine Folge von Housholder-Transformationen auf $A$ angewendet.
 
-Zuerst aus der ersten Spalte der Matrix $A$ ein Householder-Vektor berechnet, dann wird die  Householder-Transformationen auf die Matrix angewandt.
+Zuerst wird aus der ersten Spalte der Matrix $A$ ein Householder-Vektor berechnet, dann wird die  Householder-Transformationen auf die Matrix angewandt.
 Diese Housholder-Transformation erzeugt Nullen in der ersten Spalte unterhalb es ersten Eintrags.
-Damit eine obere Dreiecksmatrix entsteht, wird als nächstes die Matrix $A$ ohne die erste Zeile und Spalte betrachtet. Aus der ersten Spalte der nun betrachteten Matrix wird wieder ein Householder-Vektor berechnet und die Householder-Transformationen auf die Matrix angewandt.
+Damit eine obere Dreiecksmatrix entsteht, wird als nächstes die Matrix $A$ ohne die erste Zeile und Spalte betrachtet. Aus der ersten Spalte der neu betrachteten Matrix wird wieder ein Householder-Vektor berechnet und die Householder-Transformationen auf die Matrix angewandt.
 Fährt man nach diesem Schema immer weiter fort entsteht eine ober Dreiecksmatrix.
 %Mit Householder-Transformationen kann eine Matrix $A$ wie folgt transformieren.
 \begin{align*}
@@ -196,12 +197,12 @@ R = H_{n-1} H_{n-2}\cdot ...\cdot H_1 A \Leftrightarrow A = (H_1\cdot ...\cdot H
 \end{align*}
 $Q$ ist das Produkt aller Householder-Transformationen.
 Diese Vorgehensweise führt zum Algorithmus \ref{alg:unblockedqr}. 
-\begin{algorithm}
+\begin{algorithm}[H]
 	\caption{Ungeblockte Housholder-Transformation}
 	\begin{algorithmic}
 	\State Input: $A \in \mathbb{R}^{m \times n}$
-	\For {i = 0 : n}
-		\State ($v_i$, $\tau_i$) $\leftarrow$ housevector($A(i:m,i)$)
+	\For {i = 0,1,2,..., n}
+		\State ($v_i$, $\tau_i$) $\leftarrow$ householdervector($A(i:m,i)$)
 		\State $w \leftarrow v^T*A(i:m,i:n)$ (dgemv)
 		\State $ A(i:m,i:n) \leftarrow \tau * v * w + A $ (dger)
 		\If {i > m}

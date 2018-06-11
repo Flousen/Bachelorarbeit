@@ -93,15 +93,15 @@ struct Matrix {
 
 Für Intel MKL Routinen müssen die Matrizen zeilenweise gespeichert sein.
 
-
+\newpage
 \section{Einige BLAS-Routinen}
 Im Folgenden werden einige BLAS-Routinen beschrieben, die bei der QR-Zerlegung benutzt werden.
-BLAS-Routinen werden meist nach folgendem Schema benannt.
+BLAS-Routinen werden nach folgendem Schema benannt.
 Der erste Buchstabe im Namen gibt an für welchen Datentype die Funktion implementiert wurde. Der Rest beschreibt die Funktion der Funktion.\\
 Beispiel: \glqq dgemm\grqq{}, das d zeigt an die Funktion ist für Doubles und \glqq gemm\grqq{} steht für \glqq generel Matrix Matrix\grqq{}, die Funktion berechnet also das Matrix-Matrix Produkt für Matrizen deren Einträge Doubles sind.
 
 \subsection{Matrix-Matrix Produkt (gemm)}
-Die \glqq gemm\grqq{} Funktion berechnet das Matrix-Matrix Produkt.
+Die Funktion \glqq gemm\grqq{} berechnet das Matrix-Matrix Produkt.
 Der Funktion werden die Matrizen $A$, $B$ und $C$ und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem werden 2 Flags übergeben ob die Matrizen $A$ und $B$ transponiert werden sollen.\\
 Die Funktion berechnet
 \begin{align}
@@ -110,19 +110,21 @@ Die Funktion berechnet
 Falls $\beta = 0$ wird die Matrix $C$ zuerst mit Nullen initialisiert. Falls $C$ Einträge hat die NaN (Not a Number) sind, werden diese somit mit 0 überschrieben.
 
 %%TODO
+\cite{blast}
 Blas tecnicla forum netlib
 %%http://www.netlib.org/blas/blast-forum/
 
-\subsection{Matrix-Vector Produkt (gemv)}
-Die Funktion \glqq gemv\grqq{} berechnet das Matrix-Vector Produkt.
-Der Funktion wird die Matrix $A$ die Vektoren $x$ und $y$ und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem wird ein Flag übergeben das anzeigt ob die Matrix a Transponiert werden soll.\\
+\subsection{Matrix-Vektor Produkt (gemv)}
+Die Funktion \glqq gemv\grqq{} berechnet das Matrix-Vektor Produkt.
+Der Funktion wird die Matrix $A$ die Vektoren $x$ und $y$ und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem wird ein Flag übergeben das anzeigt ob die Matrix $A$ Transponiert werden soll.\\
 Die Funktion berechnet
 \begin{align}
 	y \leftarrow \beta  y + \alpha A x 
 \end{align}
 Falls $\beta = 0$ wird der Vektor $y$ zuerst mit Nullen initialisiert. Falls $y$ Einträge hat die NaN (Not a Number) sind, werden diese somit mit 0 überschrieben.
+
 \subsection{Rank1 update (ger)}
-Die Funktion \glqq ger\grqq{}  berechnet ein dyadische Produkt aus den Vektoren $x$ und $y$, skaliert die daraus resultierende Matrix mit $\alpha$ und addiert das Ergebnis auf $A$.//
+Die Funktion \glqq ger\grqq{}  berechnet ein dyadische Produkt aus den Vektoren $x$ und $y$, skaliert die daraus resultierende Matrix mit $\alpha$ und addiert das Ergebnis auf $A$.\\
 Der Funktion wird die Matrix $A$ die Vektoren $x$ und $y$ und das Skalar $\alpha$ übergeben.\\
 Die Funktion berechnet
 \begin{align}
@@ -131,15 +133,13 @@ Die Funktion berechnet
 
 \subsection{Matrix-Matrix Produkt (trmm)}
 Die Funktion \glqq trmm\grqq{} berechnet das Matrix-Matrix Produkt einer Dreiecksmatrix mit einer voll besetzten Matrix.
-Der Funktion wird die Dreiecksmatrix $A$, die Matrix $B$ und das Skalar $\alpha$ übergeben. Außerdem werden Flags mit übergeben die anzeigen ob $A$ eine obere oder unter Dreiecksmatrix ist, ob $A$ eine strikte oder unipotente Dreiecksmatrix ist, ob $A$ von links oder rechts auf $B$ multipliziert werden soll und ob $A$ transponiert werden soll.
-%% TODO stimmt unipotente Dreiecksmatrix?
-\\
+Der Funktion wird die Dreiecksmatrix $A$, die Matrix $B$ und das Skalar $\alpha$ übergeben. Außerdem werden Flags mit übergeben die anzeigen ob $A$ eine obere oder unter Dreiecksmatrix ist, ob $A$ eine strikte oder unipotente Dreiecksmatrix ist, ob $A$ von links oder rechts auf $B$ multipliziert werden soll und ob $A$ transponiert werden soll. Diese Eigenschaften werden unten in $op(\cdot)$ zusammengefasst. \\
 Die Funktion berechnet
 \begin{align}
-B \leftarrow  \alpha \cdot op(A) \cdot B \qquad \text{or} \qquad B \leftarrow  \alpha \cdot B \cdot op(A)
+B \leftarrow  \alpha \cdot op(A) \cdot B \qquad \text{oder} \qquad B \leftarrow  \alpha \cdot B \cdot op(A)
 \end{align}
-\subsection{Matrix-Vector Produkt (trmv)}
-Die Funktion berechnet das Matrix-Vector Produkt für Dreiecksmatrizen.
+\subsection{Matrix-Vektor Produkt (trmv)}
+Die Funktion \glqq trmv\grqq{} berechnet das Matrix-Vektor Produkt für Dreiecksmatrizen.
 Die Funktion berechnet
 \begin{align}
 x \leftarrow \alpha  Ax %\qquad \text{or} \qquad x \leftarrow \alpha * A^T*x
