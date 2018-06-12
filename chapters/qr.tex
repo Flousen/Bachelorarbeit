@@ -180,7 +180,6 @@ Fährt man nach diesem Schema immer weiter fort entsteht eine ober Dreiecksmatri
 	\right)
 \end{align*} 
 
-
 %\begin{align*}
 %	H_i = \begin{pmatrix}
 %	I_{i-1} & 0\\
@@ -189,8 +188,6 @@ Fährt man nach diesem Schema immer weiter fort entsteht eine ober Dreiecksmatri
 %\end{align*}
 %$I_{i-1}$ bezeichnet die $i-1$ dimensionale Einheitsmatrix, $\tilde{H_i}$ ist eine Householder-Transformation.
 
-
-
 So erhält man die Faktorisierung
 \begin{align*}
 R = H_{n-1} H_{n-2}\cdot ...\cdot H_1 A \Leftrightarrow A = (H_1\cdot ...\cdot H_{n-1})R \Rightarrow Q = H_1\cdot ... \cdot H_{n-1}
@@ -198,15 +195,16 @@ R = H_{n-1} H_{n-2}\cdot ...\cdot H_1 A \Leftrightarrow A = (H_1\cdot ...\cdot H
 $Q$ ist das Produkt aller Householder-Transformationen.
 Diese Vorgehensweise führt zum Algorithmus \ref{alg:unblockedqr}. 
 \begin{algorithm}[H]
-	\caption{Ungeblockte Housholder-Transformation}
-	\begin{algorithmic}
+	\caption{Ungeblockte Housholder-Transformation. \\
+		Zur übersichtlicheren Beschreibung des Algorithmus werden die Bezeichnungen $A_i$ und $\hat{a}_i$ eingeführt.	$A_i$ zeigt auf einen Matrixblock der am i-ten Diagonalelement beginnt. $\hat{a}_i$ zeigt auf die i-te Spalte unterhalb der Diagonalen. Matrizen sind 0 indiziert notiert.}
+	\begin{algorithmic}[1]
 	\State Input: $A \in \mathbb{R}^{m \times n}$
-	\For {i = 0,1,2,..., n}
-		\State ($v_i$, $\tau_i$) $\leftarrow$ householdervector($A(i:m,i)$)
-		\State $w \leftarrow v^T*A(i:m,i:n)$ (dgemv)
-		\State $ A(i:m,i:n) \leftarrow \tau * v * w + A $ (dger)
-		\If {i > m}
-			\State $A(i + 1 : m, i) \leftarrow v(2 : m - i + 1)$
+	\For {i = 0,1,2,..., n-1}
+		\State ($v_i$, $\tau_i$) $\leftarrow$ householdervector($\hat{a}_i$)
+		\State $w \leftarrow v^T*A_i$ (dgemv)
+		\State $ A_i \leftarrow \tau * v * w + A_i $ (dger)
+		\If {i < m}
+			\State $\hat{a}_i \leftarrow v$ \label{lst:line:vinA}
 		\EndIf
 	\EndFor	
 	\State Output: $A$ QR zerlegt, Vektor $\tau \in \mathbb{R}^n$
@@ -214,9 +212,7 @@ Diese Vorgehensweise führt zum Algorithmus \ref{alg:unblockedqr}.
 \label{alg:unblockedqr}
 \end{algorithm}
 
-Matizen sind 0 indizeiert notiert
-
-Dieser Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$.
+Der Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$.
 Aufgrund der Dreiecksstruktur von $R$,
 können unter der Diagonale die Housholder-Vektoren gespeichert werden. 
 Die Householder-Vektoren haben die Form 
@@ -224,7 +220,7 @@ Die Householder-Vektoren haben die Form
 v^{(j)} = ( \underbrace{0,...,0}_{j-1},1,	v_{j+1}^{(j)},...,v_{m}^{(j)}  )
 \end{align*}
 Da die ersten $j-1$ Einträge Null sind und der Vektor so normiert wurde das der $j$ Eintrag gleich 1 ist, müssen die ersten $j$ Einträge nicht gespeichert werden.
-Die Householder-Vektoren können somit unterhalb der Diagonalen gespeichert werden.
+Die Householder-Vektoren können somit unterhalb der Diagonalen gespeichert werden. Das geschieht im Algorithmus \ref{alg:unblockedqr} in Zeile \ref{lst:line:vinA}.
 Die Matrix $A$ hat somit die Form
 \begin{align*}
 	A = 
@@ -236,7 +232,7 @@ Die Matrix $A$ hat somit die Form
 	\end{array} \right) 
 \end{align*}
 
-
+\newpage
 \section{Geblockte QR-Zerlegung}
 Ein geblockter Algorithmus ist sinnvoll, um bei großen Matrizen den Cache optimal zu nutzen.
 
@@ -254,9 +250,10 @@ Betrachte dazu die Matrix $A \in \mathbb{R}^{m \times n}$ geblockt, mit einer ge
 \end{align}
 Die Abbildung \ref{fig:blockA} zeigt schematisch die Partitionierung von A.
 
+
 Die Blockgröße $bs$ wird so gewählt das die Geschwindigkeit der ungeblockten QR-Zerlegung für den Block $ \left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right)$ optimal ist.
 
-Für diesen Block wird nun die  QR-Zerlegung mit dem ungeblockten Algorithmus (Algorithmus \ref{alg:unblockedqr}) berechnet.
+Für diesen Block wird die  QR-Zerlegung mit dem ungeblockten Algorithmus (Algorithmus \ref{alg:unblockedqr}) berechnet.
 \begin{align}
 	\left(\begin{array}{l} 
 	A_{0, 0} \\ \hline
@@ -269,15 +266,14 @@ Für diesen Block wird nun die  QR-Zerlegung mit dem ungeblockten Algorithmus (A
 	\end{array}\right)
 \end{align}
 
-Im Block $A_{0, 0}$ steht nun auf und über der Diagonalen $R_{0,0}$. Unterhalb der Diagonalen und im Block $A_{\text{bs}, 0}$ stehen die Householder-Vektoren.
+Im Block $A_{0, 0}$ steht auf und über der Diagonalen $R_{0,0}$. Unterhalb der Diagonalen und im Block $A_{\text{bs}, 0}$ stehen die Householder-Vektoren.
 
 Nun muss man die bei der ungeblocketn QR-Zerlegung verwendeten Housholder-Transformationen auf die Restliche Matrix $ \left(\dfrac{A_{0, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ anwenden.
 
 
-
 Man kann das Produkt mehrerer Householder-Transformationen schreiben als
 \begin{align*}
-H_1H_2...H_k = I - VTV^T \qquad \text{mit}\qquad H_i = I - \tau_i v_iv_i^T
+H_1H_2 \cdot \cdot \cdot H_k = I - VTV^T \qquad \text{mit}\qquad H_i = I - \tau_i v_iv_i^T
 \end{align*} \cite{Joffrain:2006:AHT:1141885.1141886}
 
 Die Anwendung der Matrix $I - V*T*V^T$ auf $\left(\dfrac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ erfolgt in 2 Schritten.
@@ -374,7 +370,7 @@ Dies führt zu den
 \begin{algorithm}[H]
 	\caption{Block reflector anwenden}
 	\label{alg:applyblockref}
-	\begin{algorithmic}
+	\begin{algorithmic}[1]
 		\State 	$W \leftarrow C_1^T$ (copy)
 		\State	$W \leftarrow W * V_1 $ (trmm)
 		\If {m > k}
