@@ -29,21 +29,30 @@
 \newblock \emph{Einführung in die Numerische Lineare Algebra}.
 \newblock Ulm, Germany, 2016
 
-\bibitem[4]{DGEQRF}
+\bibitem[4]{LARFT}
+\textsc{Tennessee}, Univ. of California~B.~o. ; \textsc{Ltd..}, NAG:
+\newblock \emph{{DLARFT forms the triangular factor T of a real block reflector
+  H of order n, which is defined as a product of k elementary reflectors.}}
+\newblock
+  \url{http://www.netlib.org/lapack/explore-3.1.1-html/dgeqrf.f.html#DGEQRF.1},
+  2006. --
+\newblock [Online; zugegriffen 12-06-2018]
+
+\bibitem[5]{DGEQRF}
 \textsc{Tennessee}, Univ. of California~B.~o. ; \textsc{Ltd..}, NAG:
 \newblock \emph{{LAPACK blocked QR}}.
 \newblock \url{http://www.netlib.org/lapack/explore-3.1.1-html/dgeqrf.f.html},
   2006. --
 \newblock [Online; zugegriffen 31-01-2018]
 
-\bibitem[5]{DGEQR2}
+\bibitem[6]{DGEQR2}
 \textsc{Tennessee}, Univ. of California~B.~o. ; \textsc{Ltd..}, NAG:
 \newblock \emph{{LAPACK unblocked QR}}.
 \newblock \url{http://www.netlib.org/lapack/explore-3.1.1-html/dgeqr2.f.html},
   2006. --
 \newblock [Online; zugegriffen 31-01-2018]
 
-\bibitem[6]{blast}
+\bibitem[7]{blast}
 \textsc{Tennessee}, University of:
 \newblock \emph{{BLAS Technical Forum}}.
 \newblock \url{http://www.netlib.org/blas/blast-forum/}, 2001. --
