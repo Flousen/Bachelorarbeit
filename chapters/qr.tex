@@ -323,9 +323,9 @@ Die Matrix $C$ wird upgedatet indem die Matrix $I - V T V^T $ von rechts auf die
 
 Ein weiterer Übergabeparameter gibt an ob die Matrix  $I - V T V^T $ transponiert werden soll.
 Die Funktion berechnet also
-\begin{align*}
-	C \leftarrow H C = C - V T V^T C \quad \text{oder} \quad 	C \leftarrow H^T C = C - V T^T V^T C
-\end{align*}
+\begin{align}
+	C \leftarrow H C = C - V T V^T C \quad \text{oder} \quad 	C \leftarrow H^T C = C - V T^T V^T C	\label{eq:larfb}
+\end{align}
 
 Der Zweck der Funktion ist es die Householder-Transformationen, die bei der Bereicherung der QR-Zerlegung für einen Block entstanden sind, auf die restliche Matrix anzuwenden.
 Die Abbildung \ref{fig:patrA} zeigt wie die Matrix $A$ für die Funktion Partitioniert wird.
@@ -342,20 +342,17 @@ Diese Aufteilung ist notwendig da die BLAS-Funktion trmm (matrix-matrix product 
 
 Im Fall $ m = k $ ist die Aufteilung nicht notwendig da $ V $ quadratisch ist.
 
-
-
+(\ref{eq:larfb}) kann mit der Umformung
 \begin{align*}
-	C \leftarrow  C - \underbrace{V T V^T C}\\
-	V \cdot T \cdot V^T \cdot C\\ 
-	(C^T \cdot V \cdot T^T \cdot V^T)^T 
+	C &\leftarrow  C - V T V^T C \\
+	C &\leftarrow C - (V T V^T C)^{TT} 	\\
+	C &\leftarrow  C - (C^T  V  T^T  V^T)^T
 \end{align*}
+mit BLAS-Routinen wie in Algorithmus \ref{alg:applyblockref} berechnet werden.
 
-
-
-Dies führt zu den
 \begin{algorithm}[H]
 	\caption{$I - V T V^T$ auf C anwenden.\\
-			 Die Matrix $W$ ist ein Workspace der in der Funktion }
+			 Die Matrix $W$ ist ein Workspace}
 	\label{alg:applyblockref}
 	\begin{algorithmic}[1]
 		\State Input: $V \in \mathbb{R}^{m \times k}$, $T \in \mathbb{R}^{k \times k}$, $C \in \mathbb{R}^{m \times n}$
@@ -374,20 +371,17 @@ Dies führt zu den
 \end{algorithm}
 
 
-
-
-
-\subsection{Iterativer Algorithmus}
-\begin{algorithm}[H]
-	\caption{Iterativer Algorithmus}
-	\label{alg::italg}
-	\begin{algorithmic}
-		\For {i = 0 : n}
-			\State QR = A;
-			\If {i + ib > n}
-				\State Calc T: $H=I-VTV^T$
-				\State Apply H: $A=H^TA$
-			\EndIf
-		\EndFor
-	\end{algorithmic}
-\end{algorithm}
+%\subsection{Iterativer Algorithmus}
+%\begin{algorithm}[H]
+%	\caption{Iterativer Algorithmus}
+%	\label{alg::italg}
+%	\begin{algorithmic}
+%		\For {i = 0 : n}
+%			\State QR = A;
+%			\If {i + ib > n}
+%				\State Calc T: $H=I-VTV^T$
+%				\State Apply H: $A=H^TA$
+%			\EndIf
+%		\EndFor
+%	\end{algorithmic}
+%\end{algorithm}

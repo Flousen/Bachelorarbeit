@@ -7,7 +7,12 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[1]{Joffrain:2006:AHT:1141885.1141886}
+\bibitem[1]{atlas}
+\emph{{Automatically Tuned Linear Algebra Software (ATLAS)}}.
+\newblock \url{http://math-atlas.sourceforge.net/}, . --
+\newblock [Online; zugegriffen 12-06-2018]
+
+\bibitem[2]{Joffrain:2006:AHT:1141885.1141886}
 \textsc{Joffrain}, Thierry ; \textsc{Low}, Tze~M. ;
   \textsc{Quintana-Ort\'{\i}}, Enrique~S. ; \textsc{Geijn}, Robert van~d.  ;
   \textsc{Zee}, Field G.~V.:
@@ -18,18 +23,18 @@
 \newblock DOI 10.1145/1141885.1141886. --
 \newblock ISSN 0098--3500
 
-\bibitem[2]{HPC1}
+\bibitem[3]{HPC1}
 \textsc{Lehn~Michael}, Borchert~A.:
 \newblock \emph{{Vorlesung High Performance Computing 1}}.
 \newblock \url{http://www.mathematik.uni-ulm.de/numerik/hpc/ws17/}, 2017. --
 \newblock [Online; zugegriffen 31-05-2018]
 
-\bibitem[3]{num1}
+\bibitem[4]{num1}
 \textsc{Stefan A.~Funken}, Karsten~U.:
 \newblock \emph{Einführung in die Numerische Lineare Algebra}.
 \newblock Ulm, Germany, 2016
 
-\bibitem[4]{LARFT}
+\bibitem[5]{LARFT}
 \textsc{Tennessee}, Univ. of California~B.~o. ; \textsc{Ltd..}, NAG:
 \newblock \emph{{DLARFT forms the triangular factor T of a real block reflector
   H of order n, which is defined as a product of k elementary reflectors.}}
@@ -38,21 +43,21 @@
   2006. --
 \newblock [Online; zugegriffen 12-06-2018]
 
-\bibitem[5]{DGEQRF}
+\bibitem[6]{DGEQRF}
 \textsc{Tennessee}, Univ. of California~B.~o. ; \textsc{Ltd..}, NAG:
 \newblock \emph{{LAPACK blocked QR}}.
 \newblock \url{http://www.netlib.org/lapack/explore-3.1.1-html/dgeqrf.f.html},
   2006. --
 \newblock [Online; zugegriffen 31-01-2018]
 
-\bibitem[6]{DGEQR2}
+\bibitem[7]{DGEQR2}
 \textsc{Tennessee}, Univ. of California~B.~o. ; \textsc{Ltd..}, NAG:
 \newblock \emph{{LAPACK unblocked QR}}.
 \newblock \url{http://www.netlib.org/lapack/explore-3.1.1-html/dgeqr2.f.html},
   2006. --
 \newblock [Online; zugegriffen 31-01-2018]
 
-\bibitem[7]{blast}
+\bibitem[8]{blast}
 \textsc{Tennessee}, University of:
 \newblock \emph{{BLAS Technical Forum}}.
 \newblock \url{http://www.netlib.org/blas/blast-forum/}, 2001. --

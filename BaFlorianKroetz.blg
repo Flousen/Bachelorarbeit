@@ -8,44 +8,47 @@ Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: bibliography.bib.bib
-You've used 7 entries,
+Warning--to sort, need author or key in atlas
+Warning--empty year in atlas
+You've used 8 entries,
             4335 wiz_defined-function locations,
-            874 strings with 7152 characters,
-and the built_in function-call counts, 4434 in all, are:
-= -- 504
-> -- 88
+            877 strings with 7250 characters,
+and the built_in function-call counts, 4632 in all, are:
+= -- 525
+> -- 89
 < -- 242
-+ -- 261
++ -- 262
 - -- 37
-* -- 247
-:= -- 773
-add.period$ -- 8
-call.type$ -- 7
-change.case$ -- 28
+* -- 258
+:= -- 801
+add.period$ -- 9
+call.type$ -- 8
+change.case$ -- 30
 chr.to.int$ -- 0
-cite$ -- 7
-duplicate$ -- 78
-empty$ -- 211
+cite$ -- 10
+duplicate$ -- 86
+empty$ -- 232
 format.name$ -- 56
-if$ -- 800
+if$ -- 848
 int.to.chr$ -- 0
-int.to.str$ -- 7
-missing$ -- 30
-newline$ -- 53
+int.to.str$ -- 8
+missing$ -- 34
+newline$ -- 58
 num.names$ -- 14
-pop$ -- 31
+pop$ -- 35
 preamble$ -- 1
-purify$ -- 28
+purify$ -- 30
 quote$ -- 0
-skip$ -- 303
+skip$ -- 310
 stack$ -- 0
-substring$ -- 413
-swap$ -- 24
+substring$ -- 423
+swap$ -- 25
 text.length$ -- 16
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 28
-warning$ -- 0
+type$ -- 32
+warning$ -- 2
 while$ -- 30
-width$ -- 8
-write$ -- 101
+width$ -- 9
+write$ -- 112
+(There were 2 warnings)
