@@ -22,9 +22,10 @@
 \contentsline {subsection}{\numberline {3.3.1}Berechnung der Matrix $T$}{13}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Anwenden von $I - VTV^T$}{14}{subsection.3.3.2}
 \contentsline {chapter}{\numberline {4}Implementierung und Benchmarks}{16}{chapter.4}
-\contentsline {section}{\numberline {4.1}Fehlersch\IeC {\"a}tzer}{16}{section.4.1}
-\contentsline {section}{\numberline {4.2}MKL-Wrapper}{17}{section.4.2}
+\contentsline {section}{\numberline {4.1}Aufwand}{16}{section.4.1}
+\contentsline {section}{\numberline {4.2}Fehlersch\IeC {\"a}tzer}{16}{section.4.2}
 \contentsline {section}{\numberline {4.3}Benchmarks}{17}{section.4.3}
-\contentsline {chapter}{\numberline {A}Block Reflector}{18}{appendix.A}
-\contentsline {subsection}{\numberline {A.0.1}Orthogonal}{22}{subsection.A.0.1}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{23}{chapter*.5}
+\contentsline {subsection}{\numberline {4.3.1}Test System}{17}{subsection.4.3.1}
+\contentsline {chapter}{\numberline {A}Block Reflector}{19}{appendix.A}
+\contentsline {subsection}{\numberline {A.0.1}Orthogonal}{23}{subsection.A.0.1}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{24}{chapter*.7}

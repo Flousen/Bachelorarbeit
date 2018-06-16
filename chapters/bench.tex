@@ -9,6 +9,10 @@ Die Matrix-Klassen erlauben den zugriff auf Matrixblöcke.
 
 eventuell Beispiel
 
+\section{Aufwand}
+
+D
+
 \section{Fehlerschätzer}
 
 Es wurde der Fehlerschätzer von ATLAS\cite{atlas} verwendet.
@@ -28,19 +32,39 @@ Diese ist für eine Matrix $A \in \mathbb{R}^{m\times n}$ gegeben durch
 
 $\epsilon$ ist auf dem Test-System $2.220446\cdot10^{-16}$
 
-\section{MKL-Wrapper}
-
-
 
 \section{Benchmarks}
 
-peak performance einzeichnen
+\subsection{Test System}
 
-Taktrate * Register breite * 2 
+Getestet wurde auf einem System mit einer Intel(R) Core(TM) i5-3470 CPU mit 3.20GHz. 
 
-Taktrate : 3.20GHz  
-AVX-Register 256-Bit 4 double
+Die Theoretische peak performance errechnet sich aus der Taktrate mal die Registerbreite mal 2.
 
-25,6
+Die CPU des Test Systems hat eine Taktrate von 3.20GHz.
+Die AVX-Register sind 256-Bit groß. Darin haben 4 double Platz.
+
+\begin{align*}
+	\text{Taktrate} \cdot \text{Registerbreite} \cdot 2= 3,20 \text{ GHz} \cdot 4 \cdot 2 = 25,6 \text{ GFLOPs}
+\end{align*}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{images/blk.png}
+	\caption{Benchmark geblockte QR-Zerlegung}
+	\label{img:blk}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{images/unblk.png}
+	\caption{Benchmark ungeblockte QR-Zerlegung}
+	\label{img:unblk}
+\end{figure}
+
+
+
+
+
+
+
 
 	 
