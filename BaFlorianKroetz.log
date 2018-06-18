@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.16)  18 JUN 2018 14:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.16)  18 JUN 2018 18:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1717,17 +1717,17 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 1.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 12.
+(babel)             in language  on input line 16.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 12.
+(babel)             in language  on input line 16.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 20.
+(babel)             in language  on input line 24.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 20.
+(babel)             in language  on input line 24.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 23.
+(babel)             in language  on input line 27.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 23.
+(babel)             in language  on input line 27.
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 33.
 Package babel Info: Redefining ngerman shorthand "~
@@ -1740,36 +1740,36 @@ Package babel Info: Redefining ngerman shorthand "~
 
 ]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 43.
+(babel)             in language  on input line 50.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 43.
+(babel)             in language  on input line 50.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 45.
+(babel)             in language  on input line 52.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 45.
-<images/blk.png, id=343, 677.53125pt x 376.40625pt>
+(babel)             in language  on input line 52.
+<images/blk.png, id=341, 677.53125pt x 376.40625pt>
 File: images/blk.png Graphic file (type png)
 <use images/blk.png>
-Package pdftex.def Info: images/blk.png  used on input line 59. on input line 5
-9.
+Package pdftex.def Info: images/blk.png  used on input line 67. on input line 6
+7.
 Package pdftex.def Info: Requested size: 416.12161pt x 231.18692pt on input lin
-e 59.
+e 67.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 63.
+(babel)             in language  on input line 71.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 63.
+(babel)             in language  on input line 71.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 63.
+(babel)             in language  on input line 71.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 63.
+(babel)             in language  on input line 71.
  [17]
 <images/unblk.png, id=348, 677.53125pt x 376.40625pt>
 File: images/unblk.png Graphic file (type png)
 <use images/unblk.png>
-Package pdftex.def Info: images/unblk.png  used on input line 65. on input line
- 65.
+Package pdftex.def Info: images/unblk.png  used on input line 73. on input line
+ 73.
 Package pdftex.def Info: Requested size: 416.12161pt x 231.18692pt on input lin
-e 65.
+e 73.
 ) (./chapters/bwsblk.tex
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 1.
@@ -1928,7 +1928,7 @@ are/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on BaFlorianKroetz.pdf (29 pages, 385998 bytes).
+Output written on BaFlorianKroetz.pdf (29 pages, 388628 bytes).
 PDF statistics:
  526 PDF objects out of 1000 (max. 8388607)
  411 compressed objects within 5 object streams
