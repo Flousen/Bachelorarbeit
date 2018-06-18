@@ -4,13 +4,34 @@ Die verwendete Bibliothek wurde in der Vorlesung High Performance Computing 1 en
 Die Bibliothek ist in C++ geschrieben. Es sind Klassen für Matrizen und Vektoren implementiert, sowie einige BLAS-Routinen.
 
 Die Matrix-Klassen erlauben den zugriff auf Matrixblöcke. 
+\begin{lstlisting}
+GenerelMatrix<T> A(5,5);
+print(A);
+print(A.block(2,2));
+print(A.block(2,2).view(Trans::view));
+\end{lstlisting}
 
 
 
-Eventuell Beispiel
-Dann Code-Ausschnitt unblk
+Beispiel Ungeblockte QR Implementierung vom Algorithmus \ref{alg:unblockedqr}
+\begin{lstlisting}
+size_t mn = std::min(m,n);
+DenseVector<T> work(mn);
+for (std::size_t i = 0; i < mn; ++i){
+  householderVector(A(i,i), A.col(i+1,i),tau(i));
+  if (i < n && tau(i) != 0) {
+    AII = A(i,i);
+    A(i,i) = 1;
+    mv(1, A.block(i,i+1).view(hpc::matvec::Trans::view),
+       A.col(i,i), 0, work.block(i+1));
+    rank1(-tau(i), A.col(i,i), work.block(i+1), 
+          A.block(i,i+1));
+    A(i,i) = AII;
+  }
+}
+\end{lstlisting}
 
-Dann Code-Ausschnitt blk
+Die anderen Algorithem wurden analog Implementiert siehe Anhang.
 
 
 \section{Aufwand}

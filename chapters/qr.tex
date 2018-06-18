@@ -312,6 +312,39 @@ H_1H_2...H_k = I - VTV^T \qquad \text{mit}\qquad H_i = I - \tau_i v_iv_i^T
 
 Warum und wie das Verfahren funktioniert, wird hier beschreiben \cite{Joffrain:2006:AHT:1141885.1141886}.
 
+\begin{algorithm}[H]
+\caption{Berechnung der Matrix $T$}
+\label{alg:clacT}
+\begin{algorithmic}[1]
+	\State Input $V \in \mathbb{R}^{k \times n}$,$\tau \in \mathbb{R}^k$,$T \in \mathbb{R}^{k \times k}$
+	\For {i = 0,1,2,..., k}
+		\If{$\tau_i$ == 0}
+			\State $T_{1:i,i}=0$
+		\Else
+			\State vii$ = v_{i,i}$
+			\State $v_{i,i} = 1 $
+			%\State T(1:i-1,i) := - $\tau_i$ * V(i:n,1:i-1)' * V(i:n,i)
+			\State $T_{0:i,i} = - \tau_i \cdot V_{i:n-i,0:i}^T \cdot V_{i:n-i,i}$ (dgmv)
+			\State $ v_{i,i} =$ vii 
+			%\State T(1:i-1,i) := T(1:i-1,1:i-1) * T(1:i-1,i)
+			\State $T_{0:i,i} = T_{0:i,0:i} \cdot T_{0:i,i}$ (dtrmv)
+			\State $t_{i,i} = \tau_i$
+		\EndIf
+	\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+Überschreibt die Matrix $T$ nach folgendem Schema
+\begin{align*}
+T =&
+\begin{pmatrix}
+\tau_1 & -\tau_1 \tau_2 (v_1^T v_2 ) & - \tau_1 \tau_2  \tau_3 (v_1^T v_2 v_2^T v_3) + \tau_1 \tau_3  (v_1^T v_3)\\ 
+0 & \tau_2 &  -\tau_2 \tau_3  (v_2^T v_3)\\
+0 & 0 & \tau_3
+\end{pmatrix}
+\end{align*}
+Beispiel mit $k=3$
+
 \subsection{Anwenden von $I - VTV^T$}
 Die Anwendung der Householder-Transformationen auf eine Matrix $C$ wird in LAPACK von der  Funktion \glqq LARFB\grqq{} implementiert.
 
