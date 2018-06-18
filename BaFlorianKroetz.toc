@@ -1,8 +1,6 @@
 \select@language {ngerman}
 \contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}Cache}{1}{section.1.1}
-\contentsline {section}{\numberline {1.2}Intel MKL}{1}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}Anwendung der QR-Zerlegung}{1}{subsection.1.2.1}
+\contentsline {section}{\numberline {1.1}Intel MKL}{1}{section.1.1}
 \contentsline {chapter}{\numberline {2}BLAS}{2}{chapter.2}
 \contentsline {section}{\numberline {2.1}Datenstruktur f\IeC {\"u}r Matrizen}{2}{section.2.1}
 \contentsline {section}{\numberline {2.2}Einige BLAS-Routinen}{4}{section.2.2}
@@ -23,6 +21,7 @@
 \contentsline {subsection}{\numberline {3.3.2}Anwenden von $I - VTV^T$}{14}{subsection.3.3.2}
 \contentsline {chapter}{\numberline {4}Implementierung und Benchmarks}{16}{chapter.4}
 \contentsline {section}{\numberline {4.1}Aufwand}{16}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}FLOPS}{16}{subsection.4.1.1}
 \contentsline {section}{\numberline {4.2}Fehlersch\IeC {\"a}tzer}{16}{section.4.2}
 \contentsline {section}{\numberline {4.3}Benchmarks}{17}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Test System}{17}{subsection.4.3.1}
