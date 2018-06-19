@@ -316,28 +316,28 @@ Warum und wie das Verfahren funktioniert, wird hier beschreiben \cite{Joffrain:2
 
 
 \begin{algorithm}[H]
-\caption{Der Algorithmus berechnet die Matrix $T$ so dass  (\ref{eq:blkreflectorT}) gilt. Die untere Dreiecksmatrix $V$  enthält die Householder-Vektoren. Der Vektor $\tau$ die dazugehörigen $\tau_i = \frac{2}{v_i^Tv_i}$. Hinweise zur Notation: Kleine Buchstaben bezeichnen einen einzelne Matrixeintrag(Beipsiel $v_{i,j}$ ist der Eintrag der iten-Zeile und jten-Spalte der Matrix $V$). }
+\caption{Der Algorithmus berechnet die Matrix $T$ so dass  (\ref{eq:blkreflectorT}) gilt. Die untere Dreiecksmatrix $V$  enthält die Householder-Vektoren. Der Vektor $\tau$ die dazugehörigen $\tau_i = \frac{2}{v_i^Tv_i}$. Hinweise zur Notation: Kleine Buchstaben bezeichnen einen einzelne Matrixeintrag(Beipsiel $v_{i,j}$ ist der Eintrag der i-ten-Zeile und j-ten Spalte der Matrix $V$). Die nach unten gestelletn Indices geben einen Block an der betrachtet werden soll(Beispiel $V_{i:n,j:m}$ bezeichnet einen Block aus der Matrix $V$ der von i-ten bis zur n-ten Zeile und von der j-ten bis zur m-ten Spalte geht).}
 \label{alg:clacT}
 \begin{algorithmic}[1]
-	\State Input $V \in \mathbb{R}^{k \times n}$,$\tau \in \mathbb{R}^k$,$T \in \mathbb{R}^{k \times k}$
-	\For {i = 0,1,2,..., k}
-		\If{$\tau_i$ == 0}
-			\State $T_{1:i,i}=0$
-		\Else
-			\State vii$ = v_{i,i}$
-			\State $v_{i,i} = 1 $
-			%\State T(1:i-1,i) := - $\tau_i$ * V(i:n,1:i-1)' * V(i:n,i)
-			\State $T_{0:i,i} = - \tau_i \cdot V_{i:n-i,0:i}^T \cdot V_{i:n-i,i}$ (dgmv)
-			\State $ v_{i,i} =$ vii 
-			%\State T(1:i-1,i) := T(1:i-1,1:i-1) * T(1:i-1,i)
-			\State $T_{0:i,i} = T_{0:i,0:i} \cdot T_{0:i,i}$ (dtrmv)
-			\State $t_{i,i} = \tau_i$
-		\EndIf
-	\EndFor
+\State Input $V \in \mathbb{R}^{k \times n}$,$\tau \in \mathbb{R}^k$,$T \in \mathbb{R}^{k \times k}$
+\For {i = 0,1,2,..., k}
+	\If{$\tau_i$ == 0}
+		\State $T_{1:i,i}=0$
+	\Else
+		\State vii$ = v_{i,i}$
+		\State $v_{i,i} = 1 $
+		%\State T(1:i-1,i) := - $\tau_i$ * V(i:n,1:i-1)' * V(i:n,i)
+		\State $T_{0:i,i} = - \tau_i \cdot V_{i:n-i,0:i}^T \cdot V_{i:n-i,i}$ (dgmv)
+		\State $ v_{i,i} =$ vii 
+		%\State T(1:i-1,i) := T(1:i-1,1:i-1) * T(1:i-1,i)
+		\State $T_{0:i,i} = T_{0:i,0:i} \cdot T_{0:i,i}$ (dtrmv)
+		\State $t_{i,i} = \tau_i$
+	\EndIf
+\EndFor
 \end{algorithmic}
 \end{algorithm}
 
-Überschreibt die Matrix $T$ nach folgendem Schema
+Der Algorithmus \ref{alg:clacT} überschreibt die Matrix $T$ nach folgendermaßen
 \begin{align*}
 T =&
 \begin{pmatrix}

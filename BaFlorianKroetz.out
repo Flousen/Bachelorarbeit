@@ -19,11 +19,13 @@
 \BOOKMARK [2][-]{subsection.3.3.1}{Berechnung der Matrix T}{section.3.3}% 19
 \BOOKMARK [2][-]{subsection.3.3.2}{Anwenden von I - VTVT}{section.3.3}% 20
 \BOOKMARK [0][-]{chapter.4}{Implementierung und Benchmarks}{}% 21
-\BOOKMARK [1][-]{section.4.1}{Aufwand}{chapter.4}% 22
-\BOOKMARK [2][-]{subsection.4.1.1}{FLOPS}{section.4.1}% 23
-\BOOKMARK [1][-]{section.4.2}{Fehlersch\344tzer}{chapter.4}% 24
-\BOOKMARK [1][-]{section.4.3}{Benchmarks}{chapter.4}% 25
-\BOOKMARK [2][-]{subsection.4.3.1}{Test System}{section.4.3}% 26
-\BOOKMARK [0][-]{appendix.A}{Block Reflector}{}% 27
-\BOOKMARK [1][-]{subsection.A.0.1}{Orthogonal}{appendix.A}% 28
-\BOOKMARK [0][-]{chapter*.7}{Literaturverzeichnis}{}% 29
+\BOOKMARK [1][-]{section.4.1}{Bibliothek}{chapter.4}% 22
+\BOOKMARK [2][-]{subsection.4.1.1}{Algorithmus}{section.4.1}% 23
+\BOOKMARK [1][-]{section.4.2}{Aufwand}{chapter.4}% 24
+\BOOKMARK [2][-]{subsection.4.2.1}{FLOPS}{section.4.2}% 25
+\BOOKMARK [1][-]{section.4.3}{Fehlersch\344tzer}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.4}{Benchmarks}{chapter.4}% 27
+\BOOKMARK [2][-]{subsection.4.4.1}{Test System}{section.4.4}% 28
+\BOOKMARK [0][-]{appendix.A}{Block Reflector}{}% 29
+\BOOKMARK [1][-]{subsection.A.0.1}{Orthogonal}{appendix.A}% 30
+\BOOKMARK [0][-]{chapter*.7}{Literaturverzeichnis}{}% 31

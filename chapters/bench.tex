@@ -1,11 +1,13 @@
 \chapter{Implementierung und Benchmarks}
 Was wurde Implementiert und warum?
+
+\section{Bibliothek}
 Die verwendete Bibliothek wurde in der Vorlesung High Performance Computing 1 entwickelt \cite{HPC1}.
 
 Die Bibliothek ist in C++ geschrieben. Es sind Klassen für Matrizen und Vektoren implementiert, sowie einige BLAS-Routinen.
 
 Die Matrix-Klassen erlauben den zugriff auf Matrixblöcke. 
-Der folgender Code
+Der folgender Code Soll beispielt haft den zugriff auf matrix blocke veranschauelichen veranschaulichen
 \begin{lstlisting}
 GenerelMatrix<T> A(5,5);
 print(A);
@@ -13,6 +15,7 @@ print(A.block(2,2));
 print(A.block(2,2).view(Trans::view));
 \end{lstlisting}
 erzeugt die Ausgabe
+\lstset{numbers=none}
 \begin{lstlisting} 
 A = 
      0.4162   0.1087   0.6753  -0.3967  -0.5583
@@ -32,7 +35,7 @@ A =
     -0.1027  -0.9108  -0.0717
 \end{lstlisting}
 
-
+\subsection{Algorithmus}
 
 Beispiel Ungeblockte QR Implementierung vom Algorithmus \ref{alg:unblockedqr}
 \begin{lstlisting}
