@@ -306,14 +306,17 @@ In der Dreiecksmatrix $V$ stehen die Householder-Vektoren,
 im Vektor $\tau$ die zu den Householder-Vektoren gehörende $\tau_i$.
 
 Die Funktion berechnet eine obere Dreiecksmatrix $T$ so, dass
-\begin{align*}
+\begin{align}
 H_1H_2...H_k = I - VTV^T \qquad \text{mit}\qquad H_i = I - \tau_i v_iv_i^T
-\end{align*}
+\label{eq:blkreflectorT}
+\end{align}
 
 Warum und wie das Verfahren funktioniert, wird hier beschreiben \cite{Joffrain:2006:AHT:1141885.1141886}.
 
+
+
 \begin{algorithm}[H]
-\caption{Berechnung der Matrix $T$}
+\caption{Der Algorithmus berechnet die Matrix $T$ so dass  (\ref{eq:blkreflectorT}) gilt. Die untere Dreiecksmatrix $V$  enthält die Householder-Vektoren. Der Vektor $\tau$ die dazugehörigen $\tau_i = \frac{2}{v_i^Tv_i}$. Hinweise zur Notation: Kleine Buchstaben bezeichnen einen einzelne Matrixeintrag(Beipsiel $v_{i,j}$ ist der Eintrag der iten-Zeile und jten-Spalte der Matrix $V$). }
 \label{alg:clacT}
 \begin{algorithmic}[1]
 	\State Input $V \in \mathbb{R}^{k \times n}$,$\tau \in \mathbb{R}^k$,$T \in \mathbb{R}^{k \times k}$

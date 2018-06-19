@@ -22,7 +22,7 @@
 \contentsline {chapter}{\numberline {4}Implementierung und Benchmarks}{17}{chapter.4}
 \contentsline {section}{\numberline {4.1}Aufwand}{18}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}FLOPS}{18}{subsection.4.1.1}
-\contentsline {section}{\numberline {4.2}Fehlersch\IeC {\"a}tzer}{18}{section.4.2}
+\contentsline {section}{\numberline {4.2}Fehlersch\IeC {\"a}tzer}{19}{section.4.2}
 \contentsline {section}{\numberline {4.3}Benchmarks}{19}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Test System}{19}{subsection.4.3.1}
 \contentsline {chapter}{\numberline {A}Block Reflector}{21}{appendix.A}

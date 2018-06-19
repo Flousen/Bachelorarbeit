@@ -1,14 +1,35 @@
 \chapter{Implementierung und Benchmarks}
+Was wurde Implementiert und warum?
 Die verwendete Bibliothek wurde in der Vorlesung High Performance Computing 1 entwickelt \cite{HPC1}.
 
 Die Bibliothek ist in C++ geschrieben. Es sind Klassen für Matrizen und Vektoren implementiert, sowie einige BLAS-Routinen.
 
 Die Matrix-Klassen erlauben den zugriff auf Matrixblöcke. 
+Der folgender Code
 \begin{lstlisting}
 GenerelMatrix<T> A(5,5);
 print(A);
 print(A.block(2,2));
 print(A.block(2,2).view(Trans::view));
+\end{lstlisting}
+erzeugt die Ausgabe
+\begin{lstlisting} 
+A = 
+     0.4162   0.1087   0.6753  -0.3967  -0.5583
+    -0.6969   0.4358   0.6349  -0.6566   0.8933
+     0.9340   0.7451  -0.2149  -0.0740  -0.1027
+     0.5809   0.5491   0.0163   0.1676  -0.9108
+    -0.4325  -0.0732  -0.1847  -0.1897  -0.0717
+
+A = 
+    -0.2149  -0.0740  -0.1027
+     0.0163   0.1676  -0.9108
+    -0.1847  -0.1897  -0.0717
+
+A = 
+    -0.2149   0.0163  -0.1847
+    -0.0740   0.1676  -0.1897
+    -0.1027  -0.9108  -0.0717
 \end{lstlisting}
 
 
