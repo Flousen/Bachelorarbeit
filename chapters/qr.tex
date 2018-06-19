@@ -387,7 +387,7 @@ mit BLAS-Routinen wie in Algorithmus \ref{alg:applyblockref} berechnet werden.
 
 \begin{algorithm}[H]
 	\caption{$I - V T V^T$ auf C anwenden.\\
-			 Die Matrix $W$ ist ein Workspace}
+			 Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.}
 	\label{alg:applyblockref}
 	\begin{algorithmic}[1]
 		\State Input: $V \in \mathbb{R}^{m \times k}$, $T \in \mathbb{R}^{k \times k}$, $C \in \mathbb{R}^{m \times n}$

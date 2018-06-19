@@ -38,6 +38,7 @@ A =
 \subsection{Algorithmus}
 
 Beispiel Ungeblockte QR Implementierung vom Algorithmus \ref{alg:unblockedqr}
+\lstset{numbers=left}
 \begin{lstlisting}
 size_t mn = std::min(m,n);
 DenseVector<T> work(mn);
@@ -62,7 +63,7 @@ Die anderen Algorithem wurden analog Implementiert siehe Anhang.
 
 Die QR-Zerlegung einer Matrix $A \in \mathbb{R}^{m \times n}$  erfordert
 \begin{align*}
-	n^2(m-\frac{1}{3} n) + {\cal O}(mn)
+	n^2(m-\frac{1}{3} n) + {\cal O}(mn) \qquad \qquad \text{oder 2 mal LRs}
 \end{align*}
 Rechenoperationen. Quelle???
 
@@ -119,9 +120,6 @@ Die AVX-Register sind 256-Bit groß. Darin haben 4 double Platz.
 	\caption{Benchmark ungeblockte QR-Zerlegung}
 	\label{img:unblk}
 \end{figure}
-
-Dreiecke und Sternchen
-
 
 
 
