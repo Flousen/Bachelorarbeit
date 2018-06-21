@@ -9,7 +9,7 @@ mit einer orthogonalen Matrix $ Q \in \mathbb{R}^{m \times m} $ und einer oberen
 
 Eine QR Zerlegung kann mit einer Householder-Transformation berechnet werden.
 
-\subsection{Beispiel}
+\subsection{Beispiel für eine Anwednung}
 Lösung eines Minimierungsproblems
 \begin{align}
 \min_{x \in \mathbb{R}^n} \|Ax-b\|^2 \label{eq1}
@@ -42,9 +42,11 @@ Damit kann man das Minimierungsproblem wie folgt mit $A=QR$ modifizieren
 \end{align}
 Also löst
 \begin{align}
-Rx=Q^Tb \label{solvminqr}
+\hat{R}x=Q^Tb \label{solvminqr}
 \end{align}
 das Minimierungsproblem (\ref{eq1}). Da $R$ eine Dreiecksmatrix ist, lässt sich (\ref{solvminqr}) leicht mit Rückwärtseinsetzen  lösen.
+
+Eine l;sung ist eine auch eine L;sung des Minimierung porlbem
 
 \section{Householder-Transformation}
 %Ein Vektor  $v \in \mathbb{R}^n$ dann wird die $n \times n$ Matrix 
@@ -67,6 +69,8 @@ Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ a
 	\caption{Beispiel Householder-Transformation mit $x=(-1,2)^T$}
 	\label{fig:HHolder}
 \end{figure}
+
+Beispiel eventuel vektor (3,4) durchrechnen
 
 
 
@@ -180,13 +184,15 @@ Fährt man nach diesem Schema immer weiter fort, entsteht eine obere Dreiecksmat
 	\right)
 \end{align*} 
 
-%\begin{align*}
-%	H_i = \begin{pmatrix}
-%	I_{i-1} & 0\\
-%	0 & \tilde{H_i}
-%	\end{pmatrix}
-%\end{align*}
-%$I_{i-1}$ bezeichnet die $i-1$ dimensionale Einheitsmatrix, $\tilde{H_i}$ ist eine Householder-Transformation.
+\begin{align*}
+	H_i = \begin{pmatrix}
+	I_{i-1} & 0\\
+	0 & \tilde{H_i}
+	\end{pmatrix}
+\end{align*}
+$I_{i-1}$ bezeichnet die $i-1$ dimensionale Einheitsmatrix, $\tilde{H_i}$ ist eine Householder-Transformation.
+
+H1 und H2 und dann Hi
 
 So erhält man die Faktorisierung
 \begin{align*}
@@ -201,7 +207,7 @@ Diese Vorgehensweise führt zum Algorithmus \ref{alg:unblockedqr}.
 	\State Input: $A \in \mathbb{R}^{m \times n}$
 	\For {i = 0,1,2,..., n-1}
 		\State ($v_i$, $\tau_i$) $\leftarrow$ householdervector($\hat{a}_i$)
-		\State $w \leftarrow v^T*A_i$ (dgemv)
+		\State $w \leftarrow v^T\dot A_i$ (dgemv)
 		\State $ A_i \leftarrow \tau * v * w + A_i $ (dger)
 		\If {i < m}
 			\State $\hat{a}_i \leftarrow v$ \label{lst:line:vinA}
@@ -231,6 +237,10 @@ Die Matrix $A$ hat somit die Form
 	v_4^{(1)} & v_4^{(2)} & v_4^{(3)}
 	\end{array} \right) 
 \end{align*}
+
+Raus arbeiten dass man wenig Speciher braucht
+
+Q nicht gany barauch nur vektor tau
 
 \newpage
 \section{Geblockte QR-Zerlegung}

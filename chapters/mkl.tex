@@ -95,6 +95,12 @@ struct Matrix {
 
 Für Intel MKL Routinen müssen die Matrizen zeilenweise gespeichert sein.
 
+Eine C/C++
+
+untershcie sziye t ptd diff
+
+moglich keint inc row inc diff unter schied
+
 \newpage
 \section{Einige BLAS-Routinen}
 Im Folgenden werden einige BLAS-Routinen beschrieben, die bei der QR-Zerlegung benutzt werden.
@@ -123,7 +129,7 @@ Die Funktion berechnet
 \begin{align}
 y \leftarrow \beta  y + \alpha A x 
 \end{align}
-Falls $\beta = 0$ wird der Vektor $y$ zuerst mit Nullen initialisiert. Falls $y$ Einträge hat die NaN (Not a Number) sind, werden diese mit 0 überschrieben.
+Falls $\beta = 0$ wird der Vektor $y$ zuerst mit Nullen initialisiert. Falls $y$ Einträge hat, die NaN (Not a Number) sind, werden diese mit 0 überschrieben.
 
 \subsection{Rank1 update (ger)}
 Die Funktion \glqq ger\grqq{}  berechnet ein dyadisches Produkt aus den Vektoren $x$ und $y$, skaliert die daraus resultierende Matrix mit $\alpha$ und addiert das Ergebnis auf $A$.\\
@@ -146,5 +152,7 @@ Die Funktion berechnet
 \begin{align}
 x \leftarrow \alpha  Ax %\qquad \text{or} \qquad x \leftarrow \alpha * A^T*x
 \end{align}
+
+Dreiecks matrizen sind quadartiesch matiyen die nur die ober oder untere dteiche betrahcnten betrechten nur 
 
 

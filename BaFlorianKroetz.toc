@@ -11,10 +11,10 @@
 \contentsline {subsection}{\numberline {2.2.5}Matrix-Vektor Produkt (trmv)}{5}{subsection.2.2.5}
 \contentsline {chapter}{\numberline {3}QR-Zerlegung}{6}{chapter.3}
 \contentsline {section}{\numberline {3.1}Definition}{6}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Beispiel}{6}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.1}Beispiel f\IeC {\"u}r eine Anwednung}{6}{subsection.3.1.1}
 \contentsline {section}{\numberline {3.2}Householder-Transformation}{7}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Householder Vector}{8}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Householder-Transformation anwenden}{9}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.2}Householder-Transformation anwenden}{10}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}QR-Zerlegung mittels Housholder-Transformationen}{10}{subsection.3.2.3}
 \contentsline {section}{\numberline {3.3}Geblockte QR-Zerlegung}{12}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Berechnung der Matrix $T$}{13}{subsection.3.3.1}
