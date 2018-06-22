@@ -380,26 +380,40 @@ Die Abbildung \ref{fig:patrA} zeigt, wie die Matrix $A$ für die Funktion partit
 	\caption{Partitionierung vom A für larfb}
 	\label{fig:patrA}
 \end{figure}
-alls $m > k $ werden die Matrizen $V$ und $C$ aufgeteilt in $V=\left(\dfrac{V_1}{V_2}\right)$ und $C=\left(\dfrac{C_1}{C_2}\right)$.
+alls $m > k $ werden die Matrizen $V$ und $C$ aufgeteilt in
+\begin{align}
+	V=\left(\dfrac{V_1}{V_2}\right)  \text{  und  } C=\left(\dfrac{C_1}{C_2}\right)
+	\label{eq:aufteilen}
+\end{align}
+
 %Sodass $V_1 \in \mathbb{R}^{k \times k}$ und $C \in \mathbb{R}^{k \times n}$
 Dabei wird $V$ genau so geteilt, dass $V_1 \in \mathbb{R}^{k\times k}$ der quadratisch Dreiecksteil der Matrix ist und $V_2 \in \mathbb{R}^{m-k\times k}$ der Rest der Matrix. Die Matrix $C$ wird in $C_1 \in \mathbb{R}^{k \times n}$ und $C_2 \in \mathbb{R}^{m-k \times n}$  aufgeteilt. Die Aufteilung ist so gewählt, dass das Matrix-Matrix-Produkt $V_1 \cdot C_1$ und $V_2 \cdot C_2$ möglich ist.\\
 Diese Aufteilung ist notwendig, da die BLAS-Funktion trmm (matrix-matrix product where one input matrix is triangular) nur für quadratische Dreiecksmatrizen implementiert ist.
 
 Im Fall $ m = k $ ist die Aufteilung nicht notwendig, da $ V $ quadratisch ist.
 
-(\ref{eq:larfb}) kann mit der Umformung
+Mit folgender Umformung kommt man vom (\ref{eq:larfb}) auf Algorithmus \ref{alg:applyblockref}/
+
 \begin{align*}
 	C &\leftarrow  C - V T V^T C \\
 	C &\leftarrow C - \left(V T V^T C\right)^{TT} 	\\
-	C &\leftarrow  C - \left(C^T  V  T^T  V^T\right)^T\\
+	C &\leftarrow  C - \left(C^T  V  T^T  V^T\right)^T
+\end{align*}
+anwenden von (\ref{eq:aufteilen}). Aufteilen der Matrizen $C$ und $V$.
+\begin{align*}
 	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) -  \left( \left(\dfrac{C_1}{C_2}\right)^T \cdot \left(\dfrac{V_1}{V_2}\right) \cdot T \cdot \left(\dfrac{V_1}{V_2}\right)^T \right)^T \\
-	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( \left(C_1^T|C_2^T\right)	\cdot \left(\dfrac{V_1}{V_2}\right) \cdot T \cdot \left(V_1^T|V_2^T\right) \right)^T\\
-	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) \cdot T \cdot \left(V_1^T|V_2^T\right) \right)^T \\
+	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( \left(C_1^T|C_2^T\right)	\cdot \left(\dfrac{V_1}{V_2}\right) \cdot T \cdot \left(V_1^T|V_2^T\right) \right)^T \\
+	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) \cdot T \cdot \left(V_1^T|V_2^T\right) \right)^T 
+\end{align*}
+$ \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) $ wird in Zeil 2 - 6 berechnet und das Ergebnis in $W$ Gespeichert. Die Matrix $W$ ist eine Workspace-Matrix. In Zeile 7 wird  $ \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) \cdot T$ berechnet in dem $T$ auf $W$ Multipliziert wird $W \leftarrow W \cdot T$. 
+\begin{align*}
 	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( W \cdot \left(V_1^T|V_2^T\right) \right)^T \\
 	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left(\dfrac{V_1}{V_2}\right) \cdot W^T 	\\
 	\Longrightarrow C_1 &\leftarrow C_1 - V_1 \cdot W^T\\
-	C_2 &\leftarrow C_2 - V_2 \cdot W^Te
+	C_2 &\leftarrow C_2 - V_2 \cdot W^T	
 \end{align*}
+
+$C_1$ wird in Zeile 11 und 12 berechnet. $C_2$ in Zeile 8 - 10.
 mit BLAS-Routinen wie in Algorithmus \ref{alg:applyblockref} berechnet werden.
 
 \begin{algorithm}[H]
