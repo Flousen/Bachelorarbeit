@@ -390,8 +390,15 @@ Im Fall $ m = k $ ist die Aufteilung nicht notwendig, da $ V $ quadratisch ist.
 (\ref{eq:larfb}) kann mit der Umformung
 \begin{align*}
 	C &\leftarrow  C - V T V^T C \\
-	C &\leftarrow C - (V T V^T C)^{TT} 	\\
-	C &\leftarrow  C - (C^T  V  T^T  V^T)^T
+	C &\leftarrow C - \left(V T V^T C\right)^{TT} 	\\
+	C &\leftarrow  C - \left(C^T  V  T^T  V^T\right)^T\\
+	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) -  \left( \left(\dfrac{C_1}{C_2}\right)^T \cdot \left(\dfrac{V_1}{V_2}\right) \cdot T \cdot \left(\dfrac{V_1}{V_2}\right)^T \right)^T \\
+	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( \left(C_1^T|C_2^T\right)	\cdot \left(\dfrac{V_1}{V_2}\right) \cdot T \cdot \left(V_1^T|V_2^T\right) \right)^T\\
+	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) \cdot T \cdot \left(V_1^T|V_2^T\right) \right)^T \\
+	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( W \cdot \left(V_1^T|V_2^T\right) \right)^T \\
+	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left(\dfrac{V_1}{V_2}\right) \cdot W^T 	\\
+	\Longrightarrow C_1 &\leftarrow C_1 - V_1 \cdot W^T\\
+	C_2 &\leftarrow C_2 - V_2 \cdot W^T
 \end{align*}
 mit BLAS-Routinen wie in Algorithmus \ref{alg:applyblockref} berechnet werden.
 
