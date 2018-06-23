@@ -66,13 +66,25 @@ Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ a
 \begin{figure}[H]
 	\centering
 	\input{images/hh.tex}
-	\caption{Beispiel Householder-Transformation mit $x=(-1,2)^T$}
+	\caption{Beispiel Householder-Transformation mit $x=(3,4)^T$}
 	\label{fig:HHolder}
 \end{figure}
 
-Beispiel eventuel vektor (3,4) durchrechnen
+Beispiel (3,4) rechnen!
+\newcommand{ \vecX }[2]{ \begin{pmatrix} #1\\#2 \end{pmatrix} }
 
+\begin{align*}
+	x &= \vecX{3}{4}\\
+	\|x\| &= \sqrt{3^2 + 4^2} = 5\\
+	\alpha &= -1 \cdot \text{sign}(x_1) \cdot \|x\| = -5 \\
+	\tau &= \dfrac{\alpha - x_1}{\alpha} = \dfrac{-5 - 3}{-5} = \dfrac{8}{5} \\
+	v &=\dfrac{x - \alpha e_1}{x_1 - \alpha} = \dfrac{\vecX{3}{4} - \vecX{-5}{0}}{3- (-5)} = \dfrac{1}{8} \vecX{8}{4} = \vecX{1}{0,5}
+\end{align*}
 
+\begin{align*}
+	Hx &= x - \tau v (v^T x) = \vecX{3}{4} - \dfrac{8}{5} \cdot \vecX{1}{0,5} \cdot \left( \left(1 , 0.5\right) \cdot \vecX{3}{4} \right)\\
+	&= \vecX{3}{4} - \dfrac{8}{5} \cdot \vecX{1}{0,5} \cdot \left( 5 \right) = \vecX{3}{4} - \vecX{8}{4} = \vecX{-5}{0}
+\end{align*}
 
 
 \subsection{Householder Vector}
@@ -125,7 +137,7 @@ v = \dfrac{x - \alpha e_1}{x_1 - \alpha}
 
 Mit der Normierung kann man den Faktor $\tau = \dfrac{2}{v^Tv}$ berechnen. Setze dazu (\ref{eq:calcV}) in die Definition von $\tau$ ein.
 \begin{align*}
-\tau = \dfrac{2}{v^Tv} = \dfrac{2 (x_1 - \alpha)^2}{(x - \alpha e_1)^T (x - \alpha e_1)} = \dfrac{2 (x_1 - \alpha)^2}{\|x\|^2_2 - 2\alpha x^Te_1 + \alpha^2} =  \dfrac{2 (x_1 - \alpha)^2}{ 2\alpha (\alpha - x_1)} = \dfrac{x_1 - \alpha}{\alpha}
+\tau = \dfrac{2}{v^Tv} = \dfrac{2 (x_1 - \alpha)^2}{(x - \alpha e_1)^T (x - \alpha e_1)} = \dfrac{2 (x_1 - \alpha)^2}{\underbrace{\|x\|^2_2}_{ = \alpha^2} - 2\alpha x^Te_1 + \alpha^2} =  \dfrac{2 (x_1 - \alpha)^2}{ 2\alpha (\alpha - x_1)} = \dfrac{\alpha - x_1}{\alpha}
 \end{align*}
 
 Mit dem Faktor $\tau = \dfrac{2}{v^Tv}$ kann man die Householder-Transformation schreiben als
@@ -139,8 +151,8 @@ Mit dem Faktor $\tau = \dfrac{2}{v^Tv}$ kann man die Householder-Transformation 
 	\caption{Housholder-Vector(LAPACK DLARFG)}
 	\begin{algorithmic}
 		\State Input: $x \in \mathbb{R}^n$ 
-		\State $\alpha = -1 * \text{sign}(x_1) \|x\|_2$
-		\State $\tau = \dfrac{x_1 - \alpha}{\alpha}$
+		\State $\alpha = -1 \cdot \text{sign}(x_1) \|x\|_2$
+		\State $\tau = \dfrac{\alpha - x_1}{\alpha}$
 		\State $v=\dfrac{x - \alpha e_1}{x_1 - \alpha}$
 		\State Output: Householder-Vektor $v$, $\tau$
 	\end{algorithmic} 

@@ -13,9 +13,9 @@
 \contentsline {section}{\numberline {3.1}Definition}{6}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Beispiel f\IeC {\"u}r eine Anwednung}{6}{subsection.3.1.1}
 \contentsline {section}{\numberline {3.2}Householder-Transformation}{7}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Householder Vector}{8}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.1}Householder Vector}{9}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Householder-Transformation anwenden}{10}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}QR-Zerlegung mittels Housholder-Transformationen}{10}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.3}QR-Zerlegung mittels Housholder-Transformationen}{11}{subsection.3.2.3}
 \contentsline {section}{\numberline {3.3}Geblockte QR-Zerlegung}{13}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Berechnung der Matrix $T$}{14}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Anwenden von $I - VTV^T$}{15}{subsection.3.3.2}
