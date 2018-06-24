@@ -3,30 +3,32 @@
 \contentsline {section}{\numberline {1.1}Intel MKL}{1}{section.1.1}
 \contentsline {chapter}{\numberline {2}BLAS}{2}{chapter.2}
 \contentsline {section}{\numberline {2.1}Datenstruktur f\IeC {\"u}r Matrizen}{2}{section.2.1}
-\contentsline {section}{\numberline {2.2}Einige BLAS-Routinen}{4}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Matrix-Matrix Produkt (gemm)}{4}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Matrix-Vektor Produkt (gemv)}{4}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Rank1 update (ger)}{5}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Matrix-Matrix Produkt (trmm)}{5}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}Matrix-Vektor Produkt (trmv)}{5}{subsection.2.2.5}
-\contentsline {chapter}{\numberline {3}QR-Zerlegung}{6}{chapter.3}
-\contentsline {section}{\numberline {3.1}Definition}{6}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Beispiel f\IeC {\"u}r eine Anwednung}{6}{subsection.3.1.1}
-\contentsline {section}{\numberline {3.2}Householder-Transformation}{7}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Householder Vector}{9}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Householder-Transformation anwenden}{10}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}QR-Zerlegung mittels Housholder-Transformationen}{11}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Geblockte QR-Zerlegung}{13}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Berechnung der Matrix $T$}{14}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Anwenden von $I - VTV^T$}{15}{subsection.3.3.2}
-\contentsline {chapter}{\numberline {4}Implementierung und Benchmarks}{19}{chapter.4}
-\contentsline {section}{\numberline {4.1}Bibliothek}{19}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Algorithmus}{20}{subsection.4.1.1}
-\contentsline {section}{\numberline {4.2}Aufwand}{20}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}FLOPS}{21}{subsection.4.2.1}
-\contentsline {section}{\numberline {4.3}Fehlersch\IeC {\"a}tzer}{21}{section.4.3}
-\contentsline {section}{\numberline {4.4}Benchmarks}{21}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Test System}{21}{subsection.4.4.1}
-\contentsline {chapter}{\numberline {A}Block Reflector}{23}{appendix.A}
-\contentsline {subsection}{\numberline {A.0.1}Orthogonal}{27}{subsection.A.0.1}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{28}{chapter*.7}
+\contentsline {subsubsection}{\nonumberline Beispiel}{3}{section*.2}
+\contentsline {section}{\numberline {2.2}Einige BLAS-Routinen}{5}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Matrix-Matrix Produkt (gemm)}{5}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Matrix-Vektor Produkt (gemv)}{5}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Rank1 update (ger)}{6}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Matrix-Matrix Produkt (trmm)}{6}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Matrix-Vektor Produkt (trmv)}{6}{subsection.2.2.5}
+\contentsline {chapter}{\numberline {3}QR-Zerlegung}{7}{chapter.3}
+\contentsline {section}{\numberline {3.1}Definition}{7}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Beispiel f\IeC {\"u}r eine Anwednung}{7}{subsection.3.1.1}
+\contentsline {section}{\numberline {3.2}Householder-Transformation}{8}{section.3.2}
+\contentsline {subsubsection}{\nonumberline Beispiel}{9}{section*.4}
+\contentsline {subsection}{\numberline {3.2.1}Householder Vector}{10}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Householder-Transformation anwenden}{11}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}QR-Zerlegung mittels Housholder-Transformationen}{12}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Geblockte QR-Zerlegung}{14}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Berechnung der Matrix $T$}{15}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Anwenden von $I - VTV^T$}{16}{subsection.3.3.2}
+\contentsline {chapter}{\numberline {4}Implementierung und Benchmarks}{20}{chapter.4}
+\contentsline {section}{\numberline {4.1}Bibliothek}{20}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Algorithmus}{21}{subsection.4.1.1}
+\contentsline {section}{\numberline {4.2}Aufwand}{21}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}FLOPS}{22}{subsection.4.2.1}
+\contentsline {section}{\numberline {4.3}Fehlersch\IeC {\"a}tzer}{22}{section.4.3}
+\contentsline {section}{\numberline {4.4}Benchmarks}{22}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Test System}{22}{subsection.4.4.1}
+\contentsline {chapter}{\numberline {A}Block Reflector}{24}{appendix.A}
+\contentsline {subsection}{\numberline {A.0.1}Orthogonal}{28}{subsection.A.0.1}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{29}{chapter*.9}

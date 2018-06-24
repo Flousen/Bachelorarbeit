@@ -40,13 +40,13 @@ Damit kann man das Minimierungsproblem wie folgt mit $A=QR$ modifizieren
 \min_{x \in \mathbb{R}^n} \|Q^T(Ax-b)\|^2 =
 \min_{x \in \mathbb{R}^n} \|Rx-Q^Tb\|^2
 \end{align}
-Also löst
+
+Eine Lösung des Gleichungssystems
 \begin{align}
 \hat{R}x=Q^Tb \label{solvminqr}
 \end{align}
-das Minimierungsproblem (\ref{eq1}). Da $R$ eine Dreiecksmatrix ist, lässt sich (\ref{solvminqr}) leicht mit Rückwärtseinsetzen  lösen.
+ist auch eine Lösung des Minimierungsproblem (\ref{eq1}). Da $R$ eine Dreiecksmatrix ist, lässt sich (\ref{solvminqr}) leicht mit Rückwärtseinsetzen  lösen.
 
-Eine l;sung ist eine auch eine L;sung des Minimierung porlbem
 
 \section{Householder-Transformation}
 %Ein Vektor  $v \in \mathbb{R}^n$ dann wird die $n \times n$ Matrix 
@@ -63,31 +63,32 @@ Hx=\alpha e_1 \label{eq:spiegelung}
 \end{align}
 mit dem Skalar $\alpha \in \mathbb{R}$ und $e_1$ als ersten kanonischen Einheitsvektor. Der Householder-Vektor steht senkrecht auf der Ebene an welcher $x$ gespiegelt wird.\\
 Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ an der gestrichelt eingezeichneten Ebene auf die Achse $x_1$.
+
 \begin{figure}[H]
 	\centering
 	\input{images/hh.tex}
 	\caption{Beispiel Householder-Transformation mit $x=(3,4)^T$}
 	\label{fig:HHolder}
 \end{figure}
-
-Beispiel (3,4) rechnen!
 \newcommand{ \vecX }[2]{ \begin{pmatrix} #1\\#2 \end{pmatrix} }
-
+\subsubsection{Beispiel}
+Beispiel Rechnung zu Abbildung \ref{fig:HHolder} mit $x = \vecX{3}{4}$.
+Zuerst wird der Householder-Vektor $v$ und der dazugehörige Faktor $\tau$, wie in Kapitel \ref{sec:HHvec}, berechnet.
 \begin{align*}
-	x &= \vecX{3}{4}\\
 	\|x\| &= \sqrt{3^2 + 4^2} = 5\\
 	\alpha &= -1 \cdot \text{sign}(x_1) \cdot \|x\| = -5 \\
 	\tau &= \dfrac{\alpha - x_1}{\alpha} = \dfrac{-5 - 3}{-5} = \dfrac{8}{5} \\
 	v &=\dfrac{x - \alpha e_1}{x_1 - \alpha} = \dfrac{\vecX{3}{4} - \vecX{-5}{0}}{3- (-5)} = \dfrac{1}{8} \vecX{8}{4} = \vecX{1}{0,5}
 \end{align*}
-
+Nun wir $H$ auf $x$ angewandt, wie in Kapitel \ref{sec:HHvec} beschrieben.
 \begin{align*}
-	Hx &= x - \tau v (v^T x) = \vecX{3}{4} - \dfrac{8}{5} \cdot \vecX{1}{0,5} \cdot \left( \left(1 , 0.5\right) \cdot \vecX{3}{4} \right)\\
-	&= \vecX{3}{4} - \dfrac{8}{5} \cdot \vecX{1}{0,5} \cdot \left( 5 \right) = \vecX{3}{4} - \vecX{8}{4} = \vecX{-5}{0}
+	Hx &= x - \tau v (v^T x) = \vecX{3}{4} - \dfrac{8}{5} \cdot \vecX{1}{0,5} \cdot \left(  \vecX{1}{0,5}^T \cdot \vecX{3}{4} \right)\\
+	&= \vecX{3}{4} - \dfrac{8}{5} \cdot \vecX{1}{0,5} \cdot \left( 5 \right) = \vecX{3}{4} - \vecX{8}{4} \\
+	&= \vecX{-5}{0}
 \end{align*}
 
 
-\subsection{Householder Vector}
+\subsection{Householder Vector} \label{sec:HHvec}
 Damit (\ref{eq:spiegelung}) gilt, wird der Vektor berechnet, 
 indem man (\ref{eq:HHM}) in (\ref{eq:spiegelung}) einsetzt
 \begin{align*}
@@ -160,7 +161,7 @@ Mit dem Faktor $\tau = \dfrac{2}{v^Tv}$ kann man die Householder-Transformation 
 \end{algorithm}
 
 
-\subsection{Householder-Transformation anwenden}
+\subsection{Householder-Transformation anwenden} \label{sec:appHHvec}
 Ein aufwändiges Matrix-Matrix-Produkt kann bei der Anwendung einer Housholder-Transformation $H = I - \tau vv^T$ auf die Matrix $A$ umgangen werden, indem man geschickt klammert.
 \begin{align*} 
 H A =(I - \tau vv^T) A= A - \tau (vv^T )A = A - \tau v(v^TA)

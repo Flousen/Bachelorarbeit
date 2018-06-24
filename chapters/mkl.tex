@@ -84,7 +84,7 @@ Eine Datenstruktur benötigt folgende Elemente:
 \end{itemize}
 
 
-Eine derartige Datenstruktur könnte in C so aussehen.
+Eine derartige Datenstruktur könnte in C/C++ so aussehen.
 \begin{lstlisting}
 struct Matrix {
   double * data;
@@ -93,13 +93,57 @@ struct Matrix {
 }
 \end{lstlisting}
 
+Diese Datenstruktur ist für Matrixeinträge vom Type double.
+
+Die Variablen für die Speicherverwaltung(Zeile 3) sind vom Typ ptrdiff\_t und die Variablen für die Dimensions Informationen sind Vom Typ size\_t.
+
+ptrdiff\_t und size\_t sind Datentypen für Ganzzahlen. Der Unterschied zwischen den Datentypen ist size\_t kann nur Werte Darstellen die größer gleich 0 sind, ptrdiff\_t dann auch negative Werte Darstellen.
+
+Die das incRow und incCol aus negative Werte haben könne ist Sinnvoll, wenn man zugriff auf Einen Matrix Block haben will in anderer Reihenfolge.
+
 Für Intel MKL Routinen müssen die Matrizen zeilenweise gespeichert sein.
+Das bedeutet incCol ist gleich 1.
 
-Eine C/C++
+\subsubsection{Beispiel}
+Angenommen es wurde genügend Speicher für eine Matrix $A$ allociert. Die Matrix soll zeilenweise gespeichert werden. Dann sieht die Datenstruktur für die Matrix
+\begin{align*}
+	A = \begin{pmatrix}
+	 1 &  2 &  3 &  4 &  5 \\
+	 6 &  7 &  8 &  9 & 10 \\
+	11 & 12 & 13 & 14 & 15 \\
+	16 & 17 & 18 & 19 & 20 \\
+	21 & 22 & 23 & 24 & 25 
+	\end{pmatrix}
+\end{align*}
+folgendermaßen aus:
+\begin{lstlisting}
+struct Matrix A;
+A.data = /*pointer to data*/;
+A.numRows = 5; 
+A.numCols = 5;
+A.incRow = A.numCols;
+A.incCol = 1;
+\end{lstlisting}
 
-untershcie sziye t ptd diff
+\begin{align*}
+\hat{A} = B = \begin{pmatrix}
+25 &  20 &  15 & 10 \\
+24 &  19 &  14 & 9 \\
+23 &  18 &  13 & 8 
+\end{pmatrix}
+\end{align*}
 
-moglich keint inc row inc diff unter schied
+\begin{lstlisting}
+struct Matrix B;
+B.data = A.data[4*A.incRow + 4*A.incCol];
+B.numRows = 3; 
+B.numCols = 4;
+B.incRow = -A.incCol;
+B.incCol = -A.incRow;
+\end{lstlisting}
+
+
+
 
 \newpage
 \section{Einige BLAS-Routinen}
@@ -139,20 +183,22 @@ Die Funktion berechnet
 A \leftarrow A + \alpha  x y^T
 \end{align}
 
-\subsection{Matrix-Matrix Produkt (trmm)}
+\subsection{Matrix-Matrix Produkt (trmm)} \label{fkt:trmm}
 Die Funktion \glqq trmm\grqq{} berechnet das Matrix-Matrix Produkt einer Dreiecksmatrix mit einer voll besetzten Matrix.
 Der Funktion wird die Dreiecksmatrix $A$, die Matrix $B$ und das Skalar $\alpha$ übergeben. Außerdem werden Flags mit übergeben, die anzeigen ob $A$ eine obere oder untere Dreiecksmatrix ist, ob $A$ eine strikte oder unipotente Dreiecksmatrix ist, ob $A$ von links oder rechts auf $B$ multipliziert werden soll und ob $A$ transponiert werden soll. Diese Eigenschaften werden unten in $op(\cdot)$ zusammengefasst. \\
 Die Funktion berechnet
 \begin{align}
 B \leftarrow  \alpha \cdot op(A) \cdot B \qquad \text{oder} \qquad B \leftarrow  \alpha \cdot B \cdot op(A)
 \end{align}
-\subsection{Matrix-Vektor Produkt (trmv)}
+\subsection{Matrix-Vektor Produkt (trmv)} \label{fkt:trmv}
 Die Funktion \glqq trmv\grqq{} berechnet das Matrix-Vektor Produkt für Dreiecksmatrizen.
 Die Funktion berechnet
 \begin{align}
 x \leftarrow \alpha  Ax %\qquad \text{or} \qquad x \leftarrow \alpha * A^T*x
 \end{align}
 
-Dreiecks matrizen sind quadartiesch matiyen die nur die ober oder untere dteiche betrahcnten betrechten nur 
+
+Die Dreiecksmatrizen die von den Funktionen \glqq trmm\grqq{} und \glqq trmv\grqq{} verarbeitet werden sind quadratische Matrizen von denen nur der obere oder unter Dreiecks teil betrachtet wird.
+Das heißt die Matrix liegt als Quadratische Matrix im Speicher. Die Funktion beachtet nur die Einträge über oder unter der Diagonalen
 
 
