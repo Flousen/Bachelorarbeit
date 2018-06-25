@@ -105,7 +105,8 @@ Für Intel MKL Routinen müssen die Matrizen zeilenweise gespeichert sein.
 Das bedeutet incCol ist gleich 1.
 
 \subsubsection{Beispiel}
-Angenommen es wurde genügend Speicher für eine Matrix $A$ allociert. Die Matrix soll zeilenweise gespeichert werden. Dann sieht die Datenstruktur für die Matrix
+Angenommen es wurde genügend Speicher für eine Matrix $A$ allociert und die Werte 1 bis 25 liegen hintereinander im Speicher.
+Dann lässt sich die Matrix
 \begin{align*}
 	A = \begin{pmatrix}
 	 1 &  2 &  3 &  4 &  5 \\
@@ -115,7 +116,7 @@ Angenommen es wurde genügend Speicher für eine Matrix $A$ allociert. Die Matri
 	21 & 22 & 23 & 24 & 25 
 	\end{pmatrix}
 \end{align*}
-folgendermaßen aus:
+durch die folgende Datenstruktur repräsentieren.
 \begin{lstlisting}
 struct Matrix A;
 A.data = /*pointer to data*/;
@@ -124,15 +125,15 @@ A.numCols = 5;
 A.incRow = A.numCols;
 A.incCol = 1;
 \end{lstlisting}
-
+Die Matrix 
 \begin{align*}
-\hat{A} = B = \begin{pmatrix}
+B = \begin{pmatrix}
 25 &  20 &  15 & 10 \\
 24 &  19 &  14 & 9 \\
 23 &  18 &  13 & 8 
 \end{pmatrix}
 \end{align*}
-
+lässt sich mit folgender Datenstruktur repräsentieren.
 \begin{lstlisting}
 struct Matrix B;
 B.data = A.data[4*A.incRow + 4*A.incCol];
@@ -141,8 +142,11 @@ B.numCols = 4;
 B.incRow = -A.incCol;
 B.incCol = -A.incRow;
 \end{lstlisting}
+Diese Datenstruktur nutzt für die Daten den selben Speicherbereich wie die Matrix $A$. 
 
 
+
+Blablabla incRow Trans blabla
 
 
 \newpage
