@@ -7,14 +7,15 @@ Die verwendete Bibliothek wurde in der Vorlesung High Performance Computing 1 en
 Die Bibliothek ist in C++ geschrieben. Es sind Klassen für Matrizen und Vektoren implementiert, sowie einige BLAS-Routinen.
 
 Die Matrix-Klassen erlauben den zugriff auf Matrixblöcke. 
-Der folgender Code Soll beispielt haft den zugriff auf matrix blocke veranschauelichen veranschaulichen
+Der folgender Code Soll Beispielhaft den Zugriff auf Matrixblöcke veranschaulichen.
 \begin{lstlisting}
-GenerelMatrix<T> A(5,5);
-print(A);
+GenerelMatrix<T> A(5,5);  // erzeuer Matrix Objekt
+rand(A);  // Matrix mit zufalls Zahlen initialisieren
+print(A); // Matrix Ausgeben
 print(A.block(2,2));
 print(A.block(2,2).view(Trans::view));
 \end{lstlisting}
-erzeugt die Ausgabe
+Dieser Code kann die folgende Ausgabe erzeugen.
 \lstset{numbers=none}
 \begin{lstlisting} 
 A = 
@@ -80,7 +81,7 @@ Es wurde der Fehlerschätzer von ATLAS\cite{atlas} verwendet.
 $\|\cdot\|_i$ ist eine passende Norm.
 Die Matrizen $Q$ und $R$ sind die QR-Zerlegung der Matrix $A \in \mathbb{R}^{m \times n}$.
 $\varepsilon$ ist die kleinste darstellbare Zahl.\\
-Die QR-Zerlegung ist gut genug falls der Fehler kleiner 1 ist $ err < 1 $.
+Die QR-Zerlegung ist gut genug falls der Fehler kleiner 1 ist: $ err < 1 $.
 
 Als Norm wurde die Zeilensummennorm $\|\cdot\|_\infty$ gewählt.
 Diese ist für eine Matrix $A \in \mathbb{R}^{m\times n}$ gegeben durch
@@ -88,9 +89,9 @@ Diese ist für eine Matrix $A \in \mathbb{R}^{m\times n}$ gegeben durch
 	\|A\|_\infty = \max_{i=1,...,m} \sum_{j=1}^{n} |a_{ij}|
 \end{align*}
 
-Diese Norm wurde gewählt das sie sich leicht berechnen lässt.
+Diese Norm wurde gewählt das sie sich leicht zu berechnen ist.
 
-$\epsilon$ ist auf dem Test-System $2.220446\cdot10^{-16}$
+
 
 
 \section{Benchmarks}
@@ -101,6 +102,7 @@ Getestet wurde auf einem System mit einer Intel(R) Core(TM) i5-3470 CPU mit 3.20
 
 Die Theoretische peak performance errechnet sich aus der Taktrate mal die Registerbreite mal 2. Quelle???
 
+$\epsilon$ ist auf dem Test-System $2.220446\cdot10^{-16}$
 
 Die CPU des Test Systems hat eine Taktrate von 3.20GHz.
 Die AVX-Register sind 256-Bit groß. Darin haben 4 double Platz.

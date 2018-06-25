@@ -39,6 +39,7 @@
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}Einige BLAS-Routinen}{5}{section.2.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Matrix-Matrix Produkt (gemm)}{5}{subsection.2.2.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Matrix-Vektor Produkt (gemv)}{5}{subsection.2.2.2}}
+\citation{blast}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Rank1 update (ger)}{6}{subsection.2.2.3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}Matrix-Matrix Produkt (trmm)}{6}{subsection.2.2.4}}
 \newlabel{fkt:trmm}{{2.2.4}{6}{Matrix-Matrix Produkt (trmm)}{subsection.2.2.4}{}}
@@ -63,70 +64,70 @@
 \newlabel{fig:HHolder}{{3.1}{9}{Beispiel Householder-Transformation mit $x=(3,4)^T$\relax }{figure.caption.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\nonumberline Beispiel}{9}{section*.4}}
 \citation{num1}
-\citation{DGEQR2}
-\citation{num1}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Householder Vector}{10}{subsection.3.2.1}}
 \newlabel{sec:HHvec}{{3.2.1}{10}{Householder Vector}{subsection.3.2.1}{}}
+\citation{DGEQR2}
+\citation{num1}
 \newlabel{eq:calcV}{{3.7}{11}{Householder Vector}{equation.3.2.7}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Housholder-Vector(LAPACK DLARFG)\relax }}{11}{algorithm.1}}
-\newlabel{alg:unblockedqr}{{1}{11}{Housholder-Vector(LAPACK DLARFG)\relax }{algorithm.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Householder-Transformation anwenden}{11}{subsection.3.2.2}}
-\newlabel{sec:appHHvec}{{3.2.2}{11}{Householder-Transformation anwenden}{subsection.3.2.2}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Housholder-Vector(LAPACK DLARFG)\relax }}{12}{algorithm.1}}
+\newlabel{alg:unblockedqr}{{1}{12}{Housholder-Vector(LAPACK DLARFG)\relax }{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Householder-Transformation anwenden}{12}{subsection.3.2.2}}
+\newlabel{sec:appHHvec}{{3.2.2}{12}{Householder-Transformation anwenden}{subsection.3.2.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}QR-Zerlegung mittels Housholder-Transformationen}{12}{subsection.3.2.3}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Ungeblockte Housholder-Transformation.   Zur \IeC {\"u}bersichtlicheren Beschreibung des Algorithmus werden die Bezeichnungen $A_i$ und $\mathaccentV {hat}05E{a}_i$ eingef\IeC {\"u}hrt. $A_i$ zeigt auf einen Matrixblock der am i-ten Diagonalelement beginnt. $\mathaccentV {hat}05E{a}_i$ zeigt auf die i-te Spalte unterhalb der Diagonalen. Matrizen sind 0-indiziert notiert.\relax }}{13}{algorithm.2}}
 \newlabel{lst:line:vinA}{{7}{13}{Ungeblockte Housholder-Transformation. \\ Zur übersichtlicheren Beschreibung des Algorithmus werden die Bezeichnungen $A_i$ und $\hat {a}_i$ eingeführt. $A_i$ zeigt auf einen Matrixblock der am i-ten Diagonalelement beginnt. $\hat {a}_i$ zeigt auf die i-te Spalte unterhalb der Diagonalen. Matrizen sind 0-indiziert notiert.\relax }{algorithm.2}{}}
 \newlabel{alg:unblockedqr}{{2}{13}{Ungeblockte Housholder-Transformation. \\ Zur übersichtlicheren Beschreibung des Algorithmus werden die Bezeichnungen $A_i$ und $\hat {a}_i$ eingeführt. $A_i$ zeigt auf einen Matrixblock der am i-ten Diagonalelement beginnt. $\hat {a}_i$ zeigt auf die i-te Spalte unterhalb der Diagonalen. Matrizen sind 0-indiziert notiert.\relax }{algorithm.2}{}}
 \citation{DGEQRF}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Geblockte QR-Zerlegung}{14}{section.3.3}}
-\newlabel{equ:blockA}{{3.8}{14}{Geblockte QR-Zerlegung}{equation.3.3.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Aufteilung der Matrix $A$\relax }}{14}{figure.caption.5}}
-\newlabel{fig:blockA}{{3.2}{14}{Aufteilung der Matrix $A$\relax }{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Geblockte QR-Zerlegung}{15}{section.3.3}}
+\newlabel{equ:blockA}{{3.8}{15}{Geblockte QR-Zerlegung}{equation.3.3.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Aufteilung der Matrix $A$\relax }}{15}{figure.caption.5}}
+\newlabel{fig:blockA}{{3.2}{15}{Aufteilung der Matrix $A$\relax }{figure.caption.5}{}}
 \citation{Joffrain:2006:AHT:1141885.1141886}
 \citation{LARFT}
 \citation{Joffrain:2006:AHT:1141885.1141886}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Berechnung der Matrix $T$}{15}{subsection.3.3.1}}
-\newlabel{eq:blkreflectorT}{{3.11}{15}{Berechnung der Matrix $T$}{equation.3.3.11}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Der Algorithmus berechnet die Matrix $T$ so dass (\ref  {eq:blkreflectorT}) gilt. Die untere Dreiecksmatrix $V$ enth\IeC {\"a}lt die Householder-Vektoren. Der Vektor $\tau $ die dazugeh\IeC {\"o}rigen $\tau _i = \frac  {2}{v_i^Tv_i}$. Hinweise zur Notation: Kleine Buchstaben bezeichnen einen einzelne Matrixeintrag(Beipsiel $v_{i,j}$ ist der Eintrag der i-ten-Zeile und j-ten Spalte der Matrix $V$). Die nach unten gestelletn Indices geben einen Block an der betrachtet werden soll(Beispiel $V_{i:n,j:m}$ bezeichnet einen Block aus der Matrix $V$ der von i-ten bis zur n-ten Zeile und von der j-ten bis zur m-ten Spalte geht).\relax }}{16}{algorithm.3}}
-\newlabel{alg:clacT}{{3}{16}{Der Algorithmus berechnet die Matrix $T$ so dass (\ref {eq:blkreflectorT}) gilt. Die untere Dreiecksmatrix $V$ enthält die Householder-Vektoren. Der Vektor $\tau $ die dazugehörigen $\tau _i = \frac {2}{v_i^Tv_i}$. Hinweise zur Notation: Kleine Buchstaben bezeichnen einen einzelne Matrixeintrag(Beipsiel $v_{i,j}$ ist der Eintrag der i-ten-Zeile und j-ten Spalte der Matrix $V$). Die nach unten gestelletn Indices geben einen Block an der betrachtet werden soll(Beispiel $V_{i:n,j:m}$ bezeichnet einen Block aus der Matrix $V$ der von i-ten bis zur n-ten Zeile und von der j-ten bis zur m-ten Spalte geht).\relax }{algorithm.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Anwenden von $I - VTV^T$}{16}{subsection.3.3.2}}
-\newlabel{eq:larfb}{{3.12}{17}{Anwenden von $I - VTV^T$}{equation.3.3.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Partitionierung vom A f\IeC {\"u}r larfb\relax }}{17}{figure.caption.6}}
-\newlabel{fig:patrA}{{3.3}{17}{Partitionierung vom A für larfb\relax }{figure.caption.6}{}}
-\newlabel{eq:aufteilen}{{3.13}{17}{Anwenden von $I - VTV^T$}{equation.3.3.13}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces $I - V T V^T$ auf C anwenden.  Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }}{19}{algorithm.4}}
-\newlabel{alg:applyblockref}{{4}{19}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
-\newlabel{alg4:beg}{{2}{19}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
-\newlabel{alg4:end}{{6}{19}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
-\newlabel{alg4:trans}{{7}{19}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
-\newlabel{alg4:transE}{{11}{19}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
-\newlabel{alg4:C2}{{13}{19}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
-\newlabel{alg4:C1}{{15}{19}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
-\newlabel{alg4:C12}{{16}{19}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Berechnung der Matrix $T$}{16}{subsection.3.3.1}}
+\newlabel{eq:blkreflectorT}{{3.11}{16}{Berechnung der Matrix $T$}{equation.3.3.11}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Der Algorithmus berechnet die Matrix $T$ so dass (\ref  {eq:blkreflectorT}) gilt. Die untere Dreiecksmatrix $V$ enth\IeC {\"a}lt die Householder-Vektoren. Der Vektor $\tau $ die dazugeh\IeC {\"o}rigen $\tau _i = \frac  {2}{v_i^Tv_i}$. Hinweise zur Notation: Kleine Buchstaben bezeichnen einen einzelne Matrixeintrag(Beipsiel $v_{i,j}$ ist der Eintrag der i-ten-Zeile und j-ten Spalte der Matrix $V$). Die nach unten gestelletn Indices geben einen Block an der betrachtet werden soll(Beispiel $V_{i:n,j:m}$ bezeichnet einen Block aus der Matrix $V$ der von i-ten bis zur n-ten Zeile und von der j-ten bis zur m-ten Spalte geht).\relax }}{17}{algorithm.3}}
+\newlabel{alg:clacT}{{3}{17}{Der Algorithmus berechnet die Matrix $T$ so dass (\ref {eq:blkreflectorT}) gilt. Die untere Dreiecksmatrix $V$ enthält die Householder-Vektoren. Der Vektor $\tau $ die dazugehörigen $\tau _i = \frac {2}{v_i^Tv_i}$. Hinweise zur Notation: Kleine Buchstaben bezeichnen einen einzelne Matrixeintrag(Beipsiel $v_{i,j}$ ist der Eintrag der i-ten-Zeile und j-ten Spalte der Matrix $V$). Die nach unten gestelletn Indices geben einen Block an der betrachtet werden soll(Beispiel $V_{i:n,j:m}$ bezeichnet einen Block aus der Matrix $V$ der von i-ten bis zur n-ten Zeile und von der j-ten bis zur m-ten Spalte geht).\relax }{algorithm.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Anwenden von $I - VTV^T$}{17}{subsection.3.3.2}}
+\newlabel{eq:larfb}{{3.12}{18}{Anwenden von $I - VTV^T$}{equation.3.3.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Partitionierung vom A f\IeC {\"u}r larfb\relax }}{18}{figure.caption.6}}
+\newlabel{fig:patrA}{{3.3}{18}{Partitionierung vom A für larfb\relax }{figure.caption.6}{}}
+\newlabel{eq:aufteilen}{{3.13}{18}{Anwenden von $I - VTV^T$}{equation.3.3.13}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces $I - V T V^T$ auf C anwenden.  Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }}{20}{algorithm.4}}
+\newlabel{alg:applyblockref}{{4}{20}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
+\newlabel{alg4:beg}{{2}{20}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
+\newlabel{alg4:end}{{6}{20}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
+\newlabel{alg4:trans}{{7}{20}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
+\newlabel{alg4:transE}{{11}{20}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
+\newlabel{alg4:C2}{{13}{20}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
+\newlabel{alg4:C1}{{15}{20}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
+\newlabel{alg4:C12}{{16}{20}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
 \citation{HPC1}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Implementierung und Benchmarks}{20}{chapter.4}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Implementierung und Benchmarks}{21}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Bibliothek}{20}{section.4.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Algorithmus}{21}{subsection.4.1.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Aufwand}{21}{section.4.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Bibliothek}{21}{section.4.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Algorithmus}{22}{subsection.4.1.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Aufwand}{22}{section.4.2}}
 \citation{atlas}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}FLOPS}{22}{subsection.4.2.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Fehlersch\IeC {\"a}tzer}{22}{section.4.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Benchmarks}{22}{section.4.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Test System}{22}{subsection.4.4.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Benchmark geblockte QR-Zerlegung\relax }}{23}{figure.caption.7}}
-\newlabel{img:blk}{{4.1}{23}{Benchmark geblockte QR-Zerlegung\relax }{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Benchmark ungeblockte QR-Zerlegung\relax }}{23}{figure.caption.8}}
-\newlabel{img:unblk}{{4.2}{23}{Benchmark ungeblockte QR-Zerlegung\relax }{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}FLOPS}{23}{subsection.4.2.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Fehlersch\IeC {\"a}tzer}{23}{section.4.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Benchmarks}{23}{section.4.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Test System}{23}{subsection.4.4.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Benchmark geblockte QR-Zerlegung\relax }}{24}{figure.caption.7}}
+\newlabel{img:blk}{{4.1}{24}{Benchmark geblockte QR-Zerlegung\relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Benchmark ungeblockte QR-Zerlegung\relax }}{24}{figure.caption.8}}
+\newlabel{img:unblk}{{4.2}{24}{Benchmark ungeblockte QR-Zerlegung\relax }{figure.caption.8}{}}
 \citation{Joffrain:2006:AHT:1141885.1141886}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Block Reflector}{24}{appendix.A}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Block Reflector}{25}{appendix.A}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.0.1}Orthogonal}{28}{subsection.A.0.1}}
+\citation{Joffrain:2006:AHT:1141885.1141886}
 \bibstyle{plaindin}
 \bibdata{bibliography.bib}
 \bibcite{atlas}{1}
@@ -145,4 +146,4 @@
 \global\csname @altsecnumformattrue\endcsname
 \global\@namedef{scr@dte@chapter@lastmaxnumwidth}{12.79063pt}
 \global\@namedef{scr@dte@section@lastmaxnumwidth}{20.40558pt}
-\global\@namedef{scr@dte@subsection@lastmaxnumwidth}{31.17833pt}
+\global\@namedef{scr@dte@subsection@lastmaxnumwidth}{29.91295pt}

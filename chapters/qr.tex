@@ -72,7 +72,8 @@ Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ a
 \end{figure}
 \newcommand{ \vecX }[2]{ \begin{pmatrix} #1\\#2 \end{pmatrix} }
 \subsubsection{Beispiel}
-Beispiel Rechnung zu Abbildung \ref{fig:HHolder} mit $x = \vecX{3}{4}$.
+Beispiel Rechnung zu Abbildung \ref{fig:HHolder}. Der Vektor $x = \vecX{3}{4}$ soll auf die $x_1$ Achse gespiegelt werden.
+
 Zuerst wird der Householder-Vektor $v$ und der dazugehörige Faktor $\tau$, wie in Kapitel \ref{sec:HHvec}, berechnet.
 \begin{align*}
 	\|x\| &= \sqrt{3^2 + 4^2} = 5\\
@@ -80,11 +81,15 @@ Zuerst wird der Householder-Vektor $v$ und der dazugehörige Faktor $\tau$, wie 
 	\tau &= \dfrac{\alpha - x_1}{\alpha} = \dfrac{-5 - 3}{-5} = \dfrac{8}{5} \\
 	v &=\dfrac{x - \alpha e_1}{x_1 - \alpha} = \dfrac{\vecX{3}{4} - \vecX{-5}{0}}{3- (-5)} = \dfrac{1}{8} \vecX{8}{4} = \vecX{1}{0,5}
 \end{align*}
-Nun wir $H$ auf $x$ angewandt, wie in Kapitel \ref{sec:HHvec} beschrieben.
+Nun wird $H$ auf $x$ angewandt, wie in Kapitel \ref{sec:HHvec} beschrieben.
 \begin{align*}
 	Hx &= x - \tau v (v^T x) = \vecX{3}{4} - \dfrac{8}{5} \cdot \vecX{1}{0,5} \cdot \left(  \vecX{1}{0,5}^T \cdot \vecX{3}{4} \right)\\
 	&= \vecX{3}{4} - \dfrac{8}{5} \cdot \vecX{1}{0,5} \cdot \left( 5 \right) = \vecX{3}{4} - \vecX{8}{4} \\
 	&= \vecX{-5}{0}
+\end{align*}
+Der Vektor $x = \vecX{3}{4}$ wurde mit dem Householder-Vektor $v= \vecX{1}{0.5}$ auf die $x_1$ Achse gespiegelt.
+\begin{align*}
+	Hx = \vecX{-5}{0}
 \end{align*}
 
 
@@ -174,7 +179,26 @@ Um $A$ in eine obere Dreiecksmatrix $R$ zu transformieren, wird eine Folge von H
 
 Zuerst wird aus der ersten Spalte der Matrix $A$ ein Householder-Vektor berechnet, dann wird die  Householder-Transformationen auf die Matrix angewandt.
 Diese Housholder-Transformation erzeugt Nullen in der ersten Spalte unterhalb es ersten Eintrags.
-Damit eine obere Dreiecksmatrix entsteht, wird als nächstes die Matrix $A$ ohne die erste Zeile und Spalte betrachtet. Aus der ersten Spalte der neu betrachteten Matrix wird wieder ein Householder-Vektor berechnet und die Householder-Transformationen auf die Matrix angewandt.
+Damit eine obere Dreiecksmatrix entsteht, wird als nächstes die Matrix $A$ ohne die erste Zeile und Spalte betrachtet. Aus der ersten Spalte der neu betrachteten Matrix wird wieder ein Householder-Vektor berechnet.
+Dieser Vektor erzeugt eine Householder-Transformation $\hat{H}$.
+Um diese Transformation auf $A$ anwenden zu können setzt man:
+\begin{align*}
+H_1 = \begin{pmatrix}
+\hat{H_1} 
+\end{pmatrix} \qquad , \qquad
+H_2 = \left(\begin{array}{l|l}
+I_{1} & 0\\ \hline
+0 & \hat{H_2} 	
+\end{array} \right)\qquad , \qquad
+H_i = \left(\begin{array}{l|l}
+I_{i-1} & 0\\ \hline
+0 & \hat{H_i} 	
+\end{array} \right)
+\end{align*}
+$I_{i-1}$ bezeichnet die $i-1$ dimensionale Einheitsmatrix, $\tilde{H_i}$ ist eine Householder-Transformation.
+
+
+Diese Householder-Transformationen werden auf die Matrix angewandt.
 Fährt man nach diesem Schema immer weiter fort, entsteht eine obere Dreiecksmatrix.
 %Mit Householder-Transformationen kann eine Matrix $A$ wie folgt transformieren.
 \begin{align*}
@@ -196,21 +220,7 @@ Fährt man nach diesem Schema immer weiter fort, entsteht eine obere Dreiecksmat
 	\end{array}
 	\right)
 \end{align*} 
-Mit den H's.
-\begin{align*}
-H_1 = \begin{pmatrix}
-\hat{H_1} 
-\end{pmatrix} \qquad , \qquad
-H_2 = \left(\begin{array}{l|l}
-I_{1} & 0\\ \hline
-0 & \hat{H_2} 	
-\end{array} \right)\qquad , \qquad
-H_i = \left(\begin{array}{l|l}
-I_{i-1} & 0\\ \hline
-0 & \hat{H_i} 	
-\end{array} \right)
-\end{align*}
-$I_{i-1}$ bezeichnet die $i-1$ dimensionale Einheitsmatrix, $\tilde{H_i}$ ist eine Householder-Transformation.
+
 
 So erhält man die Faktorisierung
 \begin{align*}

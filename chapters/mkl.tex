@@ -144,7 +144,7 @@ B.incCol = -A.incRow;
 \end{lstlisting}
 Diese Datenstruktur nutzt für die Daten den selben Speicherbereich wie die Matrix $A$. 
 
-
+Der data-Pointer wurde auf das letzte Element der Matrix $A$ gesetzt.
 
 Blablabla incRow Trans blabla
 
@@ -202,7 +202,8 @@ x \leftarrow \alpha  Ax %\qquad \text{or} \qquad x \leftarrow \alpha * A^T*x
 \end{align}
 
 
-Die Dreiecksmatrizen die von den Funktionen \glqq trmm\grqq{} und \glqq trmv\grqq{} verarbeitet werden sind quadratische Matrizen von denen nur der obere oder unter Dreiecks teil betrachtet wird.
-Das heißt die Matrix liegt als Quadratische Matrix im Speicher. Die Funktion beachtet nur die Einträge über oder unter der Diagonalen
+Dreiecksmatrizen die von den Funktionen \glqq trmm\grqq{} und \glqq trmv\grqq{} verarbeitet werden sind quadratische Matrizen von denen nur der obere oder unter Dreiecks teil betrachtet wird.
+Das heißt die Matrix liegt als Quadratische Matrix im Speicher. Die Funktion beachtet nur die Einträge über oder unter der Diagonalen.
+Wird dem Algorithmus mit einem Flag angezeigt das es sich um eine eine unipotente Dreiecksmatrix handeln soll, werden die Diagonaleinträge im Speicher nicht beachtet sondern vom Algorithmus als 1 angenommen. \cite{blast}
 
 
