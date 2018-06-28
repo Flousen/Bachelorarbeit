@@ -12,7 +12,7 @@ Eine QR Zerlegung kann mit einer Householder-Transformation berechnet werden.
 \subsection{Beispiel für eine Anwednung}
 Lösung eines Minimierungsproblems
 \begin{align}
-\min_{x \in \mathbb{R}^n} \|Ax-b\|^2 \label{eq1}
+\min_{x \in \mathbb{R}^n} \|Ax-b\|_2^2 \label{eq1}
 \end{align}
 mit Matrix $A \in \mathbb{R}^{m\times n}$ mit $rang(A) = n < m$ für die eine QR Zerlegung existiert.
 $R$ besitzt die Gestalt 
@@ -36,9 +36,9 @@ R=
 $\hat{R}$ stellt eine obere Dreiecksmatrix dar.
 Damit kann man das Minimierungsproblem wie folgt mit $A=QR$ modifizieren
 \begin{align}
-\min_{x \in \mathbb{R}^n} \|Ax-b\|^2 =
-\min_{x \in \mathbb{R}^n} \|Q^T(Ax-b)\|^2 =
-\min_{x \in \mathbb{R}^n} \|Rx-Q^Tb\|^2
+\min_{x \in \mathbb{R}^n} \|Ax-b\|_2^2 =
+\min_{x \in \mathbb{R}^n} \|Q^T(Ax-b)\|_2^2 =
+\min_{x \in \mathbb{R}^n} \|Rx-Q^Tb\|_2^2
 \end{align}
 
 Eine Lösung des Gleichungssystems
@@ -64,6 +64,7 @@ Hx=\alpha e_1 \label{eq:spiegelung}
 mit dem Skalar $\alpha \in \mathbb{R}$ und $e_1$ als ersten kanonischen Einheitsvektor. Der Householder-Vektor steht senkrecht auf der Ebene an welcher $x$ gespiegelt wird.\\
 Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ an der gestrichelt eingezeichneten Ebene auf die Achse $x_1$.
 
+
 \begin{figure}[H]
 	\centering
 	\input{images/hh.tex}
@@ -72,26 +73,22 @@ Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ a
 \end{figure}
 \newcommand{ \vecX }[2]{ \begin{pmatrix} #1\\#2 \end{pmatrix} }
 \subsubsection{Beispiel}
-Beispiel Rechnung zu Abbildung \ref{fig:HHolder}. Der Vektor $x = \vecX{3}{4}$ soll auf die $x_1$ Achse gespiegelt werden.
+Rechnung zu Abbildung \ref{fig:HHolder}: Der Vektor $x = \vecX{3}{4}$ soll auf die $x_1$ Achse gespiegelt werden.
 
 Zuerst wird der Householder-Vektor $v$ und der dazugehörige Faktor $\tau$, wie in Kapitel \ref{sec:HHvec}, berechnet.
 \begin{align*}
-	\|x\| &= \sqrt{3^2 + 4^2} = 5\\
-	\alpha &= -1 \cdot \text{sign}(x_1) \cdot \|x\| = -5 \\
+	\|x\|_2 &= \sqrt{3^2 + 4^2} = 5\\
+	\alpha &= -1 \cdot \text{sign}(x_1) \cdot \|x\|_2 = -5 \\
 	\tau &= \dfrac{\alpha - x_1}{\alpha} = \dfrac{-5 - 3}{-5} = \dfrac{8}{5} \\
 	v &=\dfrac{x - \alpha e_1}{x_1 - \alpha} = \dfrac{\vecX{3}{4} - \vecX{-5}{0}}{3- (-5)} = \dfrac{1}{8} \vecX{8}{4} = \vecX{1}{0,5}
 \end{align*}
 Nun wird $H$ auf $x$ angewandt, wie in Kapitel \ref{sec:HHvec} beschrieben.
 \begin{align*}
 	Hx &= x - \tau v (v^T x) = \vecX{3}{4} - \dfrac{8}{5} \cdot \vecX{1}{0,5} \cdot \left(  \vecX{1}{0,5}^T \cdot \vecX{3}{4} \right)\\
-	&= \vecX{3}{4} - \dfrac{8}{5} \cdot \vecX{1}{0,5} \cdot \left( 5 \right) = \vecX{3}{4} - \vecX{8}{4} \\
-	&= \vecX{-5}{0}
+	&= \vecX{3}{4} - \dfrac{8}{5} \cdot \vecX{1}{0,5} \cdot 5 = \vecX{3}{4} - \vecX{8}{4} \\
+	\Longleftrightarrow Hx&= \vecX{-5}{0}
 \end{align*}
 Der Vektor $x = \vecX{3}{4}$ wurde mit dem Householder-Vektor $v= \vecX{1}{0.5}$ auf die $x_1$ Achse gespiegelt.
-\begin{align*}
-	Hx = \vecX{-5}{0}
-\end{align*}
-
 
 \subsection{Householder Vector} \label{sec:HHvec}
 Damit (\ref{eq:spiegelung}) gilt, wird der Vektor berechnet, 
@@ -175,10 +172,10 @@ Statt eines Matrix-Matrix-Produkts muss man nur ein Matrix-Vektor-Produkt und ei
 %Das Matrix-Vektor-Produkt und das dyadische Produkt haben nur einen Aufwand von $O(n^2)$.
 
 \subsection{QR-Zerlegung mittels Housholder-Transformationen}
-Um $A$ in eine obere Dreiecksmatrix $R$ zu transformieren, wird eine Folge von Housholder-Transformationen auf $A$ angewendet.
+Um $A$ in eine obere Dreiecksmatrix $R$ zu transformieren, wird eine Folge von Housholder-Transformationen auf $A$ angewandt.
 
 Zuerst wird aus der ersten Spalte der Matrix $A$ ein Householder-Vektor berechnet, dann wird die  Householder-Transformationen auf die Matrix angewandt.
-Diese Housholder-Transformation erzeugt Nullen in der ersten Spalte unterhalb es ersten Eintrags.
+Diese Housholder-Transformation erzeugt Nullen in der ersten Spalte unterhalb des ersten Eintrags.
 Damit eine obere Dreiecksmatrix entsteht, wird als nächstes die Matrix $A$ ohne die erste Zeile und Spalte betrachtet. Aus der ersten Spalte der neu betrachteten Matrix wird wieder ein Householder-Vektor berechnet.
 Dieser Vektor erzeugt eine Householder-Transformation $\hat{H}$.
 Um diese Transformation auf $A$ anwenden zu können setzt man:
@@ -195,7 +192,7 @@ I_{i-1} & 0\\ \hline
 0 & \hat{H_i} 	
 \end{array} \right)
 \end{align*}
-$I_{i-1}$ bezeichnet die $i-1$ dimensionale Einheitsmatrix, $\tilde{H_i}$ ist eine Householder-Transformation.
+$I_{i-1}$ bezeichnet die $i-1$ dimensionale Einheitsmatrix, $\hat{H_i}$ ist eine Householder-Transformation.
 
 
 Diese Householder-Transformationen werden auf die Matrix angewandt.
@@ -429,7 +426,7 @@ Mit folgender Umformung kommt man vom (\ref{eq:larfb}) auf Algorithmus \ref{alg:
 	C &\leftarrow C - \left(V T V^T C\right)^{TT} 	\\
 	C &\leftarrow  C - \left(C^T  V  T^T  V^T\right)^T
 \end{align*}
-anwenden von (\ref{eq:aufteilen}). Aufteilen der Matrizen $C$ und $V$.
+Die Matrizen $C$ und $V$ werden wie in (\ref{eq:aufteilen}) aufgeteilt.
 \begin{align*}
 	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) -  \left( \left(\dfrac{C_1}{C_2}\right)^T \cdot \left(\dfrac{V_1}{V_2}\right) \cdot T \cdot \left(\dfrac{V_1}{V_2}\right)^T \right)^T \\
 	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( \left(C_1^T|C_2^T\right)	\cdot \left(\dfrac{V_1}{V_2}\right) \cdot T \cdot \left(V_1^T|V_2^T\right) \right)^T \\

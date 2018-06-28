@@ -1,35 +1,37 @@
 \chapter{Einleitung}
 %Ziel dieser Bachelorarbeit ist es die QR-Zerlegung zu beschreiben. 
-Als QR-Zerlegung versteht man die Zerlegung der Matrix $A$ in eine  orthogonale Matrix $Q$ und eine obere Dreiecksmatrix $R$.
+Als QR-Zerlegung bezeichnet man die Zerlegung der Matrix $A$ in eine  orthogonale Matrix $Q$ und eine obere Dreiecksmatrix $R$.
 \begin{align*}
 	A = Q \cdot R
 \end{align*} 
 
-In dieser Arbeit wird nur auf die Berechnung der QR-Zerlegung mittels Householder-Transfomation eingegangen. 
+In dieser Arbeit wird die Berechnung der QR-Zerlegung mittels Householder-Transfomation betrachtet. 
 
-Neben der Householder-Transfomation kann man die QR-Zerlegung auch noch mittels Givens-Rotationen oder mit dem Gram-Schmidtschen Orthogonalisierungsverfahrens berechnet werden.
+Neben der Householder-Transfomation kann die QR-Zerlegung auch mittels Givens-Rotationen oder mit dem Gram-Schmidtschen Orthogonalisierungsverfahrens berechnet werden.
 
+Die QR-Zerlegung bietet folgende Möglichkeiten
 
-
-
+Mit eine QR-Zerlegung kann man:
 \begin{itemize}
-	\item Wozu dient die QR-Zerlegung?
+	\item Gleichungssysteme mit schlechter Kondition lassen sich mittels QR-Zerlegung stabiler als mit dem Gausschen Eliminationsverfahren (LR-Zerlegung) lösen. 
+
+	\item Lösen von linearen Ausgleichsproblemen durch die Methode der kleinsten Fehlerquadrate.
 	
-	\item Besser beim Lösen von Gleichungssystemen mit schlechter Kondition.
-	
-	\item Lösen von l	inearen Ausgleichsproblemen
-	
-	\item QR-Verfahren (Eigenwerte)
-	
-	\item Warum muss die QR-Zerlegung schnell sein? zb Kern operation beim QR verfahren.
-	
-	\item Warum Cache-Optimiert? Um Rechner capazität optiaml aus zu nuzen.
+	\item Im QR-Verfahren ist die QR-Zerlegung eine Kernoperation, weil in jedem Iterationsschritt eine QR-Zerlegung berechnet wird.
+	Das QR-Verfahren berechnet die Eigenwerte einer Matrix.	
 \end{itemize}
 
+Weil die QR-Zerlegung bei diesen Problemen oft verwendet wird, empfiehlt es sich, die Berechnung der OR-Zerlegung zu optimieren.
 
-\section{Intel MKL}
 
-Die Intel MKL ist ein
+
+Um die Prozessorkapazität optimal zu nutzen, ist es sinnvoll die QR-Zerlegung mit einem Cache optimierten Algorithmus zu berechnen.
+
+
+\section{Intel MKL (Math Kernel Library)}
+
+Die Intel MKL ist eine Bibliothek, in der mathematische Funktionen implementiert sind. Darunter sind auch BLAS-Routinen (Basic Linear Algebra Subprogramms) und LAPACK-Routinen (Linear Algebra Package) \cite{DGEQR2}.
+
 
 
 MKL ist eine Abkürzung für Math Kernel Library 

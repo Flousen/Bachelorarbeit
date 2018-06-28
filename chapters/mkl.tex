@@ -121,13 +121,38 @@ durch die folgende Datenstruktur repräsentieren.
 struct Matrix A;
 A.data = /*pointer to data*/;
 A.numRows = 5; 
-A.numCols = 5;
+A.4 numCols = 5;
 A.incRow = A.numCols;
 A.incCol = 1;
 \end{lstlisting}
-Die Matrix 
+
+Die Matrix $B$ soll den Matrixblock aus $A$ darstellen, welcher in der zweiten Zeile und dritte Spalte beginnt. Zusätzlich soll der Block transponiert betrachte werden. Die Matrix
 \begin{align*}
 B = \begin{pmatrix}
+8 &  13 &  18 & 23 \\
+9 &  14 &  19 & 24 \\
+10 &  15 &  20 & 25 
+\end{pmatrix}
+\end{align*}
+lässt sich mit folgender Datenstruktur repräsentieren.
+\begin{lstlisting}
+struct Matrix B;
+B.data = A.data[ 1*A.incRow + 2*A.incCol ];
+B.numRows = 3; 
+B.numCols = 4;
+B.incRow = A.incCol;
+B.incCol = A.incRow;
+\end{lstlisting}
+
+In Zeile 2 wird er Daten-Zeiger auf das Element der zweiten Zeile und Spalte gesetzt.
+Um die Matrix zu transponieren werden die Incremente vertauscht. Dies geschieht in Zeile 5 und 6.  
+Nun müssen nur noch die Matrix Dimensionen richtig gesetzt werden. Zeile 3 und 4.
+
+Die Matrix $C$ soll 
+
+Die Matrix 
+\begin{align*}
+C = \begin{pmatrix}
 25 &  20 &  15 & 10 \\
 24 &  19 &  14 & 9 \\
 23 &  18 &  13 & 8 
@@ -135,18 +160,16 @@ B = \begin{pmatrix}
 \end{align*}
 lässt sich mit folgender Datenstruktur repräsentieren.
 \begin{lstlisting}
-struct Matrix B;
-B.data = A.data[4*A.incRow + 4*A.incCol];
-B.numRows = 3; 
-B.numCols = 4;
-B.incRow = -A.incCol;
-B.incCol = -A.incRow;
+struct Matrix C;
+C.data = B.data[ 2*B.incRow + 3*B.incCol ];
+C.numRows = B.numRows; 
+C.numCols = B.numCols;
+C.incRow = -B.incRow;
+C.incCol = -B.incCol;
 \end{lstlisting}
 Diese Datenstruktur nutzt für die Daten den selben Speicherbereich wie die Matrix $A$. 
 
-Der data-Pointer wurde auf das letzte Element der Matrix $A$ gesetzt.
-
-Blablabla incRow Trans blabla
+Der data-Pointer wurde auf das letzte Element der Matrix $A$ gesetzt. \cite{blast}
 
 
 \newpage
@@ -202,8 +225,11 @@ x \leftarrow \alpha  Ax %\qquad \text{or} \qquad x \leftarrow \alpha * A^T*x
 \end{align}
 
 
-Dreiecksmatrizen die von den Funktionen \glqq trmm\grqq{} und \glqq trmv\grqq{} verarbeitet werden sind quadratische Matrizen von denen nur der obere oder unter Dreiecks teil betrachtet wird.
-Das heißt die Matrix liegt als Quadratische Matrix im Speicher. Die Funktion beachtet nur die Einträge über oder unter der Diagonalen.
-Wird dem Algorithmus mit einem Flag angezeigt das es sich um eine eine unipotente Dreiecksmatrix handeln soll, werden die Diagonaleinträge im Speicher nicht beachtet sondern vom Algorithmus als 1 angenommen. \cite{blast}
+Dreiecksmatrizen, die von den Funktionen \glqq trmm\grqq{} und \glqq trmv\grqq{} verarbeitet werden, sind quadratische Matrizen, von denen nur der obere oder der untere Dreiecksteil betrachtet wird.
+Das heißt, die Matrix liegt als quadratische Matrix im Speicher. Die Funktion beachtet nur die Einträge über oder unter der Diagonalen.
+Wird dem Algorithmus mit einem Flag angezeigt, dass 
+er die Matrix als eine unipotente Dreiecksmatrix betrachten soll,
+%es sich um eine eine unipotente Dreiecksmatrix handeln soll, 
+dann werden die Diagonaleinträge im Speicher nicht beachtet, sondern vom Algorithmus als 1 angenommen. \cite{blast}
 
 
