@@ -22,20 +22,20 @@
 \@writefile{toc}{\select@language{ngerman}}
 \@writefile{lof}{\select@language{ngerman}}
 \@writefile{lot}{\select@language{ngerman}}
-\citation{DGEQR2}
 \@writefile{toc}{\contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {1.1}Intel MKL (Math Kernel Library)}{2}{section.1.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Intel MKL}{2}{section*.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Cache-optimierung}{2}{section*.3}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}BLAS}{3}{chapter.2}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}Datenstruktur f\IeC {\"u}r Matrizen}{3}{section.2.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Beispiel}{4}{section*.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Beispiel}{4}{section*.4}}
 \citation{blast}
 \citation{blast}
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}Einige BLAS-Routinen}{7}{section.2.2}}
@@ -61,10 +61,10 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Householder-Transformation}{10}{section.3.2}}
 \newlabel{eq:HHM}{{3.5}{10}{Householder-Transformation}{equation.3.2.5}{}}
 \newlabel{eq:spiegelung}{{3.6}{10}{Householder-Transformation}{equation.3.2.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Beispiel Householder-Transformation mit $x=(3,4)^T$\relax }}{11}{figure.caption.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Beispiel Householder-Transformation mit $x=(3,4)^T$\relax }}{11}{figure.caption.5}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:HHolder}{{3.1}{11}{Beispiel Householder-Transformation mit $x=(3,4)^T$\relax }{figure.caption.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Beispiel}{11}{section*.4}}
+\newlabel{fig:HHolder}{{3.1}{11}{Beispiel Householder-Transformation mit $x=(3,4)^T$\relax }{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Beispiel}{11}{section*.6}}
 \citation{num1}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Householder Vector}{12}{subsection.3.2.1}}
 \newlabel{sec:HHvec}{{3.2.1}{12}{Householder Vector}{subsection.3.2.1}{}}
@@ -82,8 +82,8 @@
 \citation{DGEQRF}
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}Geblockte QR-Zerlegung}{17}{section.3.3}}
 \newlabel{equ:blockA}{{3.8}{17}{Geblockte QR-Zerlegung}{equation.3.3.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Aufteilung der Matrix $A$\relax }}{17}{figure.caption.5}}
-\newlabel{fig:blockA}{{3.2}{17}{Aufteilung der Matrix $A$\relax }{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Aufteilung der Matrix $A$\relax }}{17}{figure.caption.7}}
+\newlabel{fig:blockA}{{3.2}{17}{Aufteilung der Matrix $A$\relax }{figure.caption.7}{}}
 \citation{Joffrain:2006:AHT:1141885.1141886}
 \citation{LARFT}
 \citation{Joffrain:2006:AHT:1141885.1141886}
@@ -93,8 +93,8 @@
 \newlabel{alg:clacT}{{3}{19}{Der Algorithmus berechnet die Matrix $T$ so dass (\ref {eq:blkreflectorT}) gilt. Die untere Dreiecksmatrix $V$ enthält die Householder-Vektoren. Der Vektor $\tau $ die dazugehörigen $\tau _i = \frac {2}{v_i^Tv_i}$. Hinweise zur Notation: Kleine Buchstaben bezeichnen einen einzelne Matrixeintrag(Beipsiel $v_{i,j}$ ist der Eintrag der i-ten-Zeile und j-ten Spalte der Matrix $V$). Die nach unten gestelletn Indices geben einen Block an der betrachtet werden soll(Beispiel $V_{i:n,j:m}$ bezeichnet einen Block aus der Matrix $V$ der von i-ten bis zur n-ten Zeile und von der j-ten bis zur m-ten Spalte geht).\relax }{algorithm.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Anwenden von $I - VTV^T$}{19}{subsection.3.3.2}}
 \newlabel{eq:larfb}{{3.12}{20}{Anwenden von $I - VTV^T$}{equation.3.3.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Partitionierung vom A f\IeC {\"u}r larfb\relax }}{20}{figure.caption.6}}
-\newlabel{fig:patrA}{{3.3}{20}{Partitionierung vom A für larfb\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Partitionierung vom A f\IeC {\"u}r larfb\relax }}{20}{figure.caption.8}}
+\newlabel{fig:patrA}{{3.3}{20}{Partitionierung vom A für larfb\relax }{figure.caption.8}{}}
 \newlabel{eq:aufteilen}{{3.13}{20}{Anwenden von $I - VTV^T$}{equation.3.3.13}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces $I - V T V^T$ auf C anwenden.  Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }}{22}{algorithm.4}}
 \newlabel{alg:applyblockref}{{4}{22}{$I - V T V^T$ auf C anwenden.\\ Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.\relax }{algorithm.4}{}}
@@ -119,10 +119,10 @@
 \@writefile{toc}{\contentsline {section}{\numberline {4.3}Fehlersch\IeC {\"a}tzer}{25}{section.4.3}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.4}Benchmarks}{25}{section.4.4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Test System}{25}{subsection.4.4.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Benchmark geblockte QR-Zerlegung\relax }}{26}{figure.caption.7}}
-\newlabel{img:blk}{{4.1}{26}{Benchmark geblockte QR-Zerlegung\relax }{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Benchmark ungeblockte QR-Zerlegung\relax }}{26}{figure.caption.8}}
-\newlabel{img:unblk}{{4.2}{26}{Benchmark ungeblockte QR-Zerlegung\relax }{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Benchmark geblockte QR-Zerlegung\relax }}{26}{figure.caption.9}}
+\newlabel{img:blk}{{4.1}{26}{Benchmark geblockte QR-Zerlegung\relax }{figure.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Benchmark ungeblockte QR-Zerlegung\relax }}{26}{figure.caption.10}}
+\newlabel{img:unblk}{{4.2}{26}{Benchmark ungeblockte QR-Zerlegung\relax }{figure.caption.10}{}}
 \citation{Joffrain:2006:AHT:1141885.1141886}
 \@writefile{toc}{\contentsline {chapter}{\numberline {A}Block Reflector}{27}{appendix.A}}
 \@writefile{lof}{\addvspace {10\p@ }}
@@ -140,7 +140,7 @@
 \bibcite{DGEQRF}{6}
 \bibcite{DGEQR2}{7}
 \bibcite{blast}{8}
-\@writefile{toc}{\contentsline {chapter}{\nonumberline Literaturverzeichnis}{31}{chapter*.9}}
+\@writefile{toc}{\contentsline {chapter}{\nonumberline Literaturverzeichnis}{31}{chapter*.11}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\addvspace {10\p@ }}

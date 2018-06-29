@@ -9,32 +9,59 @@ In dieser Arbeit wird die Berechnung der QR-Zerlegung mittels Householder-Transf
 
 Neben der Householder-Transfomation kann die QR-Zerlegung auch mittels Givens-Rotationen oder mit dem Gram-Schmidtschen Orthogonalisierungsverfahrens berechnet werden.
 
-Die QR-Zerlegung bietet folgende Möglichkeiten
-
-Mit eine QR-Zerlegung kann man:
+Die QR-Zerlegung bietet folgende Möglichkeiten:
+%Mit eine QR-Zerlegung kann man:
 \begin{itemize}
 	\item Gleichungssysteme mit schlechter Kondition lassen sich mittels QR-Zerlegung stabiler als mit dem Gausschen Eliminationsverfahren (LR-Zerlegung) lösen. 
 
-	\item Lösen von linearen Ausgleichsproblemen durch die Methode der kleinsten Fehlerquadrate.
+	\item Lösen von linearen Ausgleichsproblemen durch die Methode der kleinsten Fehlerquadrate. 
 	
-	\item Im QR-Verfahren ist die QR-Zerlegung eine Kernoperation, weil in jedem Iterationsschritt eine QR-Zerlegung berechnet wird.
-	Das QR-Verfahren berechnet die Eigenwerte einer Matrix.	
+%	\item Im QR-Verfahren ist die QR-Zerlegung eine Kernoperation, weil in jedem Iterationsschritt eine QR-Zerlegung berechnet wird.	Das QR-Verfahren berechnet die Eigenwerte einer Matrix.	
+	
+	\item Berechnung von Eigenwerten einer Matrix mittels QR-Verfahren. Im QR-Verfahren ist die QR-Zerlegung eine Kernoperation, da in jedem Iterationsschritt eine QR-Zerlegung berechnet wird.
 \end{itemize}
 
-Weil die QR-Zerlegung bei diesen Problemen oft verwendet wird, empfiehlt es sich, die Berechnung der OR-Zerlegung zu optimieren.
+%Weil die QR-Zerlegung bei diesen Problemen oft verwendet wird, empfiehlt es sich, die Berechnung der OR-Zerlegung zu optimieren.
+
+Weil die QR-Zerlegung bei den aufgezählten Problemen häufig verwendet wird, empfiehlt es sich, die Berechnung der OR-Zerlegung zu optimieren.
+
+Um die Prozessorkapazität optimal zu nutzen, ist es sinnvoll die QR-Zerlegung mit einem cache-optimierten Algorithmus zu berechnen.
+Dadurch ist es möglich, die angegebene Maximalleistung des Prozessors zu erreichen.
+
+\subsubsection{Intel MKL}
+Die Intel MKL (Math Kernel Library) ist eine Bibliothek der Firma Intel, in welcher mathematische Funktionen enthalten sind.
+%Die Intel MKL ist eine Bibliothek der Firma Intel. Die Abkürzung MKL steht für Math Kernel Library.
+%In der Bibliothek sind mathematische Funktionen enthalten.
+Die MKL implementiert diese Funktionen sehr effizient, damit der Prozessor die angegebene theoretische Maximalleistung erreichen kann.
+
+%Die MKL beinhaltet BLAS-Routinen (Basic Linear Algebra Subprogramms) und LAPACK-Routinen (Linear Algebra Package) \cite{DGEQR2}.
+
+%Es sind Funktionen der linearen Algebra wie BLAS (Basic Linear Algebra Subprogramms) und LAPACK (Linear Algebra Package) implementiert.
+
+In der MKL sind die beiden Programmbibliotheken BLAS (Basic Linear Algebra Subprogramms) und LAPACK (Linear Algebra Package) implementiert. 
+Diese Funktionen aus der Teilmenge der linearen Algebra sind für die Berechnung der QR-Zerlegung elementar erforderlich.
+
+BLAS enthält grundlegende und LAPACK weiterentwickelte Funktionen der linearen Algebra.
+
+\subsubsection{Cache-optimierung}
+Der Cache ist ein schneller Datenspeicher im Prozessor. Daten die vom Prozessor verarbeitet werden sollen, müssen immer zuerst in den Cache geladen werden.
+
+Der Zugriff auf Daten die im RAM liegen dauert sehr viel länger als der Zugriff auf Daten die im Cache liegen.
+
+Aus diesem Grund ist es sinnvoll die Algorithmen so zu gestalten, dass eine optimale Übertragung erfolgt.
+
+Ziele der Cache-optimierung:
+
+\begin{itemize}
+	\item Die Daten müssen in der Reihenfolge, in der sie verwendet werden, im RAM liegen.
+	\item Sequentiell im RAM liegende Daten werden durch Prefetching effizient in den Cache geladen.
+\end{itemize}
+
+Prefetching ist die Eigenschaft des Prozessors Zugriffsmuster auf den Speicher zu erkennen und vorher zusagen.
 
 
 
-Um die Prozessorkapazität optimal zu nutzen, ist es sinnvoll die QR-Zerlegung mit einem Cache optimierten Algorithmus zu berechnen.
-
-
-\section{Intel MKL (Math Kernel Library)}
-
-Die Intel MKL ist eine Bibliothek, in der mathematische Funktionen implementiert sind. Darunter sind auch BLAS-Routinen (Basic Linear Algebra Subprogramms) und LAPACK-Routinen (Linear Algebra Package) \cite{DGEQR2}.
 
 
 
-MKL ist eine Abkürzung für Math Kernel Library 
-
-Kapitel über die Wichtigkeit der Intel MKL.
 

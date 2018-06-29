@@ -1,9 +1,10 @@
 \select@language {ngerman}
 \contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}Intel MKL (Math Kernel Library)}{2}{section.1.1}
+\contentsline {subsubsection}{\nonumberline Intel MKL}{2}{section*.2}
+\contentsline {subsubsection}{\nonumberline Cache-optimierung}{2}{section*.3}
 \contentsline {chapter}{\numberline {2}BLAS}{3}{chapter.2}
 \contentsline {section}{\numberline {2.1}Datenstruktur f\IeC {\"u}r Matrizen}{3}{section.2.1}
-\contentsline {subsubsection}{\nonumberline Beispiel}{4}{section*.2}
+\contentsline {subsubsection}{\nonumberline Beispiel}{4}{section*.4}
 \contentsline {section}{\numberline {2.2}Einige BLAS-Routinen}{7}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Matrix-Matrix Produkt (gemm)}{7}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Matrix-Vektor Produkt (gemv)}{7}{subsection.2.2.2}
@@ -14,7 +15,7 @@
 \contentsline {section}{\numberline {3.1}Definition}{9}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Beispiel f\IeC {\"u}r eine Anwednung}{9}{subsection.3.1.1}
 \contentsline {section}{\numberline {3.2}Householder-Transformation}{10}{section.3.2}
-\contentsline {subsubsection}{\nonumberline Beispiel}{11}{section*.4}
+\contentsline {subsubsection}{\nonumberline Beispiel}{11}{section*.6}
 \contentsline {subsection}{\numberline {3.2.1}Householder Vector}{12}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Householder-Transformation anwenden}{14}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}QR-Zerlegung mittels Housholder-Transformationen}{14}{subsection.3.2.3}
@@ -30,4 +31,4 @@
 \contentsline {section}{\numberline {4.4}Benchmarks}{25}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Test System}{25}{subsection.4.4.1}
 \contentsline {chapter}{\numberline {A}Block Reflector}{27}{appendix.A}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{31}{chapter*.9}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{31}{chapter*.11}
