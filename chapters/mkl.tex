@@ -94,12 +94,9 @@ struct Matrix {
 \end{lstlisting}
 
 Diese Datenstruktur ist für Matrixeinträge vom Type double.
-
 Die Variablen für die Speicherverwaltung(Zeile 3) sind vom Typ ptrdiff\_t und die Variablen für die Dimensions Informationen sind Vom Typ size\_t.
-
 ptrdiff\_t und size\_t sind Datentypen für Ganzzahlen. Der Unterschied zwischen den Datentypen ist size\_t kann nur Werte Darstellen die größer gleich 0 sind, ptrdiff\_t dann auch negative Werte Darstellen.
-
-Die das incRow und incCol aus negative Werte haben könne ist Sinnvoll, wenn man zugriff auf Einen Matrix Block haben will in anderer Reihenfolge.
+Die das incRow und incCol aus negative Werte haben könne ist Sinnvoll, wenn man zugriff auf Einen Matrix Block haben will in anderer Reihenfolge. \cite{blast}
 
 Für Intel MKL Routinen müssen die Matrizen zeilenweise gespeichert sein.
 Das bedeutet incCol ist gleich 1.
@@ -146,10 +143,9 @@ B.incCol = A.incRow;
 
 In Zeile 2 wird er Daten-Zeiger auf das Element der zweiten Zeile und Spalte gesetzt.
 Um die Matrix zu transponieren werden die Incremente vertauscht. Dies geschieht in Zeile 5 und 6.  
-Nun müssen nur noch die Matrix Dimensionen richtig gesetzt werden. Zeile 3 und 4.
+In Zeile 3 und 4 wird die Matrix Dimensionen richtig gesetzt.
 
-Die Matrix $C$ soll 
-
+Die Matrix $C$ soll ein Beispiel für negative Incremente sein. Sie nutzt den selben Datenspeicher wie die Matrizen $A$ und $B$, in dem die Werte 1 bis 25 hinter einander im Speicher liegen.
 Die Matrix 
 \begin{align*}
 C = \begin{pmatrix}
@@ -167,9 +163,9 @@ C.numCols = B.numCols;
 C.incRow = -B.incRow;
 C.incCol = -B.incCol;
 \end{lstlisting}
-Diese Datenstruktur nutzt für die Daten den selben Speicherbereich wie die Matrix $A$. 
+Der data-Pointer wurde auf das letzte Element der Matrix $B$ gesetzt. Die Incremente werden negativ von der Matrix $B$ übernommen.
 
-Der data-Pointer wurde auf das letzte Element der Matrix $A$ gesetzt. \cite{blast}
+Matrizen wie $B$ und $C$ die den selben Datenspeicher wie $A$ nutzen werden als Matrixview bezeichnet. \cite{blast}
 
 
 \newpage

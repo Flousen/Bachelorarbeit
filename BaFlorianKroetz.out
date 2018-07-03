@@ -20,10 +20,10 @@
 \BOOKMARK [0][-]{chapter.4}{Implementierung und Benchmarks}{}% 20
 \BOOKMARK [1][-]{section.4.1}{Bibliothek}{chapter.4}% 21
 \BOOKMARK [2][-]{subsection.4.1.1}{Algorithmus}{section.4.1}% 22
-\BOOKMARK [1][-]{section.4.2}{Aufwand}{chapter.4}% 23
-\BOOKMARK [2][-]{subsection.4.2.1}{FLOPS}{section.4.2}% 24
-\BOOKMARK [1][-]{section.4.3}{Fehlersch\344tzer}{chapter.4}% 25
-\BOOKMARK [1][-]{section.4.4}{Benchmarks}{chapter.4}% 26
-\BOOKMARK [2][-]{subsection.4.4.1}{Test System}{section.4.4}% 27
+\BOOKMARK [1][-]{section.4.2}{Fehlersch\344tzer}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.3}{Benchmarks}{chapter.4}% 24
+\BOOKMARK [2][-]{subsection.4.3.1}{Aufwand}{section.4.3}% 25
+\BOOKMARK [2][-]{subsection.4.3.2}{FLOPS}{section.4.3}% 26
+\BOOKMARK [2][-]{subsection.4.3.3}{Test System}{section.4.3}% 27
 \BOOKMARK [0][-]{appendix.A}{Block Reflector}{}% 28
-\BOOKMARK [0][-]{chapter*.11}{Literaturverzeichnis}{}% 29
+\BOOKMARK [0][-]{chapter*.12}{Literaturverzeichnis}{}% 29

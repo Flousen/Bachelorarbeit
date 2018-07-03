@@ -1,7 +1,7 @@
 \select@language {ngerman}
 \contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}
-\contentsline {subsubsection}{\nonumberline Intel MKL}{2}{section*.2}
-\contentsline {subsubsection}{\nonumberline Cache-optimierung}{2}{section*.3}
+\contentsline {subsubsection}{\nonumberline Cache-optimierung}{2}{section*.2}
+\contentsline {subsubsection}{\nonumberline Intel MKL}{2}{section*.3}
 \contentsline {chapter}{\numberline {2}BLAS}{3}{chapter.2}
 \contentsline {section}{\numberline {2.1}Datenstruktur f\IeC {\"u}r Matrizen}{3}{section.2.1}
 \contentsline {subsubsection}{\nonumberline Beispiel}{4}{section*.4}
@@ -24,11 +24,12 @@
 \contentsline {subsection}{\numberline {3.3.2}Anwenden von $I - VTV^T$}{19}{subsection.3.3.2}
 \contentsline {chapter}{\numberline {4}Implementierung und Benchmarks}{23}{chapter.4}
 \contentsline {section}{\numberline {4.1}Bibliothek}{23}{section.4.1}
+\contentsline {subsubsection}{\nonumberline MKL Wrapper}{24}{section*.9}
 \contentsline {subsection}{\numberline {4.1.1}Algorithmus}{24}{subsection.4.1.1}
-\contentsline {section}{\numberline {4.2}Aufwand}{24}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}FLOPS}{25}{subsection.4.2.1}
-\contentsline {section}{\numberline {4.3}Fehlersch\IeC {\"a}tzer}{25}{section.4.3}
-\contentsline {section}{\numberline {4.4}Benchmarks}{25}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Test System}{25}{subsection.4.4.1}
-\contentsline {chapter}{\numberline {A}Block Reflector}{27}{appendix.A}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{31}{chapter*.11}
+\contentsline {section}{\numberline {4.2}Fehlersch\IeC {\"a}tzer}{25}{section.4.2}
+\contentsline {section}{\numberline {4.3}Benchmarks}{25}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Aufwand}{25}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}FLOPS}{25}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Test System}{26}{subsection.4.3.3}
+\contentsline {chapter}{\numberline {A}Block Reflector}{28}{appendix.A}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{32}{chapter*.12}

@@ -1,5 +1,9 @@
 \chapter{Implementierung und Benchmarks}
-Was wurde Implementiert und warum?
+Es wurde der in Kapitel 3 beschriebe Algorithmus zur Berechnung der QR-Zerlegung mittels Householder-Transformation implementiert. Außerdem wurde sich an der Implementierung von LAPACK orientiert.
+
+Es wurde der Ungeblockte und der Geblocket Algorithmus implementiert. Beide Algorithmen wurden mit BLAS routinen der IntelMKL implementiert. Die Implementiertung wurde dann mit den Algorithmen der IntelMKL verglichen.
+
+Die Implementierung steht auf GitHub Verfügung \cite{git} \url{https://github.com/Flousen/Bachelorarbeit}
 
 \section{Bibliothek}
 Die verwendete Bibliothek wurde in der Vorlesung High Performance Computing 1 entwickelt \cite{HPC1}.
@@ -15,6 +19,7 @@ print(A); // Matrix Ausgeben
 print(A.block(2,2));
 print(A.block(2,2).view(Trans::view));
 \end{lstlisting}
+
 Dieser Code kann die folgende Ausgabe erzeugen.
 \lstset{numbers=none}
 \begin{lstlisting} 
@@ -35,6 +40,10 @@ A =
     -0.0740   0.1676  -0.1897
     -0.1027  -0.9108  -0.0717
 \end{lstlisting}
+
+\subsubsection{MKL Wrapper}
+
+
 
 \subsection{Algorithmus}
 
@@ -59,24 +68,12 @@ for (std::size_t i = 0; i < mn; ++i){
 
 Die anderen Algorithem wurden analog Implementiert siehe Anhang.
 
-
-\section{Aufwand}
-
-Die QR-Zerlegung einer Matrix $A \in \mathbb{R}^{m \times n}$  erfordert
-\begin{align*}
-	n^2(m-\frac{1}{3} n) + {\cal O}(mn) \qquad \qquad \text{oder 2 mal LRs}
-\end{align*}
-Rechenoperationen. Quelle???
-
-\subsection{FLOPS}
-FLPOS (Floating Point Operations Per Second) 
-
 \section{Fehlerschätzer}
 
 Um zu testen ob die QR-Zerlegung korrekt ist, ist ein Fehlerschätzer notwendig.
 Es wurde der Fehlerschätzer von ATLAS\cite{atlas} verwendet.
 \begin{align}
-	err = \dfrac{\|A - QR\|_i}{\|A\|_i \cdot \min(m,n) \cdot \varepsilon}
+err = \dfrac{\|A - QR\|_i}{\|A\|_i \cdot \min(m,n) \cdot \varepsilon}
 \end{align}
 $\|\cdot\|_i$ ist eine passende Norm.
 Die Matrizen $Q$ und $R$ sind die QR-Zerlegung der Matrix $A \in \mathbb{R}^{m \times n}$.
@@ -86,15 +83,23 @@ Die QR-Zerlegung ist gut genug falls der Fehler kleiner 1 ist: $ err < 1 $.
 Als Norm wurde die Zeilensummennorm $\|\cdot\|_\infty$ gewählt.
 Diese ist für eine Matrix $A \in \mathbb{R}^{m\times n}$ gegeben durch
 \begin{align*}
-	\|A\|_\infty = \max_{i=1,...,m} \sum_{j=1}^{n} |a_{ij}|
+\|A\|_\infty = \max_{i=1,...,m} \sum_{j=1}^{n} |a_{ij}|
 \end{align*}
 
-Diese Norm wurde gewählt das sie sich leicht zu berechnen ist.
-
-
-
+Diese Norm wurde gewählt, da die für zeilenweise gespeicherte Matrizen effizient berechnet werden kann.
 
 \section{Benchmarks}
+
+\subsection{Aufwand}
+
+Die QR-Zerlegung einer Matrix $A \in \mathbb{R}^{m \times n}$  erfordert
+\begin{align*}
+n^2(m-\frac{1}{3} n) + {\cal O}(mn) \qquad \qquad \text{oder 2 mal LRs}
+\end{align*}
+Rechenoperationen. Quelle???
+
+\subsection{FLOPS}
+FLPOS (Floating Point Operations Per Second) 
 
 \subsection{Test System}
 
