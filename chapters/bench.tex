@@ -3,7 +3,8 @@ Es wurde der in Kapitel 3 beschriebe Algorithmus zur Berechnung der QR-Zerlegung
 
 Es wurde der Ungeblockte und der Geblocket Algorithmus implementiert. Beide Algorithmen wurden mit BLAS routinen der IntelMKL implementiert. Die Implementiertung wurde dann mit den Algorithmen der IntelMKL verglichen.
 
-Die Implementierung steht auf GitHub Verfügung \cite{git} \url{https://github.com/Flousen/Bachelorarbeit}
+Die Implementierung steht auf GitHub Verfügung \cite{git}.\\
+\url{https://github.com/Flousen/Bachelorarbeit}
 
 \section{Bibliothek}
 Die verwendete Bibliothek wurde in der Vorlesung High Performance Computing 1 entwickelt \cite{HPC1}.
@@ -14,41 +15,62 @@ Die Matrix-Klassen erlauben den zugriff auf Matrixblöcke.
 Der folgender Code Soll Beispielhaft den Zugriff auf Matrixblöcke veranschaulichen.
 \begin{lstlisting}
 GenerelMatrix<T> A(5,5);  // erzeuer Matrix Objekt
-rand(A);  // Matrix mit zufalls Zahlen initialisieren
-print(A); // Matrix Ausgeben
-print(A.block(2,2));
-print(A.block(2,2).view(Trans::view));
+init(A);  // Matrix mit zufalls Zahlen initialisieren
+printf("A   =\n");print(A); // Matrix Ausgeben
+printf("A22 =\n");print(A.block(2,2));
+printf("A22T=\n");print(A.block(2,2).view(Trans::view));
 \end{lstlisting}
 
-Dieser Code kann die folgende Ausgabe erzeugen.
+Dieser Code kann die folgende Ausgabe erzeugen. \newpage
 \lstset{numbers=none}
 \begin{lstlisting} 
-A = 
-     0.4162   0.1087   0.6753  -0.3967  -0.5583
-    -0.6969   0.4358   0.6349  -0.6566   0.8933
-     0.9340   0.7451  -0.2149  -0.0740  -0.1027
-     0.5809   0.5491   0.0163   0.1676  -0.9108
-    -0.4325  -0.0732  -0.1847  -0.1897  -0.0717
+A   = 
+      1    2    3    4    5
+      6    7    8    9   10
+     11   12   13   14   15
+     16   17   18   19   20
+     21   22   23   24   25
 
-A = 
-    -0.2149  -0.0740  -0.1027
-     0.0163   0.1676  -0.9108
-    -0.1847  -0.1897  -0.0717
+A22 = 
+     13   14   15
+     18   19   20
+     23   24   25
 
-A = 
-    -0.2149   0.0163  -0.1847
-    -0.0740   0.1676  -0.1897
-    -0.1027  -0.9108  -0.0717
+A22T= 
+     13   18   23
+     14   19   24
+     15   20   25
 \end{lstlisting}
 
 \subsubsection{MKL Wrapper}
+\lstset{numbers=left,firstnumber=14}
+\begin{lstlisting}
+double
+dot(MKL_INT n, const double *x, MKL_INT incx,
+    const double *y, MKL_INT incy)
+{
+  return ddot(&n, x, &incx, y, &incy);
+}
+
+template <typename T, template<typename> class VectorX,
+                      template<typename> class VectorY,
+          Require< Dense<VectorX<T>>,
+                   Dense<VectorY<T>> > = true>
+T
+dot(const VectorX<T> &x, const VectorY<T> &y)
+{
+  return dot(x.length(), x.data(), x.inc(), 
+             y.data(), y.inc());
+}
+\end{lstlisting}
 
 
+  
 
 \subsection{Algorithmus}
 
 Beispiel Ungeblockte QR Implementierung vom Algorithmus \ref{alg:unblockedqr}
-\lstset{numbers=left}
+\lstset{numbers=left,firstnumber=1}
 \begin{lstlisting}
 size_t mn = std::min(m,n);
 DenseVector<T> work(mn);
@@ -71,7 +93,7 @@ Die anderen Algorithem wurden analog Implementiert siehe Anhang.
 \section{Fehlerschätzer}
 
 Um zu testen ob die QR-Zerlegung korrekt ist, ist ein Fehlerschätzer notwendig.
-Es wurde der Fehlerschätzer von ATLAS\cite{atlas} verwendet.
+Es wurde der Fehlerschätzer von ATLAS \cite{atlas} verwendet.
 \begin{align}
 err = \dfrac{\|A - QR\|_i}{\|A\|_i \cdot \min(m,n) \cdot \varepsilon}
 \end{align}
@@ -86,46 +108,55 @@ Diese ist für eine Matrix $A \in \mathbb{R}^{m\times n}$ gegeben durch
 \|A\|_\infty = \max_{i=1,...,m} \sum_{j=1}^{n} |a_{ij}|
 \end{align*}
 
-Diese Norm wurde gewählt, da die für zeilenweise gespeicherte Matrizen effizient berechnet werden kann.
+Diese Norm wurde gewählt, da sie für zeilenweise gespeicherte Matrizen effizient berechnet werden kann.
 
 \section{Benchmarks}
 
 \subsection{Aufwand}
 
-Die QR-Zerlegung einer Matrix $A \in \mathbb{R}^{m \times n}$  erfordert
+Der Aufwand der QR-Zerlegung mittels Householdertransformation einer Matrix $A \in \mathbb{R}^{m \times n}$  \cite{atlas} angegeben mit.
 \begin{align*}
-n^2(m-\frac{1}{3} n) + {\cal O}(mn) \qquad \qquad \text{oder 2 mal LRs}
+%\# &= n^2(m-\frac{1}{3} n) + {\cal O}(mn) \\
+\# &= n \cdot \left(\frac{23}{6} + m + \dfrac{n}{2} + n\cdot \left(\frac{m-n}{3} \right) + n\cdot \left(\dfrac{5}{6} + \dfrac{n}{2} + m - \dfrac{n}{3}\right)\right)
 \end{align*}
-Rechenoperationen. Quelle???
+$\#$ bezeichnet die Anzahl der Rechenoperationen. 
 
 \subsection{FLOPS}
-FLPOS (Floating Point Operations Per Second) 
+FLPOS (Floating Point Operations Per Second) geben an wie viele Fließkomma Operationen pro Sekunde ausgeführt werden.
+
+\begin{align*}
+  \text{FLPOS} = \dfrac{\#}{\Delta t}
+\end{align*}
+
+$\Delta t$ bezeichnet die Zeit in Sekunden und $\#$ die Anzahl der Rechenoperationen, die zur Berechnung der QR-Zerlegung, einer $m \times n$ Matrix, benötigt wird.
+
+
 
 \subsection{Test System}
 
 Getestet wurde auf einem System mit einer Intel(R) Core(TM) i5-3470 CPU mit 3.20GHz. 
 
-Die Theoretische peak performance errechnet sich aus der Taktrate mal die Registerbreite mal 2. Quelle???
+Die Theoretische peak performance errechnet sich aus der Taktrate mal die Registerbreite mal 2. 
 
-$\epsilon$ ist auf dem Test-System $2.220446\cdot10^{-16}$
+
 
 Die CPU des Test Systems hat eine Taktrate von 3.20GHz.
 Die AVX-Register sind 256-Bit groß. Darin haben 4 double Platz.
 
 \begin{align*}
-	\text{Taktrate} \cdot \text{Registerbreite} \cdot 2= 3,20 \text{ GHz} \cdot 4 \cdot 2 = 25,6 \text{ GFLOPs}
+  \text{Taktrate} \cdot \text{Registerbreite} \cdot 2= 3,20 \text{ GHz} \cdot 4 \cdot 2 = 25,6 \text{ GFLOPs}
 \end{align*}
 
 \begin{figure}[H]
-	\includegraphics[width=\textwidth]{images/blk.png}
-	\caption{Benchmark geblockte QR-Zerlegung}
-	\label{img:blk}
+  \includegraphics[width=\textwidth]{images/blk.png}
+  \caption{Benchmark geblockte QR-Zerlegung}
+  \label{img:blk}
 \end{figure}
 
 \begin{figure}[H]
-	\includegraphics[width=\textwidth]{images/unblk.png}
-	\caption{Benchmark ungeblockte QR-Zerlegung}
-	\label{img:unblk}
+  \includegraphics[width=\textwidth]{images/unblk.png}
+  \caption{Benchmark ungeblockte QR-Zerlegung}
+  \label{img:unblk}
 \end{figure}
 
 
@@ -135,4 +166,4 @@ Die AVX-Register sind 256-Bit groß. Darin haben 4 double Platz.
 
 
 
-	 
+   
