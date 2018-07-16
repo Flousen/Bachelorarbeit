@@ -12,7 +12,7 @@ Vollbesetzte Matrizen werden bei BLAS entweder zeilen- oder spaltenweise abgespe
 	a_{1,1} & a_{1,2} & a_{1,3} \\ 
 	a_{2,1} & a_{2,2} & a_{2,3} \\ 
 	a_{3,1} & a_{3,2} & a_{3,3} 
-	\end{array} \right) \in \mathbb{R}^{m \times n}
+	\end{array} \right) \in \mathbb{R}^{3 \times 3}
 \end{align*}
 Matrix $A$ Zeilenweise gespeichert\\
 \begin{tikzpicture}
@@ -79,7 +79,7 @@ Matrix $A$ Spaltenweise gespeichert\\
 Eine Datenstruktur benötigt folgende Elemente:
 \begin{itemize}
 	\item einen Zeiger auf eine Speicherfläche
-	\item Informationen ob die Matrix zeilen- oder spaltenweise gespeichert ist 
+	\item Information, ob die Matrix zeilen- oder spaltenweise gespeichert ist 
 	\item die Dimension der Matrix.
 \end{itemize}
 
@@ -94,15 +94,15 @@ struct Matrix {
 \end{lstlisting}
 
 Diese Datenstruktur ist für Matrixeinträge vom Type double.
-Die Variablen für die Speicherverwaltung(Zeile 3) sind vom Typ ptrdiff\_t und die Variablen für die Dimensions Informationen sind Vom Typ size\_t.
-ptrdiff\_t und size\_t sind Datentypen für Ganzzahlen. Der Unterschied zwischen den Datentypen ist size\_t kann nur Werte Darstellen die größer gleich 0 sind, ptrdiff\_t dann auch negative Werte Darstellen.
-Die das incRow und incCol aus negative Werte haben könne ist Sinnvoll, wenn man zugriff auf Einen Matrix Block haben will in anderer Reihenfolge. \cite{blast}
+Die Variablen für die Speicherverwaltung(Zeile 3) sind vom Typ \textit{ptrdiff\_t} und die Variablen für die Dimensions Informationen sind vom Typ \textit{size\_t}.
+\textit{ptrdiff\_t} und \textit{size\_t} sind Datentypen für Ganzzahlen. Der Unterschied zwischen den Datentypen ist \textit{size\_t} kann nur Werte Darstellen die $\geq$ 0 sind, \textit{ptrdiff\_t} dann auch negative Werte darstellen.
+Die das \textit{incRow} und \textit{incCol} aus negative Werte haben könne ist Sinnvoll, wenn man zugriff auf Einen Matrix Block haben will in anderer Reihenfolge. \cite{blast}
 
-Für Intel MKL Routinen müssen die Matrizen zeilenweise gespeichert sein.
-Das bedeutet incCol ist gleich 1.
+Für Intel-MKL-Routinen müssen die Matrizen zeilenweise gespeichert sein.
+Das bedeutet \textit{incCol} ist gleich 1.
 
 \subsubsection{Beispiel}
-Angenommen es wurde genügend Speicher für eine Matrix $A$ allociert und die Werte 1 bis 25 liegen hintereinander im Speicher.
+Angenommen, es wurde genügend Speicher für eine Matrix $A$ belegt und die Werte 1 bis 25 liegen hintereinander im Speicher.
 Dann lässt sich die Matrix
 \begin{align*}
 	A = \begin{pmatrix}
@@ -118,12 +118,12 @@ durch die folgende Datenstruktur repräsentieren.
 struct Matrix A;
 A.data = /*pointer to data*/;
 A.numRows = 5; 
-A.4 numCols = 5;
+A.numCols = 5;
 A.incRow = A.numCols;
 A.incCol = 1;
 \end{lstlisting}
 
-Die Matrix $B$ soll den Matrixblock aus $A$ darstellen, welcher in der zweiten Zeile und dritte Spalte beginnt. Zusätzlich soll der Block transponiert betrachte werden. Die Matrix
+Die Matrix $B$ soll den Matrixblock aus $A$ darstellen, welcher in der zweiten Zeile und dritte Spalte beginnt. Zusätzlich soll der Block transponiert betrachtet werden. Die Matrix
 \begin{align*}
 B = \begin{pmatrix}
 8 &  13 &  18 & 23 \\
@@ -134,18 +134,18 @@ B = \begin{pmatrix}
 lässt sich mit folgender Datenstruktur repräsentieren.
 \begin{lstlisting}
 struct Matrix B;
-B.data = A.data[ 1*A.incRow + 2*A.incCol ];
+B.data = &A.data[ 1*A.incRow + 2*A.incCol ];
 B.numRows = 3; 
 B.numCols = 4;
 B.incRow = A.incCol;
 B.incCol = A.incRow;
 \end{lstlisting}
 
-In Zeile 2 wird er Daten-Zeiger auf das Element der zweiten Zeile und Spalte gesetzt.
-Um die Matrix zu transponieren werden die Incremente vertauscht. Dies geschieht in Zeile 5 und 6.  
-In Zeile 3 und 4 wird die Matrix Dimensionen richtig gesetzt.
+In Zeile 2 wird der Daten-Zeiger auf das Element der zweiten Zeile und dritten Spalte gesetzt.
+Um die Matrix zu transponieren, werden die Inkremente vertauscht. Dies geschieht in den Zeilen 5 und 6.  
+In den Zeilen 3 und 4 wird die Matrix Dimensionen richtig gesetzt.
 
-Die Matrix $C$ soll ein Beispiel für negative Incremente sein. Sie nutzt den selben Datenspeicher wie die Matrizen $A$ und $B$, in dem die Werte 1 bis 25 hinter einander im Speicher liegen.
+Die Matrix $C$ soll ein Beispiel für negative Inkremente sein. Sie nutzt den selben Datenspeicher wie die Matrizen $A$ und $B$, in dem die Werte 1 bis 25 hintereinander im Speicher liegen.
 Die Matrix 
 \begin{align*}
 C = \begin{pmatrix}
@@ -157,46 +157,46 @@ C = \begin{pmatrix}
 lässt sich mit folgender Datenstruktur repräsentieren.
 \begin{lstlisting}
 struct Matrix C;
-C.data = B.data[ 2*B.incRow + 3*B.incCol ];
+C.data = &B.data[ 2*B.incRow + 3*B.incCol ];
 C.numRows = B.numRows; 
 C.numCols = B.numCols;
 C.incRow = -B.incRow;
 C.incCol = -B.incCol;
 \end{lstlisting}
-Der data-Pointer wurde auf das letzte Element der Matrix $B$ gesetzt. Die Incremente werden negativ von der Matrix $B$ übernommen.
+Der data-Pointer wurde auf das letzte Element der Matrix $B$ gesetzt. Die Inkremente werden negativ von der Matrix $B$ übernommen.
 
-Matrizen wie $B$ und $C$ die den selben Datenspeicher wie $A$ nutzen werden als Matrixview bezeichnet. \cite{blast}
+Matrizen wie $B$ und $C$, die den selben Datenspeicher wie $A$ nutzen, werden als Matrixview bezeichnet. \cite{blast}
 
 
 \newpage
 \section{Einige BLAS-Routinen}
 Im Folgenden werden einige BLAS-Routinen beschrieben, die bei der QR-Zerlegung benutzt werden.
 BLAS-Routinen werden nach folgendem Schema benannt:
-Der erste Buchstabe im Namen gibt an für welchen Datentype die Funktion implementiert wurde. Der Rest beschreibt die Funktion der Funktion.\\
-Beispiel \glqq dgemm\grqq{}: Das \glqq d\grqq{} zeigt, dass die Funktion ist für Doubles gilt und  \glqq gemm\grqq{} steht für \glqq generel Matrix Matrix\grqq{}. Die  Funktion berechnet also das Matrix-Matrix Produkt für Matrizen, deren Einträge Doubles sind.
+Der erste Buchstabe im Namen gibt an, für welchen Datentyp die Funktion implementiert wurde. Der Rest beschreibt die Funktion.\\
+Beispiel \glqq dgemm\grqq{}: Das \glqq d\grqq{} zeigt, dass die Funktion für Doubles gilt und  \glqq gemm\grqq{} steht für \glqq general matrix matrix\grqq{}. Die  Funktion berechnet also das Matrix-Matrix Produkt für Matrizen, deren Einträge Doubles sind.
 
 \subsection{Matrix-Matrix Produkt (gemm)}
 Die Funktion \glqq gemm\grqq{} berechnet das Matrix-Matrix Produkt.
-Der Funktion werden die Matrizen $A$, $B$ und $C$ und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem werden 2 Flags übergeben ob die Matrizen $A$ und $B$ transponiert werden sollen.\\
+Der Funktion werden die Matrizen $A$, $B$ und $C$ und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem werden zwei Flags übergeben, ob die Matrizen $A$ und $B$ transponiert zu betrachten sind.\\
 Die Funktion berechnet
 \begin{align}
 	C \leftarrow \beta  C + \alpha  A  B
 \end{align}
-Falls $\beta = 0$ wird die Matrix $C$ zuerst mit Nullen initialisiert. Falls $C$ Einträge hat die NaN (Not a Number) sind, werden diese somit mit 0 überschrieben.
+Falls $\beta = 0$, wird die Matrix $C$ zuerst mit Nullen initialisiert. Falls $C$ Einträge hat, die NaN (\textit{Not a Number}) sind, werden diese mit Nullen überschrieben.
 
 %%TODO
 \cite{blast}
-Blas tecnicla forum netlib
+Blas tecnical forum netlib
 %%http://www.netlib.org/blas/blast-forum/
 
 \subsection{Matrix-Vektor Produkt (gemv)}
 Die Funktion \glqq gemv\grqq{} berechnet das Matrix-Vektor Produkt.
-Der Funktion werden die Matrix $A$, die Vektoren $x$ und $y$, und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem wird ein Flag übergeben, das anzeigt ob die Matrix $A$ transponiert werden soll.\\
+Der Funktion werden die Matrix $A$, die Vektoren $x$ und $y$, und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem wird ein Flag übergeben, das anzeigt, ob die Matrix $A$ transponiert werden soll.\\
 Die Funktion berechnet
 \begin{align}
 y \leftarrow \beta  y + \alpha A x 
 \end{align}
-Falls $\beta = 0$ wird der Vektor $y$ zuerst mit Nullen initialisiert. Falls $y$ Einträge hat, die NaN (Not a Number) sind, werden diese mit 0 überschrieben.
+Falls $\beta = 0$, wird der Vektor $y$ zuerst mit Nullen initialisiert. Falls $y$ Einträge hat, die NaN (\textit{Not a Number}) sind, werden diese mit Nullen überschrieben.
 
 \subsection{Rank1 update (ger)}
 Die Funktion \glqq ger\grqq{}  berechnet ein dyadisches Produkt aus den Vektoren $x$ und $y$, skaliert die daraus resultierende Matrix mit $\alpha$ und addiert das Ergebnis auf $A$.\\
@@ -207,14 +207,14 @@ A \leftarrow A + \alpha  x y^T
 \end{align}
 
 \subsection{Matrix-Matrix Produkt (trmm)} \label{fkt:trmm}
-Die Funktion \glqq trmm\grqq{} berechnet das Matrix-Matrix Produkt einer Dreiecksmatrix mit einer voll besetzten Matrix.
-Der Funktion wird die Dreiecksmatrix $A$, die Matrix $B$ und das Skalar $\alpha$ übergeben. Außerdem werden Flags mit übergeben, die anzeigen ob $A$ eine obere oder untere Dreiecksmatrix ist, ob $A$ eine strikte oder unipotente Dreiecksmatrix ist, ob $A$ von links oder rechts auf $B$ multipliziert werden soll und ob $A$ transponiert werden soll. Diese Eigenschaften werden unten in $op(\cdot)$ zusammengefasst. \\
+Die Funktion \glqq trmm\grqq{} berechnet das Matrix-Matrix-Produkt einer Dreiecksmatrix mit einer voll besetzten Matrix.
+Der Funktion wird die Dreiecksmatrix $A$, die Matrix $B$ und das Skalar $\alpha$ übergeben. Außerdem werden Flags mit übergeben, die anzeigen, ob $A$ eine obere oder untere Dreiecksmatrix ist, ob $A$ eine strikte oder unipotente Dreiecksmatrix ist, ob $A$ von links oder rechts auf $B$ multipliziert werden soll und ob $A$ transponiert werden soll. Diese Eigenschaften werden unten in $op(\cdot)$ zusammengefasst. \\
 Die Funktion berechnet
 \begin{align}
 B \leftarrow  \alpha \cdot op(A) \cdot B \qquad \text{oder} \qquad B \leftarrow  \alpha \cdot B \cdot op(A)
 \end{align}
 \subsection{Matrix-Vektor Produkt (trmv)} \label{fkt:trmv}
-Die Funktion \glqq trmv\grqq{} berechnet das Matrix-Vektor Produkt für Dreiecksmatrizen.
+Die Funktion \glqq trmv\grqq{} berechnet das Matrix-Vektor-Produkt für Dreiecksmatrizen.
 Die Funktion berechnet
 \begin{align}
 x \leftarrow \alpha  Ax %\qquad \text{or} \qquad x \leftarrow \alpha * A^T*x

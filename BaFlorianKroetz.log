@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.16)  13 JUL 2018 13:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.16)  16 JUL 2018 19:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1419,15 +1419,15 @@ Class scrbook Warning: \float@addtolists detected!
 (scrbook)              deprecated \float@addtolist interface .
 
 
-Overfull \hbox (34.66196pt too wide) in paragraph at lines 8--9
+Overfull \hbox (38.74309pt too wide) in paragraph at lines 8--9
 []\T1/phv/m/n/12 In die-ser Ar-beit wird die Be-rech-nung der QR-Zerlegung mit-
-tels Householder-Transfomation
+tels Householder-Transformation
  []
 
 
-Overfull \hbox (1.67114pt too wide) in paragraph at lines 10--11
-[]\T1/phv/m/n/12 Neben der Householder-Transfomation kann die QR-Zerlegung auch
- mit-tels Givens-
+Overfull \hbox (5.75227pt too wide) in paragraph at lines 10--11
+[]\T1/phv/m/n/12 Neben der Householder-Transformation kann die QR-Zerlegung auc
+h mit-tels Givens-
  []
 
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <12> not available
@@ -1506,6 +1506,10 @@ File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 5.69998pt on input line 89.
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <12> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 97.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 11.39996pt on input line 97.
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 127.
 Package babel Info: Redefining ngerman shorthand "~
@@ -1516,13 +1520,13 @@ Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 127.
  [4]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 171.
+(babel)             in language  on input line 169.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 171.
+(babel)             in language  on input line 169.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 171.
+(babel)             in language  on input line 169.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 171.
+(babel)             in language  on input line 169.
  [5]
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 171.
@@ -1678,20 +1682,20 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 174.
 
-Overfull \hbox (25.05164pt too wide) in paragraph at lines 175--176
+Overfull \hbox (31.38994pt too wide) in paragraph at lines 175--176
 \T1/phv/m/n/12 Um $\OML/cmm/m/it/12 A$ \T1/phv/m/n/12 in ei-ne obe-re Drei-ecks
 -ma-trix $\OML/cmm/m/it/12 R$ \T1/phv/m/n/12 zu trans-for-mie-ren, wird ei-ne F
-ol-ge von Housholder-
+ol-ge von Householder-
  []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 194.
+(babel)             in language  on input line 182.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 194.
+(babel)             in language  on input line 182.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 194.
+(babel)             in language  on input line 182.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 194.
+(babel)             in language  on input line 182.
 [14]
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 250.
@@ -1827,70 +1831,76 @@ Package babel Info: Redefining ngerman shorthand "~
 
 ]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 70.
+(babel)             in language  on input line 69.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 70.
+(babel)             in language  on input line 69.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 70.
+(babel)             in language  on input line 69.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 70.
+(babel)             in language  on input line 69.
  [24]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 70.
+(babel)             in language  on input line 69.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 70.
+(babel)             in language  on input line 69.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 93.
+(babel)             in language  on input line 92.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 93.
+(babel)             in language  on input line 92.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 112.
+(babel)             in language  on input line 111.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 112.
+(babel)             in language  on input line 111.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 112.
+(babel)             in language  on input line 111.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 112.
+(babel)             in language  on input line 111.
  [25]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 113.
+(babel)             in language  on input line 112.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 113.
+(babel)             in language  on input line 112.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 115.
+(babel)             in language  on input line 114.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 115.
+(babel)             in language  on input line 114.
+
+Overfull \hbox (5.52432pt too wide) in paragraph at lines 116--117
+\T1/phv/m/n/12 Der Auf-wand zur Be-rech-nung der QR-Zerlegung mit-tels Househol
+der-Transformation
+ []
+
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 124.
+(babel)             in language  on input line 123.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 124.
+(babel)             in language  on input line 123.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 135.
+(babel)             in language  on input line 132.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 135.
+(babel)             in language  on input line 132.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 148.
+(babel)             in language  on input line 145.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 148.
+(babel)             in language  on input line 145.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 148.
+(babel)             in language  on input line 145.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 148.
- [26]
+(babel)             in language  on input line 145.
+[26]
 <images/blk.png, id=493, 677.53125pt x 376.40625pt>
 File: images/blk.png Graphic file (type png)
 <use images/blk.png>
-Package pdftex.def Info: images/blk.png  used on input line 151. on input line 
-151.
+Package pdftex.def Info: images/blk.png  used on input line 148. on input line 
+148.
 Package pdftex.def Info: Requested size: 416.12161pt x 231.18692pt on input lin
-e 151.
+e 148.
 <images/unblk.png, id=494, 677.53125pt x 376.40625pt>
 File: images/unblk.png Graphic file (type png)
 <use images/unblk.png>
-Package pdftex.def Info: images/unblk.png  used on input line 157. on input lin
-e 157.
+Package pdftex.def Info: images/unblk.png  used on input line 154. on input lin
+e 154.
 Package pdftex.def Info: Requested size: 416.12161pt x 231.18692pt on input lin
-e 157.
+e 154.
 ) (./chapters/bwsblk.tex
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 1.
@@ -1958,10 +1968,6 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 1.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 1.
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <12> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 11.
-LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 11.39996pt on input line 11.
 LaTeX Font Info:    Font shape `T1/phv/m/sc' will be
 (Font)              scaled to size 11.39996pt on input line 16.
 
@@ -2008,7 +2014,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 207.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 207.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 207.
 Package rerunfilecheck Info: File `BaFlorianKroetz.out' has not changed.
-(rerunfilecheck)             Checksum: 0F8F1B2C3E8ED8E1D907597D6B1F97F6;1980.
+(rerunfilecheck)             Checksum: CD73CEE321089374E20874049DEE7A59;1980.
 
 
 LaTeX Warning: There were multiply-defined labels.
@@ -2038,7 +2044,7 @@ are/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on BaFlorianKroetz.pdf (37 pages, 421838 bytes).
+Output written on BaFlorianKroetz.pdf (37 pages, 422323 bytes).
 PDF statistics:
  721 PDF objects out of 1000 (max. 8388607)
  568 compressed objects within 6 object streams

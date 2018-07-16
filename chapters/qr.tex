@@ -5,16 +5,16 @@ Eine Matrix $A \in \mathbb{R}^{m \times n}$ , $m \ge n$ besitzt eine eindeutige 
 \begin{align}
 A = QR
 \end{align}
-mit einer orthogonalen Matrix $ Q \in \mathbb{R}^{m \times m} $ und einer oberen Dreiecksmatrix $ R \in \mathbb{R}^{n \times n}$ \cite{num1}.
+mit einer orthogonalen Matrix $ Q \in \mathbb{R}^{m \times m} $ und einer oberen Dreiecksmatrix $ R \in \mathbb{R}^{m \times n}$ \cite{num1}.
 
-Eine QR Zerlegung kann mit einer Householder-Transformation berechnet werden.
+Eine QR-Zerlegung kann mit einer Householder-Transformation berechnet werden.
 
-\subsection{Beispiel für eine Anwednung}
+\subsection{Beispiel für eine Anwendung}
 Lösung eines Minimierungsproblems
 \begin{align}
 \min_{x \in \mathbb{R}^n} \|Ax-b\|_2^2 \label{eq1}
 \end{align}
-mit Matrix $A \in \mathbb{R}^{m\times n}$ mit $rang(A) = n < m$ für die eine QR Zerlegung existiert.
+mit Matrix $A \in \mathbb{R}^{m\times n}$ mit $rang(A) = n < m$, für die eine QR-Zerlegung existiert.
 $R$ besitzt die Gestalt 
 \begin{align*}
 R=	
@@ -61,7 +61,7 @@ Dazu multipliziert man $H$ von links auf $x$
 \begin{align}
 Hx=\alpha e_1 \label{eq:spiegelung}
 \end{align}
-mit dem Skalar $\alpha \in \mathbb{R}$ und $e_1$ als ersten kanonischen Einheitsvektor. Der Householder-Vektor steht senkrecht auf der Ebene an welcher $x$ gespiegelt wird.\\
+mit dem Skalar $\alpha \in \mathbb{R}$ und $e_1$ als ersten kanonischen Einheitsvektor. Der Householder-Vektor steht senkrecht auf der Ebene, an welcher $x$ gespiegelt wird.\\
 Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ an der gestrichelt eingezeichneten Ebene auf die Achse $x_1$.
 
 
@@ -75,7 +75,7 @@ Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ a
 \subsubsection{Beispiel}
 Rechnung zu Abbildung \ref{fig:HHolder}: Der Vektor $x = \vecX{3}{4}$ soll auf die $x_1$ Achse gespiegelt werden.
 
-Zuerst wird der Householder-Vektor $v$ und der dazugehörige Faktor $\tau$, wie in Kapitel \ref{sec:HHvec}, berechnet.
+Zuerst wird der Householder-Vektor $v$ und der dazugehörige Faktor $\tau$ wie in Kapitel \ref{sec:HHvec} berechnet.
 \begin{align*}
 	\|x\|_2 &= \sqrt{3^2 + 4^2} = 5\\
 	\alpha &= -1 \cdot \text{sign}(x_1) \cdot \|x\|_2 = -5 \\
@@ -110,7 +110,7 @@ Hx =& x - \dfrac{2}{v^Tv}v(v^Tx) = x - 2\dfrac{v^Tx}{v^Tv}v\\
 =\underbrace{\left(1 - \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2}\right)}_{ \overset{!}{=} 0 } x + \alpha e_1 \underbrace{\dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2} }_{\overset{!}{=} 1} \overset{!}{=} \alpha e_1
 \end{align*}
 
-Damit das Letzte $=$ gilt muss gelten.
+Damit das letzte $=$ gilt muss gelten.
 \begin{align*}
 	1 &= \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2}\\
 	\Leftrightarrow (x - \alpha e_1)^T(x - \alpha e_1) &= 2 x^T x - 2\alpha x_1 \\
@@ -122,7 +122,7 @@ Das Vorzeichen von  $\alpha = \pm \sqrt{x^Tx}$ kann man frei wählen, um $ v = x
 
 Wählt man das Vorzeichen positiv, kann Auslöschung auftreten, falls $x$ annähernd ein positives Vielfaches von $e_1$ ist.
 
-LAPACK \cite{DGEQR2} vermeidet die Auslöschung, indem das Vorzeichen entgegengesetzt gewählt wird. Das bedeutet $x$ wird immer auf die gegenüberliegende Seite gespiegelt.
+LAPACK \cite{DGEQR2} vermeidet die Auslöschung, indem das Vorzeichen entgegengesetzt gewählt wird. Das bedeutet, dass $x$ immer auf die gegenüberliegende Seite gespiegelt wird.
 
 Im Skript von Numerik 1 \cite{num1} wird das Vorzeichen immer positiv gewählt:\\ $\alpha = |\sqrt{x^Tx}| = \|x\|_2$. Eine mögliche Auslöschung im Fall $ x_1 > 0$ wird hier durch die folgende Umformung vermieden.
 \begin{align*}
@@ -153,10 +153,10 @@ Mit dem Faktor $\tau = \dfrac{2}{v^Tv}$ kann man die Householder-Transformation 
 \begin{algorithm}
 	\caption{Housholder-Vector(LAPACK DLARFG)}
 	\begin{algorithmic}
-		\State Input: $x \in \mathbb{R}^n$ 
+		\State Input: $x \in \mathbb{R}^n$ \bigskip
 		\State $\alpha = -1 \cdot \text{sign}(x_1) \|x\|_2$
 		\State $\tau = \dfrac{\alpha - x_1}{\alpha}$
-		\State $v=\dfrac{x - \alpha e_1}{x_1 - \alpha}$
+		\State $v=\dfrac{x - \alpha e_1}{x_1 - \alpha}$ \bigskip
 		\State Output: Householder-Vektor $v$, $\tau$
 	\end{algorithmic} 
 	\label{alg:unblockedqr}
@@ -172,9 +172,9 @@ Statt eines Matrix-Matrix-Produkts muss man nur ein Matrix-Vektor-Produkt und ei
 %Das Matrix-Vektor-Produkt und das dyadische Produkt haben nur einen Aufwand von $O(n^2)$.
 
 \subsection{QR-Zerlegung mittels Housholder-Transformationen}
-Um $A$ in eine obere Dreiecksmatrix $R$ zu transformieren, wird eine Folge von Housholder-Transformationen auf $A$ angewandt.
+Um $A$ in eine obere Dreiecksmatrix $R$ zu transformieren, wird eine Folge von Householder-Transformationen auf $A$ angewandt.
 
-Zuerst wird aus der ersten Spalte der Matrix $A$ ein Householder-Vektor berechnet, dann wird die  Householder-Transformationen auf die Matrix angewandt.
+Zuerst wird aus der ersten Spalte der Matrix $A$ ein Householder-Vektor berechnet, dann wird die Householder-Transformation auf die Matrix angewandt.
 Diese Housholder-Transformation erzeugt Nullen in der ersten Spalte unterhalb des ersten Eintrags.
 Damit eine obere Dreiecksmatrix entsteht, wird als nächstes die Matrix $A$ ohne die erste Zeile und Spalte betrachtet. Aus der ersten Spalte der neu betrachteten Matrix wird wieder ein Householder-Vektor berechnet.
 Dieser Vektor erzeugt eine Householder-Transformation $\hat{H}$.
@@ -192,7 +192,7 @@ I_{i-1} & 0\\ \hline
 0 & \hat{H_i} 	
 \end{array} \right)
 \end{align*}
-$I_{i-1}$ bezeichnet die $i-1$ dimensionale Einheitsmatrix, $\hat{H_i}$ ist eine Householder-Transformation.
+$I_{i-1}$ bezeichnet die $i-1$-dimensionale Einheitsmatrix, $\hat{H_i}$ ist eine Householder-Transformation.
 
 
 Diese Householder-Transformationen werden auf die Matrix angewandt.
@@ -263,9 +263,9 @@ Die Matrix $A$ hat somit die Form
 	\end{array} \right) 
 \end{align*}
 
-Indem man Householder-Vektoren unter halb der Diagonalen speichert benötigt man keinen zusätzlichen Speicher für die Matrix $Q$.
+Indem man Householder-Vektoren unterhalb der Diagonalen speichert, benötigt man keinen zusätzlichen Speicher für die Matrix $Q$.
 
-Meistens ist es nicht notwendig die Matrix $Q$ explizit zu bestimmen, da man $Q$, nur mit den Householder-Vektoren, sehr effizient anwenden kann(siehe Kapitel \ref{sec:appHHvec}).
+Meistens ist es nicht notwendig, die Matrix $Q$ explizit zu bestimmen, da man $Q$ nur mit den Householder-Vektoren sehr effizient anwenden kann (siehe Kapitel \ref{sec:appHHvec}).
 
 
 
@@ -310,14 +310,14 @@ Für diesen Block wird die  QR-Zerlegung mit dem ungeblockten Algorithmus (Algor
 
 Im Block $A_{0, 0}$ steht auf und über der Diagonalen $R_{0,0}$. Unterhalb der Diagonalen und im Block $A_{\text{bs}, 0}$ stehen die Householder-Vektoren.
 
-Nun muss man die bei der ungeblocketn QR-Zerlegung verwendeten Housholder-Transformationen auf die restliche Matrix $ \left(\dfrac{A_{0, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ anwenden.
+Nun muss man die bei der ungeblockten QR-Zerlegung verwendeten Householder-Transformationen auf die restliche Matrix $ \left(\dfrac{A_{0, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ anwenden.
 
 Das Produkt mehrerer Householder-Transformationen kann geschrieben werden als:
 \begin{align*}
 H_1H_2 \cdot \cdot \cdot H_k = I - VTV^T \qquad \text{mit}\qquad H_i = I - \tau_i v_iv_i^T
 \end{align*}  \cite{Joffrain:2006:AHT:1141885.1141886}
 
-Die Anwendung der Householder-Transformationen $I - V*T*V^T$ auf $\left(\frac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ erfolgt in 2 Schritten. Zuerst wird  die Matrix $T$ berechnet. Dann wird $I - V*T*V^T$  auf $\left(\frac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ angewandt.
+Die Anwendung der Householder-Transformationen $I - V*T*V^T$ auf $\left(\frac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ erfolgt in zwei Schritten. Zuerst wird  die Matrix $T$ berechnet. Dann wird $I - V*T*V^T$  auf $\left(\frac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ angewandt.
 %Zuerst wird von der Funktion \glqq larft \grqq{}  die Matrix $T$ berechnet. Dann wird $I - V*T*V^T$ von der Funktion \glqq larfb\grqq{} auf $\left(\dfrac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ angewendet.
 \begin{align}
 	\left(\begin{array}{l} 
@@ -342,18 +342,18 @@ Sie bekommt eine Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$, einen Vektor $\
 In der Dreiecksmatrix $V$ stehen die Householder-Vektoren,
 im Vektor $\tau$ die zu den Householder-Vektoren gehörende $\tau_i$.
 
-Die Funktion berechnet eine obere Dreiecksmatrix $T$ so, dass
+Die Funktion berechnet eine obere Dreiecksmatrix $T$, so dass
 \begin{align}
 H_1H_2...H_k = I - VTV^T \qquad \text{mit}\qquad H_i = I - \tau_i v_iv_i^T
 \label{eq:blkreflectorT}
 \end{align}
 
-Warum und wie das Verfahren funktioniert, wird hier beschreiben \cite{Joffrain:2006:AHT:1141885.1141886}.
+Warum und wie das Verfahren funktioniert, wird in \cite{Joffrain:2006:AHT:1141885.1141886} beschrieben.
 
 
 
 \begin{algorithm}[H]
-\caption{Der Algorithmus berechnet die Matrix $T$ so dass  (\ref{eq:blkreflectorT}) gilt. Die untere Dreiecksmatrix $V$  enthält die Householder-Vektoren. Der Vektor $\tau$ die dazugehörigen $\tau_i = \frac{2}{v_i^Tv_i}$. Hinweise zur Notation: Kleine Buchstaben bezeichnen einen einzelne Matrixeintrag(Beipsiel $v_{i,j}$ ist der Eintrag der i-ten-Zeile und j-ten Spalte der Matrix $V$). Die nach unten gestelletn Indices geben einen Block an der betrachtet werden soll(Beispiel $V_{i:n,j:m}$ bezeichnet einen Block aus der Matrix $V$ der von i-ten bis zur n-ten Zeile und von der j-ten bis zur m-ten Spalte geht).}
+\caption{Der Algorithmus berechnet die Matrix $T$ so dass  (\ref{eq:blkreflectorT}) gilt. Die untere Dreiecksmatrix $V$  enthält die Householder-Vektoren. Der Vektor $\tau$ die dazugehörigen $\tau_i = \frac{2}{v_i^Tv_i}$. Hinweise zur Notation: Kleine Buchstaben bezeichnen einzelne Matrixeinträge (Beispiel: $v_{i,j}$ ist der Eintrag der i-ten-Zeile und j-ten Spalte der Matrix $V$). Die nach unten gestellten Indizes geben einen Block an, der betrachtet werden soll (Beispiel $V_{i:n,j:m}$ bezeichnet einen Block aus der Matrix $V$ der von i-ten bis zur n-ten Zeile und von der j-ten bis zur m-ten Spalte geht).}
 \label{alg:clacT}
 \begin{algorithmic}[1]
 \State Input $V \in \mathbb{R}^{k \times n}$,$\tau \in \mathbb{R}^k$,$T \in \mathbb{R}^{k \times k}$
@@ -374,7 +374,7 @@ Warum und wie das Verfahren funktioniert, wird hier beschreiben \cite{Joffrain:2
 \end{algorithmic}
 \end{algorithm}
 
-Der Algorithmus \ref{alg:clacT} überschreibt die Matrix $T$ nach folgendermaßen
+Der Algorithmus \ref{alg:clacT} überschreibt die Matrix $T$ folgendermaßen
 \begin{align*}
 T =&
 \begin{pmatrix}
@@ -391,7 +391,7 @@ Die Anwendung der Householder-Transformationen auf eine Matrix $C$ wird in LAPAC
 Die Funktion bekommt eine untere Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$, eine obere Dreiecksmatrix $T \in \mathbb{R}^{k \times k}$ und eine Matrix $C \in \mathbb{R}^{m \times n }$ übergeben.
 
 In der Dreiecksmatrix $V$ stehen die Householder-Vektoren und $T$ ist die zuvor berechnete Matrix.
-Die Matrix $C$ wird upgedatet, indem die Matrix $I - V T V^T $ von rechts auf die Matrix $ C $ angewendet wird. 
+Die Matrix $C$ wird aktualisiert, indem die Matrix $I - V T V^T $ von rechts auf die Matrix $ C $ angewendet wird. 
 
 Ein weiterer Übergabeparameter gibt an, ob die Matrix  $I - V T V^T $ transponiert werden soll.
 Die Funktion berechnet also
@@ -399,7 +399,7 @@ Die Funktion berechnet also
 	C \leftarrow H C = C - V T V^T C \quad \text{oder} \quad 	C \leftarrow H^T C = C - V T^T V^T C	\label{eq:larfb}
 \end{align}
 
-Der Zweck der Funktion ist es, die Householder-Transformationen die bei der Bereicherung der QR-Zerlegung für einen Block entstanden sind, auf die restliche Matrix anzuwenden.
+Der Zweck der Funktion ist es, die Householder-Transformationen, die bei der Bereicherung der QR-Zerlegung für einen Block entstanden sind, auf die restliche Matrix anzuwenden.
 Die Abbildung \ref{fig:patrA} zeigt, wie die Matrix $A$ für die Funktion partitioniert wird.
 \begin{figure} [H]
 	\centering
@@ -407,15 +407,15 @@ Die Abbildung \ref{fig:patrA} zeigt, wie die Matrix $A$ für die Funktion partit
 	\caption{Partitionierung vom A für larfb}
 	\label{fig:patrA}
 \end{figure}
-alls $m > k $ werden die Matrizen $V$ und $C$ aufgeteilt in
+Falls $m > k $, werden die Matrizen $V$ und $C$ aufgeteilt in
 \begin{align}
 	V=\left(\dfrac{V_1}{V_2}\right)  \text{  und  } C=\left(\dfrac{C_1}{C_2}\right)
 	\label{eq:aufteilen}
 \end{align}
 
 %Sodass $V_1 \in \mathbb{R}^{k \times k}$ und $C \in \mathbb{R}^{k \times n}$
-Dabei wird $V$ genau so geteilt, dass $V_1 \in \mathbb{R}^{k\times k}$ der quadratisch Dreiecksteil der Matrix ist und $V_2 \in \mathbb{R}^{m-k\times k}$ der Rest der Matrix. Die Matrix $C$ wird in $C_1 \in \mathbb{R}^{k \times n}$ und $C_2 \in \mathbb{R}^{m-k \times n}$  aufgeteilt. Die Aufteilung ist so gewählt, dass das Matrix-Matrix-Produkt $V_1 \cdot C_1$ und $V_2 \cdot C_2$ möglich ist.\\
-Diese Aufteilung ist notwendig, da die BLAS-Funktion trmm (matrix-matrix product where one input matrix is triangular) nur für quadratische Dreiecksmatrizen implementiert ist.
+Dabei wird $V$ genau so geteilt, dass $V_1 \in \mathbb{R}^{k\times k}$ der quadratische Dreiecksteil der Matrix ist und $V_2 \in \mathbb{R}^{m-k\times k}$ der Rest der Matrix. Die Matrix $C$ wird in $C_1 \in \mathbb{R}^{k \times n}$ und $C_2 \in \mathbb{R}^{m-k \times n}$  aufgeteilt. Die Aufteilung ist so gewählt, dass das Matrix-Matrix-Produkt $V_1 \cdot C_1$ und $V_2 \cdot C_2$ möglich ist.\\
+Diese Aufteilung ist notwendig, da die BLAS-Funktion trmm (\textit{matrix-matrix product where one input matrix is triangular}) nur für quadratische Dreiecksmatrizen implementiert ist.
 
 Im Fall $ m = k $ ist die Aufteilung nicht notwendig, da $ V $ quadratisch ist.
 
@@ -432,7 +432,7 @@ Die Matrizen $C$ und $V$ werden wie in (\ref{eq:aufteilen}) aufgeteilt.
 	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( \left(C_1^T|C_2^T\right)	\cdot \left(\dfrac{V_1}{V_2}\right) \cdot T \cdot \left(V_1^T|V_2^T\right) \right)^T \\
 	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) \cdot T \cdot \left(V_1^T|V_2^T\right) \right)^T 
 \end{align*}
-$ \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) $ wird in Zeil \ref{alg4:beg} - \ref{alg4:end} berechnet und das Ergebnis in $W$ Gespeichert. Die Matrix $W$ ist eine Workspace-Matrix. In Zeile \ref{alg4:trans} - \ref{alg4:transE} wird  $ \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) \cdot T$ berechnet in dem $T$ auf $W$ Multipliziert wird $W \leftarrow W \cdot T$. 
+$ \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) $ wird in Zeile \ref{alg4:beg}-\ref{alg4:end} berechnet und das Ergebnis in $W$ gespeichert. Die Matrix $W$ ist eine Workspace-Matrix. In Zeile \ref{alg4:trans}-\ref{alg4:transE} wird  $ \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) \cdot T$ berechnet, in dem $T$ auf $W$ multipliziert wird mit $W \leftarrow W \cdot T$. 
 \begin{align*}
 	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( W \cdot \left(V_1^T|V_2^T\right) \right)^T \\
 	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left(\dfrac{V_1}{V_2}\right) \cdot W^T 	\\
