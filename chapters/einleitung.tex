@@ -28,16 +28,14 @@ Weil die QR-Zerlegung bei den aufgezählten Problemen häufig verwendet wird, em
 Um die Prozessorkapazität optimal zu nutzen, ist es sinnvoll, die QR-Zerlegung mit einem cache-optimierten Algorithmus zu berechnen.
 Dadurch ist es möglich, die angegebene Maximalleistung des Prozessors zu erreichen.
 
-\subsubsection{Cache-optimierung}
-Der Cache ist ein schneller Datenspeicher im Prozessor. Daten, die vom Prozessor verarbeitet werden sollen, müssen immer zuerst in den Cache geladen werden.
-
+\subsubsection{Cache-Optimierung}
+Der Cache ist ein schneller Datenspeicher. Daten, die vom Prozessor verarbeitet werden sollen, müssen immer zuerst in den Cache geladen werden.
 Der Zugriff auf Daten, die im RAM liegen, dauert sehr viel länger als der Zugriff auf Daten, die im Cache liegen.
-
 Aus diesem Grund ist es sinnvoll, die Algorithmen so zu gestalten, dass eine optimale Übertragung erfolgt.
 
 Ziele der Cache-Optimierung:
-
 \begin{itemize}
+	\item Mehrfaches Laden von Daten soll vermeiden werden.
 	\item Die Daten müssen in der Reihenfolge, in der sie verwendet werden, im RAM liegen.
 	\item Sequentiell im RAM liegende Daten werden durch Prefetching effizient in den Cache geladen.
 \end{itemize}
@@ -45,7 +43,7 @@ Ziele der Cache-Optimierung:
 Prefetching ist die Eigenschaft des Prozessors, Zugriffsmuster auf den Speicher zu erkennen und vorherzusagen.	
 
 \subsubsection{Intel MKL}
-Die Intel MKL (Math Kernel Library) ist eine Bibliothek der Firma Intel, in welcher mathematische Funktionen enthalten sind.
+Die Intel MKL (Math Kernel Library) \cite{mkl} ist eine Bibliothek der Firma Intel, in welcher mathematische Funktionen enthalten sind.
 %Die Intel MKL ist eine Bibliothek der Firma Intel. Die Abkürzung MKL steht für Math Kernel Library.
 %In der Bibliothek sind mathematische Funktionen enthalten.
 Die MKL implementiert diese Funktionen sehr effizient, damit der Prozessor die angegebene theoretische Maximalleistung erreichen kann.

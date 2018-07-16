@@ -97,20 +97,20 @@ indem man (\ref{eq:HHM}) in (\ref{eq:spiegelung}) einsetzt
 Hx &= x - 2\dfrac{vv^T}{v^Tv} x = x - \underbrace{2\dfrac{v^Tx}{v^Tv}}_{\lambda} v = x - \lambda v \overset{!}{=} \alpha e_1 \\
 &\Longrightarrow v \in \text{span}\{x - \alpha e_1\}
 \end{align*}
-Dadurch erhält man, dass $v$ in dem Span $x  - \alpha e_1$ liegt.\cite{num1}
+%Dadurch erhält man, dass $v$ in dem Span $x  - \alpha e_1$ liegt \cite{num1}.
 %Mit $Hx = x - 2\dfrac{vv^T}{v^Tv} x = x - \lambda v \overset{!}{=} \alpha e_1$ folgt $v \in \text{span}\{x - \alpha e_1\}$. \cite{num1}\\
 
-Setzt man $v = t(x - \alpha e_1)$ in $Hx = \alpha e_1 $(\ref{eq:spiegelung}) ein, dann erhält man 
-\begin{align*}
-Hx =& x - \dfrac{2}{v^Tv}v(v^Tx) = x - 2\dfrac{v^Tx}{v^Tv}v\\
+Setzt man $v = t(x - \alpha e_1)$ in $Hx = \alpha e_1 $ (\ref{eq:spiegelung}) ein, dann erhält man 
+\begin{align}
+Hx =& x - \dfrac{2}{v^Tv}v(v^Tx) = x - 2\dfrac{v^Tx}{v^Tv}v \nonumber \\
 =& x - 2\dfrac{ t(x - \alpha e_1)^Tx}{ t(x - \alpha e_1)^T t(x - \alpha e_1)} t(x - \alpha e_1)
 = x - 2\dfrac{ (x - \alpha e_1)^Tx}{ (x - \alpha e_1)^T (x - \alpha e_1)} (x - \alpha e_1)
-\\
-=& x - \dfrac{(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2} (x - \alpha e_1)
-=\underbrace{\left(1 - \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2}\right)}_{ \overset{!}{=} 0 } x + \alpha e_1 \underbrace{\dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2} }_{\overset{!}{=} 1} \overset{!}{=} \alpha e_1
-\end{align*}
+\nonumber \\
+=& x - \dfrac{(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2} (x - \alpha e_1) \nonumber \\
+=&\underbrace{\left(1 - \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2}\right)}_{ \overset{!}{=} 0 } x + \alpha e_1 \underbrace{\dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2} }_{\overset{!}{=} 1} \overset{!}{=} \alpha e_1 \label{lasteq}
+\end{align}
 
-Damit das letzte $=$ gilt muss gelten.
+Damit das letzte $=$ (\ref{lasteq}) gilt muss gelten.
 \begin{align*}
 	1 &= \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2}\\
 	\Leftrightarrow (x - \alpha e_1)^T(x - \alpha e_1) &= 2 x^T x - 2\alpha x_1 \\

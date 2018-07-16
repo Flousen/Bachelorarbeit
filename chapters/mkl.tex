@@ -95,8 +95,7 @@ struct Matrix {
 
 Diese Datenstruktur ist für Matrixeinträge vom Type double.
 Die Variablen für die Speicherverwaltung(Zeile 3) sind vom Typ \textit{ptrdiff\_t} und die Variablen für die Dimensions Informationen sind vom Typ \textit{size\_t}.
-\textit{ptrdiff\_t} und \textit{size\_t} sind Datentypen für Ganzzahlen. Der Unterschied zwischen den Datentypen ist \textit{size\_t} kann nur Werte Darstellen die $\geq$ 0 sind, \textit{ptrdiff\_t} dann auch negative Werte darstellen.
-Die das \textit{incRow} und \textit{incCol} aus negative Werte haben könne ist Sinnvoll, wenn man zugriff auf Einen Matrix Block haben will in anderer Reihenfolge. \cite{blast}
+\textit{ptrdiff\_t} und \textit{size\_t} sind Datentypen für Ganzzahlen. Der Unterschied zwischen den Datentypen ist \textit{size\_t} kann nur Werte Darstellen die $\geq$ 0 sind, \textit{ptrdiff\_t} dann auch negative Werte darstellen. Negative Werte von \textit{incRow} und \textit{incCol} könne nützlich sein, falls die Daten nicht auf Steigend sondern absteigend im Speicher liegen (siehe Beispiel) \cite{blast}.
 
 Für Intel-MKL-Routinen müssen die Matrizen zeilenweise gespeichert sein.
 Das bedeutet \textit{incCol} ist gleich 1.
