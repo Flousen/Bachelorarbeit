@@ -142,7 +142,7 @@ B.incCol = A.incRow;
 
 In Zeile 2 wird der Daten-Zeiger auf das Element der zweiten Zeile und dritten Spalte gesetzt.
 Um die Matrix zu transponieren, werden die Inkremente vertauscht. Dies geschieht in den Zeilen 5 und 6.  
-In den Zeilen 3 und 4 wird die Matrix Dimensionen richtig gesetzt.
+In den Zeilen 3 und 4 werden die Matrix Dimensionen richtig gesetzt.
 
 Die Matrix $C$ soll ein Beispiel für negative Inkremente sein. Sie nutzt den selben Datenspeicher wie die Matrizen $A$ und $B$, in dem die Werte 1 bis 25 hintereinander im Speicher liegen.
 Die Matrix 
@@ -221,6 +221,8 @@ x \leftarrow \alpha  Ax %\qquad \text{or} \qquad x \leftarrow \alpha * A^T*x
 
 
 Dreiecksmatrizen, die von den Funktionen \textit{trmm} und \textit{trmv} verarbeitet werden, sind quadratische Matrizen, von denen nur der obere oder der untere Dreiecksteil betrachtet wird.
+
+
 Das heißt, die Matrix liegt als quadratische Matrix im Speicher. Die Funktion beachtet nur die Einträge über oder unter der Diagonalen.
 Wird dem Algorithmus mit einem Flag angezeigt, dass 
 er die Matrix als eine unipotente Dreiecksmatrix betrachten soll,

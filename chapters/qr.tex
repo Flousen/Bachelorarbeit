@@ -75,7 +75,7 @@ Die Abbildung \ref{fig:HHolder} veranschaulicht die Spiegelung des Vektors $x$ a
 \subsubsection{Beispiel}
 Rechnung zu Abbildung \ref{fig:HHolder}: Der Vektor $x = \vecX{3}{4}$ soll auf die $x_1$ Achse gespiegelt werden.
 
-Zuerst wird der Householder-Vektor $v$ und der dazugehörige Faktor $\tau$ wie in Kapitel \ref{sec:HHvec} berechnet.
+Zuerst wird der Householder-Vektor $v$ und der dazugehörige Faktor $\tau$ wie in Abschnitt \ref{sec:HHvec} berechnet.
 \begin{align*}
 	\|x\|_2 &= \sqrt{3^2 + 4^2} = 5\\
 	\alpha &= -1 \cdot \text{sign}(x_1) \cdot \|x\|_2 = -5 \\
@@ -273,7 +273,7 @@ Meistens ist es nicht notwendig, die Matrix $Q$ explizit zu bestimmen, da man $Q
 \section{Geblockte QR-Zerlegung}
 Ein geblockter Algorithmus ist sinnvoll, um bei großen Matrizen den Cache optimal zu nutzen.
 
-Im Folgenden wird ein geblockter Algorithmus beschrieben wie er auch von LAPACK verwendet wird. Die entsprechende Funktion bei LAPACK heißt \glqq DGEQRF\grqq{} \cite{DGEQRF}.
+Im Folgenden wird ein geblockter Algorithmus beschrieben wie er auch von LAPACK verwendet wird. Die entsprechende Funktion bei \textit{LAPACK} heißt \textit{DGEQRF} \cite{DGEQRF}.
 
 Die Idee beim geblockten Algorithmus ist, die Matrix in Blöcke aufzuteilen, die geblockte QR-Zerlegung für die Blöcke zu berechnen und die dabei verwendeten Householder-Transformationen auf den Rest der Matrix anzuwenden.
 
@@ -335,7 +335,7 @@ Der Block $A_{bs, \text{bs}}$ wird erneut aufgeteilt. Das ist in Abbildung \ref{
 Dies wird solange fortgesetzt, bis $A_{bs, \text{bs}}$ gleich der Blockgröße ist.
 
 \subsection{Berechnung der Matrix $T$}
-Die Matrix $T$ wird in LAPACK von der Funktion \glqq DLARFT\grqq{} berechnet \cite{LARFT}.
+Die Matrix $T$ wird in \textit{LAPACK} von der Funktion \textit{DLARFT} berechnet \cite{LARFT}.
 
 Sie bekommt eine Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$, einen Vektor $\tau \in \mathbb{R}^k$ und eine Matrix $T\in \mathbb{R}^{k\times k}$ übergeben. 
 
@@ -386,7 +386,7 @@ T =&
 Beispiel mit $k=3$
 
 \subsection{Anwenden von $I - VTV^T$}
-Die Anwendung der Householder-Transformationen auf eine Matrix $C$ wird in LAPACK von der  Funktion \glqq LARFB\grqq{} implementiert.
+Die Anwendung der Householder-Transformationen auf eine Matrix $C$ wird in LAPACK von der  Funktion \textit{LARFB} implementiert.
 
 Die Funktion bekommt eine untere Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$, eine obere Dreiecksmatrix $T \in \mathbb{R}^{k \times k}$ und eine Matrix $C \in \mathbb{R}^{m \times n }$ übergeben.
 
