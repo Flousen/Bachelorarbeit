@@ -74,7 +74,8 @@ Beispiel: Ungeblockte QR-Implementierung vom Algorithmus \ref{alg:unblockedqr}
 \begin{lstlisting}
 size_t mn = std::min(m,n);
 DenseVector<T> work(mn);
-for (std::size_t i = 0; i < mn; ++i){
+for (std::size_t i = 0; i < m
+n; ++i){
   householderVector(A(i,i), A.col(i+1,i),tau(i));
   if (i < n && tau(i) != 0) {
     AII = A(i,i);

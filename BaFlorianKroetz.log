@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.16)  28 JUL 2018 14:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.16)  5 AUG 2018 20:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1966,63 +1966,63 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 70.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 93.
+(babel)             in language  on input line 94.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 93.
+(babel)             in language  on input line 94.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 112.
+(babel)             in language  on input line 113.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 112.
+(babel)             in language  on input line 113.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 112.
+(babel)             in language  on input line 113.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 112.
+(babel)             in language  on input line 113.
  [26]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 113.
+(babel)             in language  on input line 114.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 113.
+(babel)             in language  on input line 114.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 115.
+(babel)             in language  on input line 116.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 115.
+(babel)             in language  on input line 116.
 
-Overfull \hbox (5.52432pt too wide) in paragraph at lines 117--118
+Overfull \hbox (5.52432pt too wide) in paragraph at lines 118--119
 \T1/phv/m/n/12 Der Auf-wand zur Be-rech-nung der QR-Zerlegung mit-tels Househol
 der-Transformation
  []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 124.
+(babel)             in language  on input line 125.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 124.
+(babel)             in language  on input line 125.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 133.
+(babel)             in language  on input line 134.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 133.
+(babel)             in language  on input line 134.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 146.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 146.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 146.
+(babel)             in language  on input line 147.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 146.
+(babel)             in language  on input line 147.
 [27]
-<images/blk.png, id=501, 677.53125pt x 376.40625pt>
+<images/blk.png, id=502, 677.53125pt x 376.40625pt>
 File: images/blk.png Graphic file (type png)
 <use images/blk.png>
-Package pdftex.def Info: images/blk.png  used on input line 149. on input line 
-149.
+Package pdftex.def Info: images/blk.png  used on input line 150. on input line 
+150.
 Package pdftex.def Info: Requested size: 416.12161pt x 231.18692pt on input lin
-e 149.
-<images/unblk.png, id=502, 677.53125pt x 376.40625pt>
+e 150.
+<images/unblk.png, id=503, 677.53125pt x 376.40625pt>
 File: images/unblk.png Graphic file (type png)
 <use images/unblk.png>
-Package pdftex.def Info: images/unblk.png  used on input line 155. on input lin
-e 155.
+Package pdftex.def Info: images/unblk.png  used on input line 156. on input lin
+e 156.
 Package pdftex.def Info: Requested size: 416.12161pt x 231.18692pt on input lin
-e 155.
+e 156.
 ) (./chapters/bwsblk.tex
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 1.
@@ -2152,8 +2152,8 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 226.
  ) 
 Here is how much of TeX's memory you used:
- 24157 strings out of 494806
- 440308 string characters out of 6176909
+ 24158 strings out of 494806
+ 440323 string characters out of 6176909
  667646 words of memory out of 5000000
  26802 multiletter control sequences out of 15000+600000
  56625 words of font info for 92 fonts, out of 8000000 for 9000
@@ -2173,10 +2173,10 @@ ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/san
 smathfonts/ssmsbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic
 /uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on BaFlorianKroetz.pdf (39 pages, 409240 bytes).
+Output written on BaFlorianKroetz.pdf (39 pages, 409329 bytes).
 PDF statistics:
- 698 PDF objects out of 1000 (max. 8388607)
- 575 compressed objects within 6 object streams
- 198 named destinations out of 1000 (max. 500000)
+ 700 PDF objects out of 1000 (max. 8388607)
+ 577 compressed objects within 6 object streams
+ 199 named destinations out of 1000 (max. 500000)
  265 words of extra memory for PDF output out of 10000 (max. 10000000)
 
