@@ -1,0 +1,79 @@
+\documentclass[aspectratio=169]{beamer}
+\mode<presentation>
+{
+	\setbeamertemplate{navigation symbols}{} % no navigation bar
+}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usetheme{default}
+
+%\setbeamertemplate{footline}[text line]{
+%\parbox{\linewidth}{\vspace*{-1cm}\hspace*{7cm}\insertpagenumber}
+%}
+
+\newcommand\numbered{\setbeamertemplate{footline}[text line]{
+		\parbox{\linewidth}{\vspace*{-1cm}\hspace*{7cm}\insertpagenumber}
+}}
+\newcommand\unnumbered{\setbeamertemplate{footline}{}}	
+
+\makeatletter
+\setbeamertemplate{frametitle}{
+	\ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+	\@tempdima=\textwidth%
+	\advance\@tempdima by\beamer@leftmargin%
+	\advance\@tempdima by\beamer@rightmargin%
+	\vspace*{0.6cm}
+	\hspace*{0.6cm}
+	\begin{beamercolorbox}[sep=0.3cm,left,wd=\the\@tempdima]{frametitle}
+		\usebeamerfont{frametitle}%
+		\vbox{}\vskip-1ex%
+		\if@tempswa\else\csname beamer@ftecenter\endcsname\fi%
+		\strut\insertframetitle\strut\par%
+		{%
+			\ifx\insertframesubtitle\@empty%
+			\else%
+			{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+			\fi
+		}%
+		\vskip-1ex%
+		\if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+	\end{beamercolorbox}%
+}
+\makeatother
+
+\title{Cache-optimierte QR-Zerlegung}
+
+\subtitle{Bachelor Kolloquium}
+
+\author{Florian Krötz}
+
+
+\institute[Universities of Somewhere and Elsewhere] % 
+{
+	Universität Ulm
+}
+
+\date{\today}
+%
+\subject{Theoretical Computer Science}
+
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+% Let's get started
+\begin{document}
+\unnumbered \addtocounter{framenumber}{-1}
+\begin{frame}
+	\titlepage
+\end{frame}
+\numbered 
+\input{slides/slides.tex}
+
+
+\end{document}
+
+

@@ -1,0 +1,2 @@
+\select@language {ngerman}
+\beamer@sectionintoc {1}{LU-Zerlegung}{2}{0}{1}
