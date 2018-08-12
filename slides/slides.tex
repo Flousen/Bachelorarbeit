@@ -1,13 +1,105 @@
-
-
-\section{LU-Zerlegung}
+\section{QR-Zerlegung}
 \begin{frame}
-	\frametitle{LU}
+	\frametitle{QR-Zerlegung}
 	\vspace{-4cm}
 	\begin{itemize}
-		\item Ah
+		\item $ A = QR $
 	\end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Householder-Transformation}
+	\vspace{-1cm}
+	\begin{align*}
+		H = I - 2 \dfrac{vv^T}{v^Tv}
+	\end{align*}
+	\centering
+	\scalebox{.8}{\input{images/hh.tex}}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Householder-Transformation}
+	\vspace{-1cm}
+	\begin{itemize}
+	\item Householder Vektor berechnen
+		\begin{align*}
+			Hx = \alpha e_1
+		\end{align*}
+		$\alpha = -1 \cdot \text{sign}(x_1) \|x\|_2$\\
+		$\tau = \dfrac{\alpha - x_1}{\alpha}$\\
+		$v=\dfrac{x - \alpha e_1}{x_1 - \alpha}$ 
+
+	\item  Householder-Transformation anwenden
+		\begin{align*} 
+		H A =(I - \tau vv^T) A= A - \tau (vv^T )A = A - \tau v(v^TA)
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{QR-Zerlegung mittels Householder}
+	\vspace{-4cm}
+	\begin{itemize}
+		\item $ A = QR $
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Geblockte QR-Zerlegung}
+	\begin{itemize}
+		\item Matrix A\\
+		\centering
+		\input{images/partitionOFA1.tex}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Householder-Transformationen anwenden}
+	\begin{itemize}
+		\item Ansatz
+		\begin{align*}
+			H_1H_2...H_k = I - VTV^T \qquad \text{mit}\qquad H_i = I - \tau_i v_iv_i^T
+		\end{align*}
+		\item Berechnung vom T
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Householder-Transformationen anwenden}
+	\begin{align*}
+		C \leftarrow H C = C - V T V^T C \quad %\text{oder} \quad 	%C \leftarrow H^T C = C - V T^T V^T C	\label{eq:larfb}
+	\end{align*}
+	\centering
+	\input{images/partitionOFA.tex}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ungeblockte QR}
+	\centering
+	\scalebox{.85}{
+		\includegraphics[width=\textwidth]{images/unblk}
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Geblockte QR - Blocksizes}
+		\centering
+	\scalebox{.85}{
+		\includegraphics[width=\textwidth]{images/blkbs}
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Geblockte QR}
+		\frametitle{Geblockte QR - Blocksizes}
+	\centering
+	\scalebox{.85}{
+		\includegraphics[width=\textwidth]{images/blk}
+	}
+\end{frame}
+
 
 
 

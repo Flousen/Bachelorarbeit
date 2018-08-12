@@ -2,6 +2,7 @@
 \contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}
 \contentsline {subsubsection}{\nonumberline Cache-Optimierung}{2}{section*.2}
 \contentsline {subsubsection}{\nonumberline Intel MKL}{2}{section*.3}
+\contentsline {subsubsection}{\nonumberline Blas kapiltel motivieren}{2}{section*.4}
 \contentsline {chapter}{\numberline {2}BLAS}{3}{chapter.2}
 \contentsline {section}{\numberline {2.1}Datenstruktur f\IeC {\"u}r Matrizen}{3}{section.2.1}
 \contentsline {subsubsection}{\nonumberline Beispiel}{4}{section*.5}
@@ -22,6 +23,7 @@
 \contentsline {section}{\numberline {3.3}Geblockte QR-Zerlegung}{18}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Berechnung der Matrix $T$}{19}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Anwenden von $I - VTV^T$}{20}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Wahl der Blockgr\IeC {\"o}\IeC {\ss }e $bs$}{23}{subsection.3.3.3}
 \contentsline {chapter}{\numberline {4}Implementierung und Benchmarks}{24}{chapter.4}
 \contentsline {section}{\numberline {4.1}Bibliothek}{24}{section.4.1}
 \contentsline {subsubsection}{\nonumberline MKL Wrapper}{25}{section*.10}
@@ -32,4 +34,4 @@
 \contentsline {subsection}{\numberline {4.3.2}FLOPS}{27}{subsection.4.3.2}
 \contentsline {subsection}{\numberline {4.3.3}Test System}{27}{subsection.4.3.3}
 \contentsline {chapter}{\numberline {A}Block Reflector}{29}{appendix.A}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{33}{chapter*.13}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{33}{chapter*.11}

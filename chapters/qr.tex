@@ -1,5 +1,4 @@
 \chapter{QR-Zerlegung}
-
 \section{Definition}
 Eine Matrix $A \in \mathbb{R}^{m \times n}$ , $m \ge n$ besitzt eine eindeutige QR-Zerlegung
 \begin{align}
@@ -265,7 +264,7 @@ Die Matrix $A$ hat somit die Form
 
 Indem man Householder-Vektoren unterhalb der Diagonalen speichert, benötigt man keinen zusätzlichen Speicher für die Matrix $Q$.
 
-Meistens ist es nicht notwendig, die Matrix $Q$ explizit zu bestimmen, da man $Q$ nur mit den Householder-Vektoren sehr effizient anwenden kann (siehe Kapitel \ref{sec:appHHvec}).
+Meistens ist es nicht notwendig, die Matrix $Q$ explizit zu bestimmen, da man $Q$ nur mit den Householder-Vektoren sehr effizient anwenden kann (siehe Abschnitt \ref{sec:appHHvec}).
 
 
 
@@ -277,7 +276,7 @@ Im Folgenden wird ein geblockter Algorithmus beschrieben wie er auch von LAPACK 
 
 Die Idee beim geblockten Algorithmus ist, die Matrix in Blöcke aufzuteilen, die geblockte QR-Zerlegung für die Blöcke zu berechnen und die dabei verwendeten Householder-Transformationen auf den Rest der Matrix anzuwenden.
 
-Betrachte dazu die Matrix $A \in \mathbb{R}^{m \times n}$ geblockt, mit einer geeigneten Blockgröße $bs$.
+Betrachte dazu die Matrix $A \in \mathbb{R}^{m \times n}$ geblockt, mit einer geeigneten Blockgröße $bs$ (siehe Abschnitt \ref{bs}).
 \begin{align}
 	A = \left(\begin{array}{l|l}
 	A_{0, 0} & A_{0, \text{bs}} \\ \hline
@@ -293,7 +292,7 @@ Die Abbildung \ref{fig:blockA} zeigt schematisch die Partitionierung von $A$.
 	\label{fig:blockA}
 \end{figure}
 
-Die Blockgröße $bs$ wird so gewählt, dass die Geschwindigkeit der ungeblockten QR-Zerlegung für den Block $ \left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right)$ optimal ist.
+Die Blockgröße $bs$ wird so gewählt, dass die Geschwindigkeit der ungeblockten QR-Zerlegung für den Block $ \left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right)$ optimal ist (siehe Abschnitt \ref{bs}).
 
 Für diesen Block wird die  QR-Zerlegung mit dem ungeblockten Algorithmus (Algorithmus \ref{alg:unblockedqr}) berechnet.
 \begin{align}
@@ -446,7 +445,7 @@ $C_1$ wird in Zeile \ref{alg4:C1} und \ref{alg4:C12} berechnet. $C_2$ wird in Ze
 
 \begin{algorithm}[H]
 	\caption{$I - V T V^T$ auf C anwenden.\\
-			 Die Matrix $W$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.}
+			 Die Matrix $W \in \mathbb{R}^{n \times k}$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.}
 	\label{alg:applyblockref}
 	\begin{algorithmic}[1]
 		\State Input: $V \in \mathbb{R}^{m \times k}$, $T \in \mathbb{R}^{k \times k}$, $C \in \mathbb{R}^{m \times n}$
@@ -483,3 +482,9 @@ $C_1$ wird in Zeile \ref{alg4:C1} und \ref{alg4:C12} berechnet. $C_2$ wird in Ze
 %		\EndFor
 %	\end{algorithmic}
 %\end{algorithm}
+
+\subsection{Wahl der Blockgröße $bs$} \label{bs}
+
+algorithmus 4 nur Matrxi produkte
+
+
