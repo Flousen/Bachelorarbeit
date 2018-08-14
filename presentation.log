@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.16)  12 AUG 2018 19:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.16)  14 AUG 2018 23:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1337,7 +1337,7 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 [3
 
 ]
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 38--38
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 41--41
 []|  [][][]  
  []
 
@@ -1349,7 +1349,7 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 [4
 
 ]
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 46--46
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 111--111
 []|  [][][]  
  []
 
@@ -1360,8 +1360,8 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 
 [5
 
-] (./images/partitionOFA1.tex)
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 55--55
+]
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 111--111
 []|  [][][]  
  []
 
@@ -1373,7 +1373,7 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 [6
 
 ]
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 66--66
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 111--111
 []|  [][][]  
  []
 
@@ -1384,8 +1384,8 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 
 [7
 
-] (./images/partitionOFA.tex)
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 76--76
+]
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 111--111
 []|  [][][]  
  []
 
@@ -1397,15 +1397,7 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 [8
 
 ]
-<images/unblk.png, id=68, 677.53125pt x 376.40625pt>
-File: images/unblk.png Graphic file (type png)
-<use images/unblk.png>
-Package pdftex.def Info: images/unblk.png  used on input line 84. on input line
- 84.
-Package pdftex.def Info: Requested size: 398.3386pt x 221.30812pt on input line
- 84.
-
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 84--84
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 121--121
 []|  [][][]  
  []
 
@@ -1416,16 +1408,16 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 
 [9
 
- <./images/unblk.png>]
-<images/blkbs.png, id=75, 677.53125pt x 376.40625pt>
-File: images/blkbs.png Graphic file (type png)
-<use images/blkbs.png>
-Package pdftex.def Info: images/blkbs.png  used on input line 92. on input line
- 92.
+]
+<images/unblk.png, id=76, 677.53125pt x 376.40625pt>
+File: images/unblk.png Graphic file (type png)
+<use images/unblk.png>
+Package pdftex.def Info: images/unblk.png  used on input line 129. on input lin
+e 129.
 Package pdftex.def Info: Requested size: 398.3386pt x 221.30812pt on input line
- 92.
+ 129.
 
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 92--92
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 129--129
 []|  [][][]  
  []
 
@@ -1436,16 +1428,8 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 
 [10
 
- <./images/blkbs.png>]
-<images/blk.png, id=82, 677.53125pt x 376.40625pt>
-File: images/blk.png Graphic file (type png)
-<use images/blk.png>
-Package pdftex.def Info: images/blk.png  used on input line 101. on input line 
-101.
-Package pdftex.def Info: Requested size: 398.3386pt x 221.30812pt on input line
- 101.
-
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 101--101
+ <./images/unblk.png>] (./images/partofAani.tex)
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 138--138
 []|  [][][]  
  []
 
@@ -1456,7 +1440,95 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 
 [11
 
- <./images/blk.png>])
+] (./images/partofAani.tex)
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 138--138
+[]|  [][][]  
+ []
+
+
+Overfull \hbox (2.83337pt too wide) has occurred while \output is active
+ $[]$  
+ []
+
+[12
+
+] (./images/partofAani.tex)
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 138--138
+[]|  [][][]  
+ []
+
+
+Overfull \hbox (2.83337pt too wide) has occurred while \output is active
+ $[]$  
+ []
+
+[13
+
+] (./images/partofAani.tex)
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 138--138
+[]|  [][][]  
+ []
+
+
+Overfull \hbox (2.83337pt too wide) has occurred while \output is active
+ $[]$  
+ []
+
+[14
+
+] (./images/partitionOFAslide.tex)
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 158--158
+[]|  [][][]  
+ []
+
+
+Overfull \hbox (2.83337pt too wide) has occurred while \output is active
+ $[]$  
+ []
+
+[15
+
+]
+<images/blkbs.png, id=109, 677.53125pt x 376.40625pt>
+File: images/blkbs.png Graphic file (type png)
+<use images/blkbs.png>
+Package pdftex.def Info: images/blkbs.png  used on input line 168. on input lin
+e 168.
+Package pdftex.def Info: Requested size: 398.3386pt x 221.30812pt on input line
+ 168.
+
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 168--168
+[]|  [][][]  
+ []
+
+
+Overfull \hbox (2.83337pt too wide) has occurred while \output is active
+ $[]$  
+ []
+
+[16
+
+ <./images/blkbs.png>]
+<images/both.png, id=116, 677.53125pt x 376.40625pt>
+File: images/both.png Graphic file (type png)
+<use images/both.png>
+Package pdftex.def Info: images/both.png  used on input line 177. on input line
+ 177.
+Package pdftex.def Info: Requested size: 398.3386pt x 221.30812pt on input line
+ 177.
+
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 177--177
+[]|  [][][]  
+ []
+
+
+Overfull \hbox (2.83337pt too wide) has occurred while \output is active
+ $[]$  
+ []
+
+[17
+
+ <./images/both.png>])
 \tf@nav=\write6
 \openout6 = `presentation.nav'.
 
@@ -1475,26 +1547,29 @@ Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: 45B68C48F98E0A7A08BF1DF35F95CA18;47.
  ) 
 Here is how much of TeX's memory you used:
- 21712 strings out of 494806
- 424610 string characters out of 6176909
- 491832 words of memory out of 5000000
- 24500 multiletter control sequences out of 15000+600000
- 11730 words of font info for 43 fonts, out of 8000000 for 9000
+ 21766 strings out of 494806
+ 425844 string characters out of 6176909
+ 495832 words of memory out of 5000000
+ 24536 multiletter control sequences out of 15000+600000
+ 14184 words of font info for 52 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 56i,14n,69p,798b,676s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/symbols/msam10.pfb>
-Output written on presentation.pdf (11 pages, 126494 bytes).
+ 56i,16n,69p,798b,692s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
+ymbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sy
+mbols/msam7.pfb>
+Output written on presentation.pdf (17 pages, 160458 bytes).
 PDF statistics:
- 126 PDF objects out of 1000 (max. 8388607)
- 91 compressed objects within 1 object stream
- 24 named destinations out of 1000 (max. 500000)
+ 172 PDF objects out of 1000 (max. 8388607)
+ 127 compressed objects within 2 object streams
+ 36 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
