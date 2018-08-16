@@ -28,10 +28,14 @@
 \contentsline {section}{\numberline {4.1}Bibliothek}{24}{section.4.1}
 \contentsline {subsubsection}{\nonumberline MKL Wrapper}{25}{section*.10}
 \contentsline {subsection}{\numberline {4.1.1}Algorithmus}{26}{subsection.4.1.1}
-\contentsline {section}{\numberline {4.2}Fehlersch\IeC {\"a}tzer}{26}{section.4.2}
+\contentsline {section}{\numberline {4.2}Fehlersch\IeC {\"a}tzer}{27}{section.4.2}
 \contentsline {section}{\numberline {4.3}Benchmarks}{27}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Aufwand}{27}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}FLOPS}{27}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Test System}{27}{subsection.4.3.3}
-\contentsline {chapter}{\numberline {A}Block Reflector}{29}{appendix.A}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{33}{chapter*.11}
+\contentsline {subsection}{\numberline {4.3.2}FLOPS}{28}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Vorgehensweise}{28}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}Testsystem}{28}{subsection.4.3.4}
+\contentsline {section}{\numberline {4.4}Ergebnisse}{29}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Ungeblockter Algorithmus}{29}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Cache-optimierter Algorithmus}{30}{subsection.4.4.2}
+\contentsline {chapter}{\numberline {A}Block Reflector}{31}{appendix.A}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{35}{chapter*.14}

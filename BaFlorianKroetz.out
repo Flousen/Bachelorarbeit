@@ -25,6 +25,10 @@
 \BOOKMARK [1][-]{section.4.3}{Benchmarks}{chapter.4}% 25
 \BOOKMARK [2][-]{subsection.4.3.1}{Aufwand}{section.4.3}% 26
 \BOOKMARK [2][-]{subsection.4.3.2}{FLOPS}{section.4.3}% 27
-\BOOKMARK [2][-]{subsection.4.3.3}{Test System}{section.4.3}% 28
-\BOOKMARK [0][-]{appendix.A}{Block Reflector}{}% 29
-\BOOKMARK [0][-]{chapter*.11}{Literaturverzeichnis}{}% 30
+\BOOKMARK [2][-]{subsection.4.3.3}{Vorgehensweise}{section.4.3}% 28
+\BOOKMARK [2][-]{subsection.4.3.4}{Testsystem}{section.4.3}% 29
+\BOOKMARK [1][-]{section.4.4}{Ergebnisse}{chapter.4}% 30
+\BOOKMARK [2][-]{subsection.4.4.1}{Ungeblockter Algorithmus}{section.4.4}% 31
+\BOOKMARK [2][-]{subsection.4.4.2}{Cache-optimierter Algorithmus}{section.4.4}% 32
+\BOOKMARK [0][-]{appendix.A}{Block Reflector}{}% 33
+\BOOKMARK [0][-]{chapter*.14}{Literaturverzeichnis}{}% 34

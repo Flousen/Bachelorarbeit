@@ -21,8 +21,9 @@ printf("A   =\n");print(A); // Matrix ausgeben
 printf("A22 =\n");print(A.block(2,2));
 printf("A22T=\n");print(A.block(2,2).view(Trans::view));
 \end{lstlisting}
-
-Dieser Code kann die folgende Ausgabe erzeugen. \newpage
+Der Code erzeugt erzeugt zuerst eine $5 \times 5$ Matrix.
+Die Funktion \textit{init} initialisiert die Matrix zeilenweise mit den Werten 1 bis 25.
+Diese Matrix wird 3 ausgegeben. Zuerst die komplette Matrix(Zeile 3), dann eine ein Block der Matrix beginnend in der dritten Zeile und dritten Spalte. Als letztes wird der selbe Matrix Block noch Transponiert betrachtet.Der Code kann die folgende Ausgabe erzeugen.
 \lstset{numbers=none}
 \begin{lstlisting} 
 A   = 
@@ -44,6 +45,13 @@ A22T=
 \end{lstlisting}
 
 \subsubsection{MKL Wrapper}
+Um von der Bibliothek auf Blas-Routienen der MKL zugreifen zu können benötigt man Wrapper die die Schnittstelle zur MKL darstellen.
+
+MKL Blas-Routienen kennen keine Matrix und Vektor Klassen wie es sie in der Bibliothek gibt. Diese Funktionen bekommen Zeiger auf die Daten und Verwaltungs infomationen als Variable übergeben.
+
+Die Wrapper extrahieren diese Daten aus den Klassen und rufen damit die MKL Funktionen auf.
+
+Der folgende Code zeigt einen solchen Wrapper am Beispiel der Skalarprodukt-Funktion \textit{dot}.
 \lstset{numbers=left,firstnumber=14}
 \begin{lstlisting}
 double
@@ -64,7 +72,8 @@ dot(const VectorX<T> &x, const VectorY<T> &y)
              y.data(), y.inc());
 }
 \end{lstlisting}
-
+Die Funkton in den Zeilen 21-30 wird von der Bibliothek auf gerufen.
+In den Zeilen 28 und 29 werden die für die Funkton wichtigen Parameter aus den Klassen ausgelsesen und damit die Wrapper-Funktion(Zeilen 14-19) aufgerufen. Diese Funktion ruft dann die Blas-Funktion auf(Zeile 18).
 
 
 \subsection{Algorithmus}
@@ -91,7 +100,7 @@ n; ++i){
 
 Die anderen Algorithmen wurden analog implementiert, siehe Anhang.
 
-\section{Fehlerschätzer}
+\section{Fehlerschätzer} \label{Fehlerschätzer}
 
 Um zu testen, ob die QR-Zerlegung korrekt ist, ist ein Fehlerschätzer notwendig.
 Es wurde der Fehlerschätzer von ATLAS \cite{atlas} verwendet.
@@ -121,6 +130,7 @@ Der Aufwand zur Berechnung der QR-Zerlegung mittels Householder-Transformation e
 \#\text{QR} &= n \cdot \left(\frac{23}{6} + m + \dfrac{n}{2} + n\cdot \left(\frac{m-n}{3} \right) + n\cdot \left(\dfrac{5}{6} + \dfrac{n}{2} + m - \dfrac{n}{3}\right)\right) = {\cal O}(n^2m)
 \end{align*}
 $\#\text{QR}$ bezeichnet die Anzahl der Rechenoperationen, die zur Berechnung der QR-Zerlegung notwendig sind. 
+Vereinfacht man erhält man einen Aufwand von $ {\cal O}(n^2m)$.
 
 \subsection{FLOPS}
 FLPOS (\textit{floating point operations per second}) geben an, wie viele Fließkomma-Operationen pro Sekunde ausgeführt werden.
@@ -131,32 +141,51 @@ FLPOS (\textit{floating point operations per second}) geben an, wie viele Fließ
 
 $\Delta t$ bezeichnet die Zeit in Sekunden und $\#$ die Anzahl der Rechenoperationen, die zur Berechnung benötigt werden.
 
-\subsection{Test System}
+\subsection{Vorgehensweise}
 
-Getestet wurde auf einem System mit einer Intel i5-3470 CPU mit 3.20GHz. 
+Ein $m \times n$ Matrix wird mit gleich verteilten Zufallswerten aus $[-1,1]$ initialisiert.
 
-Die theoretische \textit{peak performance} errechnet sich, auf dieser Architektur, aus der Taktrate mal die Registerbreite mal 2. 
+Die Matrix wir kopiert um nach der Berechnung den Fehler schätzen zu können. Die QR-Zerlegung wird von der kopierten Matrix berechnet. Es wird die Zeit gemessen welche für die Berrechnung benötigt wird. 
+Aus der original Matrix und der kopierten QR-zerlegten Matrix wird der Fehler berechnet wie in Abschnitt \ref{Fehlerschätzer} beschrieben.
+
+Aus den Matrix Dimensionen werden die Anzahl der Rechenoperationen berechnet. 
+Aus Anzahl der Rechenoperationen und der gemessenen Zeit werden die FLOPS berechnet.
 
 
+\subsection{Testsystem}
+
+Getestet wurde auf einem System mit einer Intel i5-3470-CPU mit 3.20GHz. 
+Die theoretische \textit{peak performance} errechnet sich, auf der Architektur des Prozessors, aus der Taktrate mal die Registerbreite mal 2. 
 
 Die CPU des Testsystems hat eine Taktrate von 3.20GHz.
 Die AVX-Register sind 256-Bit groß. Darin haben 4 double Platz.
-
 \begin{align*}
   \text{Taktrate} \cdot \text{Registerbreite} \cdot 2= 3,20 \text{ GHz} \cdot 4 \cdot 2 = 25,6 \text{ GFLOPs}
 \end{align*}
 
-%\begin{figure}[H]
-%  \includegraphics[width=\textwidth]{images/blk.png}
-%  \caption{Benchmark geblockte QR-Zerlegung}
-%  \label{img:blk}
-%\end{figure}
-%
-%\begin{figure}[H]
-%  \includegraphics[width=\textwidth]{images/unblk.png}
-%  \caption{Benchmark ungeblockte QR-Zerlegung}
-%  \label{img:unblk}
-%\end{figure}
+\section{Ergebnisse}
+\subsection{Ungeblockter Algorithmus}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{images/unblk.png}
+	\caption{Benchmark ungeblockte QR-Zerlegung}
+	\label{img:unblk}
+\end{figure}
+
+\subsection{Cache-optimierter Algorithmus}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{images/blkbs.png}
+	\caption{Benchmark geblockte QR-Zerlegung}
+	\label{img:blk}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=\textwidth]{images/both.png}
+  \caption{Benchmark geblockte QR-Zerlegung}
+  \label{img:blk}
+\end{figure}
+
 
 
 
