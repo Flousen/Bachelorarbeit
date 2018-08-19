@@ -231,10 +231,10 @@ Diese Vorgehensweise führt zum Algorithmus \ref{alg:unblockedqr}.
 	\State Input: $A \in \mathbb{R}^{m \times n}$
 	\For {i = 0,1,2,..., n-1}
 		\State ($v_i$, $\tau_i$) $\leftarrow$ householdervector($\hat{a}_i$)
-		\State $w \leftarrow v^T\dot A_i$ (dgemv)
-		\State $ A_i \leftarrow \tau * v * w + A_i $ (dger)
+		\State $w \leftarrow v_i^T \cdot A_i$ (dgemv)
+		\State $ A_i \leftarrow \tau \cdot v_i \cdot w + A_i $ (dger)
 		\If {i < m}
-			\State $\hat{a}_i \leftarrow v$ \label{lst:line:vinA}
+			\State $\hat{a}_i \leftarrow v_i$ \label{lst:line:vinA}
 		\EndIf
 	\EndFor	
 	\State Output: $A$ QR zerlegt, Vektor $\tau \in \mathbb{R}^n$
@@ -333,7 +333,31 @@ Die Anwendung der Householder-Transformationen $I - V*T*V^T$ auf $\left(\frac{A_
 Der Block $A_{bs, \text{bs}}$ wird erneut aufgeteilt. Das ist in Abbildung \ref{fig:blockA} gestrichelt dargestellt.
 Dies wird solange fortgesetzt, bis $A_{bs, \text{bs}}$ gleich der Blockgröße ist.
 
-\subsection{Berechnung der Matrix $T$}
+So kommt man auf den Algorithmus 
+
+\begin{algorithm}[H]
+	\caption{Geblockter Algorithmus}
+	\label{alg:blockedqr}
+	\begin{algorithmic}[1]
+		\State Input: $A \in \mathbb{R}^{m \times n}$
+		\For {i = 0,1,2,..., n-1}
+			\State qr\_unblk($A_i$,$\tau_i$) (Algorithmus \ref{alg:unblockedqr})
+			\If $i + ib \le n$
+				\State calc T (Abschnitt \ref{calcT})
+				\State apply H (Abschnitt \ref{applyT})
+			\EndIf 
+		\EndFor	
+		
+		\If i $\le$ min(m,n)
+			\State qr\_unblk($A_i$,$\tau_i$) (Algorithmus \ref{alg:unblockedqr})
+		\EndIf
+		 
+		\State Output: $A$ QR zerlegt, Vektor $\tau \in \mathbb{R}^n$r
+	\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Berechnung der Matrix $T$} \label{calcT}
 Die Matrix $T$ wird in \textit{LAPACK} von der Funktion \textit{DLARFT} berechnet \cite{LARFT}.
 
 Sie bekommt eine Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$, einen Vektor $\tau \in \mathbb{R}^k$ und eine Matrix $T\in \mathbb{R}^{k\times k}$ übergeben. 
@@ -384,7 +408,7 @@ T =&
 \end{align*}
 Beispiel mit $k=3$
 
-\subsection{Anwenden von $I - VTV^T$}
+\subsection{Anwenden von $I - VTV^T$} \label{applyT}
 Die Anwendung der Householder-Transformationen auf eine Matrix $C$ wird in LAPACK von der  Funktion \textit{LARFB} implementiert.
 
 Die Funktion bekommt eine untere Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$, eine obere Dreiecksmatrix $T \in \mathbb{R}^{k \times k}$ und eine Matrix $C \in \mathbb{R}^{m \times n }$ übergeben.
@@ -431,7 +455,7 @@ Die Matrizen $C$ und $V$ werden wie in (\ref{eq:aufteilen}) aufgeteilt.
 	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( \left(C_1^T|C_2^T\right)	\cdot \left(\dfrac{V_1}{V_2}\right) \cdot T \cdot \left(V_1^T|V_2^T\right) \right)^T \\
 	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) \cdot T \cdot \left(V_1^T|V_2^T\right) \right)^T 
 \end{align*}
-$ \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) $ wird in Zeile \ref{alg4:beg}-\ref{alg4:end} berechnet und das Ergebnis in $W$ gespeichert. Die Matrix $W$ ist eine Workspace-Matrix. In Zeile \ref{alg4:trans}-\ref{alg4:transE} wird  $ \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) \cdot T$ berechnet, in dem $T$ auf $W$ multipliziert wird mit $W \leftarrow W \cdot T$. 
+$ \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) $ wird in Zeile \ref{alg4:beg}--\ref{alg4:end} berechnet und das Ergebnis in $W$ gespeichert. Die Matrix $W$ ist eine Workspace-Matrix. In Zeile \ref{alg4:trans}--\ref{alg4:transE} wird  $ \left( C_1^T \cdot V_1 + C_2^T \cdot V_2 \right) \cdot T$ berechnet, in dem $T$ auf $W$ multipliziert wird mit $W \leftarrow W \cdot T$. 
 \begin{align*}
 	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left( W \cdot \left(V_1^T|V_2^T\right) \right)^T \\
 	\left(\dfrac{C_1}{C_2}\right) &\leftarrow  \left(\dfrac{C_1}{C_2}\right) - \left(\dfrac{V_1}{V_2}\right) \cdot W^T 	\\
