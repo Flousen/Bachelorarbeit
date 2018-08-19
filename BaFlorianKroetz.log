@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.16)  19 AUG 2018 12:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.16)  19 AUG 2018 13:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1481,15 +1481,15 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 
 (./BaFlorianKroetz.toc
 LaTeX Font Info:    External font `cmssex10' loaded for size
-(Font)              <12> on input line 7.
+(Font)              <12> on input line 6.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 37.
+(babel)             in language  on input line 36.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 37.
+(babel)             in language  on input line 36.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 37.
+(babel)             in language  on input line 36.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 37.
+(babel)             in language  on input line 36.
  [3
 
 ])
@@ -2047,7 +2047,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 176.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 176.
-<images/unblk.png, id=556, 677.53125pt x 376.40625pt>
+<images/unblk.png, id=555, 677.53125pt x 376.40625pt>
 File: images/unblk.png Graphic file (type png)
 <use images/unblk.png>
 Package pdftex.def Info: images/unblk.png  used on input line 186. on input lin
@@ -2058,7 +2058,7 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 193.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 193.
-<images/blkbs.png, id=560, 677.53125pt x 376.40625pt>
+<images/blkbs.png, id=559, 677.53125pt x 376.40625pt>
 File: images/blkbs.png Graphic file (type png)
 <use images/blkbs.png>
 Package pdftex.def Info: images/blkbs.png  used on input line 201. on input lin
@@ -2083,7 +2083,7 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 205.
  [31 <./images/blkbs.png>]
-<images/both.png, id=576, 677.53125pt x 376.40625pt>
+<images/both.png, id=575, 677.53125pt x 376.40625pt>
 File: images/both.png Graphic file (type png)
 <use images/both.png>
 Package pdftex.def Info: images/both.png  used on input line 215. on input line
@@ -2230,7 +2230,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 227.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 227.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 227.
 Package rerunfilecheck Info: File `BaFlorianKroetz.out' has not changed.
-(rerunfilecheck)             Checksum: 90345476E6D872AFD125D050ED80F8E0;2399.
+(rerunfilecheck)             Checksum: AB520D17FA90F5716FB5BE0D4B10E8E2;2399.
 
 
 LaTeX Warning: There were multiply-defined labels.
@@ -2238,8 +2238,8 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 227.
  ) 
 Here is how much of TeX's memory you used:
- 24194 strings out of 494806
- 440777 string characters out of 6176909
+ 24193 strings out of 494806
+ 440766 string characters out of 6176909
  679135 words of memory out of 5000000
  26823 multiletter control sequences out of 15000+600000
  59891 words of font info for 94 fonts, out of 8000000 for 9000
@@ -2259,10 +2259,10 @@ ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/san
 smathfonts/ssmsbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic
 /uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on BaFlorianKroetz.pdf (44 pages, 437901 bytes).
+Output written on BaFlorianKroetz.pdf (44 pages, 437757 bytes).
 PDF statistics:
- 778 PDF objects out of 1000 (max. 8388607)
- 647 compressed objects within 7 object streams
- 213 named destinations out of 1000 (max. 500000)
+ 777 PDF objects out of 1000 (max. 8388607)
+ 646 compressed objects within 7 object streams
+ 212 named destinations out of 1000 (max. 500000)
  318 words of extra memory for PDF output out of 10000 (max. 10000000)
 

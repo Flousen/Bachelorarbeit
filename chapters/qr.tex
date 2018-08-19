@@ -276,7 +276,7 @@ Im Folgenden wird ein geblockter Algorithmus beschrieben wie er auch von LAPACK 
 
 Die Idee beim geblockten Algorithmus ist, die Matrix in Blöcke aufzuteilen, die geblockte QR-Zerlegung für die Blöcke zu berechnen und die dabei verwendeten Householder-Transformationen auf den Rest der Matrix anzuwenden.
 
-Betrachte dazu die Matrix $A \in \mathbb{R}^{m \times n}$ geblockt, mit einer geeigneten Blockgröße $bs$ (siehe Abschnitt \ref{bs}).
+Betrachte dazu die Matrix $A \in \mathbb{R}^{m \times n}$ als Blockmatrix, mit einer geeigneten Blockgröße $bs$ (siehe Abschnitt \ref{bs}).
 \begin{align}
 	A = \left(\begin{array}{l|l}
 	A_{0, 0} & A_{0, \text{bs}} \\ \hline
