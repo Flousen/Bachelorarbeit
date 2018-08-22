@@ -16,9 +16,9 @@
 \contentsline {subsection}{\numberline {3.1.1}Beispiel f\IeC {\"u}r eine Anwendung}{10}{subsection.3.1.1}
 \contentsline {section}{\numberline {3.2}Householder-Transformation}{11}{section.3.2}
 \contentsline {subsubsection}{\nonumberline Beispiel}{12}{section*.6}
-\contentsline {subsection}{\numberline {3.2.1}Householder Vector}{13}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.1}Householder Vektor}{13}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Householder-Transformation anwenden}{15}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}QR-Zerlegung mittels Housholder-Transformationen}{15}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.3}QR-Zerlegung mittels Householder-Transformationen}{15}{subsection.3.2.3}
 \contentsline {section}{\numberline {3.3}Geblockte QR-Zerlegung}{18}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Berechnung der Matrix $T$}{20}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Anwenden von $I - VTV^T$}{21}{subsection.3.3.2}
@@ -29,13 +29,14 @@
 \contentsline {subsection}{\numberline {4.1.1}Algorithmus}{27}{subsection.4.1.1}
 \contentsline {section}{\numberline {4.2}Fehlersch\IeC {\"a}tzer}{28}{section.4.2}
 \contentsline {section}{\numberline {4.3}Benchmarks}{28}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Aufwand}{28}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.1}Aufwand}{29}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}FLOPS}{29}{subsection.4.3.2}
 \contentsline {subsection}{\numberline {4.3.3}Vorgehensweise}{29}{subsection.4.3.3}
-\contentsline {subsection}{\numberline {4.3.4}Testsystem}{29}{subsection.4.3.4}
-\contentsline {section}{\numberline {4.4}Ergebnisse}{30}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Ungeblockter Algorithmus}{30}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Cache-optimierter Algorithmus}{30}{subsection.4.4.2}
-\contentsline {section}{\numberline {4.5}Fazit}{33}{section.4.5}
-\contentsline {chapter}{\numberline {A}Block Reflector}{34}{appendix.A}
-\contentsline {chapter}{\nonumberline Literaturverzeichnis}{38}{chapter*.13}
+\contentsline {subsection}{\numberline {4.3.4}Testsystem}{30}{subsection.4.3.4}
+\contentsline {section}{\numberline {4.4}Ergebnisse}{31}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Ungeblockter Algorithmus}{31}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Cache-optimierter Algorithmus}{31}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.5}Fazit}{34}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Ausblick}{34}{subsection.4.5.1}
+\contentsline {chapter}{\numberline {A}Block Reflector}{35}{appendix.A}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{39}{chapter*.13}

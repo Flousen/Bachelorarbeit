@@ -96,7 +96,7 @@ struct Matrix {
 
 Diese Datenstruktur ist für Matrixeinträge vom Type double.
 Die Variablen für die Speicherverwaltung(Zeile 3) sind vom Typ \textit{ptrdiff\_t} und die Variablen für die Dimensions Informationen sind vom Typ \textit{size\_t}.
-\textit{ptrdiff\_t} und \textit{size\_t} sind Datentypen für Ganzzahlen. Der Unterschied zwischen den Datentypen ist \textit{size\_t} kann nur Werte Darstellen die $\geq$ 0 sind, \textit{ptrdiff\_t} dann auch negative Werte darstellen. Negative Werte von \textit{incRow} und \textit{incCol} könne nützlich sein, falls die Daten nicht auf Steigend sondern absteigend im Speicher liegen (siehe Beispiel) \cite{blast}.
+\textit{ptrdiff\_t} und \textit{size\_t} sind Datentypen für Ganzzahlen. Der Unterschied zwischen den Datentypen ist \textit{size\_t} kann nur Werte Darstellen die $\geq$ 0 sind, \textit{ptrdiff\_t} dann auch negative Werte darstellen. Negative Werte von \textit{incRow} und \textit{incCol} könne nützlich sein, falls die Daten nicht aufsteigend sondern absteigend im Speicher liegen (siehe Beispiel) \cite{blast}.
 
 Für Intel-MKL-Routinen müssen die Matrizen zeilenweise gespeichert sein.
 Das bedeutet \textit{incCol} ist gleich 1.
@@ -143,9 +143,9 @@ B.incCol = A.incRow;
 
 In Zeile 2 wird der Daten-Zeiger auf das Element der zweiten Zeile und dritten Spalte gesetzt.
 Um die Matrix zu transponieren, werden die Inkremente vertauscht. Dies geschieht in den Zeilen 5 und 6.  
-In den Zeilen 3 und 4 werden die Matrix Dimensionen richtig gesetzt.
+In den Zeilen 3 und 4 werden die Matrix-Dimensionen richtig gesetzt.
 
-Die Matrix $C$ soll ein Beispiel für negative Inkremente sein. Sie nutzt den selben Datenspeicher wie die Matrizen $A$ und $B$, in dem die Werte 1 bis 25 hintereinander im Speicher liegen.
+Die Matrix $C$ soll ein Beispiel für negative Inkremente sein. Sie nutzt denselben Datenspeicher wie die Matrizen $A$ und $B$, in dem die Werte 1 bis 25 hintereinander im Speicher liegen.
 Die Matrix 
 \begin{align*}
 C = \begin{pmatrix}
@@ -163,7 +163,7 @@ C.numCols = B.numCols;
 C.incRow = -B.incRow;
 C.incCol = -B.incCol;
 \end{lstlisting}
-Der data-Pointer wurde auf das letzte Element der Matrix $B$ gesetzt. Die Inkremente werden negativ von der Matrix $B$ übernommen.
+Der Daten-Pointer wurde auf das letzte Element der Matrix $B$ gesetzt. Die Inkremente werden negativ von der Matrix $B$ übernommen.
 
 Matrizen wie $B$ und $C$, die den selben Datenspeicher wie $A$ nutzen, werden als Matrixview bezeichnet. \cite{blast}
 
@@ -173,7 +173,7 @@ Matrizen wie $B$ und $C$, die den selben Datenspeicher wie $A$ nutzen, werden al
 Im Folgenden werden einige BLAS-Routinen beschrieben, die bei der QR-Zerlegung benutzt werden.
 BLAS-Routinen werden nach folgendem Schema benannt:
 Der erste Buchstabe im Namen gibt an, für welchen Datentyp die Funktion implementiert wurde. Der Rest beschreibt die Funktion.\\
-Beispiel \textit{dgemm}: Das \textit{d} zeigt, dass die Funktion für Doubles gilt und  \textit{gemm} steht für \textit{general matrix matrix}. Die  Funktion berechnet also das Matrix-Matrix Produkt für Matrizen, deren Einträge Doubles sind.
+Beispiel \textit{dgemm}: Das \textit{d} zeigt, dass die Funktion für Doubles gilt und  \textit{gemm} steht für \textit{general matrix matrix}. Die  Funktion berechnet also das Matrix-Matrix Produkt für Matrizen, deren Einträge \textit{doubles} sind.
 
 \subsection{Matrix-Matrix Produkt (gemm)}
 Die Funktion \textit{gemm} berechnet das Matrix-Matrix Produkt.
@@ -228,6 +228,6 @@ Das heißt, die Matrix liegt als quadratische Matrix im Speicher. Die Funktion b
 Wird dem Algorithmus mit einem Flag angezeigt, dass 
 er die Matrix als eine unipotente Dreiecksmatrix betrachten soll,
 %es sich um eine eine unipotente Dreiecksmatrix handeln soll, 
-dann werden die Diagonaleinträge im Speicher nicht beachtet, sondern vom Algorithmus als 1 angenommen. \cite{blast}
+dann werden die Diagonaleinträge im Speicher nicht beachtet, sondern vom Algorithmus als 1 angenommen \cite{blast}.
 
 

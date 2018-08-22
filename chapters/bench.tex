@@ -27,7 +27,7 @@ printf("A22T=\n");print(A.block(2,2).view(Trans::view));
 \end{lstlisting}
 Der Code erzeugt erzeugt zuerst eine $5 \times 5$ Matrix.
 Die Funktion \textit{init} initialisiert die Matrix zeilenweise mit den Werten 1 bis 25.
-Diese Matrix wird 3 ausgegeben. Zuerst die komplette Matrix(Zeile 3), dann eine ein Block der Matrix beginnend in der dritten Zeile und dritten Spalte. Als letztes wird der selbe Matrix Block noch Transponiert betrachtet.Der Code kann die folgende Ausgabe erzeugen.
+Diese Matrix wird dreimal ausgegeben. Zuerst die komplette Matrix (Zeile 3), dann ein Block der Matrix beginnend in der dritten Zeile und dritten Spalte. Als letztes wird der selbe Matrix Block noch Transponiert betrachtet. Der Code kann die folgende Ausgabe erzeugen.
 \lstset{numbers=none}
 \begin{lstlisting} 
 A   = 
@@ -124,17 +124,22 @@ Diese ist für eine Matrix $A \in \mathbb{R}^{m\times n}$ gegeben durch
 Diese Norm wurde gewählt, da sie für zeilenweise gespeicherte Matrizen effizient berechnet werden kann.
 
 \section{Benchmarks}
-
+\newpage
 \subsection{Aufwand} \label{aufwand}
 
 Der Aufwand zur Berechnung der QR-Zerlegung mittels Householder-Transformation einer Matrix $A \in \mathbb{R}^{m \times n},~~ m \ge n$ ist bei ATLAS \cite{atlas} angegeben mit
 \begin{align}
 %\# &= n^2(m-\frac{1}{3} n) + {\cal O}(mn) \\
-\#\text{QR} &= n \cdot \left(\frac{23}{6} + m + \dfrac{n}{2} + n\cdot \left(\frac{m-n}{3} \right) + n\cdot \left(\dfrac{5}{6} + \dfrac{n}{2} + m - \dfrac{n}{3}\right)\right) %= {\cal O}(n^2m)
+%\#\text{QR} &= n \cdot \left(\frac{23}{6} + m + \dfrac{n}{2} + n\cdot \left(\frac{m-n}{3} \right) + n\cdot \left(\dfrac{5}{6} + \dfrac{n}{2} + m - \dfrac{n}{3}\right)\right) 
+%\\
+\#\text{QR} &= n\cdot\left( \frac{23}{6}+m+\frac{n}{2} + n\cdot\left(m-\frac{n}{3}\right) + \frac{5}{6} + n\cdot\left(\frac{1}{2} + m-\frac{n}{3}\right) \right) 
 \label{OQR}
 \end{align}
 $\#\text{QR}$ bezeichnet die Anzahl der Rechenoperationen, die zur Berechnung der QR-Zerlegung notwendig sind. 
 Vereinfacht man (\ref{OQR}), dann erhält man einen Aufwand von $ {\cal O}(n^2m)$.
+
+
+
 
 \subsection{FLOPS}
 FLOPS (\textit{floating point operations per second}) geben an, wie viele Fließkomma-Operationen pro Sekunde ausgeführt werden.
@@ -147,7 +152,7 @@ $\Delta t$ bezeichnet die Zeit in Sekunden und $\#$ die Anzahl der Rechenoperati
 
 Ein $m \times n$ Matrix wird mit gleichverteilten Zufallswerten aus $[-1,1]$ initialisiert.
 
-Die Matrix wird kopiert, um nach der Berechnung den Fehler schätzen zu können. Die QR-Zerlegung wird von der kopierten Matrix berechnet. Es wird die Zeit gemessen welche für die Berechnung benötigt wird. 
+Die Matrix wird kopiert, um nach der Berechnung den Fehler schätzen zu können. Die QR-Zerlegung wird von der kopierten Matrix berechnet. Es wird die Zeit gemessen, welche für die Berechnung benötigt wird. 
 Aus der Originalmatrix und der kopierten QR-zerlegten Matrix wird der Fehler berechnet, so wie in Abschnitt \ref{Fehlerschätzer} beschrieben.
 
 Aus den Matrix-Dimensionen wird die Anzahl der Rechenoperationen berechnet (Abschnitt \ref{aufwand}).
@@ -227,6 +232,13 @@ Die Benchmarktests erbrachten folgende Ergebnisse:
 	\item Der geblockte Algorithmus beider Implementierungen erreicht fast die \textit{peak performance}.
 	\item Der geblockte Algorithmus \textit{dgeqrf} der MKL ist etwas schneller.
 \end{itemize}
+
+
+\subsection{Ausblick}
+
+ rekusiv
+
+blas funktionen einfluss
 
 
 

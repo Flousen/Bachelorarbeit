@@ -11,9 +11,9 @@
 \BOOKMARK [1][-]{section.3.1}{Definition}{chapter.3}% 11
 \BOOKMARK [2][-]{subsection.3.1.1}{Beispiel f\374r eine Anwendung}{section.3.1}% 12
 \BOOKMARK [1][-]{section.3.2}{Householder-Transformation}{chapter.3}% 13
-\BOOKMARK [2][-]{subsection.3.2.1}{Householder Vector}{section.3.2}% 14
+\BOOKMARK [2][-]{subsection.3.2.1}{Householder Vektor}{section.3.2}% 14
 \BOOKMARK [2][-]{subsection.3.2.2}{Householder-Transformation anwenden}{section.3.2}% 15
-\BOOKMARK [2][-]{subsection.3.2.3}{QR-Zerlegung mittels Housholder-Transformationen}{section.3.2}% 16
+\BOOKMARK [2][-]{subsection.3.2.3}{QR-Zerlegung mittels Householder-Transformationen}{section.3.2}% 16
 \BOOKMARK [1][-]{section.3.3}{Geblockte QR-Zerlegung}{chapter.3}% 17
 \BOOKMARK [2][-]{subsection.3.3.1}{Berechnung der Matrix T}{section.3.3}% 18
 \BOOKMARK [2][-]{subsection.3.3.2}{Anwenden von I - VTVT}{section.3.3}% 19
@@ -31,5 +31,6 @@
 \BOOKMARK [2][-]{subsection.4.4.1}{Ungeblockter Algorithmus}{section.4.4}% 31
 \BOOKMARK [2][-]{subsection.4.4.2}{Cache-optimierter Algorithmus}{section.4.4}% 32
 \BOOKMARK [1][-]{section.4.5}{Fazit}{chapter.4}% 33
-\BOOKMARK [0][-]{appendix.A}{Block Reflector}{}% 34
-\BOOKMARK [0][-]{chapter*.13}{Literaturverzeichnis}{}% 35
+\BOOKMARK [2][-]{subsection.4.5.1}{Ausblick}{section.4.5}% 34
+\BOOKMARK [0][-]{appendix.A}{Block Reflector}{}% 35
+\BOOKMARK [0][-]{chapter*.13}{Literaturverzeichnis}{}% 36

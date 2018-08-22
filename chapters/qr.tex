@@ -89,7 +89,7 @@ Nun wird $H$ auf $x$ angewandt, wie in Kapitel \ref{sec:HHvec} beschrieben.
 \end{align*}
 Der Vektor $x = \vecX{3}{4}$ wurde mit dem Householder-Vektor $v= \vecX{1}{0.5}$ auf die $x_1$ Achse gespiegelt.
 
-\subsection{Householder Vector} \label{sec:HHvec}
+\subsection{Householder Vektor} \label{sec:HHvec}
 Damit (\ref{eq:spiegelung}) gilt, wird der Vektor berechnet, 
 indem man (\ref{eq:HHM}) in (\ref{eq:spiegelung}) einsetzt
 \begin{align*}
@@ -150,7 +150,7 @@ Mit dem Faktor $\tau = \dfrac{2}{v^Tv}$ kann man die Householder-Transformation 
 
 
 \begin{algorithm}
-	\caption{Housholder-Vector(LAPACK DLARFG)}
+	\caption{Householder-Vektor (LAPACK DLARFG)}
 	\begin{algorithmic}
 		\State Input: $x \in \mathbb{R}^n$ \bigskip
 		\State $\alpha = -1 \cdot \text{sign}(x_1) \|x\|_2$
@@ -163,18 +163,18 @@ Mit dem Faktor $\tau = \dfrac{2}{v^Tv}$ kann man die Householder-Transformation 
 
 
 \subsection{Householder-Transformation anwenden} \label{sec:appHHvec}
-Ein aufwändiges Matrix-Matrix-Produkt kann bei der Anwendung einer Housholder-Transformation $H = I - \tau vv^T$ auf die Matrix $A$ umgangen werden, indem man geschickt klammert.
+Ein aufwändiges Matrix-Matrix-Produkt kann bei der Anwendung einer Householder-Transformation $H = I - \tau vv^T$ auf die Matrix $A$ umgangen werden, indem man geschickt klammert.
 \begin{align*} 
 H A =(I - \tau vv^T) A= A - \tau (vv^T )A = A - \tau v(v^TA)
 \end{align*}
 Statt eines Matrix-Matrix-Produkts muss man nur ein Matrix-Vektor-Produkt und ein dyadisches Produkt berechnen.
 %Das Matrix-Vektor-Produkt und das dyadische Produkt haben nur einen Aufwand von $O(n^2)$.
 
-\subsection{QR-Zerlegung mittels Housholder-Transformationen}
+\subsection{QR-Zerlegung mittels Householder-Transformationen}
 Um $A$ in eine obere Dreiecksmatrix $R$ zu transformieren, wird eine Folge von Householder-Transformationen auf $A$ angewandt.
 
 Zuerst wird aus der ersten Spalte der Matrix $A$ ein Householder-Vektor berechnet, dann wird die Householder-Transformation auf die Matrix angewandt.
-Diese Housholder-Transformation erzeugt Nullen in der ersten Spalte unterhalb des ersten Eintrags.
+Diese Householder-Transformation erzeugt Nullen in der ersten Spalte unterhalb des ersten Eintrags.
 Damit eine obere Dreiecksmatrix entsteht, wird als nächstes die Matrix $A$ ohne die erste Zeile und Spalte betrachtet. Aus der ersten Spalte der neu betrachteten Matrix wird wieder ein Householder-Vektor berechnet.
 Dieser Vektor erzeugt eine Householder-Transformation $\hat{H}$.
 Um diese Transformation auf $A$ anwenden zu können setzt man:
@@ -191,7 +191,7 @@ I_{i-1} & 0\\ \hline
 0 & \hat{H_i} 	
 \end{array} \right)
 \end{align*}
-$I_{i-1}$ bezeichnet die $i-1$-dimensionale Einheitsmatrix, $\hat{H_i}$ ist eine Householder-Transformation.
+$I_{i-1}$ bezeichnet die i--1-dimensionale Einheitsmatrix, $\hat{H_i}$ ist eine Householder-Transformation.
 
 
 Diese Householder-Transformationen werden auf die Matrix angewandt.
@@ -230,7 +230,7 @@ Diese Vorgehensweise führt zum Algorithmus \ref{alg:unblockedqr}.
 	\begin{algorithmic}[1]
 	\State Input: $A \in \mathbb{R}^{m \times n}$
 	\For {i = 0,1,2,..., n-1}
-		\State ($v_i$, $\tau_i$) $\leftarrow$ householdervector($\hat{a}_i$)
+		\State ($v_i$, $\tau_i$) $\leftarrow$ householdervektor($\hat{a}_i$)
 		\State $w \leftarrow v_i^T \cdot A_i$ (dgemv)
 		\State $ A_i \leftarrow \tau \cdot v_i \cdot w + A_i $ (dger)
 		\If {i < m}
@@ -244,7 +244,7 @@ Diese Vorgehensweise führt zum Algorithmus \ref{alg:unblockedqr}.
 
 Der Algorithmus \ref{alg:unblockedqr} überschreibt die Matrix $A$ mit $R$.
 Aufgrund der Dreiecksstruktur von $R$,
-können unter der Diagonale die Housholder-Vektoren gespeichert werden. 
+können unter der Diagonale die Householder-Vektoren gespeichert werden. 
 Die Householder-Vektoren haben die Form 
 \begin{align*}
 v^{(j)} = ( \underbrace{0,...,0}_{j-1},1,	v_{j+1}^{(j)},...,v_{m}^{(j)}  )
@@ -343,8 +343,8 @@ So kommt man auf den Algorithmus
 		\For {i = 0,1,2,..., n-1}
 			\State qr\_unblk($A_i$,$\tau_i$) (Algorithmus \ref{alg:unblockedqr})
 			\If $i + ib \le n$
-				\State calc T (Abschnitt \ref{calcT})
-				\State apply H (Abschnitt \ref{applyT})
+				\State berechne T (Abschnitt \ref{calcT})
+				\State wende H auf den Rest von A an (Abschnitt \ref{applyT})
 			\EndIf 
 		\EndFor	
 		
@@ -419,10 +419,11 @@ Die Matrix $C$ wird aktualisiert, indem die Matrix $I - V T V^T $ von rechts auf
 Ein weiterer Übergabeparameter gibt an, ob die Matrix  $I - V T V^T $ transponiert werden soll.
 Die Funktion berechnet also
 \begin{align}
-	C \leftarrow H C = C - V T V^T C \quad \text{oder} \quad 	C \leftarrow H^T C = C - V T^T V^T C	\label{eq:larfb}
+%	C \leftarrow H C = C - V T V^T C \quad \text{oder} \quad 	
+	C \leftarrow H^T C = C - V T^T V^T C	\label{eq:larfb}
 \end{align}
 
-Der Zweck der Funktion ist es, die Householder-Transformationen, die bei der Bereicherung der QR-Zerlegung für einen Block entstanden sind, auf die restliche Matrix anzuwenden.
+Der Zweck der Funktion ist es, die Householder-Transformationen, die bei der Berechnung der QR-Zerlegung für einen Block entstanden sind, auf die restliche Matrix anzuwenden.
 Die Abbildung \ref{fig:patrA} zeigt, wie die Matrix $A$ für die Funktion partitioniert wird.
 \begin{figure} [H]
 	\centering
@@ -441,9 +442,8 @@ Dabei wird $V$ genau so geteilt, dass $V_1 \in \mathbb{R}^{k\times k}$ der quadr
 Diese Aufteilung ist notwendig, da die BLAS-Funktion trmm (\textit{matrix-matrix product where one input matrix is triangular}) nur für quadratische Dreiecksmatrizen implementiert ist.
 
 Im Fall $ m = k $ ist die Aufteilung nicht notwendig, da $ V $ quadratisch ist.
-
-Mit folgender Umformung kommt man vom (\ref{eq:larfb}) auf Algorithmus \ref{alg:applyblockref}
-
+\newpage
+Mit folgender Umformung kommt man von (\ref{eq:larfb}) auf Algorithmus \ref{alg:applyblockref}.
 \begin{align*}
 	C &\leftarrow  C - V T V^T C \\
 	C &\leftarrow C - \left(V T V^T C\right)^{TT} 	\\
@@ -510,5 +510,15 @@ $C_1$ wird in Zeile \ref{alg4:C1} und \ref{alg4:C12} berechnet. $C_2$ wird in Ze
 \subsection{Wahl der Blockgröße $bs$} \label{bs}
 
 algorithmus 4 nur Matrxi produkte
+
+blocked level 3
+
+unblocked level 2
+
+faktor 3
+
+block größe experiment
+
+matrix block in l2 chache
 
 
