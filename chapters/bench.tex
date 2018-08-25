@@ -79,28 +79,28 @@ Die Funktion in den Zeilen 21--30 wird von der Bibliothek aufgerufen.
 In den Zeilen 28 und 29 werden die für die Funkton wichtigen Parameter aus den Klassen ausgelesen und damit die Wrapper-Funktion (Zeilen 14--19) aufgerufen. Die Wrapper-Funktion ruft die Blas-Funktion auf (Zeile 18).
 
 
-\subsection{Algorithmus}
-
-Beispiel: Ungeblockte QR-Implementierung vom Algorithmus \ref{alg:unblockedqr} (Seite \pageref{alg:unblockedqr})
-\lstset{numbers=left,firstnumber=1}
-\begin{lstlisting}
-size_t mn = std::min(m,n);
-DenseVector<T> work(mn);
-for (std::size_t i = 0; i < mn; ++i){
-  householderVector(A(i,i), A.col(i+1,i),tau(i));
-  if (i < n && tau(i) != 0) {
-    AII = A(i,i);
-    A(i,i) = 1;
-    mv(1, A.block(i,i+1).view(hpc::matvec::Trans::view),
-       A.col(i,i), 0, work.block(i+1));
-    rank1(-tau(i), A.col(i,i), work.block(i+1), 
-          A.block(i,i+1));
-    A(i,i) = AII;
-  }
-}
-\end{lstlisting}
-
-Die anderen Algorithmen wurden analog implementiert, siehe Anhang.
+%\subsection{Algorithmus}
+%
+%Beispiel: Ungeblockte QR-Implementierung vom Algorithmus \ref{alg:unblockedqr} (Seite \pageref{alg:unblockedqr})
+%\lstset{numbers=left,firstnumber=1}
+%\begin{lstlisting}
+%size_t mn = std::min(m,n);
+%DenseVector<T> work(mn);
+%for (std::size_t i = 0; i < mn; ++i){
+%  householderVector(A(i,i), A.col(i+1,i),tau(i));
+%  if (i < n && tau(i) != 0) {
+%    AII = A(i,i);
+%    A(i,i) = 1;
+%    mv(1, A.block(i,i+1).view(hpc::matvec::Trans::view),
+%       A.col(i,i), 0, work.block(i+1));
+%    rank1(-tau(i), A.col(i,i), work.block(i+1), 
+%          A.block(i,i+1));
+%    A(i,i) = AII;
+%  }
+%}
+%\end{lstlisting}
+%
+%Die anderen Algorithmen wurden analog implementiert, siehe Anhang.
 
 \section{Fehlerschätzer} \label{Fehlerschätzer}
 
@@ -123,7 +123,6 @@ Diese ist für eine Matrix $A \in \mathbb{R}^{m\times n}$ gegeben durch
 Diese Norm wurde gewählt, da sie für zeilenweise gespeicherte Matrizen effizient berechnet werden kann.
 
 \section{Benchmarks}
-\newpage
 \subsection{Aufwand} \label{aufwand}
 
 Der Aufwand zur Berechnung der QR-Zerlegung mittels Householder-Transformation einer Matrix $A \in \mathbb{R}^{m \times n},~~ m \ge n$ ist bei ATLAS \cite{atlas} angegeben mit
@@ -175,6 +174,7 @@ Darin haben 4 \textit{double} Platz.
   \text{Taktrate} \cdot \text{Registerbreite} \cdot 2= 3,20 \text{ GHz} \cdot 4 \cdot 2 = 25,6 \text{ GFLOPS}
 \end{align*}
 
+
 \newpage
 \section{Ergebnisse}
 \subsection{Ungeblockter Algorithmus}
@@ -193,25 +193,35 @@ Ab einer Matrix-Dimension von $400 \times 400$ bleibt die Anzahl FLOPS gleichmä
 \end{figure}
 
 
-
+\newpage
 \subsection{Cache-optimierter Algorithmus}
 
 Die Abbildung \ref{img:blkbs} zeigt den Vergleich des Algorithmus \ref{alg:blockedqr} (Seite \pageref{alg:blockedqr}) mit verschiedenen Blockgrößen.
-
 Als Blockgrößen wurden die Zweierpotenzen $2^3 = 8$ bis $2^7 = 128$ getestet.
 
+Die Blockgröße $8$ pendelt sich ab der Matrix-Dimension 500 bei ca. 18 GFLOPS ein. 
+Die Blockgröße $32$ pendelt sich ab der Matrix-Dimension 500 bei ca. 23 GFLOPS ein.
+Die Blockgrößen $16$ und $64$ pendeln sich knapp unter den FLOPS der Blockgröße $32 $ ein.
+Die Blockgröße $128$ liegt auf dem Intervall der getesteten Matrix-Dimensionen 0 bis 1000 unter den anderen Blockgrößen. Die FLOPS haben sich bei der Dimension 1000 noch nicht auf einem Niveau eingependelt, sondern steigen noch an. Es ist davon auszugehen, dass sich die FLOPS bei größeren Matrizen auch bei  ca. 23 GFLOPS einpendeln.
+
+Folglich wird die Blockgröße $32$ gewählt, da durch diese Blockgröße am schnellsten die meisten FLOPS erreicht werden.
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{images/blkbs.png}
 	\caption{Benchmark geblockte QR-Zerlegung}
 	\label{img:blkbs}
 \end{figure}
+
+
 \newpage
 
-Die Abbildung \ref{img:blk} zeigt den Vergleich des selbst implementierten Algorithmus \ref{alg:blockedqr}, mit Blockgröße $32$, mit dem Algorithmus  \textit{dgeqrf} aus der MKL.
+Die Abbildung \ref{img:blk} zeigt den Vergleich des selbst implementierten Algorithmus \ref{alg:blockedqr} mit Blockgröße $32$, mit dem Algorithmus  \textit{dgeqrf} aus der MKL.
 \textit{dgeqrf} ist der cache-optimierte Algorithmus zur Berechnung der QR-Zerlegung.
 
-Beide Implementierungen sind von der Performance sehr ähnlich und erreichen fast die \textit{peak performance}. Dabei ist die Implementierung der MKL etwas besser.
+Beide Implementierungen sind von der Performance sehr ähnlich und erreichen fast die \textit{peak performance}. 
+Dabei ist die Implementierung der MKL etwas schneller.
+Der selbst implementierten Algorithmus erreicht bis zu 94\% die Performance der MKL.
+
 
 Zusätzlich sind in der Abbildung \ref{img:blk} noch die Benchmark-Ergebnisse der ungeblockten Algorithmen eingezeichnet. Hier wird der Performancegewinn des geblockten Algorithmus deutlich.
 
@@ -221,23 +231,28 @@ Zusätzlich sind in der Abbildung \ref{img:blk} noch die Benchmark-Ergebnisse de
   \label{img:blk}
 \end{figure}
 
-
 \newpage
 \section{Fazit}
 Die Benchmarktests erbrachten folgende Ergebnisse:
 \begin{itemize}
 	\item Der ungeblockte Algorithmus beider Implementierungen erreicht nicht die \textit{peak performance}.
-	\item Der selbst programmierte ungeblockte Algorithmus ist etwas schneller als der Algorithmus \textit{dgeqrf2} der MKL.
+	\item Der selbst programmierte ungeblockte Algorithmus ist etwa 5\% schneller als der Algorithmus \textit{dgeqrf2} der MKL.
 	\item Der geblockte Algorithmus beider Implementierungen erreicht fast die \textit{peak performance}.
-	\item Der geblockte Algorithmus \textit{dgeqrf} der MKL ist etwas schneller.
+	\item Der geblockte Algorithmus \textit{dgeqrf} der MKL ist etwas schneller. Der selbst implementierten Algorithmus erreicht bis zu 94\% die Performance der MKL.
+	
+	\item Der geblockte Algorithmus ist etwa um den Faktor 3 schneller als der ungeblockte Algorithmus.
 \end{itemize}
 
 
 \subsection{Ausblick}
+Der geblocke Algorithmus berechnet die QR-Zerlegung mittels Householder-Transformation annähernd mit \textit{peak performance} und erreicht fast die Performance der MKL.
 
- rekusiv
+Aufgund der Erkenntnisse sind weiterführend folgende Fragestellungen interessant:
+\begin{itemize}
+	\item Ist es möglich mit einem rekursiven geblockten Algorithmus die Performance der MKL zu erreichen oder sogar zu übertreffen?
+	\item Welche Blas-Funktionen haben den größten Einfluss auf die Performance? 
+\end{itemize}
 
-blas funktionen einfluss
 
 
 

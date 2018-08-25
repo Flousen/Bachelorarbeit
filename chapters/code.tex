@@ -1,0 +1,24 @@
+\section{Implementierung}
+Der Komplette Code steht in folgendem \textit{git repository} auf GitHub Verfügung: \\
+\url{https://github.com/Flousen/Bachelorarbeit} 
+
+Der folgende Code ist im Repository zu finden unter: /src/hpc/mklblas/qr.hpp\\
+Die Datei \textit{qr.hpp} enthält folgende Funktionen:
+\begin{itemize}
+    \item \textit{householderVector}\\
+    Die Funktion berechnet den Householder-Vektor.
+	\item \textit{qr\_unblk} \\
+	Die Funktion berechnet die QR-Zerlegung mittels Householder-Transformation, mit dem ungeblocketen Algorithmus.
+	\item \textit{larft}\\
+	Die Funktion berechnet die Matrix $T$ die zur Anwendung mehrerer Householder-Transformationen notwendig ist (siehe Abschnitt \ref{calcT}).
+	\item \textit{larfb}\\
+	Die Funktion wendet mehrere Householder-Transformationen auf eine Matrix an (siehe Abschnitt \ref{applyT}). 
+	\item \textit{qr\_blk}\\
+	Die Funktion berechnet die QR-Zerlegung mittels Householder-Transformation, mit dem geblockten cache-optimierten Algorithmus.
+\end{itemize}
+
+\vspace{.7cm}
+\lstset{numbers=left,firstnumber=1}
+\lstinputlisting{/home/flo/Bachelorarbeit/src/hpc/mklblas/qr.hpp}
+
+

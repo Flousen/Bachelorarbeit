@@ -109,7 +109,8 @@ Hx =& x - \dfrac{2}{v^Tv}v(v^Tx) = x - 2\dfrac{v^Tx}{v^Tv}v \nonumber \\
 =&\underbrace{\left(1 - \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2}\right)}_{ \overset{!}{=} 0 } x + \alpha e_1 \underbrace{\dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|_2^2} }_{\overset{!}{=} 1} \overset{!}{=} \alpha e_1 \label{lasteq}
 \end{align}
 
-Damit das letzte $=$ (\ref{lasteq}) gilt muss gelten.
+
+Damit (\ref{lasteq}) gilt, muss gelten
 \begin{align*}
 	1 &= \dfrac{2(x - \alpha e_1)^Tx}{\|x - \alpha e_1\|^2}\\
 	\Leftrightarrow (x - \alpha e_1)^T(x - \alpha e_1) &= 2 x^T x - 2\alpha x_1 \\
@@ -357,7 +358,7 @@ So kommt man auf den Algorithmus
 \end{algorithm}
 
 
-\subsection{Berechnung der Matrix $T$} \label{calcT}
+\subsection{Berechnung der Matrix \textit{T}} \label{calcT}
 Die Matrix $T$ wird in \textit{LAPACK} von der Funktion \textit{DLARFT} berechnet \cite{LARFT}.
 
 Sie bekommt eine Dreiecksmatrix $V \in \mathbb{R}^{m \times k}$, einen Vektor $\tau \in \mathbb{R}^k$ und eine Matrix $T\in \mathbb{R}^{k\times k}$ übergeben. 
@@ -492,18 +493,17 @@ $C_1$ wird in Zeile \ref{alg4:C1} und \ref{alg4:C12} berechnet. $C_2$ wird in Ze
 \end{algorithm}
 
 
-\subsection{Wahl der Blockgröße $bs$} \label{bs}
+\subsection{Wahl der Blockgröße \textit{bs}} \label{bs}
 
+Ein Performancegewinn durch Verwendung des geblockten Algorithmus gegenüber dem ungeblockten Algorithmus wird erwartet, da bei der Anwendung der Householder-Transformation $H$ auf eine Matrix,  Matrix-Matrix-Produkte (\textit{trmm} und \textit{gemm}) verwendet werden. 
+Der ungeblockte Algorithmus \ref{alg:unblockedqr} verwendet dafür  Matrix-Vektor-Produkte (\textit{dgemv} und \textit{dger}).
 
-Ein Performancegewinn wird erwartet, da bei der Anwendung von $H$  Blas-Level 3 Operationen Matrix-Matrix-Produkte (\textit{trmm} und \textit{gemm}) verwendet werden. 
+Matrix-Matrix-Produkte sind Blas-Level-3-Operationen und
+Matrix-Vektor-Produkte sind Blas-Level-2-Operationen.
+Durch die Verwendung von Blas-Level-3-Operationen ist man in der Regel schneller als mit Blas-Level-2-Operationen \cite{HPC1}.
 
-Algorithmus \ref{alg:unblockedqr} verwendet dafür Blas-Level 2 Operationen Matrix-Vektor-Produkte (\textit{dgemv} und \textit{dger}).
-
-Durch die Verwendung von Blas-Level 3 Operationen ist man in der Regel schneller als mit Blas-Level 2 Operationen.
-
-
-Die Blockgröße $bs$ wurde Experimentell bestimmt. Dazu wurden Benchmarks mit verschiedenen Blockgrößen gemacht (Abbildung \ref{img:blkbs}).
-
+Die Blockgröße $bs$ wurde experimentell bestimmt. Dazu wurden Benchmarks mit verschiedenen Blockgrößen durchgeführt (siehe Abbildung \ref{img:blkbs}).
+Das Ergebnis dieser Benchmarks ist eine Blockgröße von $32$ für den verwendeten Prozessor.
 
 
 %matrix block in l2 chache
