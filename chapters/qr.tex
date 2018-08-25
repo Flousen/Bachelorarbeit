@@ -313,10 +313,10 @@ Nun muss man die bei der ungeblockten QR-Zerlegung verwendeten Householder-Trans
 
 Das Produkt mehrerer Householder-Transformationen kann geschrieben werden als:
 \begin{align*}
-H_1H_2 \cdot \cdot \cdot H_k = I - VTV^T \qquad \text{mit}\qquad H_i = I - \tau_i v_iv_i^T
+\hat{H} = H_1H_2 \cdot \cdot \cdot H_k = I - V T  V^T \qquad \text{mit}\qquad H_i = I - \tau_i v_iv_i^T
 \end{align*}  \cite{Joffrain:2006:AHT:1141885.1141886}
 
-Die Anwendung der Householder-Transformationen $I - V*T*V^T$ auf $\left(\frac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ erfolgt in zwei Schritten. Zuerst wird  die Matrix $T$ berechnet. Dann wird $I - V*T*V^T$  auf $\left(\frac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ angewandt.
+Die Anwendung der Householder-Transformationen $\hat{H} = I - V T  V^T$ auf $\left(\frac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ erfolgt in zwei Schritten. Zuerst wird  die Matrix $T$ berechnet. Dann wird $\hat{H}^T$  auf $\left(\frac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ angewandt.
 %Zuerst wird von der Funktion \glqq larft \grqq{}  die Matrix $T$ berechnet. Dann wird $I - V*T*V^T$ von der Funktion \glqq larfb\grqq{} auf $\left(\dfrac{A_{\text{bs}, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right)$ angewendet.
 \begin{align}
 	\left(\begin{array}{l} 
@@ -324,7 +324,7 @@ Die Anwendung der Householder-Transformationen $I - V*T*V^T$ auf $\left(\frac{A_
 	A_{bs, \text{bs}}
 	\end{array}\right)
 	\leftarrow
-	H^T \left(\begin{array}{l} 
+	\hat{H}^T \left(\begin{array}{l} 
 	A_{0, \text{bs}} \\ \hline
 	A_{bs, \text{bs}}
 	\end{array}\right)
@@ -343,8 +343,8 @@ So kommt man auf den Algorithmus
 		\For {i = 0,1,2,..., n-1}
 			\State qr\_unblk($A_i$,$\tau_i$) (Algorithmus \ref{alg:unblockedqr})
 			\If $i + ib \le n$
-				\State berechne T (Abschnitt \ref{calcT})
-				\State wende H auf den Rest von A an (Abschnitt \ref{applyT})
+				\State berechne T aus $\left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right) $ (Abschnitt \ref{calcT})
+				\State wende $\hat{H}$ auf $\left(\dfrac{A_{0, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right) $ an (Abschnitt \ref{applyT})
 			\EndIf 
 		\EndFor	
 		
@@ -420,7 +420,7 @@ Ein weiterer Übergabeparameter gibt an, ob die Matrix  $I - V T V^T $ transponi
 Die Funktion berechnet also
 \begin{align}
 %	C \leftarrow H C = C - V T V^T C \quad \text{oder} \quad 	
-	C \leftarrow H^T C = C - V T^T V^T C	\label{eq:larfb}
+	C \leftarrow \hat{H}^T C = C - V T^T V^T C	\label{eq:larfb}
 \end{align}
 
 Der Zweck der Funktion ist es, die Householder-Transformationen, die bei der Berechnung der QR-Zerlegung für einen Block entstanden sind, auf die restliche Matrix anzuwenden.
@@ -492,33 +492,20 @@ $C_1$ wird in Zeile \ref{alg4:C1} und \ref{alg4:C12} berechnet. $C_2$ wird in Ze
 \end{algorithm}
 
 
-%\subsection{Iterativer Algorithmus}
-%\begin{algorithm}[H]
-%	\caption{Iterativer Algorithmus}
-%	\label{alg::italg}
-%	\begin{algorithmic}
-%		\For {i = 0 : n}
-%			\State QR = A;
-%			\If {i + ib > n}
-%				\State Calc T: $H=I-VTV^T$
-%				\State Apply H: $A=H^TA$
-%			\EndIf
-%		\EndFor
-%	\end{algorithmic}
-%\end{algorithm}
-
 \subsection{Wahl der Blockgröße $bs$} \label{bs}
 
-algorithmus 4 nur Matrxi produkte
 
-blocked level 3
+Ein Performancegewinn wird erwartet, da bei der Anwendung von $H$  Blas-Level 3 Operationen Matrix-Matrix-Produkte (\textit{trmm} und \textit{gemm}) verwendet werden. 
 
-unblocked level 2
+Algorithmus \ref{alg:unblockedqr} verwendet dafür Blas-Level 2 Operationen Matrix-Vektor-Produkte (\textit{dgemv} und \textit{dger}).
 
-faktor 3
+Durch die Verwendung von Blas-Level 3 Operationen ist man in der Regel schneller als mit Blas-Level 2 Operationen.
 
-block größe experiment
 
-matrix block in l2 chache
+Die Blockgröße $bs$ wurde Experimentell bestimmt. Dazu wurden Benchmarks mit verschiedenen Blockgrößen gemacht (Abbildung \ref{img:blkbs}).
+
+
+
+%matrix block in l2 chache
 
 
