@@ -27,7 +27,7 @@ printf("A22T=\n");print(A.block(2,2).view(Trans::view));
 \end{lstlisting}
 Der Code erzeugt erzeugt zuerst eine $5 \times 5$ Matrix.
 Die Funktion \textit{init} initialisiert die Matrix zeilenweise mit den Werten 1 bis 25.
-Diese Matrix wird dreimal ausgegeben. Zuerst die komplette Matrix (Zeile 3), dann ein Block der Matrix beginnend in der dritten Zeile und dritten Spalte. Als letztes wird der selbe Matrix Block noch Transponiert betrachtet. Der Code kann die folgende Ausgabe erzeugen.
+Diese Matrix wird dreimal ausgegeben. Zuerst die komplette Matrix (Zeile 3), dann ein Block der Matrix beginnend in der dritten Zeile und der dritten Spalte. Als Letztes wird derselbe Matrix-Block noch transponiert betrachtet. Der Code kann die folgende Ausgabe erzeugen.
 \lstset{numbers=none}
 \begin{lstlisting} 
 A   = 
@@ -49,7 +49,7 @@ A22T=
 \end{lstlisting}
 
 \subsubsection{MKL Wrapper}
-Um von der Bibliothek auf Blas-Routienen der MKL zugreifen zu können, benötigt man Wrapper, die die Schnittstelle zur MKL darstellen.
+Um von der Bibliothek auf Blas-Routinen der MKL zugreifen zu können, benötigt man Wrapper, die die Schnittstelle zur MKL darstellen.
 
 MKL-Blas-Routinen kennen keine Matrix- und Vektor-Klassen, wie es sie in der HPC1-Bibliothek gibt. Diese Funktionen bekommen Zeiger auf die Daten und Verwaltungsinfomationen als Variable übergeben.
 Die Wrapper extrahieren die Daten aus den Klassen und rufen damit die MKL-Funktionen auf.
@@ -154,7 +154,7 @@ Die Matrix wird kopiert, um nach der Berechnung den Fehler schätzen zu können.
 Aus der Originalmatrix und der kopierten QR-zerlegten Matrix wird der Fehler berechnet, so wie in Abschnitt \ref{Fehlerschätzer} beschrieben.
 
 Aus den Matrix-Dimensionen wird die Anzahl der Rechenoperationen berechnet (Abschnitt \ref{aufwand}).
-Aus Anzahl der notwendigen Rechenoperationen und der gemessenen Zeit werden die FLOPS berechnet.
+Aus der Anzahl der notwendigen Rechenoperationen und der gemessenen Zeit werden die FLOPS berechnet.
 
 Es wurden jeweils Matrizen mit den Dimensionen $10 \times 10$ bis $1000 \times 1000$  getestet. Die Matrizen wurden in Zehnerschritten vergrößert.
 

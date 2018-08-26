@@ -44,7 +44,7 @@ Eine Lösung des Gleichungssystems
 \begin{align}
 \hat{R}x=Q^Tb \label{solvminqr}
 \end{align}
-ist auch eine Lösung des Minimierungsproblem (\ref{eq1}). Da $R$ eine Dreiecksmatrix ist, lässt sich (\ref{solvminqr}) leicht mit Rückwärtseinsetzen  lösen.
+ist auch eine Lösung des Minimierungsproblem (\ref{eq1}). Da $R$ eine Dreiecksmatrix ist, lässt sich (\ref{solvminqr}) leicht durch Rückwärtseinsetzen  lösen.
 
 
 \section{Householder-Transformation}
@@ -53,7 +53,7 @@ Eine Matrix $H \in \mathbb{R}^{n \times n}$
 \begin{align}
 H = I - 2 \dfrac{vv^T}{v^Tv} \label{eq:HHM}
 \end{align}
-wird als Householder-Transformation und der Vektor $v \in \mathbb{R}^n$ als Householder-Vektor bezeichnet.
+wird als Householder-Transformation und der Vektor $v \in \mathbb{R}^n$ als Householder-Vektor bezeichnet. $I$ ist die Einheitsmatrix.
 Eine Householder-Transformation $H = I - 2 \dfrac{vv^T}{v^Tv}$ ist orthogonal und symmetrisch \cite{num1}.\\
 Die Householder-Transformation spiegelt den Vektor $x$ auf die Achse $x_1$.
 Dazu multipliziert man $H$ von links auf $x$
@@ -250,7 +250,7 @@ Die Householder-Vektoren haben die Form
 \begin{align*}
 v^{(j)} = ( \underbrace{0,...,0}_{j-1},1,	v_{j+1}^{(j)},...,v_{m}^{(j)}  )
 \end{align*}
-Da die ersten $j-1$ Einträge Null sind und der Vektor so normiert wurde, dass der $j$ Eintrag gleich 1 ist, müssen die ersten $j$ Einträge nicht gespeichert werden.
+Da die ersten $j-1$ Einträge Null sind und der Vektor so normiert wurde, dass der Eintrag $j$ gleich 1 ist, müssen die ersten $j$ Einträge nicht gespeichert werden.
 Die Householder-Vektoren können somit unterhalb der Diagonalen gespeichert werden. Das geschieht im Algorithmus \ref{alg:unblockedqr} in Zeile \ref{lst:line:vinA}.
 Die Matrix $A$ hat somit die Form
 \begin{align*}
@@ -273,9 +273,9 @@ Meistens ist es nicht notwendig, die Matrix $Q$ explizit zu bestimmen, da man $Q
 \section{Geblockte QR-Zerlegung}
 Ein geblockter Algorithmus ist sinnvoll, um bei großen Matrizen den Cache optimal zu nutzen.
 
-Im Folgenden wird ein geblockter Algorithmus beschrieben wie er auch von LAPACK verwendet wird. Die entsprechende Funktion bei \textit{LAPACK} heißt \textit{DGEQRF} \cite{DGEQRF}.
+Im Folgenden wird ein geblockter Algorithmus beschrieben, wie er auch von LAPACK verwendet wird. Die entsprechende Funktion bei \textit{LAPACK} heißt \textit{DGEQRF} \cite{DGEQRF}.
 
-Die Idee beim geblockten Algorithmus ist, die Matrix in Blöcke aufzuteilen, die geblockte QR-Zerlegung für die Blöcke zu berechnen und die dabei verwendeten Householder-Transformationen auf den Rest der Matrix anzuwenden.
+Die Idee beim geblockten Algorithmus ist, die Matrix $A$ in Blöcke aufzuteilen, die geblockte QR-Zerlegung für die Blöcke zu berechnen und die dabei verwendeten Householder-Transformationen auf den Rest der Matrix anzuwenden.
 
 Betrachte dazu die Matrix $A \in \mathbb{R}^{m \times n}$ als Blockmatrix, mit einer geeigneten Blockgröße $bs$ (siehe Abschnitt \ref{bs}).
 \begin{align}
@@ -334,12 +334,12 @@ Die Anwendung der Householder-Transformationen $\hat{H} = I - V T  V^T$ auf $\le
 Der Block $A_{bs, \text{bs}}$ wird erneut aufgeteilt. Das ist in Abbildung \ref{fig:blockA} gestrichelt dargestellt.
 Dies wird solange fortgesetzt, bis $A_{bs, \text{bs}}$ gleich der Blockgröße ist.
 
-So kommt man auf den Algorithmus 
+So kommt man auf den geblockten Algorithmus \ref{alg:blockedqr}.
 
 \begin{algorithm}[H]
 	\caption{Geblockter Algorithmus\\
 	Die Matrix $A$ wird im Algorithmus betrachtet wie in Abbildung \ref{fig:blockA}. 
-	Die Matrix $T \in \mathbb{R}^{bs \times bs}$ ist ein Workspace in dem die Matrix $T$ wie in (\ref{eq:blkreflectorT}) gespeichert wird. }
+	Die Matrix $T \in \mathbb{R}^{bs \times bs}$ ist ein Workspace, in dem die Matrix $T$ wie in (\ref{eq:blkreflectorT}) gespeichert wird. }
 	\label{alg:blockedqr}
 	\begin{algorithmic}[1]
 		\State Input: $A \in \mathbb{R}^{m \times n}$
@@ -394,7 +394,7 @@ Warum und wie das Verfahren funktioniert, wird in \cite{Joffrain:2006:AHT:114188
 
 
 \begin{algorithm}[H]
-\caption{Der Algorithmus berechnet die Matrix $T$ so dass  (\ref{eq:blkreflectorT}) gilt. Die untere Dreiecksmatrix $V$  enthält die Householder-Vektoren. Der Vektor $\tau$ die dazugehörigen $\tau_i = \frac{2}{v_i^Tv_i}$. Hinweise zur Notation: Kleine Buchstaben bezeichnen einzelne Matrixeinträge (Beispiel: $v_{i,j}$ ist der Eintrag der i-ten-Zeile und j-ten Spalte der Matrix $V$). Die nach unten gestellten Indizes geben einen Block an, der betrachtet werden soll (Beispiel $V_{i:n,j:m}$ bezeichnet einen Block aus der Matrix $V$ der von i-ten bis zur n-ten Zeile und von der j-ten bis zur m-ten Spalte geht).}
+\caption{\\Der Algorithmus berechnet die Matrix $T$ so, dass  (\ref{eq:blkreflectorT}) gilt. Die untere Dreiecksmatrix $V$  enthält die Householder-Vektoren. Der Vektor $\tau$ die dazugehörigen $\tau_i = \frac{2}{v_i^Tv_i}$. Hinweise zur Notation: Kleine Buchstaben bezeichnen einzelne Matrixeinträge (Beispiel: $v_{i,j}$ ist der Eintrag der i-ten-Zeile und j-ten Spalte der Matrix $V$). Die nach unten gestellten Indizes geben einen Block an, der betrachtet werden soll.\\ Beispiel: $V_{i:n,j:m}$ bezeichnet einen Block aus der Matrix $V$, der von der i-ten bis zur n-ten Zeile und von der j-ten bis zur m-ten Spalte geht.}
 \label{alg:clacT}
 \begin{algorithmic}[1]
 \State Input $V \in \mathbb{R}^{k \times n}$,$\tau \in \mathbb{R}^k$,$T \in \mathbb{R}^{k \times k}$
@@ -456,12 +456,12 @@ Falls $m > k $, werden die Matrizen $V$ und $C$ aufgeteilt in
 \end{align}
 
 %Sodass $V_1 \in \mathbb{R}^{k \times k}$ und $C \in \mathbb{R}^{k \times n}$
-Dabei wird $V$ genau so geteilt, dass $V_1 \in \mathbb{R}^{k\times k}$ der quadratische Dreiecksteil der Matrix ist und $V_2 \in \mathbb{R}^{m-k\times k}$ der Rest der Matrix. Die Matrix $C$ wird in $C_1 \in \mathbb{R}^{k \times n}$ und $C_2 \in \mathbb{R}^{m-k \times n}$  aufgeteilt. Die Aufteilung ist so gewählt, dass das Matrix-Matrix-Produkt $V_1 \cdot C_1$ und $V_2 \cdot C_2$ möglich ist.\\
+Dabei wird $V$ genau so geteilt, dass $V_1 \in \mathbb{R}^{k\times k}$ der quadratische Dreiecksteil der Matrix ist und $V_2 \in \mathbb{R}^{m-k\times k}$ der Rest der Matrix. Die Matrix $C$ wird in $C_1 \in \mathbb{R}^{k \times n}$ und $C_2 \in \mathbb{R}^{m-k \times n}$  aufgeteilt. Die Aufteilung ist so gewählt, dass die Matrix-Matrix-Produkte $V_1 \cdot C_1$ und $V_2 \cdot C_2$ möglich sind.\\
 Diese Aufteilung ist notwendig, da die BLAS-Funktion trmm (\textit{matrix-matrix product where one input matrix is triangular}) nur für quadratische Dreiecksmatrizen implementiert ist.
 
 Im Fall $ m = k $ ist die Aufteilung nicht notwendig, da $ V $ quadratisch ist.
 \newpage
-Mit folgender Umformung kommt man von (\ref{eq:larfb}) auf Algorithmus \ref{alg:applyblockref}.
+Mit folgender Umformung kommt man von (\ref{eq:larfb}) auf den Algorithmus \ref{alg:applyblockref} (Seite \pageref{alg:applyblockref}).
 \begin{align*}
 	C &\leftarrow  C - V T V^T C \\
 	C &\leftarrow C - \left(V T V^T C\right)^{TT} 	\\
@@ -486,7 +486,7 @@ $C_1$ wird in Zeile \ref{alg4:C1} und \ref{alg4:C12} berechnet. $C_2$ wird in Ze
 
 
 \begin{algorithm}[H]
-	\caption{$I - V T V^T$ auf C anwenden.\\
+	\caption{$I - V T V^T$ auf C anwenden\\
 			 Die Matrix $W \in \mathbb{R}^{n \times k}$ ist ein Workspace. Die Matrizen $V$ und $C$ werden geteilt in $V_1, V_2$ und $C_1,C_2$ wie oben beschrieben.}
 	\label{alg:applyblockref}
 	\begin{algorithmic}[1]

@@ -35,7 +35,7 @@ Aus diesem Grund ist es sinnvoll, die Algorithmen so zu gestalten, dass eine opt
 
 Ziele der Cache-Optimierung:
 \begin{itemize}
-	\item Mehrfaches Laden von Daten soll vermeiden werden.
+	\item Mehrfaches Laden von Daten soll vermieden werden.
 	\item Die Daten müssen in der Reihenfolge, in der sie verwendet werden, im RAM liegen.
 	\item Sequentiell im RAM liegende Daten werden durch Prefetching effizient in den Cache geladen.
 \end{itemize}
@@ -58,7 +58,7 @@ Diese Funktionen aus der Teilmenge der linearen Algebra sind für die Berechnung
 BLAS enthält grundlegende und LAPACK weiterentwickelte Funktionen der linearen Algebra.
 
 \subsubsection{Ziel der Arbeit}
-Ein einfacher QR-Algorithmus wie man ihn aus Numerik 1 kennt, erreicht auf modernen Prozessoren nicht die theoretische Maximalleistung. 
+Ein einfacher QR-Algorithmus wie man ihn aus Numerik 1 \cite{num1} kennt, erreicht auf modernen Prozessoren nicht die theoretische Maximalleistung. 
 Ziel dieser Arbeit ist es, einen Algorithmus zu beschreiben, der die Prozessorkapazität besser nutzt und diesen Algorithmus an die BLAS-Schnitstelle anzupassen.
 
 

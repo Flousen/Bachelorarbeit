@@ -2,7 +2,7 @@
 Die Abkürzung BLAS steht für Basic Linear Algebra Subprograms. 
 BLAS-Bibliotheken enthalten elementare Operationen der linearen Algebra.
 
-Hier werden einige Aspekte von BLAS beschrieben die zur Berechnung der QR-Zerlegung notwendig sind.
+Hier werden einige Aspekte von BLAS beschrieben, die zur Berechnung der QR-Zerlegung notwendig sind.
 
 \section{Datenstruktur für Matrizen}
 Vollbesetzte Matrizen werden bei BLAS entweder zeilen- oder spaltenweise abgespeichert. Das bedeutet, dass entweder die Zeilen- oder die Spalten der Matrix hintereinander im Speicher stehen.  
@@ -15,7 +15,7 @@ Vollbesetzte Matrizen werden bei BLAS entweder zeilen- oder spaltenweise abgespe
 	a_{3,1} & a_{3,2} & a_{3,3} 
 	\end{array} \right) \in \mathbb{R}^{3 \times 3}
 \end{align*}
-Matrix $A$ Zeilenweise gespeichert\\
+Matrix $A$ Zeilenweise gespeichert:\\
 \begin{tikzpicture}
 	\draw[semithick] (0,0) -- (9,0);
 	\draw[semithick] (0,1) -- (9,1);
@@ -45,7 +45,7 @@ Matrix $A$ Zeilenweise gespeichert\\
 	\draw[->,line width=0.4mm] (0,-.25) -- (3,-.25);
 	\draw (3,-0.8) node {incRow};
 \end{tikzpicture}\\
-Matrix $A$ Spaltenweise gespeichert\\
+Matrix $A$ Spaltenweise gespeichert:\\
 \begin{tikzpicture}
 \draw[semithick] (0,0) -- (9,0);
 \draw[semithick] (0,1) -- (9,1);
@@ -95,8 +95,10 @@ struct Matrix {
 \end{lstlisting}
 
 Diese Datenstruktur ist für Matrixeinträge vom Type double.
-Die Variablen für die Speicherverwaltung(Zeile 3) sind vom Typ \textit{ptrdiff\_t} und die Variablen für die Dimensions Informationen sind vom Typ \textit{size\_t}.
-\textit{ptrdiff\_t} und \textit{size\_t} sind Datentypen für Ganzzahlen. Der Unterschied zwischen den Datentypen ist \textit{size\_t} kann nur Werte Darstellen die $\geq$ 0 sind, \textit{ptrdiff\_t} dann auch negative Werte darstellen. Negative Werte von \textit{incRow} und \textit{incCol} könne nützlich sein, falls die Daten nicht aufsteigend sondern absteigend im Speicher liegen (siehe Beispiel) \cite{blast}.
+Die Variablen für die Speicherverwaltung (Zeile 3) sind vom Typ \textit{ptrdiff\_t} und die Variablen für die Dimensionsinformationen sind vom Typ \textit{size\_t}.
+\textit{ptrdiff\_t} und \textit{size\_t} sind Datentypen für ganze Zahlen.
+Die Datentypen unterscheiden sich folgendermaßen: \textit{size\_t} kann nur Werte darstellen die $\geq$ 0 sind, \textit{ptrdiff\_t} kann auch negative Werte darstellen. 
+Negative Werte von \textit{incRow} und \textit{incCol} können nützlich sein, falls die Daten nicht aufsteigend sondern absteigend im Speicher liegen (siehe Beispiel) \cite{blast}.
 
 Für Intel-MKL-Routinen müssen die Matrizen zeilenweise gespeichert sein.
 Das bedeutet \textit{incCol} ist gleich 1.
@@ -177,16 +179,13 @@ Beispiel \textit{dgemm}: Das \textit{d} zeigt, dass die Funktion für Doubles gi
 
 \subsection{Matrix-Matrix Produkt (gemm)}
 Die Funktion \textit{gemm} berechnet das Matrix-Matrix Produkt.
-Der Funktion werden die Matrizen $A$, $B$ und $C$ und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem werden zwei Flags übergeben, ob die Matrizen $A$ und $B$ transponiert zu betrachten sind.\\
+Der Funktion werden die Matrizen $A$, $B$ und $C$ und die Skalare $\alpha$ und $\beta$ übergeben. Außerdem werden zwei Flags übergeben, die anzeigen ob die Matrizen $A$ und $B$ transponiert zu betrachten sind.\\
 Die Funktion berechnet
 \begin{align}
 	C \leftarrow \beta  C + \alpha  A  B
 \end{align}
-Falls $\beta = 0$, wird die Matrix $C$ zuerst mit Nullen initialisiert. Falls $C$ Einträge hat, die NaN (\textit{Not a Number}) sind, werden diese mit Nullen überschrieben.
+Falls $\beta = 0$, wird die Matrix $C$ zuerst mit Nullen initialisiert. Falls $C$ Einträge hat, die NaN (\textit{Not a Number}) sind, werden diese mit Nullen überschrieben \cite{blast}.
 
-%%TODO
-\cite{blast}
-Blas tecnical forum netlib
 %%http://www.netlib.org/blas/blast-forum/
 
 \subsection{Matrix-Vektor Produkt (gemv)}
@@ -196,7 +195,7 @@ Die Funktion berechnet
 \begin{align}
 y \leftarrow \beta  y + \alpha A x 
 \end{align}
-Falls $\beta = 0$, wird der Vektor $y$ zuerst mit Nullen initialisiert. Falls $y$ Einträge hat, die NaN (\textit{Not a Number}) sind, werden diese mit Nullen überschrieben.
+Falls $\beta = 0$, wird der Vektor $y$ zuerst mit Nullen initialisiert. Falls $y$ Einträge hat, die NaN (\textit{Not a Number}) sind, werden diese mit Nullen überschrieben \cite{blast}.
 
 \subsection{Rank1 update (ger)}
 Die Funktion \textit{ger}  berechnet ein dyadisches Produkt aus den Vektoren $x$ und $y$, skaliert die daraus resultierende Matrix mit $\alpha$ und addiert das Ergebnis auf $A$.\\
@@ -208,7 +207,7 @@ A \leftarrow A + \alpha  x y^T
 
 \subsection{Matrix-Matrix Produkt (trmm)} \label{fkt:trmm}
 Die Funktion \textit{trmm} berechnet das Matrix-Matrix-Produkt einer Dreiecksmatrix mit einer voll besetzten Matrix.
-Der Funktion wird die Dreiecksmatrix $A$, die Matrix $B$ und das Skalar $\alpha$ übergeben. Außerdem werden Flags mit übergeben, die anzeigen, ob $A$ eine obere oder untere Dreiecksmatrix ist, ob $A$ eine strikte oder unipotente Dreiecksmatrix ist, ob $A$ von links oder rechts auf $B$ multipliziert werden soll und ob $A$ transponiert werden soll. Diese Eigenschaften werden unten in $op(\cdot)$ zusammengefasst. \\
+Der Funktion werden die Dreiecksmatrix $A$, die Matrix $B$ und das Skalar $\alpha$ übergeben. Außerdem werden Flags mit übergeben, die anzeigen, ob $A$ eine obere oder untere Dreiecksmatrix ist, ob $A$ eine strikte oder unipotente Dreiecksmatrix ist, ob $A$ von links oder rechts auf $B$ multipliziert werden soll und ob $A$ transponiert werden soll. Diese Eigenschaften werden unten in $op(\cdot)$ zusammengefasst. \\
 Die Funktion berechnet
 \begin{align}
 B \leftarrow  \alpha \cdot op(A) \cdot B \qquad \text{oder} \qquad B \leftarrow  \alpha \cdot B \cdot op(A)
@@ -222,8 +221,6 @@ x \leftarrow \alpha  Ax %\qquad \text{or} \qquad x \leftarrow \alpha * A^T*x
 
 
 Dreiecksmatrizen, die von den Funktionen \textit{trmm} und \textit{trmv} verarbeitet werden, sind quadratische Matrizen, von denen nur der obere oder der untere Dreiecksteil betrachtet wird.
-
-
 Das heißt, die Matrix liegt als quadratische Matrix im Speicher. Die Funktion beachtet nur die Einträge über oder unter der Diagonalen.
 Wird dem Algorithmus mit einem Flag angezeigt, dass 
 er die Matrix als eine unipotente Dreiecksmatrix betrachten soll,
