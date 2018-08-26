@@ -337,25 +337,42 @@ Dies wird solange fortgesetzt, bis $A_{bs, \text{bs}}$ gleich der Blockgröße i
 So kommt man auf den Algorithmus 
 
 \begin{algorithm}[H]
-	\caption{Geblockter Algorithmus}
+	\caption{Geblockter Algorithmus\\
+	Die Matrix $A$ wird im Algorithmus betrachtet wie in Abbildung \ref{fig:blockA}. 
+	Die Matrix $T \in \mathbb{R}^{bs \times bs}$ ist ein Workspace in dem die Matrix $T$ wie in (\ref{eq:blkreflectorT}) gespeichert wird. }
 	\label{alg:blockedqr}
 	\begin{algorithmic}[1]
 		\State Input: $A \in \mathbb{R}^{m \times n}$
-		\For {i = 0,1,2,..., n-1}
-			\State qr\_unblk($A_i$,$\tau_i$) (Algorithmus \ref{alg:unblockedqr})
-			\If $i + ib \le n$
-				\State berechne T aus $\left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right) $ (Abschnitt \ref{calcT})
-				\State wende $\hat{H}$ auf $\left(\dfrac{A_{0, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right) $ an (Abschnitt \ref{applyT})
-			\EndIf 
-		\EndFor	
-		
-		\If i $\le$ min(m,n)
-			\State qr\_unblk($A_i$,$\tau_i$) (Algorithmus \ref{alg:unblockedqr})
+		\While {A\text{.}numCols $\ge bs$}
+			\State Berechne QR-Zerlegung von  $\left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right) $ mit Algorithmus \ref{alg:unblockedqr}
+			\If {A\text{.}numCols $> bs$}
+				\State Berechne T aus $\left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right) $ (siehe Abschnitt \ref{calcT})
+				\State Wende $\hat{H}$ auf $\left(\dfrac{A_{0, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right) $ an (siehe Abschnitt \ref{applyT})
+			\EndIf
+			\State Betrachte $A_{\text{bs},\text{bs}}$ als $A$
+		\EndWhile
+		\If {A\text{.}numCols $< bs$}
+			\State Berechne QR-Zerlegung von  $A$ mit Algorithmus \ref{alg:unblockedqr}
 		\EndIf
-		 
-		\State Output: $A$ QR zerlegt, Vektor $\tau \in \mathbb{R}^n$r
 	\end{algorithmic}
 \end{algorithm}
+
+%	\begin{algorithmic}[1]
+%		\State Input: $A \in \mathbb{R}^{m \times n}$
+%		\For {i = 0,1,2,..., n-1}
+%			\State qr\_unblk($A_i$,$\tau_i$) (Algorithmus \ref{alg:unblockedqr})
+%			\If $i + ib \le n$
+%				\State berechne T aus $\left(\dfrac{A_{0, 0}}{A_{\text{bs}, 0}} \right) $ (Abschnitt \ref{calcT})
+%				\State wende $\hat{H}$ auf $\left(\dfrac{A_{0, \text{bs}}}{A_{\text{bs}, \text{bs}}} \right) $ an (Abschnitt \ref{applyT})
+%			\EndIf 
+%		\EndFor	
+%		
+%		\If i $\le$ min(m,n)
+%			\State qr\_unblk($A_i$,$\tau_i$) (Algorithmus \ref{alg:unblockedqr})
+%		\EndIf
+%		 
+%		\State Output: $A$ QR zerlegt, Vektor $\tau \in \mathbb{R}^n$r
+%	\end{algorithmic}
 
 
 \subsection{Berechnung der Matrix \textit{T}} \label{calcT}
