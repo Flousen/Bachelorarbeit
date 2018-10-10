@@ -12,10 +12,6 @@
 \usepackage[Algorithmus]{algorithm}
 \usetikzlibrary{decorations.pathreplacing}
 
-%\setbeamertemplate{footline}[text line]{
-%\parbox{\linewidth}{\vspace*{-1cm}\hspace*{7cm}\insertpagenumber}
-%}
-
 \newcommand\numbered{\setbeamertemplate{footline}[text line]{
 		\parbox{\linewidth}{\vspace*{-1cm}\hspace*{7cm}\insertpagenumber}
 }}
@@ -48,35 +44,24 @@
 
 
 \title{Cache-optimierte QR-Zerlegung}
-
 \subtitle{Bachelor Kolloquium}
-
 \author{Florian Krötz}
 
 
-\institute[Universities of Somewhere and Elsewhere] % 
-{
-	Universität Ulm
-}
+\institute[Universities of Somewhere and Elsewhere]{Universität Ulm}
 
 \date{\today}
-%
-\subject{Theoretical Computer Science}
+%\date{3. Oktober 2018}
 
-\AtBeginSubsection[]
-{
-  \begin{frame}<beamer>{Outline}
-    \tableofcontents[currentsection,currentsubsection]
-  \end{frame}
-}
 
-% Let's get started
 \begin{document}
-\unnumbered \addtocounter{framenumber}{-1}
+\unnumbered 
 \begin{frame}
 	\titlepage
 \end{frame}
 \numbered 
+\clearpage
+\setcounter{page}{1}
 \input{slides/slides.tex}
 
 
