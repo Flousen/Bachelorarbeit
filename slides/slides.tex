@@ -1,13 +1,19 @@
-\section{QR-Zerlegung}
 \begin{frame}
-	\frametitle{QR-Zerlegung}
-%	\vspace{-2cm}
+\frametitle{Cache-optimierte QR-Zerlegung}
+\vspace{-.6cm}
+\begin{itemize}
+	\item $ A = QR $
+	\input{images/klmmern.tex}
+	\item QR-Zerlegung mittels Householder transformation
+	\item Cache-optimierten Algorithmus implementieren
+	\item Anwendungs:
 	\begin{itemize}
-		\item $ A = QR $\\
-		\scalebox{.8}{\input{images/QRsheme.tex}}
-		\item $ Ax = b $ lösen mit QR: $\quad QRx=b \quad \Longleftrightarrow \quad Rx=Q^Tb $
+		\item LGS $ Ax = b $ lösen mit QR
+		\item Lineares Ausgleichsproblem mittels kleinstes Fehler Quadrat
 		\item Kern operation im QR-Verfahren (Berechnung von Eigenwerten)
 	\end{itemize}
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}
@@ -40,6 +46,7 @@
 		\begin{align*} 
 		H A =(I - \tau vv^T) A= A - \tau (vv^T )A = A - \tau v(v^TA)
 		\end{align*}
+	\item  Vektor-Rechenoperationen und Vektor-Matrix-Rechenoperationen
 	\end{itemize}
 \end{frame}
 
@@ -79,14 +86,16 @@
 			\vspace{0.3cm}
 			$\hat{H} = H_1H_2...H_k = I - VTV^T \quad \text{mit}\quad H_i = I - \tau_i v_iv_i^T $
 			\vspace{0.3cm}
+			\item  Vektor-Matrix-Rechenoperationen um T zu berrechen
 			\item Householder-Transformationen anwenden\\
 			\vspace{0.3cm}
 			$ C \leftarrow \hat{H} C = C - V T V^T C \quad $
+			\item  Matrix-Produkte um \\ Householder-Transformationen anzuwenden
 			
 		\end{itemize}
 
-		\vspace{-3cm}
-		\hspace{9.5cm}
+		\vspace{-4cm}
+		\hspace{9.6cm}
 		\centering
 		\input{images/partitionOFAslide.tex}
 \end{frame}

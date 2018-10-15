@@ -1,2 +1,1 @@
 \babel@toc {ngerman}{}
-\beamer@sectionintoc {1}{QR-Zerlegung}{1}{0}{1}

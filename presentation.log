@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.8.29)  10 OCT 2018 14:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.8.29)  15 OCT 2018 17:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1276,18 +1276,18 @@ Dictionary: translator-theorem-dictionary, Language: English
 ) (./presentation.nav) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./slides/slides.tex
-LaTeX Font Info:    Try loading font information for U+msa on input line 11.
+LaTeX Font Info:    Try loading font information for U+msa on input line 17.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 11.
+LaTeX Font Info:    Try loading font information for U+msb on input line 17.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-(./images/QRsheme.tex)
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 11--11
+(./images/klmmern.tex (./images/QRsheme.tex))
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 17--17
 []|  [][][]  
  []
 
@@ -1300,17 +1300,17 @@ pdfTeX warning (ext4): destination with the same identifier (name{Navigation1})
  has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.11 \end{frame}
+l.17 \end{frame}
                 pdfTeX warning (ext4): destination with the same identifier (na
 me{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.11 \end{frame}
+l.17 \end{frame}
                  [1
 
 
 ] (./images/hh.tex)
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 22--22
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 28--28
 []|  [][][]  
  []
 
@@ -1322,7 +1322,7 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 [2
 
 ]
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 44--44
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 51--51
 []|  [][][]  
  []
 
@@ -1414,7 +1414,7 @@ l.144 \end{frame}
                   [4
 
 ])
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 62--62
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 69--69
 []|  [][][]  
  []
 
@@ -1426,13 +1426,13 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 [5
 
 ]
-<images/unblk.png, id=68, 677.53125pt x 376.40625pt>
+<images/unblk.png, id=64, 677.53125pt x 376.40625pt>
 File: images/unblk.png Graphic file (type png)
 <use images/unblk.png>
-Package pdftex.def Info: images/unblk.png  used on input line 70.
+Package pdftex.def Info: images/unblk.png  used on input line 77.
 (pdftex.def)             Requested size: 398.3386pt x 221.30812pt.
 
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 70--70
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 77--77
 []|  [][][]  
  []
 
@@ -1444,7 +1444,7 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 [6
 
  <./images/unblk.png>] (./images/partitionOFAslide.tex)
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 92--92
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 101--101
 []|  [][][]  
  []
 
@@ -1538,13 +1538,13 @@ l.146 \end{frame}
 
 
 ])
-<images/blkbs.png, id=95, 677.53125pt x 376.40625pt>
+<images/blkbs.png, id=91, 677.53125pt x 376.40625pt>
 File: images/blkbs.png Graphic file (type png)
 <use images/blkbs.png>
-Package pdftex.def Info: images/blkbs.png  used on input line 102.
+Package pdftex.def Info: images/blkbs.png  used on input line 111.
 (pdftex.def)             Requested size: 398.3386pt x 221.30812pt.
 
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 102--102
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 111--111
 []|  [][][]  
  []
 
@@ -1556,13 +1556,13 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 [9
 
  <./images/blkbs.png>]
-<images/both.png, id=102, 677.53125pt x 376.40625pt>
+<images/both.png, id=98, 677.53125pt x 376.40625pt>
 File: images/both.png Graphic file (type png)
 <use images/both.png>
-Package pdftex.def Info: images/both.png  used on input line 110.
+Package pdftex.def Info: images/both.png  used on input line 119.
 (pdftex.def)             Requested size: 398.3386pt x 221.30812pt.
 
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 110--110
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 119--119
 []|  [][][]  
  []
 
@@ -1574,7 +1574,7 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 [10
 
  <./images/both.png>]
-Overfull \hbox (20.20512pt too wide) in paragraph at lines 122--122
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 131--131
 []|  [][][]  
  []
 
@@ -1601,13 +1601,13 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 68.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 68.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 68.
 Package rerunfilecheck Info: File `presentation.out' has not changed.
-(rerunfilecheck)             Checksum: 45B68C48F98E0A7A08BF1DF35F95CA18;47.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
  21695 strings out of 494798
- 422583 string characters out of 6176800
- 496793 words of memory out of 5000000
- 24508 multiletter control sequences out of 15000+600000
+ 422630 string characters out of 6176800
+ 504789 words of memory out of 5000000
+ 24506 multiletter control sequences out of 15000+600000
  13920 words of font info for 52 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  48i,16n,65p,798b,674s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1623,10 +1623,10 @@ ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sy
 mbols/msbm10.pfb>
-Output written on presentation.pdf (18 pages, 161578 bytes).
+Output written on presentation.pdf (18 pages, 161848 bytes).
 PDF statistics:
- 161 PDF objects out of 1000 (max. 8388607)
- 115 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 156 PDF objects out of 1000 (max. 8388607)
+ 110 compressed objects within 2 object streams
+ 23 named destinations out of 1000 (max. 500000)
+ 58 words of extra memory for PDF output out of 10000 (max. 10000000)
 
