@@ -4,12 +4,12 @@
 \begin{itemize}
 	\item $ A = QR $
 	\input{images/klmmern.tex}
-	\item QR-Zerlegung mittels Householder transformation
+	\item QR-Zerlegung mittels Householder-Transformation
 	\item Cache-optimierten Algorithmus implementieren
 	\item Anwendungen:
 	\begin{itemize}
 		\item LGS $ Ax = b $ lösen mit QR
-		\item Lineares Ausgleichsproblem mittels kleinstes Fehler Quadrat
+		\item Lineares Ausgleichsproblem mittels kleinstes Fehlerquadrat
 		\item Kernoperation im QR-Verfahren
 	\end{itemize}
 \end{itemize}
@@ -54,7 +54,7 @@
 \begin{frame}
 \frametitle{Benchmark}
 	\begin{itemize}
-		\item Aufwand QR mittels Householder $A \in \mathbb{R}^{m \times n},~~ m \ge n$
+		\item Aufwand QR-Zerlegung mittels Householder-Transformation $A \in \mathbb{R}^{m \times n},~~ m \ge n$
 		\begin{align*}
 			\#\text{QR} &= n\cdot\left( \frac{23}{6}+m+\frac{n}{2} + n\cdot\left(m-\frac{n}{3}\right) + \frac{5}{6} + n\cdot\left(\frac{1}{2} + m-\frac{n}{3}\right) \right) = \mathcal{O}(n^2m)
 		\end{align*}
@@ -62,13 +62,13 @@
 		\begin{align*}
 			\text{FLOPS} = \dfrac{\text{Aufwand}}{\Delta t}
 		\end{align*}
-		\item Peak performance \\
+		\item \textit{Peak performance} \\
 		25,6 GFLOPS auf dem Testsystem mit i5-3470-CPU
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Ungeblockte QR}
+	\frametitle{Ungeblockte QR-Zerlegung}
 	\centering
 	\scalebox{.85}{
 		\includegraphics[width=\textwidth]{images/unblk}
@@ -102,7 +102,7 @@
 \input{images/partofAani.tex}
 
 \begin{frame}
-\frametitle{Verschiedene Blockgrößen}
+\frametitle{Test verschiedener Blockgrößen}
 		\centering
 	\scalebox{.85}{
 		\includegraphics[width=\textwidth]{images/blkbs}
@@ -110,7 +110,7 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Geblockte QR - Blocksizes}
+\frametitle{Geblockte QR-Zerlegung}
 	\centering
 	\scalebox{.85}{
 		\includegraphics[width=\textwidth]{images/both}
@@ -121,11 +121,11 @@
 \frametitle{Fazit}
 %\vspace{-2cm}
 \begin{itemize}
-	\item Ungeblockter Algorithmus erreicht nicht die \textit{peak performance}
-	\item Eigener ungeblockte Algorithmus ist etwa 5\% schneller als MKL
-	\item Geblockte Algorithmus erreicht fast die \textit{peak performance}
-	\item Der geblockte Algorithmus \textit{dgeqrf} der MKL ist etwas schneller. Der selbst implementierten Algorithmus erreicht bis zu 94\% die Performance der MKL
-	\item Der geblockte Algorithmus ist um den Faktor 3 schneller als der ungeblockte Algorithmus
+	\item Der ungeblockte Algorithmus erreicht nicht die \textit{peak performance}.
+	\item Der eigene ungeblockte Algorithmus ist etwa 5\% schneller als MKL.
+	\item Geblockte Algorithmus erreicht fast die \textit{peak performance}.
+	\item Der geblockte Algorithmus \textit{dgeqrf} der MKL ist etwas schneller. Der selbst implementierte Algorithmus erreicht bis zu 94\% die Performance der MKL.
+	\item Der geblockte Algorithmus ist um den Faktor 3 schneller als der ungeblockte.
 \end{itemize}
 \end{frame}
 
