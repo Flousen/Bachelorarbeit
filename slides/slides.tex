@@ -6,11 +6,11 @@
 	\input{images/klmmern.tex}
 	\item QR-Zerlegung mittels Householder transformation
 	\item Cache-optimierten Algorithmus implementieren
-	\item Anwendungs:
+	\item Anwendungen:
 	\begin{itemize}
 		\item LGS $ Ax = b $ lösen mit QR
 		\item Lineares Ausgleichsproblem mittels kleinstes Fehler Quadrat
-		\item Kern operation im QR-Verfahren (Berechnung von Eigenwerten)
+		\item Kernoperation im QR-Verfahren
 	\end{itemize}
 \end{itemize}
 
@@ -31,9 +31,8 @@
 	\frametitle{Householder-Transformation}
 	\vspace{-1cm}
 	\begin{itemize}
-	\item Householder Vektor berechnen\\
+	\item Householder-Vektor berechnen\\
 		\begin{itemize}
-			\item Ansatz $ Hx = \alpha e_1 $
 			\item Normieren $ v_1 = 1 $
 			\item $ \tau = \dfrac{2}{v^Tv} \quad \Longrightarrow \quad H = I - 2 \dfrac{vv^T}{v^Tv} = I - \tau vv^T$
 		\end{itemize}
@@ -55,16 +54,16 @@
 \begin{frame}
 \frametitle{Benchmark}
 	\begin{itemize}
-		\item Peak performance \\
-		25,6 GFLOPS auf dem Testsystem mit i5-3470-CPU
 		\item Aufwand QR mittels Householder $A \in \mathbb{R}^{m \times n},~~ m \ge n$
 		\begin{align*}
 			\#\text{QR} &= n\cdot\left( \frac{23}{6}+m+\frac{n}{2} + n\cdot\left(m-\frac{n}{3}\right) + \frac{5}{6} + n\cdot\left(\frac{1}{2} + m-\frac{n}{3}\right) \right) = \mathcal{O}(n^2m)
 		\end{align*}
-		\item Flops
+		\item 
 		\begin{align*}
 			\text{FLOPS} = \dfrac{\text{Aufwand}}{\Delta t}
 		\end{align*}
+		\item Peak performance \\
+		25,6 GFLOPS auf dem Testsystem mit i5-3470-CPU
 	\end{itemize}
 \end{frame}
 
@@ -86,11 +85,11 @@
 			\vspace{0.3cm}
 			$\hat{H} = H_1H_2...H_k = I - VTV^T \quad \text{mit}\quad H_i = I - \tau_i v_iv_i^T $
 			\vspace{0.3cm}
-			\item  Vektor-Matrix-Rechenoperationen um T zu berrechen
+			\item  Vektor-Matrix-Rechenoperationen
 			\item Householder-Transformationen anwenden\\
 			\vspace{0.3cm}
 			$ C \leftarrow \hat{H} C = C - V T V^T C \quad $
-			\item  Matrix-Produkte um \\ Householder-Transformationen anzuwenden
+			\item  Matrix-Matrix-Produkte
 			
 		\end{itemize}
 
@@ -120,13 +119,13 @@
 
 \begin{frame}
 \frametitle{Fazit}
-\centering
+%\vspace{-2cm}
 \begin{itemize}
-	\item Ungeblockter Algorithmus erreicht nicht die \textit{peak performance}.
-	\item Eigener ungeblockte Algorithmus ist etwa 5\% schneller als MKL.
-	\item Geblockte Algorithmus erreicht fast die \textit{peak performance}.
-	\item Der geblockte Algorithmus \textit{dgeqrf} der MKL ist etwas schneller. Der selbst implementierten Algorithmus erreicht bis zu 94\% die Performance der MKL.
-	\item Der geblockte Algorithmus ist um den Faktor 3 schneller als der ungeblockte Algorithmus.
+	\item Ungeblockter Algorithmus erreicht nicht die \textit{peak performance}
+	\item Eigener ungeblockte Algorithmus ist etwa 5\% schneller als MKL
+	\item Geblockte Algorithmus erreicht fast die \textit{peak performance}
+	\item Der geblockte Algorithmus \textit{dgeqrf} der MKL ist etwas schneller. Der selbst implementierten Algorithmus erreicht bis zu 94\% die Performance der MKL
+	\item Der geblockte Algorithmus ist um den Faktor 3 schneller als der ungeblockte Algorithmus
 \end{itemize}
 \end{frame}
 
