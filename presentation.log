@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.8.29)  15 OCT 2018 19:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.8.29)  15 OCT 2018 19:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1585,6 +1585,18 @@ Overfull \hbox (2.83337pt too wide) has occurred while \output is active
 
 [11
 
+]
+Overfull \hbox (20.20512pt too wide) in paragraph at lines 139--139
+[]|  [][][]  
+ []
+
+
+Overfull \hbox (2.83337pt too wide) has occurred while \output is active
+ $[]$  
+ []
+
+[12
+
 ])
 \tf@nav=\write6
 \openout6 = `presentation.nav'.
@@ -1604,10 +1616,10 @@ Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 21696 strings out of 494798
- 422647 string characters out of 6176800
- 504789 words of memory out of 5000000
- 24507 multiletter control sequences out of 15000+600000
+ 21700 strings out of 494798
+ 422682 string characters out of 6176800
+ 504785 words of memory out of 5000000
+ 24509 multiletter control sequences out of 15000+600000
  13920 words of font info for 52 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  48i,16n,65p,798b,674s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1623,10 +1635,10 @@ ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sy
 mbols/msbm10.pfb>
-Output written on presentation.pdf (18 pages, 161522 bytes).
+Output written on presentation.pdf (19 pages, 163232 bytes).
 PDF statistics:
- 156 PDF objects out of 1000 (max. 8388607)
- 110 compressed objects within 2 object streams
- 23 named destinations out of 1000 (max. 500000)
+ 163 PDF objects out of 1000 (max. 8388607)
+ 116 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
  58 words of extra memory for PDF output out of 10000 (max. 10000000)
 

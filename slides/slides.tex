@@ -9,7 +9,7 @@
 	\item Anwendungen:
 	\begin{itemize}
 		\item LGS $ Ax = b $ lösen mit QR
-		\item Lineares Ausgleichsproblem mittels kleinstes Fehlerquadrat
+		\item Lineares Ausgleichsproblem mittels kleinstem Fehlerquadrat
 		\item Kernoperation im QR-Verfahren
 	\end{itemize}
 \end{itemize}
@@ -120,12 +120,21 @@
 \begin{frame}
 \frametitle{Fazit}
 %\vspace{-2cm}
+%\begin{itemize}
+%	\item Der ungeblockte Algorithmus erreicht nicht die \textit{peak performance}.
+%	\item Der eigene ungeblockte Algorithmus ist etwa 5\% schneller als MKL.
+%	\item Der geblockte Algorithmus erreicht fast die \textit{peak performance}.
+%	\item Der geblockte Algorithmus \textit{dgeqrf} der MKL ist etwas schneller. Der selbst implementierte Algorithmus erreicht bis zu 94\% die Performance der MKL.
+%	\item Der geblockte Algorithmus ist um den Faktor 3 schneller als der ungeblockte.
+%\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ausblick}
+%\vspace{-2cm}
 \begin{itemize}
-	\item Der ungeblockte Algorithmus erreicht nicht die \textit{peak performance}.
-	\item Der eigene ungeblockte Algorithmus ist etwa 5\% schneller als MKL.
-	\item Geblockte Algorithmus erreicht fast die \textit{peak performance}.
-	\item Der geblockte Algorithmus \textit{dgeqrf} der MKL ist etwas schneller. Der selbst implementierte Algorithmus erreicht bis zu 94\% die Performance der MKL.
-	\item Der geblockte Algorithmus ist um den Faktor 3 schneller als der ungeblockte.
+	\item Ist es möglich mit einem rekursiven geblockten Algorithmus die Performance der MKL zu erreichen oder sogar zu übertreffen?
+	\item Welche Blas-Funktionen haben den größten Einfluss auf die Performance? 
 \end{itemize}
 \end{frame}
 
